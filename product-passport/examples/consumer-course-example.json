@@ -1,0 +1,1076 @@
+{
+  "schema_version": "1.1.0",
+  "passport_id": "consumer-course-example",
+  "version": "1.1.0",
+  "status": "approved",
+  "effective_from": "2026-09-01",
+  "effective_to": "2027-08-31",
+  "default_locale": "ru",
+  "business": {
+    "legal_name": {
+      "value": "Fictional Language Studio (example only)",
+      "status": "verified",
+      "source": "Fictional example — business registry",
+      "verified_at": "2026-10-23"
+    },
+    "display_name": "Til Sprint",
+    "description": {
+      "value": "A self-paced online Kyrgyz-language course for individual learners.",
+      "status": "verified",
+      "source": "Fictional example — business brief",
+      "verified_at": "2026-10-23"
+    },
+    "website": {
+      "value": "https://til-sprint.example.invalid",
+      "status": "verified",
+      "source": "Fictional example — website",
+      "verified_at": "2026-10-23"
+    },
+    "markets": [
+      {
+        "value": "Kyrgyzstan; online delivery only",
+        "status": "verified",
+        "source": "Fictional example — market plan",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "timezone": {
+      "value": "Asia/Bishkek",
+      "status": "verified",
+      "source": "Fictional example — operations plan",
+      "verified_at": "2026-10-23"
+    },
+    "support_contact": {
+      "value": "Email support at support@til-sprint.example.invalid, Mon–Fri 09:00–18:00 Asia/Bishkek",
+      "status": "verified",
+      "source": "Fictional example — support plan",
+      "verified_at": "2026-10-23"
+    },
+    "languages": [
+      "ru",
+      "ky",
+      "en"
+    ]
+  },
+  "offer": {
+    "id": "til-sprint-self-paced",
+    "name": "Til Sprint Self-Paced",
+    "type": "program",
+    "buyer_types": [
+      "b2c"
+    ],
+    "one_liner": {
+      "value": "A six-week self-paced online course that builds conversational Kyrgyz for everyday situations.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "outcomes": [
+      {
+        "value": "Learners practise speaking and listening in everyday scenarios.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Learners get written feedback on two recorded speaking tasks.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "includes": [
+      {
+        "value": "Six weeks of video and audio lessons",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Two written speaking-task reviews",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Downloadable practice workbook",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "excludes": [
+      {
+        "value": "Live one-to-one tutoring",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "A certificate recognized by a government body",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Guaranteed fluency outcomes",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "prerequisites": [
+      {
+        "value": "A phone or computer and internet access",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "About three hours of study per week",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "support": {
+      "value": "Email support during business hours; no live tutoring on this plan.",
+      "status": "verified",
+      "source": "Fictional example — support plan",
+      "verified_at": "2026-10-23"
+    },
+    "status": "active"
+  },
+  "pricing": {
+    "currency": {
+      "value": "KGS",
+      "status": "verified",
+      "source": "Fictional example — price book",
+      "verified_at": "2026-10-23"
+    },
+    "tax_behavior": "included",
+    "plans": [
+      {
+        "id": "self-paced",
+        "name": "Self-paced course",
+        "billing_period": "one_time",
+        "price": {
+          "value": 4900,
+          "status": "verified",
+          "source": "Fictional example — price book",
+          "verified_at": "2026-10-23",
+          "notes": "KGS, one-time, taxes included."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Fictional example — price book",
+          "verified_at": "2026-10-23"
+        },
+        "minimum_term": {
+          "value": "No minimum term; one-time purchase.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-23"
+        },
+        "cancellation": {
+          "value": "No subscription to cancel; access is one purchase.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-23"
+        },
+        "refund": {
+          "value": "Seven-day money-back if less than 20% of the course is completed.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-23"
+        },
+        "status": "active"
+      }
+    ],
+    "payment_methods": [
+      {
+        "value": "Card payment through the approved payment provider",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Local wallet transfer where supported by the provider",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "invoice_policy": {
+      "value": "A receipt is sent by the payment provider. Business invoices are not issued for this consumer offer.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "discount_policy": {
+      "allowed": true,
+      "max_percent": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-23",
+        "notes": "Student or group discount, verification required."
+      },
+      "approval_threshold_percent": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-23"
+      },
+      "stacking": {
+        "value": "One discount per purchase; do not stack.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "conditions": [
+        {
+          "value": "Student discount requires a valid student ID.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        {
+          "value": "Group discount requires three or more purchases in one order.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      ]
+    },
+    "quote_policy": {
+      "required_for_discount": true,
+      "required_for_custom_terms": true,
+      "validity_days": {
+        "value": 7,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-23"
+      },
+      "terms_snapshot_required": true,
+      "approved_quote_required_for_payment": true
+    }
+  },
+  "qualification": {
+    "fit_criteria": [
+      {
+        "value": "An adult individual who wants to learn or improve conversational Kyrgyz.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Able to study online for about three hours a week.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "disqualifiers": [
+      {
+        "value": "Requires live tutoring or a recognized certificate.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Needs a language outcome guaranteed by contract.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "required_fields": [
+      "goal",
+      "current_level",
+      "study_time"
+    ],
+    "decision_roles": [
+      {
+        "value": "The learner is usually the buyer and the user.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "service_area": {
+      "value": "Online worldwide; support is offered in Russian, Kyrgyz, and English.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    }
+  },
+  "discovery": {
+    "required_fields": [
+      "goal",
+      "current_level"
+    ],
+    "optional_fields": [
+      "study_time",
+      "past_courses",
+      "motivation"
+    ],
+    "recommendation_rules": [
+      {
+        "value": "If the learner wants speaking practice with feedback, recommend the self-paced plan and set expectations for the two reviews.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "If the learner needs live tutoring, say it is not offered and do not improvise it.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ]
+  },
+  "proof": {
+    "cases": [
+      {
+        "id": "case-1",
+        "title": {
+          "value": "Five fictional learners completed the speaking tasks over six weeks",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "client_name": {
+          "value": "Anonymized fictional learners",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "outcome": {
+          "value": "Four of five submitted both speaking tasks; no independent fluency measurement was run.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "permission": "anonymized",
+        "source": {
+          "value": "Fictional example — internal course report, not independently audited",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "segment": {
+          "value": "Adult self-paced learners",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "baseline": {
+          "value": "No prior structured speaking practice.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "intervention": {
+          "value": "Six-week self-paced course with two written reviews.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "measurement_period": {
+          "value": "Six weeks; completion data only.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "limitations": {
+          "value": "Small self-reported sample; not evidence of fluency or typical outcomes.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      }
+    ],
+    "testimonials": [
+      {
+        "id": "t-1",
+        "quote": {
+          "value": "I finally practised speaking without feeling judged.",
+          "status": "verified",
+          "source": "Fictional example — approved testimonial",
+          "verified_at": "2026-10-23"
+        },
+        "attribution": {
+          "value": "Fictional learner, Bishkek",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "permission": "public",
+        "source": {
+          "value": "Fictional example — testimonial release",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      }
+    ],
+    "certifications": [],
+    "stats": [
+      {
+        "value": "Median completion was five of six weeks across twelve fictional learners.",
+        "status": "verified",
+        "source": "Fictional example — internal report",
+        "verified_at": "2026-10-23",
+        "notes": "Small sample; not a guarantee."
+      }
+    ],
+    "prohibited_claims": [
+      {
+        "value": "Do not claim fluency, a guaranteed level, or government recognition.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Do not claim live tutoring is included.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ]
+  },
+  "fulfillment": {
+    "mode": "direct_purchase",
+    "delivery": {
+      "value": "Access is granted by email within one business day of confirmed payment.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "booking": {
+      "required": false,
+      "calendar_id": {
+        "value": "not applicable",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "duration_minutes": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "timezone": {
+        "value": "Asia/Bishkek",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "slot_interval_minutes": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "buffer_before_minutes": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "buffer_after_minutes": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "availability_window_days": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "offer_slot_count": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "reschedule_policy": {
+        "value": "Not applicable; no appointments.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "cancellation_policy": {
+        "value": "Not applicable.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "no_show_policy": {
+        "value": "Not applicable.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "reminder_policy": {
+        "value": "Not applicable.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "external_link_allowed": false
+    },
+    "proposal": {
+      "required": false,
+      "template_id": {
+        "value": "not applicable",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "validity_days": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      "approval_required": false
+    }
+  },
+  "sales_policy": {
+    "authority_limits": {
+      "max_discount_percent_without_approval": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-23"
+      },
+      "can_customize_contract": false,
+      "can_change_refund_terms": false,
+      "can_waive_fees": false
+    },
+    "approval_matrix": [
+      {
+        "condition": {
+          "value": "Discount above 10% or a custom refund",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "approver": {
+          "value": "Studio owner",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "channel": {
+          "value": "Handoff tool, reason code authority",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      }
+    ],
+    "verified_scarcity": [],
+    "competitor_policy": {
+      "value": "Compare only with verified public facts about free or paid Kyrgyz-learning resources; do not disparage.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "custom_terms": {
+      "value": "The agent may explain the standard terms but cannot draft or agree to custom terms.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "contract_policy": {
+      "value": "Standard online purchase terms only; no signed contracts for this offer.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "call_recording_policy": {
+      "value": "Not applicable to text chat.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "negotiation": {
+      "tradables": [
+        {
+          "value": "Apply an eligible published discount when verification is provided.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "non_negotiables": [
+        {
+          "value": "No live tutoring, no fluency guarantee, no custom refund terms.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "walk_away": {
+        "value": "If the buyer requires tutoring or a guaranteed result, decline and end politely; do not improvise.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    }
+  },
+  "sales_guidance": {
+    "segments": [
+      {
+        "id": "self-learners",
+        "name": "Adult self-paced learners",
+        "description": {
+          "value": "Adults who want conversational Kyrgyz for daily life, family, or work and can study independently.",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "buyer_types": [
+          "b2c"
+        ],
+        "fit_signals": [
+          {
+            "value": "They want to speak more, not just memorize rules.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          },
+          {
+            "value": "They can commit a few hours a week.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Past courses were too theoretical.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          },
+          {
+            "value": "They feel embarrassed speaking.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "A trip, a new job, or family communication.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          },
+          {
+            "value": "A failed attempt with another app.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          }
+        ],
+        "default_motion": "direct_purchase"
+      }
+    ],
+    "objection_guidance": [
+      {
+        "id": "obj-not-finish",
+        "objection_type": "adoption",
+        "guidance": {
+          "value": "Acknowledge the past experience. Ask what stopped them. Offer the smallest study plan and the two review checkpoints; do not promise they will finish.",
+          "status": "verified",
+          "source": "Fictional example — sales playbook",
+          "verified_at": "2026-10-23"
+        },
+        "evidence_ids": [
+          "case-1"
+        ],
+        "avoid": [
+          {
+            "value": "Do not claim a completion guarantee.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          },
+          {
+            "value": "Do not blame the learner.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          }
+        ]
+      },
+      {
+        "id": "obj-price",
+        "objection_type": "price",
+        "guidance": {
+          "value": "State the one-time price and what is included. Compare with the cost of live tutoring only if the buyer raises it; do not invent competitor prices.",
+          "status": "verified",
+          "source": "Fictional example — sales playbook",
+          "verified_at": "2026-10-23"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not manufacture a deadline.",
+            "status": "verified",
+            "source": "Fictional example — consumer course brief",
+            "verified_at": "2026-10-23"
+          }
+        ]
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "Free language apps",
+        "category": "adjacent product",
+        "our_advantage": {
+          "value": "Included spoken tasks get human feedback.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-23"
+        },
+        "our_tradeoff": {
+          "value": "Free apps may cover more languages and vocabulary.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-23"
+        },
+        "source": {
+          "value": "Fictional example — positioning brief",
+          "status": "verified",
+          "source": "Fictional example — marketing approval",
+          "verified_at": "2026-10-23"
+        },
+        "last_checked": "2026-10-23"
+      },
+      {
+        "name": "Live tutoring",
+        "category": "higher-touch service",
+        "our_advantage": {
+          "value": "Lower cost and self-paced.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-23"
+        },
+        "our_tradeoff": {
+          "value": "No live correction; speaking feedback is limited to two written reviews.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-23"
+        },
+        "source": {
+          "value": "Fictional example — positioning brief",
+          "status": "verified",
+          "source": "Fictional example — marketing approval",
+          "verified_at": "2026-10-23"
+        },
+        "last_checked": "2026-10-23"
+      }
+    ]
+  },
+  "handoff": {
+    "routes": [
+      {
+        "reason_code": "human_request",
+        "destination": {
+          "value": "Studio support inbox",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "channel": {
+          "value": "email",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "response_time": {
+          "value": "Within one business day",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "fallback": {
+          "value": "Email address support@til-sprint.example.invalid",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      },
+      {
+        "reason_code": "authority",
+        "destination": {
+          "value": "Studio owner",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "channel": {
+          "value": "handoff tool",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "hours": {
+          "value": "Business hours",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "response_time": {
+          "value": "Within one business day",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "fallback": {
+          "value": "Tell the buyer the request is being reviewed",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      },
+      {
+        "reason_code": "complaint",
+        "destination": {
+          "value": "Studio owner",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "channel": {
+          "value": "handoff tool",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "hours": {
+          "value": "Business hours",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "response_time": {
+          "value": "Within one business day",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        },
+        "fallback": {
+          "value": "Support email",
+          "status": "verified",
+          "source": "Fictional example — consumer course brief",
+          "verified_at": "2026-10-23"
+        }
+      }
+    ],
+    "required_fields": [
+      "buyer_goal",
+      "verified_facts",
+      "open_questions"
+    ],
+    "automation_pause": true,
+    "human_takeover_policy": {
+      "value": "A human owns the thread after a handoff; automation stays paused until a human resumes it.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    }
+  },
+  "follow_up": {
+    "allowed": true,
+    "basis": [
+      "buyer_requested",
+      "agreed_next_step",
+      "buyer_initiated_inquiry"
+    ],
+    "channels": [
+      "whatsapp",
+      "telegram",
+      "email"
+    ],
+    "quiet_hours": {
+      "start": "20:00",
+      "end": "09:00",
+      "timezone": "Asia/Bishkek"
+    },
+    "allowed_days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat"
+    ],
+    "max_attempts_per_reason": {
+      "value": 2,
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "max_attempts_per_conversation": {
+      "value": 3,
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "min_interval_hours": {
+      "value": 48,
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "close_out_after_days": {
+      "value": 21,
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "opt_out_keywords": [
+      "стоп",
+      "не пишите",
+      "отписаться"
+    ],
+    "marketing_consent_required": true
+  },
+  "privacy": {
+    "data_collected": [
+      {
+        "value": "Name and contact handle; purchase email; study goal; payment status from the provider.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "purposes": [
+      {
+        "value": "Deliver the course and support.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Send transactional messages about the purchase.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "retention": {
+      "value": "Purchase records for the accounting retention period; study notes for 12 months.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "deletion_process": {
+      "value": "Email support; deletion confirmed by email once processed.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "sharing": {
+      "value": "Payment and messaging providers only; no sale of personal data.",
+      "status": "verified",
+      "source": "Fictional example — consumer course brief",
+      "verified_at": "2026-10-23"
+    },
+    "pii_rules": [
+      {
+        "value": "Collect only what the purchase and support need.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "value": "Do not collect payment card data in chat.",
+        "status": "verified",
+        "source": "Fictional example — consumer course brief",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "legal_basis": {
+      "value": "Contract and consent, depending on the processing.",
+      "status": "estimated",
+      "source": "Fictional example — privacy policy",
+      "verified_at": "2026-10-21",
+      "notes": "Jurisdiction-specific review required before production."
+    }
+  },
+  "tools": {
+    "passport_lookup": {
+      "adapter_id": "adapter-passport_lookup",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "calendar_availability": {
+      "adapter_id": "adapter-calendar_availability",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "calendar_booking": {
+      "adapter_id": "adapter-calendar_booking",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "payments_invoicing": {
+      "adapter_id": "adapter-payments_invoicing",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "crm_memory": {
+      "adapter_id": "adapter-crm_memory",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "human_handoff": {
+      "adapter_id": "adapter-human_handoff",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "messaging_media": {
+      "adapter_id": "adapter-messaging_media",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    }
+  },
+  "metadata": {
+    "owner": "Fictional example owner",
+    "approved_by": "Fictional reviewer (example only)",
+    "approved_at": "2026-10-23",
+    "created_at": "2026-10-23",
+    "updated_at": "2026-10-23",
+    "source_of_truth": "This file is a fictional example and is not connected to a real price book or business.",
+    "review_cycle_days": 90,
+    "fictional": true,
+    "changelog": [
+      {
+        "version": "1.1.0",
+        "date": "2026-10-23",
+        "change": "Initial fictional consumer direct-purchase example."
+      }
+    ]
+  },
+  "unresolved": [
+    "Confirm jurisdiction-specific consumer cooling-off and refund rules before production."
+  ]
+}

@@ -1,6 +1,6 @@
 # Scripts
 
-Five small tools for validating, rendering, and installing the repository. None of them calls a language model, a sales tool, or a production API. Only `install_skills.py --apply` writes outside a temporary directory.
+Seven small tools for validating, testing, rendering, and installing the repository. None of them calls a language model, a sales tool, or a production API. Only `install_skills.py --apply` writes outside a temporary directory.
 
 Install development dependencies once:
 
@@ -13,6 +13,8 @@ python3 -m pip install -r requirements-dev.txt
 | [`validate_repository.py`](validate_repository.py) | repository | nothing | no |
 | [`evaluate_responses.py`](evaluate_responses.py) | scenarios + JSONL responses | optional JSON summary to stdout | no |
 | [`render_scenarios.py`](render_scenarios.py) | scenarios | optional file | no |
+| [`test_checker.py`](test_checker.py) | scenarios | nothing | no |
+| [`test_installed_artifact.py`](test_installed_artifact.py) | skills, validator | temporary directory | no |
 | [`test_hermes_loading.py`](test_hermes_loading.py) | skills | temporary `HERMES_HOME` | yes, `hermes skills list` |
 | [`install_skills.py`](install_skills.py) | skills, validator | target Hermes home, only with `--apply` | no |
 
@@ -34,7 +36,7 @@ Checks:
 - skills do not contain fictional example brands or concrete currency amounts;
 - passport examples validate against `product-passport/passport.schema.json`;
 - tool envelopes validate against `tools/schemas/tool-envelope.schema.json`;
-- all scenario YAML parses, IDs are unique, category counts match the declared 51, and expectations are well-formed;
+- all scenario YAML parses, IDs are unique, category counts match the declared 57, and expectations are well-formed;
 - every scenario ID appears in `tests/COVERAGE.md`;
 - local Markdown links resolve;
 - obvious secret patterns are absent;

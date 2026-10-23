@@ -1,6 +1,6 @@
 # Contract: `calendar.booking`
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Kind:** write (create / reschedule / cancel)  
 **Adapter status in this repository:** not implemented
 
@@ -40,7 +40,7 @@ A booking is confirmed only when this tool returns `status: "confirmed"` with a 
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "calendar.booking",
   "request_id": "req_01J9Z5C1",
   "tenant_id": "tenant_demo",
@@ -60,9 +60,10 @@ A booking is confirmed only when this tool returns `status: "confirmed"` with a 
       "phone": null
     },
     "consent": {
-      "given": true,
+      "status": "granted",
       "at": "2026-10-23T10:02:00+06:00",
-      "scope": "book this appointment and send a confirmation to the provided email"
+      "scope": "book this appointment and send a confirmation to the provided email",
+      "source": "buyer_message"
     },
     "purpose": "Operations Diagnostic Call",
     "notes": "Buyer chose 27 October, 14:00."
@@ -82,9 +83,10 @@ A booking is confirmed only when this tool returns `status: "confirmed"` with a 
 | `attendee.name` | string | yes | Use the name the buyer gave |
 | `attendee.email` | string | yes for create | Do not invent or guess |
 | `attendee.phone` | string or null | no | Only if the channel requires it and the buyer consents |
-| `consent.given` | boolean | yes | Must be true; false is a hard stop |
+| `consent.status` | `granted, denied, unknown, withdrawn` | yes | Must be `granted`; anything else is a hard stop |
 | `consent.at` | ISO-8601 | yes | When the buyer chose/confirmed |
-| `consent.scope` | string | yes | What the buyer agreed to |
+| `consent.scope` | string | yes | What the buyer agreed to, including date/time/timezone |
+| `consent.source` | enum | yes | Copy from canonical state: `buyer_message`, `buyer_action`, `import`, or `passport` |
 | `purpose` | string | yes | From the passport offer |
 | `notes` | string | no | No sensitive data; max 1000 chars |
 | `booking_id` | string | reschedule/cancel/get | Existing booking |
@@ -124,7 +126,7 @@ Do not collect a home address, government ID, or payment data for a booking unle
   "meta": {
     "server_time": "2026-10-23T10:02:01+06:00",
     "source": "calendar-provider",
-    "contract_version": "1.0.0",
+    "contract_version": "1.1.0",
     "trace_id": "trace_abc125"
   }
 }
@@ -157,7 +159,7 @@ Only `status: "confirmed"` authorizes the agent to say "you're booked". `confirm
   "meta": {
     "server_time": "2026-10-23T10:03:00+06:00",
     "source": "calendar-provider",
-    "contract_version": "1.0.0"
+    "contract_version": "1.1.0"
   }
 }
 ```

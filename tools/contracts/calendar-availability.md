@@ -1,6 +1,6 @@
 # Contract: `calendar.availability`
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Kind:** read-only  
 **Adapter status in this repository:** not implemented
 
@@ -28,7 +28,7 @@ If availability cannot be read, the agent must say so. It must not infer slots f
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "calendar.availability",
   "request_id": "req_01J9Z4A1",
   "tenant_id": "tenant_demo",
@@ -108,7 +108,7 @@ The server must validate that `calendar_id` belongs to the tenant. A calendar ID
   "meta": {
     "server_time": "2026-10-23T10:00:03+06:00",
     "source": "calendar-provider",
-    "contract_version": "1.0.0",
+    "contract_version": "1.1.0",
     "trace_id": "trace_abc124"
   }
 }
@@ -149,7 +149,7 @@ The server must validate that `calendar_id` belongs to the tenant. A calendar ID
   "meta": {
     "server_time": "2026-10-23T10:01:00+06:00",
     "source": "calendar-provider",
-    "contract_version": "1.0.0"
+    "contract_version": "1.1.0"
   }
 }
 ```

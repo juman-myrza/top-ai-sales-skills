@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.1.0",
+  "conversation_id": "conv_demo_001",
+  "tenant_id": "tenant_demo",
+  "passport_id": "direct-sale-nimbus-notes",
+  "passport_version": "1.1.0",
+  "channel": "whatsapp",
+  "language": {
+    "primary": "ru",
+    "detected": [
+      "ru",
+      "en"
+    ],
+    "register": "neutral"
+  },
+  "stage": "commit",
+  "mode": "confirm",
+  "buyer": {
+    "display_name": "Айжан",
+    "company": "Fictional Example LLC",
+    "role": "Operations lead",
+    "timezone": "Asia/Bishkek",
+    "preferred_channel": "whatsapp"
+  },
+  "fit": {
+    "status": "qualified",
+    "reasons": [
+      "Team of 8 shares notes and customer research in a cloud workspace."
+    ],
+    "disqualifiers": []
+  },
+  "needs": [
+    {
+      "id": "need_1",
+      "statement": "The team loses time searching across chat, documents, and personal notes.",
+      "source": "buyer",
+      "status": "confirmed",
+      "impact": "Duplicate work and unclear task ownership.",
+      "priority": "high"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "budget",
+      "value": "Up to 960 USD per year before tax.",
+      "source": "buyer",
+      "status": "current",
+      "notes": "Buyer confirmed the annual plan for 8 users."
+    }
+  ],
+  "decision": {
+    "criteria": [
+      "One searchable workspace",
+      "Role-based access",
+      "No on-premise deployment"
+    ],
+    "process": "Buyer confirms the plan and billing details; finance pays by invoice.",
+    "stakeholders": [
+      {
+        "role": "Operations lead",
+        "name": "Айжан",
+        "influence": "decision_maker"
+      }
+    ],
+    "authority": "buyer",
+    "timeline": "This week"
+  },
+  "diagnosis": {
+    "primary_problem": "Fragmented team knowledge and task ownership.",
+    "impact": "Repeated searches and duplicate task updates.",
+    "desired_outcome": "One searchable workspace with clear access control.",
+    "barrier": "none",
+    "buying_readiness": "committed",
+    "recommended_action": "Confirm the annual plan, issue the approved invoice, and explain tax and cancellation terms.",
+    "last_revised_at": "2026-10-23T10:05:00+06:00"
+  },
+  "objections": [
+    {
+      "id": "obj_1",
+      "type": "price",
+      "statement": "The annual price is higher than the team expected.",
+      "status": "resolved",
+      "resolution": "Compared the annual effective monthly price and confirmed the 8-user total.",
+      "evidence_used": [
+        "pricing.plans.annual"
+      ],
+      "buyer_response": "Understood; annual works."
+    }
+  ],
+  "next_step": {
+    "type": "pay",
+    "description": "Issue the approved invoice after the buyer confirms billing details.",
+    "owner": "agent",
+    "confirmed_by_buyer": true,
+    "due_at": null
+  },
+  "consent": {
+    "follow_up": {
+      "status": "granted",
+      "at": "2026-10-23T10:03:00+06:00",
+      "scope": "send the invoice and implementation details for this purchase",
+      "source": "buyer_message"
+    },
+    "booking": {
+      "status": "unknown",
+      "at": null,
+      "scope": null,
+      "source": "none"
+    },
+    "payment": {
+      "status": "granted",
+      "at": "2026-10-23T10:05:00+06:00",
+      "scope": "issue an invoice for 960 USD for the annual plan for 8 users",
+      "source": "buyer_message"
+    },
+    "data_sharing": {
+      "status": "unknown",
+      "at": null,
+      "scope": null,
+      "source": "none"
+    },
+    "marketing": {
+      "status": "denied",
+      "at": "2026-10-23T10:00:00+06:00",
+      "scope": null,
+      "source": "buyer_message"
+    }
+  },
+  "known_facts": [
+    {
+      "key": "team_size",
+      "value": 8,
+      "source": "buyer",
+      "status": "current",
+      "confidence": "high",
+      "checked_at": "2026-10-23T10:00:00+06:00",
+      "notes": null
+    },
+    {
+      "key": "plan",
+      "value": "annual",
+      "source": "buyer",
+      "status": "current",
+      "confidence": "high",
+      "checked_at": "2026-10-23T10:03:00+06:00",
+      "notes": null
+    },
+    {
+      "key": "annual_unit_amount",
+      "value": 120,
+      "source": "passport",
+      "status": "current",
+      "confidence": "high",
+      "checked_at": "2026-10-23T10:05:00+06:00",
+      "notes": "USD per user per year, taxes excluded."
+    },
+    {
+      "key": "annual_total_amount",
+      "value": 960,
+      "source": "passport",
+      "status": "current",
+      "confidence": "high",
+      "checked_at": "2026-10-23T10:05:00+06:00",
+      "notes": "8 users x 120 USD; taxes excluded."
+    }
+  ],
+  "follow_up": {
+    "status": "none",
+    "basis": "none",
+    "attempts": 0,
+    "last_contact_at": "2026-10-23T10:05:00+06:00",
+    "next_due_at": null,
+    "scheduled_message_id": null,
+    "close_reason": null,
+    "notes": "No follow-up scheduled while the invoice is being issued."
+  },
+  "quote": {
+    "quote_id": "quote_demo_001",
+    "version": "1.0.0",
+    "status": "approved",
+    "offer_id": "nimbus-notes-team",
+    "plan_id": "annual",
+    "quantity": 8,
+    "unit_amount": 120,
+    "subtotal": 960,
+    "discount_percent": 0,
+    "discount_amount": 0,
+    "tax_amount": 0,
+    "total_amount": 960,
+    "currency": "usd",
+    "terms": "Annual plan for 8 users. 960 USD before tax. Taxes are excluded and calculated by the payment provider. 14-day money-back on the first purchase; cancellation stops renewal.",
+    "approval_ref": null,
+    "issued_at": "2026-10-23T10:05:00+06:00",
+    "valid_until": "2026-11-06T23:59:59+06:00"
+  },
+  "tool_results": [
+    {
+      "tool": "passport.lookup",
+      "status": "ok",
+      "id": "lookup_demo_001",
+      "idempotency_key": null,
+      "checked_at": "2026-10-23T10:05:00+06:00",
+      "summary": "Pricing and quote policy returned for passport version 1.1.0.",
+      "error_code": null
+    }
+  ],
+  "promises": [
+    {
+      "text": "Send the approved invoice after billing details are confirmed.",
+      "owner": "agent",
+      "due_at": "2026-10-23T12:00:00+06:00",
+      "status": "open"
+    }
+  ],
+  "handoff": {
+    "status": "none",
+    "reason_code": null,
+    "handoff_id": null
+  },
+  "open_questions": [],
+  "updated_at": "2026-10-23T10:05:00+06:00"
+}

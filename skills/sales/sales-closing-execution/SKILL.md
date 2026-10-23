@@ -1,7 +1,7 @@
 ---
 name: sales-closing-execution
 description: "Close, book, invoice, and confirm only verified outcomes."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -56,8 +56,9 @@ The universal rule: **no claim of completion without a confirming tool result.**
 | Booking policy, duration, timezone, buffer | passport `fulfillment.booking` | booking |
 | Real availability | calendar tool | booking |
 | Buyer identity and consent | state | all execution |
-| Authority limits | passport `sales_policy` | discounts, custom terms |
-| Proposal template | passport `templates` or business file | proposal |
+| Authority limits and negotiation limits | passport `sales_policy`, `sales_policy.negotiation` | discounts, custom terms |
+| Quote policy | passport `pricing.quote_policy` | discounted or custom amounts |
+| Proposal template | passport `fulfillment.proposal.template_id` | proposal |
 | Handoff route | passport `handoff` | human close |
 
 If a required input is missing, do not improvise. Say what is missing and offer a path.
@@ -76,6 +77,17 @@ Readiness is evidence, not hope. Signals include:
 - "What's the next step?"
 
 A question about price or features is not readiness. A polite "sounds interesting" is not readiness. When unsure, ask one direct question: "Would you like to proceed with [verified option]?"
+
+Do not wait passively for the buyer to volunteer a decision. When the diagnosis is clear, the buyer's criteria are met, and the next step is verified, ask for the decision directly. "Ask for the decision" is part of the job, not pressure.
+
+A commitment ladder can make the yes smaller without hiding the real next step:
+
+1. confirm the specific problem and desired outcome;
+2. confirm the option that fits;
+3. confirm the terms;
+4. execute the purchase, booking, or quote.
+
+Each rung is a real confirmation of a real thing, not a trick question. Do not use a "small yes" to imply a commitment the buyer did not make. If the buyer is ready at rung four, skip the earlier ones.
 
 ### Step 2 — Choose the execution path
 
@@ -108,9 +120,9 @@ Ask for explicit confirmation: "Подтверждаете? / Do you confirm?" D
 
 ### Step 4A — Direct purchase
 
-1. Confirm the exact offer and amount.
-2. Confirm the buyer's billing identity and consent to be charged.
-3. Create the payment request or invoice through the approved tool, with an idempotency key.
+1. Confirm the exact offer, quantity, plan, and amount against an approved quote. If the buyer changes quantity, plan, discount, or terms, create a new quote version and re-confirm; do not reuse an old snapshot.
+2. Confirm the buyer's billing identity and consent to be charged for that exact quote version.
+3. Create the payment request or invoice through the approved tool, with the quote ID/version and an idempotency key.
 4. Tell the buyer what was created and how to pay, using only verified details.
 5. Do **not** say "paid" until the payment status is confirmed by the tool/webhook.
 6. If payment is pending, say it is pending and what happens next.
@@ -129,11 +141,11 @@ Ask for explicit confirmation: "Подтверждаете? / Do you confirm?" D
 
 1. Confirm the buyer wants to book and the purpose/duration.
 2. Ask for the preferred date range and timezone if not known. Do not assume the buyer's timezone.
-3. Call `calendar.check_availability` with the tenant, calendar, duration, and range.
+3. Call `calendar.availability` with the tenant, calendar, duration, and range.
 4. If the tool returns slots, offer **two or three real options** in the chat, with date, time, timezone, and duration.
-5. Do not send a Calendly/Cal.com link by default. The buyer stays in the conversation.
+5. Keep the buyer in the conversation by default. Send an external scheduling link only if `fulfillment.booking.external_link_allowed` is true, the exact link is approved for this offer, and the buyer agrees to use it.
 6. When the buyer chooses, restate the exact slot and ask for confirmation if there is any ambiguity.
-7. Call `calendar.book` with the slot id, buyer identity, consent, and an idempotency key.
+7. Call `calendar.booking` with the slot id, buyer identity, consent, and an idempotency key.
 8. If the result is `confirmed`, send the confirmation with the exact date/time/timezone and what happens next.
 9. If the result is `conflict`/`slot_taken`, apologize briefly, re-check availability, and offer new real slots. Do not book a different time without the buyer's choice.
 10. If the result is `failed`/`timeout`, do not claim the booking. Say it is not confirmed, preserve the chosen slot in state, retry once if allowed, then offer a human or a callback.
@@ -145,7 +157,7 @@ Ask for explicit confirmation: "Подтверждаете? / Do you confirm?" D
 - book without the buyer's choice;
 - confirm a slot the tool has not confirmed;
 - double-book by retrying without an idempotency key;
-- send an external link "because it's easier".
+- send an external link "because it's easier" or one the passport does not allow.
 
 ### Step 4C — Proposal or quote
 
@@ -260,6 +272,14 @@ Do not add marketing to the confirmation. Do not ask a new qualifying question. 
 - Capture the request and hand off to a human with authority.
 - Do not promise the terms will be accepted.
 
+### After a successful purchase: expansion or referral
+
+- Finish the current confirmation and next step first. Do not turn a receipt into a pitch.
+- Consider expansion (more seats, a later plan) only after the buyer has the product and there is a verified reason it helps. Use the passport's plans; never invent an add-on.
+- Ask for a referral only when the buyer has expressed satisfaction and the passport permits it. A referral ask is optional for the buyer and must not be tied to support, a refund, or a discount.
+- A referral must never expose another customer's data. Do not share a reference customer's contact details without their permission.
+- Route a support issue to support before any expansion conversation.
+
 ### Buyer is ready but the passport has no payment method
 
 - Do not improvise.
@@ -344,13 +364,15 @@ Agent: "Спасибо. Проверяю статус… [tool says pending]. П
 
 Why: does not take the buyer's word as payment confirmation; gives a verified expectation.
 
-### Example 5 — No external link
+### Example 5 — External link requested
+
+Passport fact: `fulfillment.booking.external_link_allowed = false`.
 
 Buyer: "Скиньте Calendly, я сам выберу."
 
-Agent: "Могу записать прямо здесь — так быстрее и без перехода на другой сайт. Есть [slot A] и [slot B]. Какое время удобнее?"
+Agent: "В этом предложении запись идёт прямо в чате — так я вижу реальные окна и сразу подтверждаю. Есть [slot A] и [slot B]. Какое время удобнее?"
 
-Why: respects the in-chat booking policy and offers a concrete alternative.
+Why: respects the passport's booking policy and offers real alternatives. If the passport allowed the approved link and the buyer preferred it, the agent could send that approved link instead; it must not send an unapproved link or claim the in-chat path is "faster" as a fact.
 
 ## Counterexamples
 
@@ -364,6 +386,9 @@ Why: respects the in-chat booking policy and offers a concrete alternative.
 - **Skipping terms:** charging before the buyer sees the price, currency, and cancellation policy.
 - **Marketing after confirmation:** "Кстати, у нас есть ещё..." instead of a clean receipt.
 - **Forcing a meeting:** refusing a direct purchase when the passport allows it.
+- **Stale quote:** charging an amount the buyer did not confirm after the quantity, plan, or discount changed.
+- **Unapproved link:** sending a scheduling or payment link the passport does not allow.
+- **Referral pressure:** asking for a referral while the buyer is in support, or making a referral a condition of service.
 
 ## Dependencies
 

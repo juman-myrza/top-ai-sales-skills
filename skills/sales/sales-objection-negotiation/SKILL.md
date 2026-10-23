@@ -1,7 +1,7 @@
 ---
 name: sales-objection-negotiation
 description: "Resolve objections and negotiate within set authority."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -48,9 +48,11 @@ Negotiation is the same discipline applied to terms: understand interests, know 
 | Discount and concession authority | passport `sales_policy` | Defines what can be offered |
 | Refund/cancellation policy | passport `pricing` / `sales_policy` | Prevents invented risk reversal |
 | Verified proof | passport `proof` | Supports value claims |
+| Objection guidance and alternatives | passport `sales_guidance.objection_guidance`, `sales_guidance.alternatives` | Business-specific responses, not generic rebuttals |
 | Buyer's stated objection and history | state | Avoids repeating a failed response |
 | Decision process and stakeholders | state | Identifies whether the objection is the real blocker |
-| BATNA / walk-away | passport `sales_policy` | Defines when to stop |
+| Tradables, non-negotiables, walk-away | passport `sales_policy.negotiation` | Defines what may be traded and when to stop |
+| Current quote / approved terms | state `quote` | Keeps any concession tied to a versioned, approved snapshot |
 
 ## Procedure
 
@@ -67,10 +69,12 @@ Negotiation is the same discipline applied to terms: understand interests, know 
 | **Status quo** | "We do it manually" | Understand the cost/benefit of change; do not attack |
 | **Competitor** | "X is cheaper" | Clarify criteria; compare verified facts |
 | **Risk** | "What if it fails?" | Explain verified risk controls and exit terms |
+| **Implementation** | "This will take weeks to set up" | Explain the verified delivery path, owner, and effort; do not minimize real work |
+| **Adoption** | "The team won't use it" | Ask who must change, what has failed before, and what support exists |
 | **Need** | "We don't really need this" | Return to discovery; accept if true |
 | **Stall** | "Send info, I'll think" | Ask what would help; set a consented next step |
 
-Do not assume every objection is a smokescreen. Many are accurate.
+Do not assume every objection is a smokescreen. Many are accurate. An implementation or adoption concern is usually a real barrier, not a delay tactic; treating it as a "stall" and repeating a value pitch is the most common way to lose a technically qualified deal.
 
 ### Step 2 — Acknowledge without agreeing to a false premise
 
@@ -105,6 +109,8 @@ Match the response to the type:
 - **Status quo:** quantify the cost of the current process with the buyer's numbers, not invented ones.
 - **Competitor:** compare on the buyer's criteria with verified facts. Do not disparage.
 - **Risk:** explain verified guarantees, SLAs, refunds, data handling, and reversibility.
+- **Implementation:** state the verified setup steps, who owns them, and the realistic effort. Do not promise a fast setup the passport does not support.
+- **Adoption:** diagnose who has to change, what the last failed attempt was, and what support is included. Offer the smallest viable adoption path.
 - **Stall:** ask what specific information would help; offer a low-friction next step.
 
 Use at most one new argument per turn. A wall of rebuttals signals fear, not confidence.
@@ -123,23 +129,26 @@ Do not ask "Now do you understand?" Do not treat a nod as a closed objection.
 
 Before making any concession, check the passport:
 
+- If `sales_policy.negotiation` is absent, treat it as: no tradables beyond the published `discount_policy`, no custom terms, and no authority to go below the published floor. Do not infer tradables.
 - Is discounting allowed?
 - What is the maximum percentage or amount?
 - Who must approve?
-- What can be traded (term length, scope, payment schedule, start date, case study, referral)?
-- What is the walk-away point?
-- What concessions are forbidden?
+- What can be traded? Read `sales_policy.negotiation.tradables` (term length, scope, payment schedule, start date, case-study permission, referral).
+- What is forbidden? Read `sales_policy.negotiation.non_negotiables`.
+- What is the walk-away point (`sales_policy.negotiation.walk_away`)?
 
 Negotiation rules:
 
 1. **Never open with a discount.** Diagnose first.
-2. **Never concede without a trade.** If the buyer wants a lower price, ask for a longer term, a faster start, a smaller scope, or a public reference — whichever the passport permits.
-3. **One concession at a time.** Do not bundle unrequested extras.
-4. **Do not bid against yourself.** Wait for the buyer's counter.
-5. **Do not invent a competing offer or deadline.**
-6. **Do not promise approval you do not have.**
-7. **Protect the walk-away.** If the deal is below the passport floor, say no or escalate.
-8. **Write down the agreed terms** and confirm them before execution.
+2. **Never concede without a trade.** If the buyer wants a lower price, ask for a longer term, a faster start, a smaller scope, or a public reference — whichever `tradables` permits.
+3. **Correct your own error first.** If the business published a wrong price, missed a promised feature, or overcharged the buyer, fix the error and honor the advertised terms. That is not a concession to trade. "Trade, do not give" does not apply to money or scope the buyer was already owed.
+4. **One concession at a time.** Do not bundle unrequested extras.
+5. **Do not bid against yourself.** Wait for the buyer's counter.
+6. **Do not invent a competing offer or deadline.**
+7. **Do not promise approval you do not have.**
+8. **Protect the walk-away.** If the deal is below the passport floor, say no or escalate.
+9. **Record the agreed terms in a new quote version.** If the amount, quantity, discount, tax treatment, or terms change, create a new version, summarize it, and get fresh confirmation. Never execute a payment against a discounted or changed amount that is not in an approved quote.
+10. **Do not trade away a non-negotiable** to save the deal.
 
 ### Step 7 — Know when to stop
 
@@ -206,10 +215,18 @@ A clean no preserves the relationship and the business's pricing integrity.
 ### "Give me a discount"
 
 - Ask why the discount is needed (budget, comparison, risk, timing).
-- Check authority.
-- If allowed, trade for a commitment.
+- Check authority and the passport's `discount_policy` and `sales_policy.negotiation`.
+- If allowed, trade for a commitment and record the result in a new quote version.
 - If not allowed, say so and offer a non-price alternative if one exists.
 - Do not invent a "special price" to test the buyer.
+- Do not stack discounts the passport says cannot be stacked.
+
+### "You charged me the wrong amount / you broke your own promise"
+
+- This is an entitlement issue, not a negotiation. Verify the original quote, terms, and payment record first.
+- If the business was wrong, correct it immediately and do not require a trade.
+- If the buyer is mistaken, show the exact quote version and terms without arguing.
+- Route a disputed charge or refund to the documented process; do not improvise compensation.
 
 ### "I'll pay later / can we start now and pay after results?"
 
@@ -317,6 +334,9 @@ Why: one acknowledgment, no rebuttal, clean exit.
 - **Pressure after no:** "Давайте ещё один созвон, вы просто не разобрались."
 - **Unauthorized terms:** promising net-60, a custom SLA, or a refund outside the passport.
 - **Winning the argument:** proving the buyer wrong and losing the relationship.
+- **Untracked concession:** agreeing to a lower price or extra scope without a new approved quote version.
+- **Entitlement trade:** withholding a correction the buyer is owed until they concede something.
+- **Adoption dismissal:** replying to "the team won't use it" with another value pitch instead of an adoption plan.
 
 ## Dependencies
 

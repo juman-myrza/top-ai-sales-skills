@@ -1,6 +1,6 @@
 # Contract: `passport.lookup`
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Kind:** read-only  
 **Adapter status in this repository:** not implemented
 
@@ -40,14 +40,14 @@ A single implementation may expose only `lookup`; the other operations can be de
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "passport.lookup",
   "request_id": "req_01J9Z3K4T5",
   "tenant_id": "tenant_demo",
   "conversation_id": "conv_123",
   "actor": { "type": "agent", "id": "sales-agent" },
   "params": {
-    "passport_id": "nimbus-notes-direct",
+    "passport_id": "direct-sale-nimbus-notes",
     "offer_id": "nimbus-notes-team",
     "locale": "ru",
     "requested_fields": [
@@ -69,8 +69,8 @@ A single implementation may expose only `lookup`; the other operations can be de
 |---|---|---|---|
 | `passport_id` | string | yes | Exact ID; no fuzzy matching |
 | `offer_id` | string | yes | Must match the passport's `offer.id` |
-| `locale` | enum `ru, ky, en` | yes | Approved locale; do not machine-translate on lookup |
-| `requested_fields` | array of dot paths | yes | Max 40; unknown paths return `invalid_request` |
+| `locale` | enum `ru, ky, en` | yes | The **approved content** locale. It is not the conversation's language. A buyer may converse in a Russian–Kyrgyz mix while the approved product content is `ru`; the language skill handles the mix, and the lookup returns only approved `ru` content rather than a machine translation. If no approved content exists for the requested locale, return the field with `status: "unknown"`. |
+| `requested_fields` | array of dot paths | yes | Max 40. An unknown top-level path or unsupported pointer returns `invalid_request`; a known field with no approved value returns `status: "unknown"`. |
 | `at` | ISO-8601 | no | Defaults to server time; used to check effective dates |
 | `version` | semver | no | Pin a version for audit; default latest approved |
 
@@ -79,7 +79,8 @@ A single implementation may expose only `lookup`; the other operations can be de
 - Only allowlisted paths are returned.
 - Whole sections (`pricing`) are allowed; arbitrary JSON pointers are not.
 - Sensitive paths (for example `privacy.legal_basis` details) require an explicit scope.
-- If a requested field is unknown, return it with `status: "unknown"`, not omitted silently.
+- A malformed, unallowlisted, or unknown path is a request error: return `invalid_request` and do not guess.
+- If a known field exists in the allowlist but has no approved value, return it with `status: "unknown"`; do not omit it silently.
 - Do not return `tools` or internal adapter credentials to the model.
 
 ---
@@ -95,8 +96,8 @@ A single implementation may expose only `lookup`; the other operations can be de
   "tool": "passport.lookup",
   "request_id": "req_01J9Z3K4T5",
   "data": {
-    "passport_id": "nimbus-notes-direct",
-    "version": "1.0.0",
+    "passport_id": "direct-sale-nimbus-notes",
+    "version": "1.1.0",
     "passport_status": "approved",
     "effective_from": "2026-01-01",
     "effective_to": "2026-12-31",
@@ -131,7 +132,7 @@ A single implementation may expose only `lookup`; the other operations can be de
   "meta": {
     "server_time": "2026-10-23T10:00:01+06:00",
     "source": "passport-store",
-    "contract_version": "1.0.0",
+    "contract_version": "1.1.0",
     "trace_id": "trace_abc123"
   }
 }

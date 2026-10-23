@@ -150,19 +150,29 @@ def markdown(corpus: list[dict[str, Any]]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def jsonl(corpus: list[dict[str, Any]], include_expected: bool) -> str:
+def jsonl(
+    corpus: list[dict[str, Any]],
+    include_expected: bool,
+    include_fixtures: bool = False,
+    include_title: bool = False,
+) -> str:
+    """Emit one JSON object per scenario.
+
+    By default the packet is safe to hand to a responding agent: it omits the
+    hidden tool fixtures (which would leak outcomes such as "slot taken") and
+    the evaluator title (which names the expected behavior). Opt in with
+    --include-fixtures or --include-title for offline analysis.
+    """
     lines: list[str] = []
     for scenario in corpus:
         payload: dict[str, Any] = {
             "scenario_id": scenario["id"],
             "category": scenario["_category"],
-            "title": scenario.get("title"),
             "difficulty": scenario.get("difficulty"),
             "locale": scenario.get("locale"),
             "passport": scenario.get("passport"),
             "context": scenario.get("context", {}),
             "turns": scenario.get("turns", []),
-            "fixtures": scenario.get("fixtures", []),
             "rubric_focus": scenario.get("rubric_focus", []),
             "response_contract": {
                 "scenario_id": scenario["id"],
@@ -173,6 +183,10 @@ def jsonl(corpus: list[dict[str, Any]], include_expected: bool) -> str:
                 "stopped": False,
             },
         }
+        if include_title:
+            payload["title"] = scenario.get("title")
+        if include_fixtures:
+            payload["fixtures"] = scenario.get("fixtures", [])
         if include_expected:
             payload["expected"] = scenario.get("expected", {})
         lines.append(json.dumps(payload, ensure_ascii=False, sort_keys=False))
@@ -189,6 +203,16 @@ def main() -> int:
         action="store_true",
         help="include deterministic expectations in JSONL (offline analysis only)",
     )
+    parser.add_argument(
+        "--include-fixtures",
+        action="store_true",
+        help="include hidden tool fixtures in JSONL; never hand these to a responding agent",
+    )
+    parser.add_argument(
+        "--include-title",
+        action="store_true",
+        help="include the evaluator title in JSONL; it names the expected behavior",
+    )
     args = parser.parse_args()
 
     if not args.scenarios.is_dir():
@@ -200,7 +224,11 @@ def main() -> int:
         print(f"ERROR: no scenarios found in {args.scenarios}", file=sys.stderr)
         return 2
 
-    output = markdown(corpus) if args.format == "markdown" else jsonl(corpus, args.include_expected)
+    output = (
+        markdown(corpus)
+        if args.format == "markdown"
+        else jsonl(corpus, args.include_expected, args.include_fixtures, args.include_title)
+    )
     if args.out:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(output, encoding="utf-8")

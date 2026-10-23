@@ -9,17 +9,18 @@
 | Field | Example shape | Why it matters |
 |---|---|---|
 | `follow_up.allowed` | `true` / `false` | Some offers or channels prohibit proactive contact |
-| `follow_up.basis` | `buyer_request`, `agreed_step`, `existing_customer` | Defines what counts as permission |
+| `follow_up.basis` | `buyer_requested`, `agreed_next_step`, `existing_customer`, `buyer_initiated_inquiry`, `marketing_consent` | Defines what counts as permission |
 | `follow_up.channels` | ordered list | Prevents channel hopping |
 | `follow_up.quiet_hours` | local start/end + timezone | Protects the buyer's time |
 | `follow_up.allowed_days` | e.g. Mon–Fri | Avoids weekend messages where inappropriate |
 | `follow_up.max_attempts_per_reason` | integer | Prevents nagging |
 | `follow_up.max_attempts_per_conversation` | integer | Caps the whole thread |
 | `follow_up.min_interval_hours` | integer | Prevents rapid bumps |
-| `follow_up.close_out_after` | duration | Defines when to stop |
-| `follow_up.no_show_policy` | text + timing | Governs appointment recovery |
-| `follow_up.marketing_consent` | separate flag | Transactional consent is not marketing consent |
+| `follow_up.close_out_after_days` | integer (days) | Defines when to stop |
+| `follow_up.marketing_consent_required` | boolean | Transactional consent is not marketing consent |
 | `follow_up.opt_out_keywords` | list per language | Must include Russian and Kyrgyz variants |
+
+Appointment recovery uses the booking contract's `no_show_policy` (`fulfillment.booking.no_show_policy`), not a separate follow-up field.
 
 If a field is `unknown`, the safe behavior is: send only buyer-requested follow-ups, and ask for a date if none was given.
 
@@ -148,8 +149,8 @@ Replace `[verified …]` from the passport. Do not send placeholders. Kyrgyz lin
 |---|---|---|
 | `yes` | `decision: yes`, `consent` confirmed | Move to closing; execute only with a tool result |
 | `no` | `decision: no`, `sequence: stopped` | One acknowledgment; no further sales |
-| `not_now_with_date` | `next_contact_at` | One scheduled touch on that date |
-| `not_now_without_date` | `next_contact_at: null` | Ask once for a date; otherwise close |
+| `not_now_with_date` | `follow_up.status: scheduled`, `follow_up.next_due_at` | One scheduled touch on that date |
+| `not_now_without_date` | `follow_up.next_due_at: null` | Ask once for a date; otherwise close |
 | `question` | Append to `open_questions` | Answer; do not treat as consent |
 | `silence` | Increment attempts | Wait; then close per policy |
 | `stop` | `opt_out: true`, `sequence: stopped` | Immediate stop; one neutral acknowledgment at most |
@@ -171,7 +172,8 @@ Replace `[verified …]` from the passport. Do not send placeholders. Kyrgyz lin
 - [ ] The language and register match the buyer.
 - [ ] Names, amounts, dates, and document IDs are exact.
 - [ ] The channel and timing are approved by the passport.
-- [ ] The send result is confirmed by the messaging tool.
+- [ ] The send result is confirmed by the messaging tool; a scheduled message is not described as sent.
+- [ ] A scheduled message will be cancelled if the buyer opts out or replies before dispatch.
 - [ ] A human-owned thread is not being interleaved.
 - [ ] The attempt count and opt-out status are updated.
 

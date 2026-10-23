@@ -199,7 +199,7 @@ Do not escalate merely because the buyer is hesitant, asks a difficult question,
 
 1. static structure and schema validation;
 2. isolated Hermes discovery;
-3. a 51-scenario corpus with deterministic checks;
+3. a 57-scenario corpus with deterministic checks, including B2C, scoped-refusal, and adoption coverage;
 4. a response checker that reads recorded responses.
 
 Do not claim a live model was evaluated. Flag rubric review as not run. Do not implement fake tool adapters.
@@ -214,13 +214,13 @@ Do not claim a live model was evaluated. Flag rubric review as not run. Do not i
 
 ### D13. Isolated installation
 
-**Decision.** The installer is dry-run by default and writes only with `--apply`. It backs up replaced skill directories. The loading test uses a temporary `HERMES_HOME` and never reads or writes the live profile.
+**Decision.** The installer is dry-run by default and writes only with `--apply`. It backs up replaced skill directories. It copies the shared `core/`, `tools/`, `product-passport/`, and `research/` documents into each skill under `references/shared/` and rewrites each skill's links, because Hermes serves only files inside a skill directory. It writes an install manifest and activation notes. The loading test uses a temporary `HERMES_HOME` and never reads or writes the live profile.
 
-**Why.** The owner explicitly said not to install into the active agent during this work. Even outside this task, silently modifying a live profile is unacceptable.
+**Why.** The owner explicitly said not to install into the active agent during this work. Even outside this task, silently modifying a live profile is unacceptable. The audit found that installing a skill alone dropped its core contract and tool contracts, so the bundle is required for the skill to function as designed.
 
-**Tradeoff.** One extra command for the user. The installer cannot verify the target profile's model or tool configuration; it only copies instruction files.
+**Tradeoff.** Each installed skill carries a copy of the shared documents, so editing one copy would drift; the source repository remains the source of truth and reinstalling refreshes the copies. The installer cannot verify the target profile's model or tool configuration.
 
-**Related:** [`scripts/install_skills.py`](../scripts/install_skills.py), [`scripts/test_hermes_loading.py`](../scripts/test_hermes_loading.py).
+**Related:** [`scripts/install_skills.py`](../scripts/install_skills.py), [`scripts/test_installed_artifact.py`](../scripts/test_installed_artifact.py), [`scripts/test_hermes_loading.py`](../scripts/test_hermes_loading.py).
 
 ---
 
@@ -242,13 +242,47 @@ Do not claim a live model was evaluated. Flag rubric review as not run. Do not i
 
 ---
 
+### D16. Quote as the unit of payment truth
+
+**Decision.** A payment request must reference an approved, unexpired quote version with an exact terms snapshot. A change to quantity, plan, discount, tax treatment, or terms creates a new version. A discounted or custom quote needs an approval reference from the passport's authority owner.
+
+**Why.** The audit found that a documented discount path could produce a payment request with no record of what was approved. A versioned quote makes the amount auditable and gives the payment tool something concrete to verify.
+
+**Tradeoff.** One more artifact to maintain, and a re-quote whenever scope changes. The alternative — trusting the conversation and the client-supplied amount — is what produces billing disputes.
+
+### D17. Scoped refusal is not a stop
+
+**Decision.** A refusal of one element (a meeting, a channel, a plan) stops only that element. A refusal of the offer or of contact stops the sequence. A buyer correction is accepted immediately, not treated as a contradiction to adjudicate.
+
+**Why.** The audit found the earlier wording could either pressure a buyer past a boundary or end a conversation with a ready buyer who only declined a call.
+
+**Tradeoff.** The agent must classify the refusal correctly. A wrong classification in either direction is a real failure, which is why the behavior is covered by scenarios B02 and F03.
+
+### D18. Consumer offers are first-class
+
+**Decision.** Whether a consumer is a fit comes from `offer.buyer_types` and `sales_guidance.segments`, never from a universal "business buyers only" rule. The repository ships a B2C example and four consumer scenarios.
+
+**Why.** The audit found B2B-only assumptions encoded as universal logic and no B2C coverage. The architecture must serve both motions.
+
+**Tradeoff.** More passport surface area and a consumer example that needs its own jurisdiction review (recorded in the passport's `unresolved`).
+
+### D19. Klaff is recorded, not adopted
+
+**Decision.** Oren Klaff's framing vocabulary is recorded in the source register as a known coverage gap, but the repository adopts only the integrity-compatible idea of reducing perceived risk through verified clarity. Frame-control and status tactics are not encoded.
+
+**Why.** The audit noted Klaff's absence and also warned against adopting famous methodology content without evidence that it improves behavior. Recording the source and declining to adopt it is the honest response.
+
+**Tradeoff.** The repository may miss a framing pattern that a controlled test would show helps. That is an accepted gap, not a hidden capability.
+
+---
+
 ## 3. Corrections to the original brief
 
 The source brief contained several patterns that are common in sales content but unsafe or unsupported. The repository changes them deliberately:
 
 | Original pattern | Repository decision | Reason |
 |---|---|---|
-| Send a Calendly link to book | Check real availability and book in chat; external link only as fallback | Owner requirement; verifiable confirmation |
+| Send a Calendly link to book | Check real availability and book in chat; use the approved external link only when the passport allows it and the buyer agrees | Owner requirement; verifiable confirmation; the audit found the old wording contradicted passports that allowed a link |
 | Every message must end with a question | No such rule; question limits are scenario-specific | Pressure, interrogation, and unnatural conversation |
 | Use "alpha" / dominance language | Rejected | Unvalidated construct; conflicts with consent |
 | Type slowly to seem human | Rejected | Deception; no evidence of durable trust |
@@ -260,6 +294,9 @@ The source brief contained several patterns that are common in sales content but
 | Use Belfort's straight-line close | Excluded | Fraud conviction/restitution; high-pressure tactics |
 | Use a 5–7 word personality read | Rejected | Unsupported psychotyping |
 | Treat RAG as truth | Tool/passport verification plus explicit unknowns | Retrieval reduces but does not eliminate hallucination |
+| "Never discount; discount destroys value" | The passport's discount and negotiation limits win, with a trade or correction; never above authority | The audit found this generic rule could override approved business policy |
+| Reject a consumer because the skill assumes B2B | Read `offer.buyer_types`; qualify against the declared segment | The audit found a B2B-only disqualifier encoded as universal logic |
+| Answer a "no call" as if the whole offer was refused | Stop only the refused element; continue on the legitimate path | Scoped refusal protects both the buyer's boundary and their goal |
 
 ---
 

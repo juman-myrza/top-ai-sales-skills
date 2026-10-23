@@ -29,7 +29,7 @@ except ImportError:  # pragma: no cover - environment guard
 
 try:
     import jsonschema
-    from jsonschema import Draft202012Validator
+    from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:  # pragma: no cover - environment guard
     print("ERROR: jsonschema is required. Install with: pip install -r requirements-dev.txt", file=sys.stderr)
     raise SystemExit(2)
@@ -52,12 +52,13 @@ EXPECTED_SKILLS = [
 EXPECTED_CATEGORIES = {
     "price-intent": 6,
     "qualification-discovery": 6,
-    "objections": 8,
+    "objections": 10,
     "closing-booking": 7,
     "tool-failures": 6,
     "handoff-safety": 6,
     "multilingual-multiturn": 6,
     "follow-up-refusal": 6,
+    "consumer-direct": 4,
 }
 
 EXPECTED_TOTAL = sum(EXPECTED_CATEGORIES.values())
@@ -71,6 +72,7 @@ CATEGORY_LABELS = {
     "handoff-safety": "Handoff and safety",
     "multilingual-multiturn": "Multilingual and multi-turn",
     "follow-up-refusal": "Follow-up and refusal",
+    "consumer-direct": "Consumer direct purchase",
 }
 
 SKILL_SECTIONS = [
@@ -101,7 +103,18 @@ STAGES = {
     "follow_up",
     "protect",
 }
-RUBRIC_DIMENSIONS = {"truth", "consent", "diagnosis", "execution", "language", "integrity", "efficiency"}
+RUBRIC_DIMENSIONS = {
+    "truth",
+    "consent",
+    "diagnosis",
+    "recommendation",
+    "barrier",
+    "progression",
+    "execution",
+    "language",
+    "integrity",
+    "efficiency",
+}
 
 TOOL_NAMES = {
     "passport.lookup",
@@ -134,8 +147,13 @@ EXPECTED_KEYS = {
     "must_include_any",
     "must_not_include",
     "must_not_regex",
+    "must_match_regex_all",
+    "must_match_regex_any",
     "max_questions",
     "required_tool_calls",
+    "required_tool_statuses",
+    "required_tool_sequence",
+    "expected_final_state",
     "forbidden_tool_calls",
     "forbidden_tool_operations",
     "should_handoff",
@@ -170,6 +188,7 @@ REQUIRED_PATHS = [
     "core/CONFLICT-RESOLUTION.md",
     "core/CONVERSATION-STATE.md",
     "core/conversation-state.schema.json",
+    "core/example-state.json",
     "core/SYSTEM-PROMPT-SNIPPET.md",
     "product-passport/README.md",
     "product-passport/TEMPLATE.md",
@@ -178,6 +197,8 @@ REQUIRED_PATHS = [
     "product-passport/examples/direct-sale-nimbus-notes.md",
     "product-passport/examples/appointment-karkyra-consult.json",
     "product-passport/examples/appointment-karkyra-consult.md",
+    "product-passport/examples/consumer-course-example.json",
+    "product-passport/examples/consumer-course-example.md",
     "tools/README.md",
     "tools/schemas/tool-envelope.schema.json",
     "tools/schemas/example-envelopes.json",
@@ -190,14 +211,18 @@ REQUIRED_PATHS = [
     "tools/contracts/messaging-media.md",
     "tests/README.md",
     "tests/SCENARIO-FORMAT.md",
+    "tests/BEHAVIORAL-EVALUATION.md",
+    "tests/scenarios/consumer-direct.yaml",
     "tests/RUBRIC.md",
     "tests/COVERAGE.md",
     "tests/fixtures/README.md",
+    "tests/schema-invalid/README.md",
     "research/source-register.md",
     "research/claim-evidence-matrix.md",
     "research/decisions-and-tradeoffs.md",
     "research/open-source-audit.md",
     "scripts/README.md",
+    "scripts/test_installed_artifact.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -340,7 +365,7 @@ def check_passports() -> None:
     if schema is None:
         return
     try:
-        validator = Draft202012Validator(schema)
+        validator = Draft202012Validator(schema, format_checker=FormatChecker())
         validator.check_schema(schema)
     except jsonschema.SchemaError as exc:
         record("passport-schema", f"invalid schema: {exc.message}")
@@ -348,8 +373,8 @@ def check_passports() -> None:
 
     examples = sorted((ROOT / "product-passport" / "examples").glob("*.json"))
     bump()
-    if len(examples) != 2:
-        record("passport-examples", f"expected 2 JSON passport examples, found {len(examples)}")
+    if len(examples) != 3:
+        record("passport-examples", f"expected 3 JSON passport examples (business and consumer), found {len(examples)}")
 
     for path in examples:
         data = load_json(path)
@@ -360,6 +385,12 @@ def check_passports() -> None:
         for exc in errors:
             location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
             record("passport-example", f"{path.relative_to(ROOT)}: {location}: {exc.message}")
+        bump()
+        if data.get("passport_id") != path.stem:
+            record(
+                "passport-identity",
+                f"{path.relative_to(ROOT)}: passport_id {data.get('passport_id')!r} does not match filename {path.stem!r}",
+            )
         md_path = path.with_suffix(".md")
         bump()
         if not md_path.is_file():
@@ -370,6 +401,25 @@ def check_passports() -> None:
                 record("passport-examples", f"{md_path.relative_to(ROOT)}: contains an unreplaced placeholder")
             if "fictional" not in md.lower():
                 warn("passport-examples", f"{md_path.relative_to(ROOT)}: no explicit fictional disclaimer")
+
+        # Semantic checks that JSON Schema cannot express.
+        effective_from = data.get("effective_from")
+        effective_to = data.get("effective_to")
+        bump()
+        if effective_from and effective_to and effective_to < effective_from:
+            record("passport-semantics", f"{path.relative_to(ROOT)}: effective_to precedes effective_from")
+        plan_ids = [plan.get("id") for plan in data.get("pricing", {}).get("plans", [])]
+        bump()
+        if len(plan_ids) != len(set(plan_ids)):
+            record("passport-semantics", f"{path.relative_to(ROOT)}: duplicate plan ids {plan_ids}")
+        metadata = data.get("metadata", {})
+        bump()
+        if data.get("status") == "approved" and not metadata.get("approved_by"):
+            record("passport-semantics", f"{path.relative_to(ROOT)}: approved passport has no approver")
+        follow_up_basis = data.get("follow_up", {}).get("basis", [])
+        bump()
+        if data.get("follow_up", {}).get("allowed") and not follow_up_basis:
+            record("passport-semantics", f"{path.relative_to(ROOT)}: follow_up.allowed is true but no basis is declared")
 
     template = (ROOT / "product-passport" / "TEMPLATE.md").read_text(encoding="utf-8")
     bump()
@@ -548,6 +598,8 @@ def check_scenarios() -> None:
                 "must_include_any",
                 "must_not_include",
                 "must_not_regex",
+                "must_match_regex_all",
+                "must_match_regex_any",
                 "required_tool_calls",
                 "forbidden_tool_calls",
                 "forbidden_tool_operations",
@@ -564,7 +616,37 @@ def check_scenarios() -> None:
             for operation in expected.get("forbidden_tool_operations", []) or []:
                 if ":" not in operation or operation.split(":", 1)[0] not in known_tools:
                     record("scenario-expected", f"{label}: invalid forbidden operation '{operation}'")
-            for pattern in expected.get("must_not_regex", []) or []:
+            statuses = expected.get("required_tool_statuses", {})
+            if not isinstance(statuses, dict):
+                record("scenario-expected", f"{label}: required_tool_statuses must be a mapping")
+            else:
+                for key, allowed in statuses.items():
+                    base = key.split(":", 1)[0]
+                    if base not in known_tools:
+                        record("scenario-expected", f"{label}: required_tool_statuses key '{key}' is not a known tool")
+                    if isinstance(allowed, str):
+                        allowed = [allowed]
+                    if not isinstance(allowed, list) or any(not isinstance(item, str) for item in allowed):
+                        record("scenario-expected", f"{label}: required_tool_statuses[{key!r}] must be a string or list of strings")
+            sequence = expected.get("required_tool_sequence", [])
+            if not isinstance(sequence, list) or any(not isinstance(item, str) for item in sequence):
+                record("scenario-expected", f"{label}: required_tool_sequence must be a list of strings")
+            else:
+                for item in sequence:
+                    if item.split(":", 1)[0] not in known_tools:
+                        record("scenario-expected", f"{label}: required_tool_sequence item '{item}' is not a known tool")
+            final_state = expected.get("expected_final_state", {})
+            if not isinstance(final_state, dict):
+                record("scenario-expected", f"{label}: expected_final_state must be a mapping")
+            else:
+                for path, value in final_state.items():
+                    if not isinstance(path, str) or not path:
+                        record("scenario-expected", f"{label}: expected_final_state keys must be non-empty strings")
+                    if isinstance(value, (dict, list)):
+                        record("scenario-expected", f"{label}: expected_final_state[{path!r}] must be a scalar")
+            for pattern in list(expected.get("must_not_regex", []) or []) + list(
+                expected.get("must_match_regex_all", []) or []
+            ) + list(expected.get("must_match_regex_any", []) or []):
                 try:
                     re.compile(pattern, re.IGNORECASE)
                 except re.error as exc:
@@ -618,9 +700,138 @@ def check_state_schema() -> None:
     if schema is None:
         return
     try:
-        Draft202012Validator.check_schema(schema)
+        validator = Draft202012Validator(schema, format_checker=FormatChecker())
+        validator.check_schema(schema)
     except jsonschema.SchemaError as exc:
         record("state-schema", f"{exc.message}")
+        return
+
+    example = ROOT / "core" / "example-state.json"
+    data = load_json(example)
+    if data is None:
+        return
+    bump()
+    errors = sorted(validator.iter_errors(data), key=lambda e: list(e.absolute_path))
+    for exc in errors:
+        location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
+        record("state-example", f"{example.relative_to(ROOT)}: {location}: {exc.message}")
+
+
+def extract_json_block(path: Path, marker: str) -> Any | None:
+    """Return the first ```json fenced block after a marker line."""
+    if not path.is_file():
+        record("contract-example", f"{path.relative_to(ROOT)}: missing")
+        return None
+    text = path.read_text(encoding="utf-8")
+    index = text.find(marker)
+    if index == -1:
+        record("contract-example", f"{path.relative_to(ROOT)}: marker {marker!r} not found")
+        return None
+    remainder = text[index:]
+    match = re.search(r"```json\s*\n(.*?)\n```", remainder, re.DOTALL)
+    if not match:
+        record("contract-example", f"{path.relative_to(ROOT)}: no JSON block after {marker!r}")
+        return None
+    try:
+        return json.loads(match.group(1))
+    except json.JSONDecodeError as exc:
+        record("contract-example", f"{path.relative_to(ROOT)}: invalid JSON after {marker!r}: {exc}")
+        return None
+
+
+def deep_merge(base: Any, patch: Any) -> Any:
+    if isinstance(base, dict) and isinstance(patch, dict):
+        merged = dict(base)
+        for key, value in patch.items():
+            merged[key] = deep_merge(merged.get(key), value) if key in merged else value
+        return merged
+    return patch
+
+
+def check_contract_examples() -> None:
+    """Validate documented request examples and a documented state patch.
+
+    The audit found that a documented CRM patch produced schema errors and that
+    the canonical state and CRM contract disagreed. This check keeps the
+    documented examples executable rather than aspirational.
+    """
+    envelope_schema = load_json(ROOT / "tools" / "schemas" / "tool-envelope.schema.json")
+    state_schema = load_json(ROOT / "core" / "conversation-state.schema.json")
+    state_example = load_json(ROOT / "core" / "example-state.json")
+    if envelope_schema is None or state_schema is None or state_example is None:
+        return
+    envelope_request = envelope_schema["$defs"]["request"]
+    request_validator = Draft202012Validator(envelope_request, format_checker=FormatChecker())
+    state_validator = Draft202012Validator(state_schema, format_checker=FormatChecker())
+
+    # Every contract request example must satisfy the shared envelope.
+    for contract in sorted((ROOT / "tools" / "contracts").glob("*.md")):
+        text = contract.read_text(encoding="utf-8")
+        if '"tool":' not in text:
+            continue
+        for block in re.findall(r"```json\s*\n(.*?)\n```", text, re.DOTALL):
+            try:
+                data = json.loads(block)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(data, dict) and "request_id" in data and "params" in data:
+                bump()
+                errors = list(request_validator.iter_errors(data))
+                for exc in errors:
+                    location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
+                    record("contract-request", f"{contract.relative_to(ROOT)}: {location}: {exc.message}")
+
+    # The documented CRM update patch must merge into the canonical state and validate.
+    crm_request = extract_json_block(ROOT / "tools" / "contracts" / "crm-memory.md", "## 4. Request: update state")
+    if isinstance(crm_request, dict):
+        bump()
+        for exc in request_validator.iter_errors(crm_request):
+            location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
+            record("contract-request", f"crm-memory.md: {location}: {exc.message}")
+        patch = crm_request.get("params", {}).get("patch", {})
+        if isinstance(patch, dict):
+            merged = deep_merge(state_example, patch)
+            bump()
+            errors = list(state_validator.iter_errors(merged))
+            for exc in errors:
+                location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
+                record("crm-patch", f"crm-memory.md merged patch: {location}: {exc.message}")
+
+
+def check_invalid_fixtures() -> None:
+    """Every file under tests/schema-invalid/ must be rejected by its schema.
+
+    A schema that accepts invalid data is worse than no schema: it creates false
+    confidence. These fixtures pin the important invariants.
+    """
+    fixture_dir = ROOT / "tests" / "schema-invalid"
+    if not fixture_dir.is_dir():
+        record("schema-invalid", "tests/schema-invalid/ is missing")
+        return
+    schema_map = {
+        "passport": ROOT / "product-passport" / "passport.schema.json",
+        "state": ROOT / "core" / "conversation-state.schema.json",
+    }
+    validators: dict[str, Draft202012Validator] = {}
+    for name, path in schema_map.items():
+        schema = load_json(path)
+        if schema is None:
+            continue
+        validators[name] = Draft202012Validator(schema, format_checker=FormatChecker())
+
+    for fixture in sorted(fixture_dir.glob("*.json")):
+        prefix = fixture.name.split("-", 1)[0]
+        validator = validators.get(prefix)
+        bump()
+        if validator is None:
+            record("schema-invalid", f"{fixture.relative_to(ROOT)}: filename must start with passport- or state-")
+            continue
+        data = load_json(fixture)
+        if data is None:
+            continue
+        bump()
+        if not list(validator.iter_errors(data)):
+            record("schema-invalid", f"{fixture.relative_to(ROOT)}: expected the schema to reject this document, but it passed")
 
 
 def iter_markdown_files() -> Iterable[Path]:
@@ -705,6 +916,8 @@ def main() -> int:
     check_tool_schemas()
     check_scenarios()
     check_state_schema()
+    check_contract_examples()
+    check_invalid_fixtures()
     check_links()
     check_placeholders_and_secrets()
     check_gitignore()

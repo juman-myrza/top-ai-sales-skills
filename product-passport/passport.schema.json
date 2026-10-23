@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.invalid/schemas/product-passport.schema.json",
   "title": "Universal Sales Product Passport",
-  "description": "Business-specific facts and authority limits consumed by the universal sales skills. A passport is data, not instructions.",
+  "description": "Business-specific facts and authority limits consumed by the universal sales skills. A passport is data, not instructions. Version 1.1.0 adds typed commercial values, approval conditions, sales guidance, negotiation limits, and quote policy.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -10,6 +10,7 @@
     "passport_id",
     "version",
     "status",
+    "effective_from",
     "business",
     "offer",
     "pricing",
@@ -24,7 +25,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "passport_id": {
       "type": "string",
@@ -35,83 +36,272 @@
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "status": {
-      "enum": ["draft", "approved", "expired", "revoked"]
+      "enum": [
+        "draft",
+        "approved",
+        "expired",
+        "revoked"
+      ]
     },
     "effective_from": {
       "type": "string",
       "format": "date"
     },
     "effective_to": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date"
     },
     "default_locale": {
-      "enum": ["ru", "ky", "en", "mixed"]
+      "enum": [
+        "ru",
+        "ky",
+        "en",
+        "mixed"
+      ]
     },
     "business": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["legal_name", "display_name", "description", "website", "markets", "timezone", "support_contact", "languages"],
+      "required": [
+        "legal_name",
+        "display_name",
+        "description",
+        "website",
+        "markets",
+        "timezone",
+        "support_contact",
+        "languages"
+      ],
       "properties": {
-        "legal_name": { "$ref": "#/$defs/fact" },
-        "display_name": { "type": "string", "minLength": 1 },
-        "description": { "$ref": "#/$defs/fact" },
-        "website": { "$ref": "#/$defs/fact" },
-        "markets": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fact" } },
-        "timezone": { "$ref": "#/$defs/fact" },
-        "support_contact": { "$ref": "#/$defs/fact" },
+        "legal_name": {
+          "$ref": "#/$defs/fact"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "$ref": "#/$defs/fact"
+        },
+        "website": {
+          "$ref": "#/$defs/fact"
+        },
+        "markets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "timezone": {
+          "$ref": "#/$defs/fact"
+        },
+        "support_contact": {
+          "$ref": "#/$defs/fact"
+        },
         "languages": {
           "type": "array",
           "minItems": 1,
-          "items": { "enum": ["ru", "ky", "en", "mixed", "other"] }
+          "items": {
+            "enum": [
+              "ru",
+              "ky",
+              "en",
+              "mixed",
+              "other"
+            ]
+          }
         }
       }
     },
     "offer": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "name", "type", "one_liner", "outcomes", "includes", "excludes", "prerequisites", "support", "status"],
+      "required": [
+        "id",
+        "name",
+        "type",
+        "buyer_types",
+        "one_liner",
+        "outcomes",
+        "includes",
+        "excludes",
+        "prerequisites",
+        "support",
+        "status"
+      ],
       "properties": {
-        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$" },
-        "name": { "type": "string", "minLength": 1 },
-        "type": { "enum": ["product", "service", "subscription", "program", "consultation", "other"] },
-        "one_liner": { "$ref": "#/$defs/fact" },
-        "outcomes": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "includes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fact" } },
-        "excludes": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "prerequisites": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "support": { "$ref": "#/$defs/fact" },
-        "status": { "enum": ["active", "paused", "retired"] }
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "product",
+            "service",
+            "subscription",
+            "program",
+            "consultation",
+            "other"
+          ]
+        },
+        "one_liner": {
+          "$ref": "#/$defs/fact"
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "includes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "support": {
+          "$ref": "#/$defs/fact"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "paused",
+            "retired"
+          ]
+        },
+        "buyer_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "b2b",
+              "b2c"
+            ]
+          }
+        }
       }
     },
     "pricing": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["currency", "tax_behavior", "plans", "payment_methods", "invoice_policy", "discount_policy"],
+      "required": [
+        "currency",
+        "tax_behavior",
+        "plans",
+        "payment_methods",
+        "invoice_policy",
+        "discount_policy",
+        "quote_policy"
+      ],
       "properties": {
-        "currency": { "$ref": "#/$defs/fact" },
-        "tax_behavior": { "enum": ["included", "excluded", "varies", "unknown"] },
+        "currency": {
+          "$ref": "#/$defs/currencyFact"
+        },
+        "tax_behavior": {
+          "enum": [
+            "included",
+            "excluded",
+            "varies",
+            "unknown"
+          ]
+        },
         "plans": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/plan" }
+          "items": {
+            "$ref": "#/$defs/plan"
+          }
         },
         "payment_methods": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/fact" }
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
         },
-        "invoice_policy": { "$ref": "#/$defs/fact" },
+        "invoice_policy": {
+          "$ref": "#/$defs/fact"
+        },
         "discount_policy": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["allowed", "max_percent", "approval_threshold_percent", "stacking", "conditions"],
+          "required": [
+            "allowed",
+            "max_percent",
+            "approval_threshold_percent",
+            "stacking",
+            "conditions"
+          ],
           "properties": {
-            "allowed": { "type": "boolean" },
-            "max_percent": { "$ref": "#/$defs/fact" },
-            "approval_threshold_percent": { "$ref": "#/$defs/fact" },
-            "stacking": { "$ref": "#/$defs/fact" },
-            "conditions": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
+            "allowed": {
+              "type": "boolean"
+            },
+            "max_percent": {
+              "$ref": "#/$defs/percentFact"
+            },
+            "approval_threshold_percent": {
+              "$ref": "#/$defs/percentFact"
+            },
+            "stacking": {
+              "$ref": "#/$defs/fact"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/fact"
+              }
+            }
+          }
+        },
+        "quote_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_for_discount",
+            "required_for_custom_terms",
+            "validity_days",
+            "terms_snapshot_required",
+            "approved_quote_required_for_payment"
+          ],
+          "properties": {
+            "required_for_discount": {
+              "type": "boolean"
+            },
+            "required_for_custom_terms": {
+              "type": "boolean"
+            },
+            "validity_days": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "terms_snapshot_required": {
+              "type": "boolean"
+            },
+            "approved_quote_required_for_payment": {
+              "type": "boolean"
+            }
           }
         }
       }
@@ -119,43 +309,135 @@
     "qualification": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["fit_criteria", "disqualifiers", "required_fields", "decision_roles", "service_area"],
+      "required": [
+        "fit_criteria",
+        "disqualifiers",
+        "required_fields",
+        "decision_roles",
+        "service_area"
+      ],
       "properties": {
-        "fit_criteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fact" } },
-        "disqualifiers": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "required_fields": { "type": "array", "items": { "type": "string" } },
-        "decision_roles": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "service_area": { "$ref": "#/$defs/fact" }
+        "fit_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "disqualifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "decision_roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "service_area": {
+          "$ref": "#/$defs/fact"
+        }
       }
     },
     "discovery": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["required_fields", "optional_fields", "recommendation_rules"],
+      "required": [
+        "required_fields",
+        "optional_fields",
+        "recommendation_rules"
+      ],
       "properties": {
-        "required_fields": { "type": "array", "items": { "type": "string" } },
-        "optional_fields": { "type": "array", "items": { "type": "string" } },
-        "recommendation_rules": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optional_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommendation_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        }
       }
     },
     "proof": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["cases", "testimonials", "certifications", "stats", "prohibited_claims"],
+      "required": [
+        "cases",
+        "testimonials",
+        "certifications",
+        "stats",
+        "prohibited_claims"
+      ],
       "properties": {
         "cases": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "title", "outcome", "permission", "source"],
+            "required": [
+              "id",
+              "title",
+              "outcome",
+              "permission",
+              "source"
+            ],
             "properties": {
-              "id": { "type": "string" },
-              "title": { "$ref": "#/$defs/fact" },
-              "client_name": { "$ref": "#/$defs/fact" },
-              "outcome": { "$ref": "#/$defs/fact" },
-              "permission": { "enum": ["public", "anonymized", "nda", "unknown"] },
-              "source": { "$ref": "#/$defs/fact" }
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "$ref": "#/$defs/fact"
+              },
+              "client_name": {
+                "$ref": "#/$defs/fact"
+              },
+              "outcome": {
+                "$ref": "#/$defs/fact"
+              },
+              "permission": {
+                "enum": [
+                  "public",
+                  "anonymized",
+                  "nda",
+                  "unknown"
+                ]
+              },
+              "source": {
+                "$ref": "#/$defs/fact"
+              },
+              "segment": {
+                "$ref": "#/$defs/fact"
+              },
+              "baseline": {
+                "$ref": "#/$defs/fact"
+              },
+              "intervention": {
+                "$ref": "#/$defs/fact"
+              },
+              "measurement_period": {
+                "$ref": "#/$defs/fact"
+              },
+              "limitations": {
+                "$ref": "#/$defs/fact"
+              }
             }
           }
         },
@@ -164,28 +446,79 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "quote", "attribution", "permission", "source"],
+            "required": [
+              "id",
+              "quote",
+              "attribution",
+              "permission",
+              "source"
+            ],
             "properties": {
-              "id": { "type": "string" },
-              "quote": { "$ref": "#/$defs/fact" },
-              "attribution": { "$ref": "#/$defs/fact" },
-              "permission": { "enum": ["public", "anonymized", "nda", "unknown"] },
-              "source": { "$ref": "#/$defs/fact" }
+              "id": {
+                "type": "string"
+              },
+              "quote": {
+                "$ref": "#/$defs/fact"
+              },
+              "attribution": {
+                "$ref": "#/$defs/fact"
+              },
+              "permission": {
+                "enum": [
+                  "public",
+                  "anonymized",
+                  "nda",
+                  "unknown"
+                ]
+              },
+              "source": {
+                "$ref": "#/$defs/fact"
+              }
             }
           }
         },
-        "certifications": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "stats": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "prohibited_claims": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
+        "certifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "prohibited_claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        }
       }
     },
     "fulfillment": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["mode", "delivery", "booking", "proposal"],
+      "required": [
+        "mode",
+        "delivery",
+        "booking",
+        "proposal"
+      ],
       "properties": {
-        "mode": { "enum": ["direct_purchase", "appointment", "quote", "hybrid", "human_only"] },
-        "delivery": { "$ref": "#/$defs/fact" },
+        "mode": {
+          "enum": [
+            "direct_purchase",
+            "appointment",
+            "quote",
+            "hybrid",
+            "human_only"
+          ]
+        },
+        "delivery": {
+          "$ref": "#/$defs/fact"
+        },
         "booking": {
           "type": "object",
           "additionalProperties": false,
@@ -206,33 +539,78 @@
             "external_link_allowed"
           ],
           "properties": {
-            "required": { "type": "boolean" },
-            "calendar_id": { "$ref": "#/$defs/fact" },
-            "duration_minutes": { "$ref": "#/$defs/fact" },
-            "timezone": { "$ref": "#/$defs/fact" },
-            "slot_interval_minutes": { "$ref": "#/$defs/fact" },
-            "buffer_before_minutes": { "$ref": "#/$defs/fact" },
-            "buffer_after_minutes": { "$ref": "#/$defs/fact" },
-            "availability_window_days": { "$ref": "#/$defs/fact" },
-            "offer_slot_count": { "$ref": "#/$defs/fact" },
-            "reschedule_policy": { "$ref": "#/$defs/fact" },
-            "cancellation_policy": { "$ref": "#/$defs/fact" },
-            "no_show_policy": { "$ref": "#/$defs/fact" },
-            "reminder_policy": { "$ref": "#/$defs/fact" },
-            "external_link_allowed": { "type": "boolean" },
-            "external_link": { "$ref": "#/$defs/fact" }
+            "required": {
+              "type": "boolean"
+            },
+            "calendar_id": {
+              "$ref": "#/$defs/fact"
+            },
+            "duration_minutes": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "timezone": {
+              "$ref": "#/$defs/fact"
+            },
+            "slot_interval_minutes": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "buffer_before_minutes": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "buffer_after_minutes": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "availability_window_days": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "offer_slot_count": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "reschedule_policy": {
+              "$ref": "#/$defs/fact"
+            },
+            "cancellation_policy": {
+              "$ref": "#/$defs/fact"
+            },
+            "no_show_policy": {
+              "$ref": "#/$defs/fact"
+            },
+            "reminder_policy": {
+              "$ref": "#/$defs/fact"
+            },
+            "external_link_allowed": {
+              "type": "boolean"
+            },
+            "external_link": {
+              "$ref": "#/$defs/fact"
+            }
           }
         },
         "proposal": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["required", "template_id", "validity_days", "approval_required"],
+          "required": [
+            "required",
+            "template_id",
+            "validity_days",
+            "approval_required"
+          ],
           "properties": {
-            "required": { "type": "boolean" },
-            "template_id": { "$ref": "#/$defs/fact" },
-            "validity_days": { "$ref": "#/$defs/fact" },
-            "approval_required": { "type": "boolean" },
-            "approval_role": { "$ref": "#/$defs/fact" }
+            "required": {
+              "type": "boolean"
+            },
+            "template_id": {
+              "$ref": "#/$defs/fact"
+            },
+            "validity_days": {
+              "$ref": "#/$defs/integerFact"
+            },
+            "approval_required": {
+              "type": "boolean"
+            },
+            "approval_role": {
+              "$ref": "#/$defs/fact"
+            }
           }
         }
       }
@@ -253,12 +631,25 @@
         "authority_limits": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["max_discount_percent_without_approval", "can_customize_contract", "can_change_refund_terms", "can_waive_fees"],
+          "required": [
+            "max_discount_percent_without_approval",
+            "can_customize_contract",
+            "can_change_refund_terms",
+            "can_waive_fees"
+          ],
           "properties": {
-            "max_discount_percent_without_approval": { "$ref": "#/$defs/fact" },
-            "can_customize_contract": { "type": "boolean" },
-            "can_change_refund_terms": { "type": "boolean" },
-            "can_waive_fees": { "type": "boolean" }
+            "max_discount_percent_without_approval": {
+              "$ref": "#/$defs/fact"
+            },
+            "can_customize_contract": {
+              "type": "boolean"
+            },
+            "can_change_refund_terms": {
+              "type": "boolean"
+            },
+            "can_waive_fees": {
+              "type": "boolean"
+            }
           }
         },
         "approval_matrix": {
@@ -266,29 +657,80 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["condition", "approver", "channel"],
+            "required": [
+              "condition",
+              "approver",
+              "channel"
+            ],
             "properties": {
-              "condition": { "$ref": "#/$defs/fact" },
-              "approver": { "$ref": "#/$defs/fact" },
-              "channel": { "$ref": "#/$defs/fact" }
+              "condition": {
+                "$ref": "#/$defs/fact"
+              },
+              "approver": {
+                "$ref": "#/$defs/fact"
+              },
+              "channel": {
+                "$ref": "#/$defs/fact"
+              }
             }
           }
         },
         "verified_scarcity": {
           "type": "array",
-          "items": { "$ref": "#/$defs/fact" },
+          "items": {
+            "$ref": "#/$defs/fact"
+          },
           "description": "Only documented scarcity may be used. Empty means no scarcity claims."
         },
-        "competitor_policy": { "$ref": "#/$defs/fact" },
-        "custom_terms": { "$ref": "#/$defs/fact" },
-        "contract_policy": { "$ref": "#/$defs/fact" },
-        "call_recording_policy": { "$ref": "#/$defs/fact" }
+        "competitor_policy": {
+          "$ref": "#/$defs/fact"
+        },
+        "custom_terms": {
+          "$ref": "#/$defs/fact"
+        },
+        "contract_policy": {
+          "$ref": "#/$defs/fact"
+        },
+        "call_recording_policy": {
+          "$ref": "#/$defs/fact"
+        },
+        "negotiation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tradables",
+            "non_negotiables",
+            "walk_away"
+          ],
+          "properties": {
+            "tradables": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/fact"
+              }
+            },
+            "non_negotiables": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/fact"
+              }
+            },
+            "walk_away": {
+              "$ref": "#/$defs/fact"
+            }
+          }
+        }
       }
     },
     "handoff": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["routes", "required_fields", "automation_pause", "human_takeover_policy"],
+      "required": [
+        "routes",
+        "required_fields",
+        "automation_pause",
+        "human_takeover_policy"
+      ],
       "properties": {
         "routes": {
           "type": "array",
@@ -296,7 +738,14 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["reason_code", "destination", "channel", "hours", "response_time", "fallback"],
+            "required": [
+              "reason_code",
+              "destination",
+              "channel",
+              "hours",
+              "response_time",
+              "fallback"
+            ],
             "properties": {
               "reason_code": {
                 "enum": [
@@ -316,17 +765,36 @@
                   "loop"
                 ]
               },
-              "destination": { "$ref": "#/$defs/fact" },
-              "channel": { "$ref": "#/$defs/fact" },
-              "hours": { "$ref": "#/$defs/fact" },
-              "response_time": { "$ref": "#/$defs/fact" },
-              "fallback": { "$ref": "#/$defs/fact" }
+              "destination": {
+                "$ref": "#/$defs/fact"
+              },
+              "channel": {
+                "$ref": "#/$defs/fact"
+              },
+              "hours": {
+                "$ref": "#/$defs/fact"
+              },
+              "response_time": {
+                "$ref": "#/$defs/fact"
+              },
+              "fallback": {
+                "$ref": "#/$defs/fact"
+              }
             }
           }
         },
-        "required_fields": { "type": "array", "items": { "type": "string" } },
-        "automation_pause": { "type": "boolean" },
-        "human_takeover_policy": { "$ref": "#/$defs/fact" }
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "automation_pause": {
+          "type": "boolean"
+        },
+        "human_takeover_policy": {
+          "$ref": "#/$defs/fact"
+        }
       }
     },
     "follow_up": {
@@ -346,54 +814,158 @@
         "marketing_consent_required"
       ],
       "properties": {
-        "allowed": { "type": "boolean" },
+        "allowed": {
+          "type": "boolean"
+        },
         "basis": {
           "type": "array",
-          "items": { "enum": ["buyer_requested", "agreed_next_step", "existing_customer", "marketing_consent"] }
+          "items": {
+            "enum": [
+              "buyer_requested",
+              "agreed_next_step",
+              "existing_customer",
+              "buyer_initiated_inquiry",
+              "transactional_response",
+              "marketing_consent"
+            ]
+          }
         },
-        "channels": { "type": "array", "items": { "type": "string" } },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "quiet_hours": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["start", "end", "timezone"],
+          "required": [
+            "start",
+            "end",
+            "timezone"
+          ],
           "properties": {
-            "start": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
-            "end": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
-            "timezone": { "type": "string" }
+            "start": {
+              "type": "string",
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+            },
+            "end": {
+              "type": "string",
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+            },
+            "timezone": {
+              "type": "string"
+            }
           }
         },
-        "allowed_days": { "type": "array", "items": { "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] } },
-        "max_attempts_per_reason": { "$ref": "#/$defs/fact" },
-        "max_attempts_per_conversation": { "$ref": "#/$defs/fact" },
-        "min_interval_hours": { "$ref": "#/$defs/fact" },
-        "close_out_after_days": { "$ref": "#/$defs/fact" },
-        "opt_out_keywords": { "type": "array", "minItems": 1, "items": { "type": "string" } },
-        "marketing_consent_required": { "type": "boolean" }
+        "allowed_days": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ]
+          }
+        },
+        "max_attempts_per_reason": {
+          "$ref": "#/$defs/integerFact"
+        },
+        "max_attempts_per_conversation": {
+          "$ref": "#/$defs/integerFact"
+        },
+        "min_interval_hours": {
+          "$ref": "#/$defs/integerFact"
+        },
+        "close_out_after_days": {
+          "$ref": "#/$defs/integerFact"
+        },
+        "opt_out_keywords": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "marketing_consent_required": {
+          "type": "boolean"
+        }
       }
     },
     "privacy": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["data_collected", "purposes", "retention", "deletion_process", "sharing", "pii_rules", "legal_basis"],
+      "required": [
+        "data_collected",
+        "purposes",
+        "retention",
+        "deletion_process",
+        "sharing",
+        "pii_rules",
+        "legal_basis"
+      ],
       "properties": {
-        "data_collected": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "purposes": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "retention": { "$ref": "#/$defs/fact" },
-        "deletion_process": { "$ref": "#/$defs/fact" },
-        "sharing": { "$ref": "#/$defs/fact" },
-        "pii_rules": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "legal_basis": { "$ref": "#/$defs/fact" }
+        "data_collected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "purposes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "retention": {
+          "$ref": "#/$defs/fact"
+        },
+        "deletion_process": {
+          "$ref": "#/$defs/fact"
+        },
+        "sharing": {
+          "$ref": "#/$defs/fact"
+        },
+        "pii_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "legal_basis": {
+          "$ref": "#/$defs/fact"
+        }
       }
     },
     "safety": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["emergency_protocol", "emergency_resources", "minors_policy", "vulnerability_policy"],
+      "required": [
+        "emergency_protocol",
+        "emergency_resources",
+        "minors_policy",
+        "vulnerability_policy"
+      ],
       "properties": {
-        "emergency_protocol": { "$ref": "#/$defs/fact" },
-        "emergency_resources": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-        "minors_policy": { "$ref": "#/$defs/fact" },
-        "vulnerability_policy": { "$ref": "#/$defs/fact" }
+        "emergency_protocol": {
+          "$ref": "#/$defs/fact"
+        },
+        "emergency_resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "minors_policy": {
+          "$ref": "#/$defs/fact"
+        },
+        "vulnerability_policy": {
+          "$ref": "#/$defs/fact"
+        }
       }
     },
     "tools": {
@@ -409,38 +981,96 @@
         "messaging_media"
       ],
       "properties": {
-        "passport_lookup": { "$ref": "#/$defs/toolBinding" },
-        "calendar_availability": { "$ref": "#/$defs/toolBinding" },
-        "calendar_booking": { "$ref": "#/$defs/toolBinding" },
-        "payments_invoicing": { "$ref": "#/$defs/toolBinding" },
-        "crm_memory": { "$ref": "#/$defs/toolBinding" },
-        "human_handoff": { "$ref": "#/$defs/toolBinding" },
-        "messaging_media": { "$ref": "#/$defs/toolBinding" }
+        "passport_lookup": {
+          "$ref": "#/$defs/toolBinding"
+        },
+        "calendar_availability": {
+          "$ref": "#/$defs/toolBinding"
+        },
+        "calendar_booking": {
+          "$ref": "#/$defs/toolBinding"
+        },
+        "payments_invoicing": {
+          "$ref": "#/$defs/toolBinding"
+        },
+        "crm_memory": {
+          "$ref": "#/$defs/toolBinding"
+        },
+        "human_handoff": {
+          "$ref": "#/$defs/toolBinding"
+        },
+        "messaging_media": {
+          "$ref": "#/$defs/toolBinding"
+        }
       }
     },
     "metadata": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["owner", "created_at", "updated_at", "source_of_truth", "review_cycle_days", "fictional"],
+      "required": [
+        "owner",
+        "created_at",
+        "updated_at",
+        "source_of_truth",
+        "review_cycle_days",
+        "fictional"
+      ],
       "properties": {
-        "owner": { "type": "string" },
-        "approved_by": { "type": ["string", "null"] },
-        "approved_at": { "type": ["string", "null"], "format": "date" },
-        "created_at": { "type": "string", "format": "date" },
-        "updated_at": { "type": "string", "format": "date" },
-        "source_of_truth": { "type": "string" },
-        "review_cycle_days": { "type": "integer", "minimum": 1 },
-        "fictional": { "type": "boolean" },
+        "owner": {
+          "type": "string"
+        },
+        "approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "source_of_truth": {
+          "type": "string"
+        },
+        "review_cycle_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fictional": {
+          "type": "boolean"
+        },
         "changelog": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["version", "date", "change"],
+            "required": [
+              "version",
+              "date",
+              "change"
+            ],
             "properties": {
-              "version": { "type": "string" },
-              "date": { "type": "string", "format": "date" },
-              "change": { "type": "string" }
+              "version": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "change": {
+                "type": "string"
+              }
             }
           }
         }
@@ -448,64 +1078,563 @@
     },
     "unresolved": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
+    },
+    "sales_guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "segments",
+        "objection_guidance",
+        "alternatives"
+      ],
+      "properties": {
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "description",
+              "buyer_types",
+              "fit_signals",
+              "typical_pains",
+              "buying_triggers",
+              "default_motion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "$ref": "#/$defs/fact"
+              },
+              "buyer_types": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "b2b",
+                    "b2c"
+                  ]
+                }
+              },
+              "fit_signals": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/fact"
+                }
+              },
+              "typical_pains": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/fact"
+                }
+              },
+              "buying_triggers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/fact"
+                }
+              },
+              "default_motion": {
+                "type": "string",
+                "enum": [
+                  "direct_purchase",
+                  "appointment",
+                  "quote",
+                  "hybrid",
+                  "human_only"
+                ]
+              }
+            }
+          }
+        },
+        "objection_guidance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "objection_type",
+              "guidance",
+              "evidence_ids",
+              "avoid"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "objection_type": {
+                "type": "string",
+                "enum": [
+                  "price",
+                  "budget",
+                  "timing",
+                  "trust",
+                  "fit",
+                  "authority",
+                  "status_quo",
+                  "competitor",
+                  "risk",
+                  "need",
+                  "stall",
+                  "implementation",
+                  "adoption",
+                  "other"
+                ]
+              },
+              "guidance": {
+                "$ref": "#/$defs/fact"
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avoid": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/fact"
+                }
+              }
+            }
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "category",
+              "our_advantage",
+              "our_tradeoff",
+              "source",
+              "last_checked"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "string",
+                "minLength": 1
+              },
+              "our_advantage": {
+                "$ref": "#/$defs/fact"
+              },
+              "our_tradeoff": {
+                "$ref": "#/$defs/fact"
+              },
+              "source": {
+                "$ref": "#/$defs/fact"
+              },
+              "last_checked": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "$defs": {
     "fact": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["value", "status"],
+      "required": [
+        "value",
+        "status"
+      ],
       "properties": {
         "value": {},
-        "status": { "enum": ["verified", "estimated", "unknown"] },
-        "source": { "type": "string", "minLength": 1 },
-        "verified_at": { "type": ["string", "null"], "format": "date" },
-        "notes": { "type": "string" }
+        "status": {
+          "enum": [
+            "verified",
+            "estimated",
+            "unknown"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verified_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
       },
       "allOf": [
         {
           "if": {
-            "properties": { "status": { "const": "verified" } },
-            "required": ["status"]
+            "properties": {
+              "status": {
+                "const": "verified"
+              }
+            },
+            "required": [
+              "status"
+            ]
           },
-          "then": { "required": ["source", "verified_at"] }
+          "then": {
+            "required": [
+              "source",
+              "verified_at"
+            ],
+            "properties": {
+              "verified_at": {
+                "type": "string",
+                "format": "date"
+              },
+              "value": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
         },
         {
           "if": {
-            "properties": { "status": { "const": "estimated" } },
-            "required": ["status"]
+            "properties": {
+              "status": {
+                "const": "estimated"
+              }
+            },
+            "required": [
+              "status"
+            ]
           },
-          "then": { "required": ["source", "notes"] }
+          "then": {
+            "required": [
+              "source",
+              "notes"
+            ]
+          }
         }
       ]
     },
     "plan": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "name", "billing_period", "price", "setup_fee", "minimum_term", "cancellation", "refund", "status"],
+      "required": [
+        "id",
+        "name",
+        "billing_period",
+        "price",
+        "setup_fee",
+        "minimum_term",
+        "cancellation",
+        "refund",
+        "status"
+      ],
       "properties": {
-        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$" },
-        "name": { "type": "string", "minLength": 1 },
-        "billing_period": { "enum": ["one_time", "monthly", "quarterly", "annual", "custom", "unknown"] },
-        "price": { "$ref": "#/$defs/fact" },
-        "setup_fee": { "$ref": "#/$defs/fact" },
-        "minimum_term": { "$ref": "#/$defs/fact" },
-        "cancellation": { "$ref": "#/$defs/fact" },
-        "refund": { "$ref": "#/$defs/fact" },
-        "status": { "enum": ["active", "paused", "retired"] }
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "billing_period": {
+          "enum": [
+            "one_time",
+            "monthly",
+            "quarterly",
+            "annual",
+            "custom",
+            "unknown"
+          ]
+        },
+        "price": {
+          "$ref": "#/$defs/moneyFact"
+        },
+        "setup_fee": {
+          "$ref": "#/$defs/moneyFact"
+        },
+        "minimum_term": {
+          "$ref": "#/$defs/fact"
+        },
+        "cancellation": {
+          "$ref": "#/$defs/fact"
+        },
+        "refund": {
+          "$ref": "#/$defs/fact"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "paused",
+            "retired"
+          ]
+        }
       }
     },
     "toolBinding": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["adapter_id", "status", "contract_version"],
+      "required": [
+        "adapter_id",
+        "status",
+        "contract_version"
+      ],
       "properties": {
-        "adapter_id": { "type": "string", "minLength": 1 },
-        "status": { "enum": ["implemented", "not_implemented", "degraded"] },
-        "contract_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
-        "notes": { "type": "string" }
+        "adapter_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "implemented",
+            "not_implemented",
+            "degraded"
+          ]
+        },
+        "contract_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "moneyFact": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/fact"
+        },
+        {
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "verified",
+                      "estimated"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "percentFact": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/fact"
+        },
+        {
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "verified",
+                      "estimated"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "integerFact": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/fact"
+        },
+        {
+          "properties": {
+            "value": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "verified",
+                      "estimated"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "value": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "currencyFact": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/fact"
+        },
+        {
+          "properties": {
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[A-Z]{3}$"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "verified",
+                      "estimated"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "pattern": "^[A-Z]{3}$"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "approved"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "effective_from",
+          "metadata"
+        ],
+        "properties": {
+          "metadata": {
+            "required": [
+              "approved_by",
+              "approved_at"
+            ],
+            "properties": {
+              "approved_by": {
+                "type": "string",
+                "minLength": 1
+              },
+              "approved_at": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
       }
     }
-  }
+  ]
 }

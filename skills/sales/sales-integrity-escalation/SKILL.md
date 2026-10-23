@@ -1,7 +1,7 @@
 ---
 name: sales-integrity-escalation
 description: "Refuse manipulation and escalate safely."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -148,14 +148,27 @@ Do **not** escalate merely because:
 - the buyer asks a difficult but answerable question;
 - the agent wants to avoid a decision;
 - the buyer is mildly rude but not threatening;
-- the agent would have to say "I don't know" — say it, then offer a path.
+- the agent would have to say "I don't know" — say it, then offer a path;
+- the buyer wants a discount within the passport's authority — negotiate it instead;
+- the buyer asks a scoped-refusal question ("no call, just the invoice") — execute the remaining path;
+- the request is a standard trade-off the passport already authorizes.
+
+| Situation | Required action |
+|---|---|
+| Buyer asks for a human | Hand off (`human_request`); do not finish qualification first |
+| Discount/terms above the passport limit | Do not promise; route for approval (`authority`) |
+| Tool down after the allowed retry | Do not claim success; offer a truthful path or hand off (`tool_failure`) |
+| Safety, fraud, abuse, minors, coercion | Follow the integrity/safety path; stop selling |
+| Difficult but answerable question | Answer it or verify it; do **not** hand off to avoid the work |
+| Ordinary price/timing/competitor objection | Use the negotiation skill; no handoff |
+| Scoped refusal | Stop only that element; continue the legitimate path |
 
 ### Step 6 — Hand off with a complete summary
 
 The handoff must let a human continue without re-asking the buyer everything. Include:
 
 1. **Buyer and channel** — name/handle, language, timezone, consent flags.
-2. **Reason code** — `human_request`, `authority`, `capability`, `safety`, `legal`, `fraud`, `privacy`, `complaint`, `tool_failure`, `agent_error`.
+2. **Reason code** — one of the canonical values in [`human.handoff`](../../../tools/contracts/human-handoff.md): `human_request`, `authority`, `capability`, `safety`, `legal`, `fraud`, `privacy`, `complaint`, `minor`, `coercion`, `abuse`, `tool_failure`, `agent_error`, `loop`. Use exactly these; do not invent a synonym such as `out_of_authority`.
 3. **What happened** — a short factual timeline, no speculation.
 4. **What the buyer wants** — their words, summarized.
 5. **What was promised** — only commitments actually made, with timestamps.
@@ -374,7 +387,7 @@ Why: refuses clearly, does not negotiate, routes to authority.
 - The core contract's safety and truth hierarchy is an original design choice, informed by consumer-protection and AI-transparency principles rather than a single sales method.
 - U.S. Federal Trade Commission, *Bringing Dark Patterns to Light* (2022), for manipulative design and deceptive practices: <https://www.ftc.gov/reports/bringing-dark-patterns-light>.
 - European Union, *AI Act*, Article 50 transparency obligations for AI systems interacting with people (applicable from 2 August 2026): <https://eur-lex.europa.eu/eli/reg/2024/1689/oj>. This repository does not provide legal advice; deployers must check their jurisdiction.
-- GDPR consent and data-subject-rights guidance: <https://gdpr.eu/what-is-gdpr/>.
+- European Union, *General Data Protection Regulation* (Regulation (EU) 2016/679), for consent and data-subject rights: <https://eur-lex.europa.eu/eli/reg/2016/679/oj> (official text). Research grades are recorded in [`research/source-register.md`](../../../research/source-register.md).
 - Robert Cialdini, *Influence* (1984; expanded editions), for the mechanics of persuasion and the ethical boundary between influence and manipulation. Cialdini's principles are descriptive tendencies, not a license to fabricate scarcity or social proof.
 - Jordan Belfort's *Way of the Wolf* (2017) is **not** used as an integrity source. Its author's fraud conviction and restitution order are part of the public record; high-pressure "straight line" tactics are deliberately excluded from this repository. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).
 

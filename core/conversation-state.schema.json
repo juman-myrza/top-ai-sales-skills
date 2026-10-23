@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.invalid/schemas/conversation-state.schema.json",
   "title": "Sales Conversation State",
-  "description": "Minimal, source-labelled state for a universal sales conversation. Not a CRM schema.",
+  "description": "Minimal, source-labelled state for a universal sales conversation. Not a CRM schema. Version 1.1.0 separates conversational mode from sales stage and preserves consent provenance.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -19,7 +19,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "conversation_id": {
       "type": "string",
@@ -42,28 +42,54 @@
     },
     "channel": {
       "type": "string",
-      "enum": ["whatsapp", "instagram", "telegram", "webchat", "email", "sms", "other"]
+      "enum": [
+        "whatsapp",
+        "instagram",
+        "telegram",
+        "webchat",
+        "email",
+        "sms",
+        "other"
+      ]
     },
     "language": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["primary"],
+      "required": [
+        "primary"
+      ],
       "properties": {
         "primary": {
           "type": "string",
-          "enum": ["ru", "ky", "mixed", "en", "other"]
+          "enum": [
+            "ru",
+            "ky",
+            "mixed",
+            "en",
+            "other"
+          ]
         },
         "detected": {
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["ru", "ky", "mixed", "en", "other"]
+            "enum": [
+              "ru",
+              "ky",
+              "mixed",
+              "en",
+              "other"
+            ]
           },
           "uniqueItems": true
         },
         "register": {
           "type": "string",
-          "enum": ["formal", "neutral", "familiar"]
+          "enum": [
+            "formal",
+            "neutral",
+            "familiar"
+          ]
         }
       }
     },
@@ -78,6 +104,8 @@
         "commit",
         "execute",
         "confirm",
+        "follow_up",
+        "protect",
         "nurture",
         "closed_won",
         "closed_lost",
@@ -88,33 +116,84 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "display_name": {"type": ["string", "null"], "maxLength": 160},
-        "company": {"type": ["string", "null"], "maxLength": 200},
-        "role": {"type": ["string", "null"], "maxLength": 160},
-        "timezone": {"type": ["string", "null"], "maxLength": 64},
+        "display_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "company": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "role": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 64
+        },
         "preferred_channel": {
-          "type": ["string", "null"],
-          "enum": ["whatsapp", "instagram", "telegram", "webchat", "email", "sms", "other", null]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "whatsapp",
+            "instagram",
+            "telegram",
+            "webchat",
+            "email",
+            "sms",
+            "other",
+            null
+          ]
         }
       }
     },
     "fit": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status"],
+      "required": [
+        "status"
+      ],
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["unknown", "qualified", "nurture", "not_fit", "insufficient_info"]
+          "enum": [
+            "unknown",
+            "qualified",
+            "nurture",
+            "not_fit",
+            "insufficient_info",
+            "handoff"
+          ]
         },
         "reasons": {
           "type": "array",
-          "items": {"type": "string", "maxLength": 500},
+          "items": {
+            "type": "string",
+            "maxLength": 500
+          },
           "maxItems": 10
         },
         "disqualifiers": {
           "type": "array",
-          "items": {"type": "string", "maxLength": 500},
+          "items": {
+            "type": "string",
+            "maxLength": 500
+          },
           "maxItems": 10
         }
       }
@@ -125,22 +204,56 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "statement", "source", "status"],
+        "required": [
+          "id",
+          "statement",
+          "source",
+          "status"
+        ],
         "properties": {
-          "id": {"type": "string", "maxLength": 64},
-          "statement": {"type": "string", "maxLength": 1000},
+          "id": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "statement": {
+            "type": "string",
+            "maxLength": 1000
+          },
           "source": {
             "type": "string",
-            "enum": ["buyer", "passport", "tool", "agent_inference"]
+            "enum": [
+              "buyer",
+              "passport",
+              "tool",
+              "agent_inference"
+            ]
           },
           "status": {
             "type": "string",
-            "enum": ["stated", "confirmed", "inferred", "retracted", "superseded"]
+            "enum": [
+              "stated",
+              "confirmed",
+              "inferred",
+              "retracted",
+              "superseded"
+            ]
           },
-          "impact": {"type": ["string", "null"], "maxLength": 1000},
+          "impact": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          },
           "priority": {
             "type": "string",
-            "enum": ["unknown", "low", "medium", "high", "critical"]
+            "enum": [
+              "unknown",
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
           }
         }
       }
@@ -151,7 +264,11 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["type", "value", "source"],
+        "required": [
+          "type",
+          "value",
+          "source"
+        ],
         "properties": {
           "type": {
             "type": "string",
@@ -166,16 +283,34 @@
               "other"
             ]
           },
-          "value": {"type": "string", "maxLength": 500},
+          "value": {
+            "type": "string",
+            "maxLength": 500
+          },
           "source": {
             "type": "string",
-            "enum": ["buyer", "passport", "tool", "agent_inference"]
+            "enum": [
+              "buyer",
+              "passport",
+              "tool",
+              "agent_inference"
+            ]
           },
           "status": {
             "type": "string",
-            "enum": ["current", "superseded", "uncertain"]
+            "enum": [
+              "current",
+              "superseded",
+              "uncertain"
+            ]
           },
-          "notes": {"type": ["string", "null"], "maxLength": 1000}
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          }
         }
       }
     },
@@ -185,22 +320,48 @@
       "properties": {
         "criteria": {
           "type": "array",
-          "items": {"type": "string", "maxLength": 500},
+          "items": {
+            "type": "string",
+            "maxLength": 500
+          },
           "maxItems": 15
         },
-        "process": {"type": ["string", "null"], "maxLength": 2000},
+        "process": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2000
+        },
         "stakeholders": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["role"],
+            "required": [
+              "role"
+            ],
             "properties": {
-              "role": {"type": "string", "maxLength": 160},
-              "name": {"type": ["string", "null"], "maxLength": 160},
+              "role": {
+                "type": "string",
+                "maxLength": 160
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 160
+              },
               "influence": {
                 "type": "string",
-                "enum": ["unknown", "low", "medium", "high", "decision_maker"]
+                "enum": [
+                  "unknown",
+                  "low",
+                  "medium",
+                  "high",
+                  "decision_maker"
+                ]
               }
             }
           },
@@ -208,9 +369,21 @@
         },
         "authority": {
           "type": "string",
-          "enum": ["unknown", "buyer", "buyer_with_approval", "influencer", "not_authorized"]
+          "enum": [
+            "unknown",
+            "buyer",
+            "buyer_with_approval",
+            "influencer",
+            "not_authorized"
+          ]
         },
-        "timeline": {"type": ["string", "null"], "maxLength": 500}
+        "timeline": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        }
       }
     },
     "objections": {
@@ -219,9 +392,17 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "type", "statement", "status"],
+        "required": [
+          "id",
+          "type",
+          "statement",
+          "status"
+        ],
         "properties": {
-          "id": {"type": "string", "maxLength": 64},
+          "id": {
+            "type": "string",
+            "maxLength": 64
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -236,21 +417,47 @@
               "risk",
               "need",
               "stall",
+              "implementation",
+              "adoption",
               "other"
             ]
           },
-          "statement": {"type": "string", "maxLength": 1000},
+          "statement": {
+            "type": "string",
+            "maxLength": 1000
+          },
           "status": {
             "type": "string",
-            "enum": ["open", "resolved", "accepted_no", "deferred", "escalated"]
+            "enum": [
+              "open",
+              "resolved",
+              "accepted_no",
+              "deferred",
+              "escalated"
+            ]
           },
-          "resolution": {"type": ["string", "null"], "maxLength": 2000},
+          "resolution": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 2000
+          },
           "evidence_used": {
             "type": "array",
-            "items": {"type": "string", "maxLength": 300},
+            "items": {
+              "type": "string",
+              "maxLength": 300
+            },
             "maxItems": 10
           },
-          "buyer_response": {"type": ["string", "null"], "maxLength": 1000}
+          "buyer_response": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          }
         }
       }
     },
@@ -269,24 +476,71 @@
             "pay",
             "human",
             "follow_up",
-            "close"
+            "close",
+            "expand",
+            "referral"
           ]
         },
-        "description": {"type": ["string", "null"], "maxLength": 1000},
-        "confirmed_by_buyer": {"type": "boolean"},
-        "due_at": {"type": ["string", "null"], "format": "date-time"}
-      }
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "confirmed_by_buyer": {
+          "type": "boolean"
+        },
+        "due_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "owner": {
+          "type": "string",
+          "enum": [
+            "agent",
+            "buyer",
+            "human",
+            "business",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "owner",
+        "confirmed_by_buyer"
+      ]
     },
     "consent": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["follow_up", "booking", "payment", "data_sharing", "marketing"],
+      "required": [
+        "follow_up",
+        "booking",
+        "payment",
+        "data_sharing",
+        "marketing"
+      ],
       "properties": {
-        "follow_up": {"$ref": "#/$defs/consentValue"},
-        "booking": {"$ref": "#/$defs/consentValue"},
-        "payment": {"$ref": "#/$defs/consentValue"},
-        "data_sharing": {"$ref": "#/$defs/consentValue"},
-        "marketing": {"$ref": "#/$defs/consentValue"}
+        "follow_up": {
+          "$ref": "#/$defs/consentValue"
+        },
+        "booking": {
+          "$ref": "#/$defs/consentValue"
+        },
+        "payment": {
+          "$ref": "#/$defs/consentValue"
+        },
+        "data_sharing": {
+          "$ref": "#/$defs/consentValue"
+        },
+        "marketing": {
+          "$ref": "#/$defs/consentValue"
+        }
       }
     },
     "tool_results": {
@@ -295,18 +549,63 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["tool", "status", "checked_at"],
+        "required": [
+          "tool",
+          "status",
+          "checked_at"
+        ],
         "properties": {
-          "tool": {"type": "string", "maxLength": 160},
+          "tool": {
+            "type": "string",
+            "maxLength": 160
+          },
           "status": {
             "type": "string",
-            "enum": ["pending", "confirmed", "failed", "unknown"]
+            "enum": [
+              "ok",
+              "created",
+              "pending",
+              "confirmed",
+              "paid",
+              "sent",
+              "refunded",
+              "failed",
+              "expired",
+              "unknown"
+            ]
           },
-          "id": {"type": ["string", "null"], "maxLength": 200},
-          "idempotency_key": {"type": ["string", "null"], "maxLength": 200},
-          "checked_at": {"type": "string", "format": "date-time"},
-          "summary": {"type": ["string", "null"], "maxLength": 1000},
-          "error_code": {"type": ["string", "null"], "maxLength": 100}
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "idempotency_key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "checked_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          },
+          "error_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100
+          }
         }
       }
     },
@@ -316,14 +615,39 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["text", "owner", "status"],
+        "required": [
+          "text",
+          "owner",
+          "status"
+        ],
         "properties": {
-          "text": {"type": "string", "maxLength": 1000},
-          "owner": {"type": "string", "enum": ["agent", "human", "business"]},
-          "due_at": {"type": ["string", "null"], "format": "date-time"},
+          "text": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "owner": {
+            "type": "string",
+            "enum": [
+              "agent",
+              "human",
+              "business"
+            ]
+          },
+          "due_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
           "status": {
             "type": "string",
-            "enum": ["open", "kept", "missed", "cancelled"]
+            "enum": [
+              "open",
+              "kept",
+              "missed",
+              "cancelled"
+            ]
           }
         }
       }
@@ -334,41 +658,501 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["none", "requested", "created", "accepted", "failed", "completed"]
+          "enum": [
+            "none",
+            "requested",
+            "created",
+            "accepted",
+            "failed",
+            "completed"
+          ]
         },
         "reason_code": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
-            "explicit_human_request",
-            "out_of_authority",
-            "out_of_capability",
-            "tool_failure",
-            "legal_complexity",
+            "human_request",
+            "authority",
+            "capability",
             "safety",
-            "abuse",
+            "legal",
             "fraud",
-            "repeated_misunderstanding",
-            "passport_rule",
+            "privacy",
+            "complaint",
+            "minor",
+            "coercion",
+            "abuse",
+            "tool_failure",
+            "agent_error",
+            "loop",
             null
           ]
         },
-        "handoff_id": {"type": ["string", "null"], "maxLength": 200}
+        "handoff_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        }
       }
     },
     "open_questions": {
       "type": "array",
       "maxItems": 20,
-      "items": {"type": "string", "maxLength": 1000}
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
     },
     "updated_at": {
       "type": "string",
       "format": "date-time"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "answer",
+        "qualify",
+        "discover",
+        "prove",
+        "resolve",
+        "commit",
+        "execute",
+        "confirm",
+        "follow_up",
+        "protect",
+        "handoff",
+        "closed"
+      ]
+    },
+    "known_facts": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "value",
+          "source",
+          "status"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+          },
+          "value": {},
+          "source": {
+            "type": "string",
+            "enum": [
+              "buyer",
+              "passport",
+              "tool",
+              "business",
+              "agent_inference",
+              "import"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "current",
+              "superseded",
+              "uncertain"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "checked_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "diagnosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primary_problem": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "impact": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "desired_outcome": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "barrier": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "none",
+            "unclear_value",
+            "no_need",
+            "no_urgency",
+            "no_trust",
+            "price",
+            "budget",
+            "authority",
+            "status_quo",
+            "risk",
+            "adoption",
+            "fit",
+            "other"
+          ]
+        },
+        "buying_readiness": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "exploring",
+            "comparing",
+            "ready",
+            "committed",
+            "stalled"
+          ]
+        },
+        "recommended_action": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "last_revised_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "follow_up": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "none",
+            "eligible",
+            "scheduled",
+            "sent",
+            "replied",
+            "closed",
+            "blocked"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "enum": [
+            "none",
+            "buyer_requested",
+            "agreed_next_step",
+            "existing_customer",
+            "buyer_initiated_inquiry",
+            "marketing_consent"
+          ]
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "last_contact_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "next_due_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "scheduled_message_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "close_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "none",
+            "opt_out",
+            "refused",
+            "completed",
+            "expired",
+            "not_eligible",
+            "consent_withdrawn",
+            "max_attempts",
+            null
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        }
+      }
+    },
+    "quote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quote_id",
+        "version",
+        "status",
+        "offer_id",
+        "plan_id",
+        "quantity",
+        "unit_amount",
+        "total_amount",
+        "currency",
+        "terms",
+        "issued_at",
+        "valid_until"
+      ],
+      "properties": {
+        "quote_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved",
+            "sent",
+            "accepted",
+            "declined",
+            "expired",
+            "void"
+          ]
+        },
+        "offer_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "plan_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "subtotal": {
+          "type": "number",
+          "minimum": 0
+        },
+        "discount_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "discount_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tax_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "total_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "terms": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "approval_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "Null means an open-ended quote governed by the passport's review policy; the payment tool must still reject a stale or expired passport."
+        }
+      }
     }
   },
   "$defs": {
     "consentValue": {
-      "type": "string",
-      "enum": ["granted", "denied", "unknown", "withdrawn"]
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "granted",
+            "denied",
+            "unknown",
+            "withdrawn"
+          ]
+        },
+        "at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "scope": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "buyer_message",
+            "buyer_action",
+            "passport",
+            "import",
+            "agent_inferred",
+            "none"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "granted",
+                  "withdrawn"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "at",
+              "scope",
+              "source"
+            ],
+            "properties": {
+              "at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "scope": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "denied"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "at",
+              "source"
+            ],
+            "properties": {
+              "at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

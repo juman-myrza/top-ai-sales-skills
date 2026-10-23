@@ -107,6 +107,7 @@
         },
         "tool": { "type": "string" },
         "request_id": { "type": "string" },
+        "tenant_id": { "type": "string", "minLength": 1, "maxLength": 128 },
         "data": { "type": ["object", "null"] },
         "error": { "oneOf": [{ "$ref": "#/$defs/error" }, { "type": "null" }] },
         "meta": { "$ref": "#/$defs/meta" }

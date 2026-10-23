@@ -4,7 +4,7 @@ A researched, Hermes-compatible skill set for text-based sales conversations, pl
 
 The repository is designed for a sales assistant that can qualify, discover, handle objections, close, book, invoice, follow up, escalate, and speak Russian, Kyrgyz, or a natural mix — **without hardcoding a company, product, price, or calendar into the skills**. It is not a working sales platform. It contains instructions, contracts, examples, and tests; every external integration is still to be built.
 
-> **Status:** v0.1.0, research and structural validation complete. No live model was evaluated, no tool adapter is connected, and no native Kyrgyz review has been completed. See [What is and is not verified](#what-is-and-is-not-verified).
+> **Status:** v0.2.0, research and structural validation complete. No live model was evaluated, no tool adapter is connected, and no native Kyrgyz review has been completed. See [What is and is not verified](#what-is-and-is-not-verified).
 
 ---
 
@@ -30,8 +30,8 @@ core/                       constitutional rules: truth, consent, tools, escalat
 skills/sales/               nine universal skills (no product facts)
 product-passport/           business-specific facts, schema, fictional examples
 tools/                      seven tool contracts and envelope schemas
-tests/                      51 scenarios, rubric, coverage, response checker fixture
-scripts/                    validation, evaluation, rendering, isolated loading, install
+tests/                      57 scenarios, rubric, coverage, response checker and installed-artifact tests
+scripts/                    validation, checker tests, installed-artifact test, rendering, isolated loading, install
 research/                   sources, claim-evidence matrix, decisions, repo audit
 ```
 
@@ -88,7 +88,7 @@ Each skill follows the Hermes `SKILL.md` format: YAML `name` and `description` (
 python3 scripts/validate_repository.py
 ```
 
-This checks file structure, skill frontmatter and sections, passport schemas, tool envelopes, 51 scenario definitions, coverage IDs, local links, obvious secrets, and hardcoded fictional facts. Passing is **structural** validation, not a behavioral test.
+This checks file structure, skill frontmatter and sections, passport schemas, tool envelopes, 57 scenario definitions, coverage IDs, local links, obvious secrets, and hardcoded fictional facts. It also validates the example state, the three passport examples, and a set of deliberately invalid schema fixtures that the schemas must reject. Passing is **structural** validation, not a behavioral test.
 
 ### Check the response-checker contract
 
@@ -98,7 +98,12 @@ python3 scripts/evaluate_responses.py \
   --allow-partial
 ```
 
-The fixture is hand-written to exercise the checker, not model output.
+The fixture is hand-written to exercise the checker, not model output. Two further test scripts run without a model:
+
+```bash
+python3 scripts/test_checker.py           # must-pass / must-fail checker cases
+python3 scripts/test_installed_artifact.py  # a skill installed alone resolves its shared docs
+```
 
 ### Test Hermes discovery without touching the live profile
 
@@ -118,7 +123,7 @@ python3 scripts/install_skills.py
 python3 scripts/install_skills.py --target ~/.hermes --apply
 ```
 
-The installer validates the repository, creates `skills/sales/<name>/`, skips existing directories unless `--force` is passed, and backs up replaced directories by default. It installs instructions only — not tool adapters, credentials, cron jobs, or a model.
+The installer validates the repository, creates `skills/sales/<name>/`, copies the shared `core/`, `tools/`, `product-passport/`, and `research/` documents into each skill under `references/shared/`, and rewrites each skill's links to point there, so an installed skill still resolves its dependencies when the checkout is gone. It writes an `INSTALL-MANIFEST.json` and an `ACTIVATION.md`. It skips existing directories unless `--force` is passed, and backs up replaced directories by default. It installs instructions only — not tool adapters, credentials, cron jobs, or a model.
 
 > Do not install into a live production profile until you have reviewed the [tool limitations](tools/README.md) and run the scenarios against your own model and passport.
 
@@ -137,8 +142,9 @@ Two complete fictional examples show the format:
 
 - [Direct-sale example](product-passport/examples/direct-sale-nimbus-notes.md) — a digital product bought without a meeting.
 - [Appointment-booking example](product-passport/examples/appointment-karkyra-consult.md) — a consult booked in chat.
+- [Consumer example](product-passport/examples/consumer-course-example.md) — a B2C course bought directly, with no meeting.
 
-Both use `.example.invalid` domains and are explicitly fictional. Do not copy their facts.
+All three use `.example.invalid` domains and are explicitly fictional. Do not copy their facts.
 
 ---
 
@@ -160,28 +166,29 @@ Every request and response uses the [shared envelope schema](tools/schemas/tool-
 
 > **No claim of completion without a confirming tool result.**
 
-Both passport examples mark every binding `not_implemented`. No adapter, credential, webhook, CRM, calendar, or payment provider is included. Claims that an integration works would be false.
+All three passport examples mark every binding `not_implemented`. No adapter, credential, webhook, CRM, calendar, or payment provider is included. Claims that an integration works would be false.
 
 ---
 
 ## Evaluation
 
-The corpus contains **51 scenarios** in eight categories:
+The corpus contains **57 scenarios** in nine categories:
 
 | Category | Count | Focus |
 |---|---|---|
 | Price and intent | 6 | Price questions, budget, buying signals, direct purchase |
 | Qualification and discovery | 6 | Fit, poor fit, authority, discovery quality |
-| Objections and negotiation | 8 | Price, timing, competitors, trust, discount limits |
+| Objections and negotiation | 10 | Price, timing, competitors, trust, discount limits, adoption risk, entitlement correction |
 | Closing and booking | 7 | Direct close, invoice, in-chat booking, confirmation |
 | Tool failures | 6 | Timeout, conflict, false success, handoff failure |
 | Handoff and safety | 6 | Human request, legal complexity, abuse, privacy |
 | Multilingual and multi-turn | 6 | Russian, Kyrgyz, mixed language, contradictions |
 | Follow-up and refusal | 6 | Consent, cadence, no-show, opt-out |
+| Consumer direct purchase | 4 | B2C price, scoped refusal, adoption, direct buy |
 
 Start with [tests/README.md](tests/README.md), [SCENARIO-FORMAT.md](tests/SCENARIO-FORMAT.md), [RUBRIC.md](tests/RUBRIC.md), and [COVERAGE.md](tests/COVERAGE.md).
 
-What the tests can detect: missing required facts or phrases, forbidden claims, excess questions, missing or forbidden tool calls, handoff/stop mismatches, and language-marker misses. What they cannot detect: tone, empathy, naturalness, strategic quality, or whether a true-sounding statement is actually true in a way the scenario did not anticipate.
+What the tests can detect: missing required facts or phrases, forbidden claims, excess questions, missing or forbidden tool calls, a tool status that contradicts the fixture, a required tool order that was violated, a wrong terminal state, a success claim with no confirming result, handoff/stop mismatches, and language-marker misses. What they cannot detect: tone, empathy, naturalness, strategic quality, or whether a true-sounding statement is actually true in a way the scenario did not anticipate.
 
 ---
 
@@ -191,7 +198,7 @@ What the tests can detect: missing required facts or phrases, forbidden claims, 
 |---|---|
 | [`core/`](core/) | Behavior contract, conflict resolution, conversation state, system-prompt snippet |
 | [`skills/sales/`](skills/sales/) | Nine skills plus language, cadence, and escalation references |
-| [`product-passport/`](product-passport/) | Template, JSON Schema, two fictional examples |
+| [`product-passport/`](product-passport/) | Template, JSON Schema, three fictional examples |
 | [`tools/`](tools/) | Contracts, envelope schema, example envelopes |
 | [`tests/`](tests/) | Scenario corpus, rubric, coverage, fixtures |
 | [`scripts/`](scripts/) | Validation, evaluation, rendering, isolated loading, installation |

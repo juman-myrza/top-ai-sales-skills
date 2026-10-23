@@ -1,7 +1,7 @@
 ---
 name: sales-qualification
 description: "Qualify buyers by fit, intent, authority, and timing."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -45,14 +45,17 @@ Product-specific fit criteria come from the passport. This skill contains the un
 
 | Input | Source | Why |
 |---|---|---|
-| Passport ICP and disqualifiers | passport `audience`, `sales_policy` | Defines fit without inventing criteria |
+| Buyer type and segments | passport `offer.buyer_types`, `sales_guidance.segments` | Tells you whether this is a B2B or B2C motion, and which segment fits |
+| Fit criteria and disqualifiers | passport `qualification.fit_criteria`, `qualification.disqualifiers` | Defines fit without inventing criteria |
 | Offer and fulfillment model | passport `offer`, `fulfillment` | Determines whether a direct sale or booking is possible |
 | Authority and discount limits | passport `sales_policy` | Prevents promising approvals the agent lacks |
-| Service area / eligibility | passport `audience`, `constraints` | Prevents wasted conversations |
+| Service area / eligibility | passport `qualification.service_area` | Prevents wasted conversations |
 | Conversation state | state store | Avoids re-asking |
 | Buyer's messages | channel | Evidence for intent and fit |
 
 If the passport has no ICP or disqualifiers, do not invent them. Ask the business owner to supply them, or use only the minimum logic: does the buyer have a real problem the offer can solve, and can they decide?
+
+Adapt the depth of qualification to the purchase, not to a B2B/B2C label: a high-cost, regulated, or hard-to-reverse decision needs more verification; a low-cost, familiar consumer purchase needs less. When the buyer asks "which of your products should I buy?", use the passport's `discovery.recommendation_rules` and `sales_guidance.segments` to recommend one option, or, if the runtime can resolve several passports, ask it to return the candidate offers. Do not guess a catalog that the current passport does not describe.
 
 ## Procedure
 
@@ -88,7 +91,9 @@ Never turn an inference into a fact. "You mentioned you handle about 30 inquirie
 
 ### Step 4 — Apply passport criteria, not personal taste
 
-Use the passport's ICP, exclusions, geography, language, minimum volume, budget floor, and regulatory constraints. Do not disqualify based on:
+Use the passport's buyer types, segments, fit criteria, exclusions, geography, language, minimum volume, budget floor, and regulatory constraints. These are business facts, not universal sales rules: a consumer offer is normal when `offer.buyer_types` includes `b2c`, and an enterprise-only offer is normal when it does not. Never hard-code "business, not consumer" into the logic; read the passport.
+
+Do not disqualify based on:
 
 - accent, grammar, or spelling;
 - inferred income, education, or social class;
@@ -126,8 +131,8 @@ Do not use false flattery ("You're exactly our ideal client!") before you know.
 
 ### "I don't have a business, just curious"
 
-- Thank them for the interest.
-- Say plainly that the offer is for [passport audience], not consumers.
+- Check `offer.buyer_types` first. If the offer includes `b2c`, a consumer is a real buyer: qualify them against the consumer segment, not against a business ICP.
+- If the offer is business-only, thank them for the interest and say plainly, using the passport's own words, which buyer types the offer serves.
 - Offer a public resource only if one exists and is approved.
 - Do not pitch, do not collect data, do not add to a sequence.
 
@@ -228,13 +233,25 @@ Agent: "Это подходит по [verified ICP criterion]. Основная 
 
 Why: two questions, both decision-relevant; no product dump; fit tied to a passport criterion.
 
-### Example 2 — Respectful disqualification
+### Example 2 — Respectful disqualification (business-only offer)
+
+Passport fact: `offer.buyer_types = ["b2b"]`.
 
 Buyer: "Я хочу купить это для себя, я не бизнес."
 
-Agent: "Спасибо, что написали. Это решение для [verified audience]; для личного использования оно не подходит. Не хочу тратить ваше время. Если появится [verified qualifying situation], напишите — буду рад помочь."
+Agent: "Спасибо, что написали. Это решение для команд [verified segment]; для личного использования оно не подходит. Не хочу тратить ваше время. Если появится [verified qualifying situation], напишите — буду рад помочь."
 
-Why: clear, kind, no fake alternative, no data collection.
+Why: clear, kind, no fake alternative, no data collection. The disqualification comes from `offer.buyer_types`, not from a universal "consumers are not buyers" rule.
+
+### Example 2b — Consumer offer stays qualified
+
+Passport fact: `offer.buyer_types = ["b2c"]`; consumer segment exists.
+
+Buyer: "Хочу купить курс для себя."
+
+Agent: "Отлично, курс рассчитан как раз на самостоятельных учеников. Чтобы порекомендовать формат, один вопрос: [one consumer fit question]."
+
+Why: the same logic serves a consumer when the passport authorizes it. Do not route a legitimate consumer to a "not a fit" branch that assumes B2B.
 
 ### Example 3 — Authority gap
 
@@ -258,6 +275,7 @@ Why: does not guess, offers a low-friction path, and respects the buyer's choice
 - **Gatekeeping:** refusing a price until the buyer discloses budget and company size.
 - **False flattery:** "Вы идеальный клиент!" before any fit check.
 - **Snob filter:** disqualifying a buyer for typos or an informal tone.
+- **Universal B2B assumption:** telling a consumer "this is not for you" when the passport's `buyer_types` includes `b2c`.
 - **Protected-trait filter:** using age, gender, or nationality as a fit signal.
 - **Premature nurture:** adding a curious visitor to a follow-up sequence without consent.
 - **Endless qualification:** asking more questions after the buyer has said "I'm ready to buy."

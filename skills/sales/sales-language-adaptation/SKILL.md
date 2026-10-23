@@ -1,7 +1,7 @@
 ---
 name: sales-language-adaptation
 description: "Match Russian, Kyrgyz, or mixed language with clarity."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -45,6 +45,7 @@ The rule is simple: **mirror the buyer's language and register, preserve factual
 | Input | Source | If missing |
 |---|---|---|
 | Buyer's latest message and language | channel | Wait; do not generate a turn |
+| Explicit language preference | state `language.primary`, buyer's instruction | If the buyer named a language, use it even if the last message was in another language |
 | Language preference and register | state, or inferred from the latest message | Mirror the latest message |
 | Approved product terms and names | passport | Do not translate or invent them |
 | Approved legal/regulated wording | passport or legal team | Use the approved text or hand off |
@@ -70,6 +71,8 @@ Also note:
 
 If the signal is ambiguous, mirror the safest neutral option and keep the message short.
 
+Capability boundary: the languages the deployment can serve are a fact about the runtime, not a universal property of the model. Check the passport's `business.languages` and the deployment's declared capability before promising a language. If a language is outside the declared set, say so and offer a supported language or a human; do not extrapolate fluency from a greeting. A "contains Cyrillic" check is not evidence of quality.
+
 ### Step 2 — Choose the reply language
 
 | Buyer's latest message | Reply |
@@ -79,6 +82,14 @@ If the signal is ambiguous, mirror the safest neutral option and keep the messag
 | Mixed Russian–Kyrgyz | Mixed, weighted toward the buyer's dominant language |
 | English or another supported language | That language, if the agent can be accurate |
 | Unsupported language | Say so plainly in the buyer's language if possible, then offer Russian, Kyrgyz, or a human |
+
+Precedence:
+
+1. An explicit instruction from the buyer ("write in Kyrgyz", "please use English", "можно по-русски") wins over the language of the last message.
+2. Otherwise, mirror the language of the latest message.
+3. If the latest message is mixed, mirror the mix, weighted toward the buyer's dominant language.
+
+A one-word reply, an emoji, a number, or a forwarded document is not always a language signal. Do not treat "ок" or "👍" as a switch. If the buyer explicitly chose a language earlier, keep it until they change it.
 
 Do not switch to Russian merely because the agent finds Kyrgyz harder. Do not switch to English to sound modern. Do not answer a Kyrgyz question in Russian and call it "close enough".
 
@@ -123,7 +134,7 @@ Russian pitfalls:
 
 Kyrgyz pitfalls:
 
-- Do not calque Russian case government into Kyrgyz. Prefer simple subject–verb–object sentences.
+- Do not calque Russian case government or word order into Kyrgyz. Use natural Kyrgyz word order and prefer short, clear sentences over complex nested clauses.
 - Decide whether a business term stays in Russian (`оплата`, `скидка`, `договор`) or has a common Kyrgyz equivalent. In mixed speech, the Russian term is often natural; do not over-translate.
 - `сиз` is the safe default with strangers and older buyers.
 - Avoid direct translation of "you guys", "reach out", or "pain point"; say the plain action.
@@ -139,7 +150,7 @@ Kyrgyz pitfalls:
 
 ### Step 7 — Check before sending
 
-- Did I answer in the language of the latest message?
+- Did I answer in the language the buyer explicitly chose, or the language of the latest message if they did not?
 - Is the register right for this buyer?
 - Are names, numbers, dates, and currency exactly as verified?
 - Did I translate a product or legal term I should have kept?
@@ -277,6 +288,8 @@ Why: owns the error, states the verified fact, offers a path. No defensiveness.
 - **Number drift:** writing a price or date in a second format without confirming it.
 - **Slang mimicry:** copying slang the agent cannot sustain or that insults the buyer.
 - **Language lecture:** correcting the buyer's grammar mid-sale.
+- **Preference override:** switching language because the agent is more comfortable, ignoring the buyer's explicit choice.
+- **Over-mirroring:** copying a one-word "ок" or a stray term as if it were a full language switch.
 
 ## Dependencies
 

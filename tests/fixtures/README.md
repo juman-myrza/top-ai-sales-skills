@@ -15,8 +15,9 @@ There are no recorded real customer conversations, credentials, or provider payl
 |---|---|---|
 | `direct-sale-nimbus-notes` | [`direct-sale-nimbus-notes.json`](../../product-passport/examples/direct-sale-nimbus-notes.json) | Direct purchase, invoice, discount authority, proof permissions |
 | `appointment-karkyra-consult` | [`appointment-karkyra-consult.json`](../../product-passport/examples/appointment-karkyra-consult.json) | In-chat booking, availability, no-show, free consultation |
+| `consumer-course-example` | [`consumer-course-example.json`](../../product-passport/examples/consumer-course-example.json) | B2C direct purchase, consumer pricing, scoped refusal, adoption objection |
 
-Both are marked `metadata.fictional: true`. Do not treat their prices, proofs, or policies as real.
+All are marked `metadata.fictional: true`. Do not treat their prices, proofs, or policies as real.
 
 ---
 
@@ -38,7 +39,7 @@ These are **test doubles**, not implementations. A fixture does not prove that a
 
 ## Response smoke fixture
 
-[`smoke-responses.jsonl`](smoke-responses.jsonl) contains three hand-written responses used to verify that `scripts/evaluate_responses.py` accepts a correct record and rejects a broken one. It is **not** model output, not a score, and not evidence that any scenario passes in production. Run it with `--allow-partial`; the other 48 scenarios are intentionally absent.
+[`smoke-responses.jsonl`](smoke-responses.jsonl) contains three hand-written responses used to verify that `scripts/evaluate_responses.py` accepts a correct record and rejects a broken one. It is **not** model output, not a score, and not evidence that any scenario passes in production. Run it with `--allow-partial`; the other 53 scenarios are intentionally absent. `scripts/test_checker.py` adds must-pass and must-fail cases, including the wrong-price, false-confirmation, and negated-refusal defects found in the audit.
 
 ### Fixture rules
 

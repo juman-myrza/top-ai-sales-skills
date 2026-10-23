@@ -81,6 +81,7 @@ Do not put a personal phone number or email in a public repository. Use a role-b
 | Offer ID | `[offer-id]` |
 | Name | `[offer name]` |
 | Type | `product / service / subscription / program / consultation / other` |
+| Buyer types | `[b2b, b2c]` — who may buy; drives whether a consumer is a fit |
 | One-liner | `[verified description]` |
 | Outcomes | `[what the buyer can expect, without guarantees]` |
 | Includes | `[scope, deliverables, support]` |
@@ -131,6 +132,18 @@ Never include a personal wallet or raw card number.
 
 If `allowed` is false, the agent must not offer a discount even to save the deal. If the buyer asks for more than the maximum, hand off.
 
+### 4.5 Quote policy
+
+| Field | Value |
+|---|---|
+| Quote required for discount | `true / false` |
+| Quote required for custom terms | `true / false` |
+| Validity days | `[number]` |
+| Terms snapshot required | `true / false` |
+| Approved quote required for payment | `true / false` |
+
+Any amount, quantity, discount, or term change creates a new quote version. Payment execution must reference an approved, unexpired quote. A discounted quote needs an `approval_ref` from the authority owner.
+
 ---
 
 ## 5. Qualification
@@ -166,6 +179,8 @@ Recommendation rules are deterministic where possible. "If team size > 20 and ne
 | ID | Title | Client name | Outcome | Permission | Source |
 |---|---|---|---|---|---|
 | `[case-1]` | `[short title]` | `[name / anonymized]` | `[documented result]` | `public / anonymized / nda` | `[URL or document]` |
+
+For each case, also record the evidence-quality fields the schema supports: `segment`, `baseline`, `intervention`, `measurement_period`, and `limitations`. A case without a stated limitation invites the agent to imply more than the data shows.
 
 ### 7.2 Testimonials
 
@@ -263,7 +278,29 @@ The passport never contains specific available times. The calendar tool does. If
 | Contract policy | `[standard contract; no drafting by the agent]` |
 | Call recording policy | `[consent required / not applicable]` |
 
-If there is no verified scarcity, the agent must not use countdowns, "only N spots", or "price increases tomorrow".
+### 9.4 Negotiation limits
+
+| Field | Value |
+|---|---|
+| Tradables | `[term length, quantity, payment schedule, start date, reference, etc.]` |
+| Non-negotiables | `[what must not be traded, ever]` |
+| Walk-away | `[the point at which the agent declines or escalates]` |
+
+If there is no verified scarcity, the agent must not use countdowns, "only N spots", or "price increases tomorrow". A correction of the business's own error is not a concession to trade.
+
+---
+
+## 9a. Sales guidance
+
+Business-specific relevance data that keeps the universal skills from inventing a segment.
+
+| Segment ID | Name | Buyer types | Fit signals | Typical pains | Buying triggers | Default motion |
+|---|---|---|---|---|---|---|
+| `[segment-id]` | `[name]` | `b2b / b2c` | `[observable signals]` | `[documented pains]` | `[real triggers]` | `direct_purchase / appointment / quote / hybrid / human_only` |
+
+Objection guidance: for each common objection, record the factual response, the evidence IDs it may cite, and what to avoid. Alternative/competitive positioning: record verified advantages and honest trade-offs with a source and a last-checked date.
+
+Do not use this section to script manipulation. It exists so the agent answers from business facts rather than generic rebuttals.
 
 ---
 

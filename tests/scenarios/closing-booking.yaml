@@ -213,6 +213,12 @@ scenarios:
     required_tool_calls:
     - calendar.availability
     - calendar.booking
+    required_tool_sequence:
+    - calendar.availability
+    - calendar.booking
+    required_tool_statuses:
+      calendar.booking:
+      - confirmed
     forbidden_tool_calls: []
     forbidden_tool_operations: []
     should_handoff: false
@@ -224,7 +230,7 @@ scenarios:
   - execution
   - truth
   - efficiency
-  notes: Book with consent and confirm the exact date, time, timezone, and booking ID from the tool result.
+  notes: Book with consent and confirm the exact date, time, timezone, and booking ID from the tool result, after availability was checked first.
 - id: C05
   title: Slot taken between offer and booking
   difficulty: advanced

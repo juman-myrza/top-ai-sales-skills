@@ -1,0 +1,908 @@
+{
+  "schema_version": "1.0.0",
+  "passport_id": "karkyra-advisory-booking",
+  "version": "1.0.0",
+  "status": "approved",
+  "effective_from": "2026-02-01",
+  "effective_to": "2026-12-31",
+  "default_locale": "ru",
+  "business": {
+    "legal_name": {
+      "value": "Karkyra Advisory Demo LLC",
+      "status": "verified",
+      "source": "Fictional example — not a real company",
+      "verified_at": "2026-10-21"
+    },
+    "display_name": "Karkyra Advisory",
+    "description": {
+      "value": "A fictional operations advisory that helps small teams find and fix one operational bottleneck at a time.",
+      "status": "verified",
+      "source": "Fictional example — not a real business",
+      "verified_at": "2026-10-21"
+    },
+    "website": {
+      "value": "https://karkyra-advisory.example.invalid",
+      "status": "verified",
+      "source": "Fictional example — reserved .invalid domain",
+      "verified_at": "2026-10-21"
+    },
+    "markets": [
+      {
+        "value": "Kyrgyzstan, remote delivery",
+        "status": "verified",
+        "source": "Fictional example — service plan",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "timezone": {
+      "value": "Asia/Bishkek",
+      "status": "verified",
+      "source": "Fictional example — operating plan",
+      "verified_at": "2026-10-21"
+    },
+    "support_contact": {
+      "value": "hello@karkyra-advisory.example.invalid, Mon–Fri 10:00–18:00 Asia/Bishkek",
+      "status": "verified",
+      "source": "Fictional example — support plan",
+      "verified_at": "2026-10-21"
+    },
+    "languages": ["ru", "ky"]
+  },
+  "offer": {
+    "id": "operations-diagnostic-call",
+    "name": "Operations Diagnostic Call",
+    "type": "consultation",
+    "one_liner": {
+      "value": "A 30-minute structured conversation to identify one operational bottleneck and agree on a useful next step.",
+      "status": "verified",
+      "source": "Fictional example — service description",
+      "verified_at": "2026-10-21"
+    },
+    "outcomes": [
+      {
+        "value": "A shared description of one bottleneck and its impact, based on what the buyer says in the call.",
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "A written summary and one agreed next step, sent only if the buyer consents to receive it.",
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "includes": [
+      {
+        "value": "One 30-minute video or phone call",
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "A short written summary after the call, with buyer consent",
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "excludes": [
+      {
+        "value": "Implementation work, done-for-you operations, or ongoing support",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "Legal, financial, tax, medical, or HR advice",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "A guaranteed revenue, cost-saving, or turnaround outcome",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "prerequisites": [
+      {
+        "value": "The person who can describe the process and make decisions should attend.",
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "The buyer should be ready to describe the current process, not just the desired outcome.",
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "support": {
+      "value": "Email support before and after the call during business hours. No emergency support.",
+      "status": "verified",
+      "source": "Fictional example — support plan",
+      "verified_at": "2026-10-21"
+    },
+    "status": "active"
+  },
+  "pricing": {
+    "currency": {
+      "value": "KGS",
+      "status": "verified",
+      "source": "Fictional example — pricing plan",
+      "verified_at": "2026-10-21"
+    },
+    "tax_behavior": "included",
+    "plans": [
+      {
+        "id": "diagnostic-call",
+        "name": "Diagnostic Call",
+        "billing_period": "one_time",
+        "price": {
+          "value": 0,
+          "status": "verified",
+          "source": "Fictional example — pricing plan",
+          "verified_at": "2026-10-21",
+          "notes": "The consultation is free. No payment is collected in this example."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Fictional example — pricing plan",
+          "verified_at": "2026-10-21"
+        },
+        "minimum_term": {
+          "value": "None",
+          "status": "verified",
+          "source": "Fictional example — pricing plan",
+          "verified_at": "2026-10-21"
+        },
+        "cancellation": {
+          "value": "Free to cancel or reschedule with at least 24 hours' notice. No fee for a missed call.",
+          "status": "verified",
+          "source": "Fictional example — booking policy",
+          "verified_at": "2026-10-21"
+        },
+        "refund": {
+          "value": "Not applicable; the call is free.",
+          "status": "verified",
+          "source": "Fictional example — pricing plan",
+          "verified_at": "2026-10-21"
+        },
+        "status": "active"
+      }
+    ],
+    "payment_methods": [
+      {
+        "value": "No payment is collected for the consultation.",
+        "status": "verified",
+        "source": "Fictional example — pricing plan",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "invoice_policy": {
+      "value": "No invoice is issued for the free consultation. Any paid engagement requires a separate proposal and a human-approved agreement.",
+      "status": "verified",
+      "source": "Fictional example — billing policy",
+      "verified_at": "2026-10-21"
+    },
+    "discount_policy": {
+      "allowed": false,
+      "max_percent": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — pricing plan",
+        "verified_at": "2026-10-21"
+      },
+      "approval_threshold_percent": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — pricing plan",
+        "verified_at": "2026-10-21"
+      },
+      "stacking": {
+        "value": "Not applicable",
+        "status": "verified",
+        "source": "Fictional example — pricing plan",
+        "verified_at": "2026-10-21"
+      },
+      "conditions": []
+    }
+  },
+  "qualification": {
+    "fit_criteria": [
+      {
+        "value": "A team of 5–50 people with a recurring operational bottleneck.",
+        "status": "verified",
+        "source": "Fictional example — ideal client profile",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "A decision-maker can attend the call and describe the current process.",
+        "status": "verified",
+        "source": "Fictional example — ideal client profile",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "The buyer wants a diagnosis and a next step, not a guaranteed outcome.",
+        "status": "verified",
+        "source": "Fictional example — ideal client profile",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "disqualifiers": [
+      {
+        "value": "The request is for legal, financial, tax, medical, HR, or safety-critical advice.",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "The buyer wants a guaranteed revenue or cost-saving result.",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "There is an emergency or immediate safety risk.",
+        "status": "verified",
+        "source": "Fictional example — safety plan",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "required_fields": ["team_size", "bottleneck", "impact", "decision_role", "timezone"],
+    "decision_roles": [
+      {
+        "value": "Operations lead or founder — usually the person who books and attends",
+        "status": "verified",
+        "source": "Fictional example — sales playbook",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "Team member who runs the process — may join to provide detail",
+        "status": "verified",
+        "source": "Fictional example — sales playbook",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "service_area": {
+      "value": "Kyrgyzstan, remote calls. Other markets require a human check.",
+      "status": "verified",
+      "source": "Fictional example — service plan",
+      "verified_at": "2026-10-21"
+    }
+  },
+  "discovery": {
+    "required_fields": ["current_process", "bottleneck", "impact", "attempted_fixes", "decision_process"],
+    "optional_fields": ["team_structure", "tools_used", "timeline", "budget_for_paid_work"],
+    "recommendation_rules": [
+      {
+        "value": "If the bottleneck is outside the advisory's scope (legal, medical, financial, HR), do not book; explain the scope and offer a human only if the passport supports it.",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "If the buyer wants implementation, explain that the call is diagnostic only and that any paid work needs a separate proposal.",
+        "status": "verified",
+        "source": "Fictional example — service scope",
+        "verified_at": "2026-10-21"
+      }
+    ]
+  },
+  "proof": {
+    "cases": [
+      {
+        "id": "case-1",
+        "title": {
+          "value": "A 20-person team mapped a handoff bottleneck in one diagnostic call",
+          "status": "verified",
+          "source": "Fictional example — case notes",
+          "verified_at": "2026-10-21"
+        },
+        "client_name": {
+          "value": "Anonymized; permission for anonymized use only",
+          "status": "verified",
+          "source": "Fictional example — permission record",
+          "verified_at": "2026-10-21"
+        },
+        "outcome": {
+          "value": "The team left with a written description of the handoff and one next step; no revenue impact was measured.",
+          "status": "verified",
+          "source": "Fictional example — case notes",
+          "verified_at": "2026-10-21"
+        },
+        "permission": "anonymized",
+        "source": {
+          "value": "Fictional example — approved anonymized summary",
+          "status": "verified",
+          "source": "Fictional example — permission record",
+          "verified_at": "2026-10-21"
+        }
+      }
+    ],
+    "testimonials": [],
+    "certifications": [],
+    "stats": [],
+    "prohibited_claims": [
+      {
+        "value": "Do not claim a guaranteed cost reduction, revenue increase, or turnaround.",
+        "status": "verified",
+        "source": "Fictional example — compliance policy",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "Do not claim professional certification, accreditation, or a regulated advisory license.",
+        "status": "verified",
+        "source": "Fictional example — compliance policy",
+        "verified_at": "2026-10-21"
+      }
+    ]
+  },
+  "fulfillment": {
+    "mode": "appointment",
+    "delivery": {
+      "value": "The call happens at the booked time. A written summary is sent within one business day only if the buyer consents.",
+      "status": "verified",
+      "source": "Fictional example — service description",
+      "verified_at": "2026-10-21"
+    },
+    "booking": {
+      "required": true,
+      "calendar_id": {
+        "value": "karkyra-advisory-demo-calendar",
+        "status": "verified",
+        "source": "Fictional example — calendar configuration",
+        "verified_at": "2026-10-21"
+      },
+      "duration_minutes": {
+        "value": 30,
+        "status": "verified",
+        "source": "Fictional example — service description",
+        "verified_at": "2026-10-21"
+      },
+      "timezone": {
+        "value": "Asia/Bishkek",
+        "status": "verified",
+        "source": "Fictional example — operating plan",
+        "verified_at": "2026-10-21"
+      },
+      "slot_interval_minutes": {
+        "value": 30,
+        "status": "verified",
+        "source": "Fictional example — calendar configuration",
+        "verified_at": "2026-10-21"
+      },
+      "buffer_before_minutes": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — calendar configuration",
+        "verified_at": "2026-10-21"
+      },
+      "buffer_after_minutes": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — calendar configuration",
+        "verified_at": "2026-10-21"
+      },
+      "availability_window_days": {
+        "value": 14,
+        "status": "verified",
+        "source": "Fictional example — calendar configuration",
+        "verified_at": "2026-10-21"
+      },
+      "offer_slot_count": {
+        "value": 3,
+        "status": "verified",
+        "source": "Fictional example — booking policy",
+        "verified_at": "2026-10-21"
+      },
+      "reschedule_policy": {
+        "value": "Free reschedule with at least 24 hours' notice, subject to real availability.",
+        "status": "verified",
+        "source": "Fictional example — booking policy",
+        "verified_at": "2026-10-21"
+      },
+      "cancellation_policy": {
+        "value": "Free cancellation at any time. No fee.",
+        "status": "verified",
+        "source": "Fictional example — booking policy",
+        "verified_at": "2026-10-21"
+      },
+      "no_show_policy": {
+        "value": "No fee. One follow-up message is allowed to ask whether the buyer wants to rebook; no automated sequence after that.",
+        "status": "verified",
+        "source": "Fictional example — booking policy",
+        "verified_at": "2026-10-21"
+      },
+      "reminder_policy": {
+        "value": "Email reminder 24 hours before and 1 hour before, if the buyer provides an email and consents.",
+        "status": "verified",
+        "source": "Fictional example — booking policy",
+        "verified_at": "2026-10-21"
+      },
+      "external_link_allowed": false
+    },
+    "proposal": {
+      "required": false,
+      "template_id": {
+        "value": null,
+        "status": "unknown"
+      },
+      "validity_days": {
+        "value": null,
+        "status": "unknown"
+      },
+      "approval_required": false
+    }
+  },
+  "sales_policy": {
+    "authority_limits": {
+      "max_discount_percent_without_approval": {
+        "value": 0,
+        "status": "verified",
+        "source": "Fictional example — pricing plan",
+        "verified_at": "2026-10-21"
+      },
+      "can_customize_contract": false,
+      "can_change_refund_terms": false,
+      "can_waive_fees": false
+    },
+    "approval_matrix": [
+      {
+        "condition": {
+          "value": "Any paid engagement, custom scope, or contract",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-21"
+        },
+        "approver": {
+          "value": "Founder / principal consultant",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        }
+      }
+    ],
+    "verified_scarcity": [],
+    "competitor_policy": {
+      "value": "Do not compare or disparage. If the buyer asks, discuss criteria and verified facts only.",
+      "status": "verified",
+      "source": "Fictional example — sales policy",
+      "verified_at": "2026-10-21"
+    },
+    "custom_terms": {
+      "value": "The free call is standard. Any paid scope needs a proposal and human approval.",
+      "status": "verified",
+      "source": "Fictional example — sales policy",
+      "verified_at": "2026-10-21"
+    },
+    "contract_policy": {
+      "value": "No contract is signed for the free call. Paid work requires a separate agreement reviewed by a human.",
+      "status": "verified",
+      "source": "Fictional example — legal policy",
+      "verified_at": "2026-10-21"
+    },
+    "call_recording_policy": {
+      "value": "Calls are not recorded. If recording is introduced, explicit consent is required.",
+      "status": "verified",
+      "source": "Fictional example — privacy policy",
+      "verified_at": "2026-10-21"
+    }
+  },
+  "handoff": {
+    "routes": [
+      {
+        "reason_code": "human_request",
+        "destination": {
+          "value": "Founder / principal consultant",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "hours": {
+          "value": "Mon–Fri 10:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "response_time": {
+          "value": "Within 1 business day",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-21"
+        },
+        "fallback": {
+          "value": "If the handoff fails, say it was not created and give the hello@ email.",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        }
+      },
+      {
+        "reason_code": "authority",
+        "destination": {
+          "value": "Founder / principal consultant",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "hours": {
+          "value": "Mon–Fri 10:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "response_time": {
+          "value": "Within 1 business day",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-21"
+        },
+        "fallback": {
+          "value": "Do not promise paid work; give the hello@ email.",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        }
+      },
+      {
+        "reason_code": "capability",
+        "destination": {
+          "value": "Founder / principal consultant",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "hours": {
+          "value": "Mon–Fri 10:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "response_time": {
+          "value": "Within 1 business day",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-21"
+        },
+        "fallback": {
+          "value": "Give the hello@ email; do not claim a booking or answer exists.",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        }
+      },
+      {
+        "reason_code": "safety",
+        "destination": {
+          "value": "Founder and, if immediate danger, local emergency services",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter and phone escalation",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-21"
+        },
+        "hours": {
+          "value": "Emergency page 24/7; business hours otherwise",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-21"
+        },
+        "response_time": {
+          "value": "Immediate page; no chat response-time promise",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-21"
+        },
+        "fallback": {
+          "value": "Tell the buyer to contact local emergency services; do not invent a hotline.",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-21"
+        }
+      },
+      {
+        "reason_code": "legal",
+        "destination": {
+          "value": "External counsel",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "hours": {
+          "value": "Business days via email",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-21"
+        },
+        "response_time": {
+          "value": "Within 3 business days",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-21"
+        },
+        "fallback": {
+          "value": "Do not give legal advice; give the hello@ email and say counsel will review.",
+          "status": "verified",
+          "source": "Fictional example — legal policy",
+          "verified_at": "2026-10-21"
+        }
+      },
+      {
+        "reason_code": "privacy",
+        "destination": {
+          "value": "Privacy owner",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-21"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-21"
+        },
+        "hours": {
+          "value": "Mon–Fri 10:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-21"
+        },
+        "response_time": {
+          "value": "Within 2 business days",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-21"
+        },
+        "fallback": {
+          "value": "Do not claim deletion; give the hello@ email and log the request.",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-21"
+        }
+      }
+    ],
+    "required_fields": [
+      "buyer",
+      "channel",
+      "language",
+      "reason_code",
+      "summary",
+      "buyer_goal",
+      "commitments_made",
+      "verified_facts",
+      "open_questions",
+      "risk_flags",
+      "recommended_next_action",
+      "handoff_status"
+    ],
+    "automation_pause": true,
+    "human_takeover_policy": {
+      "value": "When the founder takes over, automated messages stop. Automation resumes only with an explicit instruction.",
+      "status": "verified",
+      "source": "Fictional example — operations plan",
+      "verified_at": "2026-10-21"
+    }
+  },
+  "follow_up": {
+    "allowed": true,
+    "basis": ["buyer_requested", "agreed_next_step"],
+    "channels": ["whatsapp", "email"],
+    "quiet_hours": {
+      "start": "19:00",
+      "end": "09:00",
+      "timezone": "Asia/Bishkek"
+    },
+    "allowed_days": ["mon", "tue", "wed", "thu", "fri"],
+    "max_attempts_per_reason": {
+      "value": 2,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-21"
+    },
+    "max_attempts_per_conversation": {
+      "value": 3,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-21"
+    },
+    "min_interval_hours": {
+      "value": 24,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-21"
+    },
+    "close_out_after_days": {
+      "value": 10,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-21"
+    },
+    "opt_out_keywords": ["stop", "не пишите", "отпишите", "керек эмес", "жазбаңыз"],
+    "marketing_consent_required": true
+  },
+  "privacy": {
+    "data_collected": [
+      {
+        "value": "Name, work email, company, role, timezone, and conversation content",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "Call notes written by the consultant, if the buyer consents",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "purposes": [
+      {
+        "value": "Book and conduct the consultation, send the agreed summary, and respond to follow-up questions",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "retention": {
+      "value": "12 months after the last contact unless a legal obligation requires longer.",
+      "status": "verified",
+      "source": "Fictional example — privacy notice",
+      "verified_at": "2026-10-21"
+    },
+    "deletion_process": {
+      "value": "Route deletion requests to the privacy owner; confirm only after the tool records completion.",
+      "status": "verified",
+      "source": "Fictional example — privacy procedure",
+      "verified_at": "2026-10-21"
+    },
+    "sharing": {
+      "value": "Calendar and email providers only; no sale of personal data.",
+      "status": "verified",
+      "source": "Fictional example — privacy notice",
+      "verified_at": "2026-10-21"
+    },
+    "pii_rules": [
+      {
+        "value": "Do not ask for payment data; the call is free.",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-21"
+      },
+      {
+        "value": "Do not repeat sensitive personal details in a summary unless they are necessary for the next step.",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-21"
+      }
+    ],
+    "legal_basis": {
+      "value": "Consent for booking and follow-up; contract only if a paid engagement is later agreed. Legal review pending.",
+      "status": "estimated",
+      "source": "Fictional example — draft privacy notice",
+      "verified_at": null,
+      "notes": "Requires local counsel review before launch."
+    }
+  },
+  "safety": {
+    "emergency_protocol": {
+      "value": "Stop selling. If there is immediate danger, tell the buyer to contact local emergency services. Page the founder. Do not counsel or invent resources.",
+      "status": "verified",
+      "source": "Fictional example — safety plan",
+      "verified_at": "2026-10-21"
+    },
+    "emergency_resources": [],
+    "minors_policy": {
+      "value": "Do not book a consultation for a buyer under 18. Stop and route to a human.",
+      "status": "verified",
+      "source": "Fictional example — safety plan",
+      "verified_at": "2026-10-21"
+    },
+    "vulnerability_policy": {
+      "value": "Pause, do not use distress as leverage, and offer a human. Do not provide financial, medical, or legal advice.",
+      "status": "verified",
+      "source": "Fictional example — safety plan",
+      "verified_at": "2026-10-21"
+    }
+  },
+  "tools": {
+    "passport_lookup": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.0.0"
+    },
+    "calendar_availability": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.0.0",
+      "notes": "The calendar ID is fictional; no calendar is connected."
+    },
+    "calendar_booking": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.0.0"
+    },
+    "payments_invoicing": {
+      "adapter_id": "not_applicable",
+      "status": "not_implemented",
+      "contract_version": "1.0.0",
+      "notes": "The consultation is free; no payment flow is used."
+    },
+    "crm_memory": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.0.0"
+    },
+    "human_handoff": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.0.0"
+    },
+    "messaging_media": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.0.0"
+    }
+  },
+  "metadata": {
+    "owner": "Fictional example owner",
+    "approved_by": "Fictional reviewer (example only)",
+    "approved_at": "2026-10-21",
+    "created_at": "2026-10-01",
+    "updated_at": "2026-10-21",
+    "source_of_truth": "This file is a fictional example and is not connected to a real calendar or business.",
+    "review_cycle_days": 90,
+    "fictional": true,
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-10-21",
+        "change": "Initial fictional appointment-booking example."
+      }
+    ]
+  },
+  "unresolved": [
+    "No calendar adapter is implemented; booking cannot be executed from this repository.",
+    "The consultation is free, so the payment and invoicing path is intentionally untested here.",
+    "Kyrgyz copy requires native-speaker review.",
+    "Paid engagement scope, pricing, and contract are deliberately outside this passport."
+  ]
+}

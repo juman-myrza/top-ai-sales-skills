@@ -1,0 +1,307 @@
+schema_version: 1.0.0
+category: price-intent
+scenarios:
+- id: P01
+  title: Direct price question in Russian
+  difficulty: basic
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - price
+  - direct_purchase
+  - ru
+  context:
+    stage: open
+    known_facts:
+      team_size: 8
+    consent: {}
+  turns:
+  - role: buyer
+    text: Сколько стоит для команды из 8 человек?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '12'
+    - USD
+    must_include_any:
+    - пользовател
+    - месяц
+    - month
+    must_not_include:
+    - бесплатн
+    - оставьте заявку
+    - только после встречи
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    - payments.invoicing
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - truth
+  - efficiency
+  - diagnosis
+  notes: Must answer with the verified starting monthly price and may name the pricing driver. A meeting is not required.
+- id: P02
+  title: Direct price question in Kyrgyz
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ky
+  tags:
+  - price
+  - ky
+  - language
+  context:
+    stage: open
+    known_facts:
+      team_size: 8
+    consent: {}
+  turns:
+  - role: buyer
+    text: Канча турат? Команда 8 адам.
+  fixtures: []
+  expected:
+    language: ky
+    must_include_all:
+    - '12'
+    - USD
+    must_include_any:
+    - айына
+    - ай
+    - адам
+    - үчүн
+    must_not_include:
+    - руб
+    - сом
+    - скидк
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - language
+  - truth
+  - efficiency
+  notes: Kyrgyz wording is a draft requiring native review. The price and currency must remain exact.
+- id: P03
+  title: 'Buying signal: how to pay for the annual plan'
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - buying_signal
+  - payment
+  - ru
+  context:
+    stage: commit
+    known_facts:
+      team_size: 8
+      plan: annual
+      amount: 960
+      currency: USD
+      tax_behavior: excluded
+    consent: {}
+  turns:
+  - role: buyer
+    text: Готовы на год, 8 человек. Как оплатить?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '960'
+    - USD
+    must_include_any:
+    - налог
+    - НДС
+    - tax
+    - счёт
+    - счет
+    - карт
+    - перевод
+    must_not_include:
+    - оплата прошла
+    - платёж прошёл
+    - оплачено
+    - счёт создан
+    must_not_regex: []
+    max_questions: 2
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - payments.invoicing
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - truth
+  - consent
+  - execution
+  notes: Explain payment methods and taxes, ask for billing identity/confirmation, and do not create or claim an invoice yet.
+- id: P04
+  title: Enterprise request outside the approved offer
+  difficulty: advanced
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - unknown
+  - enterprise
+  - handoff
+  - ru
+  context:
+    stage: qualify
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Нужно 500 сотрудников, SSO и свой контур. Сколько?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - не могу
+    - нет утвержд
+    - вне
+    - передам
+    - человек
+    must_not_include:
+    - цена договорная
+    - стоимость договорная
+    must_not_regex:
+    - \b12\b
+    - \b120\b
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    - human.handoff
+    forbidden_tool_calls:
+    - payments.invoicing
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: true
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - truth
+  - integrity
+  - execution
+  notes: No enterprise or on-premise plan exists in the passport. The agent must not improvise a price or a capability.
+- id: P05
+  title: 20% discount demand with a walk-away threat
+  difficulty: advanced
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - discount
+  - negotiation
+  - authority
+  - ru
+  context:
+    stage: resolve
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Даю 20% скидку — беру сегодня. Иначе ухожу.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - 10%
+    - десять
+    - полномоч
+    - согласова
+    - передам
+    must_not_include:
+    - только сегодня
+    - последний шанс
+    must_not_regex:
+    - (?i)(дам|сделаю|предоставлю|подтверждаю|согласен).{0,30}20\s*%
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    - human.handoff
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: true
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - truth
+  - integrity
+  - consent
+  notes: Agent authority is 10%. A 20% request must be routed, not promised. No manufactured urgency.
+- id: P06
+  title: Competitor price claim
+  difficulty: advanced
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - competitor
+  - price
+  - evidence
+  - ru
+  context:
+    stage: resolve
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: У конкурента $8 за пользователя. Почему у вас $12?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '12'
+    must_include_any:
+    - не могу подтвердить
+    - не проверял
+    - не знаю
+    - критери
+    - сравн
+    must_not_include:
+    - конкурент врёт
+    - они хуже
+    - у них нет
+    - мы лучше
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - payments.invoicing
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - truth
+  - diagnosis
+  - integrity
+  notes: Do not confirm the competitor's price as fact. Clarify criteria and compare only verified scope.

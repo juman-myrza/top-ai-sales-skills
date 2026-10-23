@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/tool-envelope.schema.json",
+  "title": "Sales Tool Envelope",
+  "description": "Common request and response envelope for every tool contract in this repository. Tool-specific params and data are defined in the corresponding contract document.",
+  "$defs": {
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "tool", "request_id", "tenant_id", "conversation_id", "actor", "params"],
+      "properties": {
+        "contract_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tool": { "type": "string", "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$" },
+        "request_id": { "type": "string", "minLength": 8, "maxLength": 128 },
+        "tenant_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "conversation_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "actor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "id"],
+          "properties": {
+            "type": { "enum": ["agent", "human", "system"] },
+            "id": { "type": "string", "minLength": 1, "maxLength": 128 }
+          }
+        },
+        "params": { "type": "object" },
+        "idempotency_key": { "type": "string", "minLength": 16, "maxLength": 256 },
+        "timeout_ms": { "type": "integer", "minimum": 100, "maximum": 60000 }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": {
+          "enum": [
+            "unauthorized",
+            "forbidden",
+            "not_found",
+            "invalid_request",
+            "conflict",
+            "idempotency_conflict",
+            "consent_required",
+            "rate_limited",
+            "unavailable",
+            "timeout",
+            "internal_error",
+            "verification_failed",
+            "version_mismatch"
+          ]
+        },
+        "message": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "retryable": { "type": "boolean" },
+        "retry_after_ms": { "type": "integer", "minimum": 0 },
+        "details": { "type": "object" }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["server_time", "source", "contract_version"],
+      "properties": {
+        "server_time": { "type": "string", "format": "date-time" },
+        "source": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "contract_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "trace_id": { "type": "string", "maxLength": 128 }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "status", "tool", "request_id", "data", "error", "meta"],
+      "properties": {
+        "ok": { "type": "boolean" },
+        "status": {
+          "enum": [
+            "ok",
+            "created",
+            "pending",
+            "confirmed",
+            "paid",
+            "sent",
+            "delivered",
+            "read",
+            "refunded",
+            "cancelled",
+            "assigned",
+            "in_progress",
+            "pending_info",
+            "closed",
+            "conflict",
+            "no_slots",
+            "not_found",
+            "expired",
+            "unauthorized",
+            "forbidden",
+            "invalid_request",
+            "consent_required",
+            "rate_limited",
+            "unavailable",
+            "timeout",
+            "blocked",
+            "failed",
+            "unknown"
+          ]
+        },
+        "tool": { "type": "string" },
+        "request_id": { "type": "string" },
+        "data": { "type": ["object", "null"] },
+        "error": { "oneOf": [{ "$ref": "#/$defs/error" }, { "type": "null" }] },
+        "meta": { "$ref": "#/$defs/meta" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "ok": { "const": true } },
+            "required": ["ok"]
+          },
+          "then": {
+            "properties": {
+              "status": { "enum": ["ok", "created", "pending", "confirmed", "paid", "sent", "delivered", "read", "refunded", "cancelled", "assigned", "in_progress", "pending_info", "closed", "no_slots"] },
+              "error": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "ok": { "const": false } },
+            "required": ["ok"]
+          },
+          "then": {
+            "properties": {
+              "error": { "$ref": "#/$defs/error" }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/request" },
+    { "$ref": "#/$defs/response" }
+  ]
+}

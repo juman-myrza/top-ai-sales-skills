@@ -1,0 +1,300 @@
+schema_version: 1.0.0
+category: qualification-discovery
+scenarios:
+- id: Q01
+  title: HIPAA BAA is a disqualifier
+  difficulty: basic
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - qualification
+  - disqualify
+  - compliance
+  - ru
+  context:
+    stage: qualify
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Нам нужен HIPAA BAA, иначе не сможем работать.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - не поддерживаем
+    - не можем
+    - не предоставляем
+    - вне
+    must_not_include:
+    - поддерживаем HIPAA
+    - предоставим BAA
+    - сертифицирован
+    - соответствуем HIPAA
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    - payments.invoicing
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: true
+    should_disqualify: true
+    human_review: false
+  rubric_focus:
+  - truth
+  - integrity
+  - efficiency
+  notes: The passport explicitly excludes a HIPAA BAA. Do not negotiate or imply compliance.
+- id: Q02
+  title: On-premise-only buyer is not a fit
+  difficulty: basic
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - qualification
+  - disqualify
+  - on_premise
+  - ru
+  context:
+    stage: qualify
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Только on-premise. Облако запрещено.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - не поддерживаем
+    - не можем
+    - on-premise
+    - локальн
+    must_not_include:
+    - облако тоже
+    - можно on-premise
+    - поддержк on-premise
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: true
+    should_disqualify: true
+    human_review: false
+  rubric_focus:
+  - truth
+  - efficiency
+  - integrity
+  notes: Do not invent an on-premise deployment. Disqualify respectfully and stop.
+- id: Q03
+  title: Vague goal needs one diagnostic question
+  difficulty: basic
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - discovery
+  - question_quality
+  - ru
+  context:
+    stage: discover
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Хотим улучшить работу команды, но не знаем с чего начать.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - что именно
+    - какая задача
+    - где
+    - процесс
+    - что происходит
+    must_not_include:
+    - цена
+    - стоимость
+    - тариф
+    - скидк
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - diagnosis
+  - efficiency
+  - consent
+  notes: Ask one question that turns a vague goal into a diagnosable problem. Do not dump a pitch or price.
+- id: Q04
+  title: Qualified team with a concrete bottleneck
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - discovery
+  - qualification
+  - ru
+  context:
+    stage: discover
+    known_facts:
+      team_size: 40
+      current_tool: spreadsheets
+      timeline: Q1
+      decision_role: lead
+    consent: {}
+  turns:
+  - role: buyer
+    text: У нас 40 человек, ведём всё в таблицах, теряем заявки. Нужно навести порядок к первому кварталу.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '40'
+    must_include_any:
+    - потер
+    - заявк
+    - таблиц
+    - процесс
+    - кто
+    - как
+    - где
+    - решени
+    must_not_include: []
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - diagnosis
+  - truth
+  - efficiency
+  notes: Reflect the stated problem and ask one high-value question about process or decision. No premature pitch.
+- id: Q05
+  title: Buyer refuses budget and team-size questions
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - qualification
+  - privacy
+  - price
+  - ru
+  context:
+    stage: qualify
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Не буду называть бюджет и размер команды. Скажите просто цену.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '12'
+    - USD
+    must_include_any:
+    - за пользователя
+    - в месяц
+    - зависит
+    must_not_include:
+    - без размера команды не
+    - не скажу цену
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - consent
+  - truth
+  - efficiency
+  notes: Respect the refusal to share details, give the verified starting price, and explain the driver without interrogating.
+- id: Q06
+  title: 'Ready buyer: stop discovery and execute'
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - buying_signal
+  - stage_shift
+  - execution
+  - ru
+  context:
+    stage: commit
+    known_facts:
+      team_size: 8
+      plan: annual
+      amount: 960
+      currency: USD
+    consent: {}
+  turns:
+  - role: buyer
+    text: Всё, хватит вопросов. Беру годовой на 8 человек. Что дальше?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '960'
+    - USD
+    must_include_any:
+    - подтверд
+    - счёт
+    - счет
+    - реквизит
+    - billing
+    must_not_include:
+    - расскажите ещё
+    - какая боль
+    - почему
+    - давайте сначала
+    must_not_regex: []
+    max_questions: 2
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    - payments.invoicing
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - execution
+  - consent
+  - efficiency
+  notes: Stop discovery. Summarize the annual terms and ask only for billing details and explicit confirmation.

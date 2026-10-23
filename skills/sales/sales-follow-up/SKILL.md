@@ -1,0 +1,356 @@
+---
+name: sales-follow-up
+description: "Follow up with consent, context, and a clean stop."
+version: 1.0.0
+author: Jumanazar
+license: MIT
+metadata:
+  hermes:
+    tags: [Sales, Follow-up, Consent, Cadence, Retention]
+    category: sales
+    related_skills:
+      - sales-conversation-orchestrator
+      - sales-closing-execution
+      - sales-objection-negotiation
+      - sales-language-adaptation
+      - sales-integrity-escalation
+---
+
+# Sales Follow-Up
+
+Follow-up exists to keep a decision moving, not to wear the buyer down. A good follow-up gives the buyer something useful: an answer, a document, a verified deadline, a summary, or a clear next step. A bad follow-up repeats "just checking in" until the buyer blocks the number.
+
+This skill defines eligibility, timing, content, cadence, and stop rules. All cadence numbers, channels, and quiet hours come from the product passport. The skill contains no business-specific schedule.
+
+## When to Use
+
+- The buyer asked to be contacted later, with a date or time.
+- Both sides agreed on a next step that has not happened.
+- The buyer asked for a document, calculation, or answer that is now ready.
+- A proposal or quote was sent and a decision date was agreed.
+- The buyer missed a booked appointment and the passport allows a recovery message.
+- A purchase is complete and a transactional onboarding check-in is appropriate.
+- A customer asked a question that could not be answered in the previous turn.
+- A legitimate re-engagement is permitted by consent and the passport.
+
+## When Not to Use
+
+- The buyer refused, opted out, or asked not to be contacted.
+- The buyer asked for a human and the handoff is active.
+- There is no new information, no agreed next step, and no consent.
+- The passport has no cadence and the buyer did not request contact.
+- The message would be pure pressure ("just following up", "any update?", "last chance").
+- The buyer is in distress, angry, or a safety situation; use the integrity path.
+- The purpose is marketing to someone who only consented to a transactional conversation.
+- A human has taken over the thread; do not interleave automated messages.
+
+## Required Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Consent to follow up | state / buyer's request | Do not send; ask once or stop |
+| Reason for the follow-up | state / agreed next step | Do not send |
+| New value or answer to deliver | passport / tool / human | Do not send a content-free reminder |
+| Cadence, channel, quiet hours | passport `follow_up` | Send only if buyer-initiated; otherwise stop |
+| Attempt count and last contact | state / CRM | Treat as unknown; do not restart a sequence |
+| Timezone | buyer or passport | Ask before scheduling |
+| Opt-out status | state / CRM | Treat as opted out until verified |
+| Handoff status | handoff tool | Do not send if a human owns the thread |
+
+## Procedure
+
+### Step 1 — Check eligibility before writing
+
+A follow-up is eligible only if all are true:
+
+1. **Basis:** the buyer requested it, both sides agreed to it, or the passport explicitly permits this contact.
+2. **Consent:** the buyer has not opted out and the purpose matches the consent.
+3. **Reason:** there is a concrete reason code, not "it's been a few days".
+4. **Value:** the message will add a fact, answer, document, decision aid, or verified next step.
+5. **Ownership:** no human has taken over the conversation.
+6. **Timing:** it is inside the passport's cadence and quiet hours.
+7. **Channel:** it is an approved channel for this buyer.
+
+If any answer is no, do not send. Record why.
+
+Reason codes:
+
+| Reason code | Example |
+|---|---|
+| `buyer_requested` | "Напишите мне в понедельник" |
+| `agreed_next_step` | "I'll send the calculation by Thursday" |
+| `document_ready` | The proposal or invoice is ready |
+| `answer_ready` | The human/technical answer arrived |
+| `appointment_recovery` | The buyer missed a booked appointment |
+| `post_purchase` | Onboarding or delivery check-in |
+| `re_engagement` | Permitted marketing consent, with something new |
+
+### Step 2 — Choose the timing
+
+Use the passport's `follow_up` policy:
+
+- minimum and maximum interval between touches;
+- allowed days and quiet hours;
+- maximum attempts per reason and per conversation;
+- timezone rules;
+- channel preference and fallback order;
+- whether a missed appointment triggers a message.
+
+If the passport is silent:
+
+- send only buyer-requested or explicitly agreed follow-ups;
+- do not start an unsolicited sequence;
+- if the buyer said "later" without a date, ask once for a date instead of guessing;
+- when in doubt, wait longer rather than shorter.
+
+Do not send multiple messages in a row to "bump" the thread. Do not switch channels to bypass silence.
+
+### Step 3 — Decide what the message must contain
+
+Every follow-up has four parts:
+
+1. **Context** — why this message is arriving now, in one line.
+2. **Value** — the new fact, answer, document, or decision aid.
+3. **One ask** — a specific, low-friction next step.
+4. **Exit** — an easy way to say no or pause.
+
+Shape:
+
+> [Context]. [New value]. [One ask]. If now is not the right time, tell me and I'll close the loop.
+
+The exit is not a guilt trip. It is a real option, and the agent must honor it.
+
+### Step 4 — Write in the buyer's language and register
+
+Follow `sales-language-adaptation`:
+
+- mirror the latest language;
+- keep names, amounts, dates, and document numbers exact;
+- do not become more formal or more chummy than the thread;
+- keep it short — usually 2–5 sentences;
+- do not attach a wall of marketing copy.
+
+### Step 5 — Send through the approved channel
+
+- Use the channel the buyer used, unless the passport requires another.
+- Confirm the send with the messaging tool. A drafted message is not a sent message.
+- If the send fails, do not claim it was delivered; retry once per contract or log the failure.
+- Do not send the same content on two channels "just in case".
+- Do not schedule a message outside quiet hours because the tool is convenient.
+
+### Step 6 — Interpret the response
+
+| Buyer response | Action |
+|---|---|
+| Clear yes | Move to `sales-closing-execution`; confirm what happens next |
+| Clear no | Acknowledge once; stop the sequence; record opt-out if requested |
+| "Later" with a date | Schedule only that date; confirm it |
+| "Later" without a date | Ask once for a date; if no date, close the loop |
+| Question | Answer it; do not treat it as consent to continue selling |
+| Silence | Follow the passport's attempt limit; then close the loop |
+| Anger or complaint | Acknowledge, stop selling, offer a human if appropriate |
+| "Stop" / "unsubscribe" / "не пишите" / "керек эмес" | Stop immediately; one neutral acknowledgment at most |
+| Auto-reply / out of office | Do not count it as a real response; follow the stated return date if reliable |
+| Wrong person | Ask for the right contact or close politely; do not pitch them |
+
+Silence is not consent. A read receipt is not consent. A click is not consent to a sales sequence.
+
+### Step 7 — Update state and close the loop
+
+Record:
+
+- reason code, channel, timestamp, and send result;
+- attempt number for this reason and this conversation;
+- buyer response and sentiment;
+- next scheduled touch, if any;
+- opt-out status;
+- whether the thread is now owned by a human.
+
+When the cadence ends without a response, send at most one clean close-out if the passport allows it. Then stop. Do not restart the sequence under a new reason code to evade the limit.
+
+## Branches
+
+### Buyer says "write later" without a date
+
+Ask once: "Когда вам удобнее — назовите день, и я напишу только тогда." If the buyer gives no date, close the loop: "Хорошо, не буду напоминать. Напишите, когда будет актуально."
+
+Do not choose a date for the buyer and call it agreed.
+
+### Buyer says "write tomorrow"
+
+Confirm the timezone and the channel. If "tomorrow" is ambiguous because the buyer is in another timezone, state your assumption and ask for confirmation. Schedule one message, not a sequence.
+
+### Buyer says "I need to think"
+
+Do not send a countdown. Ask what would help: a summary, a calculation, a comparison, or time. If the buyer accepts a follow-up date, schedule it. If not, close the loop.
+
+### Buyer asks for a proposal and then goes silent
+
+The proposal follow-up must reference the actual document and a specific open question:
+
+> "Я отправил предложение [id] [date]. В нём [one verified point]. Успели посмотреть раздел [section]? Если удобнее, могу ответить на вопросы письменно."
+
+Do not send "any thoughts?" with no context.
+
+### Buyer misses a booked appointment
+
+Check the passport's no-show policy. Send one factual message:
+
+> "Сегодня была запись на [date/time]. Вы не подключились. Хотите перенести? Если передумали — скажите, и я закрою вопрос."
+
+Do not imply the buyer wasted your time. Do not charge a no-show fee unless the passport authorizes it and the buyer was told in advance.
+
+### Buyer refuses after one follow-up
+
+Acknowledge once and stop. Do not send a "final discount". Do not add them to another sequence. If they only refused the timing, not the offer, ask whether they want a later contact — once.
+
+### Buyer opts out, then asks a question
+
+Answer the factual question. Do not resume the sales sequence. Do not add a pitch to the answer. The opt-out remains in force for marketing.
+
+### Buyer asks to change channel
+
+Move only if the new channel is approved and the buyer confirms. Confirm the switch in one line. Do not keep the old channel active "in case".
+
+### Multiple stakeholders
+
+Follow up with the person who consented. Do not message other stakeholders without their own consent, even if their names came up. Offer the champion a shareable summary instead.
+
+### Out-of-office reply
+
+Use the stated return date only if it is reliable. Do not send during the absence. If the auto-reply is ambiguous, wait for the passport's normal interval.
+
+### Message send fails
+
+Do not claim delivery. Retry once if the contract allows. If it fails again, log it and either try an approved fallback channel with consent or hand off. Do not silently drop the commitment.
+
+### Buyer replies angrily "why are you writing?"
+
+Acknowledge, state the reason in one line, and offer to stop:
+
+> "Вы просили вернуться к вопросу [date]. Если это больше не актуально — скажите, и я не буду писать."
+
+If the buyer says stop, stop. Do not defend the cadence.
+
+### Post-purchase follow-up
+
+Keep it transactional and useful: onboarding, access, delivery, or a documented check-in. Do not use a support conversation to upsell unless the buyer asks or the passport has separate marketing consent. Do not ask for a review in exchange for support.
+
+### Handoff is active
+
+Do not send automated sales follow-ups. A human-owned thread may still need a transactional message, but only if the handoff protocol assigns it and the buyer expects it.
+
+## Stopping Conditions
+
+Stop the follow-up sequence immediately when:
+
+- the buyer refuses or opts out;
+- the buyer asks for a human;
+- the buyer buys, and the next step is fulfillment;
+- the buyer is not a fit and has been told;
+- the cadence or attempt limit is reached;
+- the reason is resolved or no longer valid;
+- a safety, legal, or privacy issue appears;
+- a human takes ownership;
+- the agent cannot verify a material fact and has no path to verify it.
+
+A clean close-out is better than a fourth "just checking in".
+
+## Failure Recovery
+
+| Failure | Response | Do not |
+|---|---|---|
+| Consent status unknown | Ask once or do not send | Assume opt-in |
+| Cadence missing from passport | Send only buyer-requested follow-ups | Invent a sequence |
+| CRM/state unavailable | Keep a local note; do not restart the sequence | Claim CRM is updated |
+| Send tool fails | Retry once; log; offer human/fallback | Say "sent" without confirmation |
+| Duplicate follow-up risk | Check last contact and reason before sending | Send "just in case" |
+| Buyer says stop but state is stale | Stop immediately; update state | Send one more "final" message |
+| Buyer's language changed | Switch language per `sales-language-adaptation` | Continue in the old language |
+| Handoff status unclear | Treat the thread as human-owned; do not send | Interleave automated sales |
+| Wrong recipient | Apologize once; ask for the right contact or close | Pitch the wrong person |
+| Follow-up reveals a factual error | Correct it, then decide whether the thread should continue | Bury the correction in a pitch |
+
+## Examples
+
+Placeholders must be replaced with verified values.
+
+### Example 1 — Buyer-requested follow-up
+
+Buyer (Monday): "Напишите в среду, я обсужу с командой."
+
+Agent: "Хорошо, напишу в среду. Если раньше появятся вопросы — пишите сюда."
+
+Wednesday:
+
+Agent: "Добрый день! Вы планировали обсудить [verified topic] с командой. Подготовил короткое резюме: [verified scope], [verified price], [verified next step]. Посмотрели? Если удобнее, могу ответить на вопросы письменно."
+
+Why: honors the agreed date, adds a summary, asks one question, and does not invent urgency.
+
+### Example 2 — Proposal follow-up with a real reason
+
+Agent: "Я отправил предложение [id] [date]. В нём [verified key term]. Успели посмотреть раздел [section]? Если есть вопрос по [verified topic], отвечу здесь."
+
+Why: references the actual document and a specific section. Not "any update?".
+
+### Example 3 — No response, close-out
+
+Agent: "Не буду больше напоминать по этому вопросу. Если он вернётся, напишите сюда — помогу. Спасибо."
+
+Why: clean exit, no guilt, no fake deadline. The buyer can return without friction.
+
+### Example 4 — Kyrgyz follow-up
+
+Buyer: "Шаршембиде жазыңыз, команда менен сүйлөшөм."
+
+Agent (Wednesday): "Салам! [Verified topic] боюнча команда менен сүйлөшө турган болчуңуз. Кыскача корутунду даярдадым: [verified scope], [verified price], [verified next step]. Карап чыктыңызбы? Суроо болсо, ушул жерге жазыңыз."
+
+Why: mirrors Kyrgyz, keeps the promise, adds value, one question. Kyrgyz is a draft and needs native review.
+
+### Example 5 — Refusal
+
+Buyer: "Не пишите больше, неинтересно."
+
+Agent: "Понял, больше не пишу. Спасибо за ответ."
+
+Why: one acknowledgment, no pitch, no "final offer". The sequence ends.
+
+### Example 6 — No-show recovery
+
+Agent: "Сегодня была запись на [date/time] с [verified role]. Вы не подключились. Хотите перенести на другое реальное время? Если вопрос больше не актуален — скажите, и я закрою его."
+
+Why: factual, no blame, offers a real path, accepts a no.
+
+## Counterexamples
+
+- **"Just checking in":** no context, no value, no reason.
+- **Bumping:** three messages in a row because the buyer is silent.
+- **Channel hopping:** WhatsApp, then SMS, then Instagram to bypass silence.
+- **Guilt:** "I've been waiting for your reply" or "I don't want to bother you, but…".
+- **Fake deadline:** "The price changes tomorrow" without a verified policy.
+- **Final-offer theater:** a "last chance" that is not the last chance.
+- **Post-refusal pitch:** a discount after "no".
+- **Review pressure:** tying support or a refund to a positive review.
+- **Stale personalization:** referencing a need the buyer already changed.
+- **Cross-stakeholder spam:** messaging the buyer's boss without consent.
+- **Claimed delivery:** "I sent it" when the messaging tool failed.
+- **Sequence evasion:** restarting the count under a new reason code.
+
+## Dependencies
+
+- [Core Behavior Contract](../../../core/CORE-BEHAVIOR-CONTRACT.md), especially §4 and §7.
+- [Conversation State](../../../core/CONVERSATION-STATE.md) for consent, attempts, and next-step fields.
+- [Product Passport](../../../product-passport/README.md) for cadence and channel rules.
+- `sales-conversation-orchestrator`, `sales-closing-execution`, `sales-language-adaptation`, `sales-integrity-escalation`.
+- [CRM and memory contract](../../../tools/contracts/crm-memory.md).
+- [Messaging and media contract](../../../tools/contracts/messaging-media.md).
+- [Cadence and templates](references/cadence-and-templates.md).
+
+## Sources
+
+- Consent and electronic-marketing rules vary by jurisdiction. This skill follows the conservative rule of explicit, purpose-specific consent and immediate opt-out; it is not legal advice. See the U.S. FTC's CAN-SPAM guidance and the EU GDPR information on consent: <https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business> and <https://gdpr.eu/what-is-gdpr/>.
+- The "add value, not reminders" rule is an engineering decision informed by practitioner writing on follow-up, not a controlled study. No response-rate benchmark is claimed.
+- Gartner's B2B buying research describes buyers spending more time away from sellers and completing research independently; this supports usefulness over volume but does not prove a specific cadence: <https://www.gartner.com/en/sales/insights/b2b-buying-journey>.
+- Agent Skills specification for progressive disclosure: <https://agentskills.io/specification>.
+
+Cadence values are deliberately absent. The business must define them in the passport and test them in its own market.

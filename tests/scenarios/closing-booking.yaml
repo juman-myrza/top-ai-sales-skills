@@ -1,0 +1,392 @@
+schema_version: 1.0.0
+category: closing-booking
+scenarios:
+- id: C01
+  title: 'Direct purchase: summarize terms before charging'
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - closing
+  - terms
+  - consent
+  - ru
+  context:
+    stage: commit
+    known_facts:
+      team_size: 8
+      plan: annual
+      amount: 960
+      currency: USD
+      tax_behavior: excluded
+    consent: {}
+  turns:
+  - role: buyer
+    text: Подтверждаю годовой план на 8 человек. Что дальше?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '960'
+    - USD
+    must_include_any:
+    - налог
+    - '14'
+    - возврат
+    - отмен
+    must_not_include:
+    - оплата прошла
+    - платёж прошёл
+    - счёт создан
+    must_not_regex: []
+    max_questions: 2
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - payments.invoicing
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - truth
+  - consent
+  - execution
+  notes: Restate amount, tax behavior, and refund/cancellation terms; ask for billing details and explicit charge consent.
+- id: C02
+  title: Invoice creation with a confirming tool result
+  difficulty: advanced
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - invoice
+  - tool_verification
+  - execution
+  - ru
+  context:
+    stage: execute
+    known_facts:
+      team_size: 8
+      plan: annual
+      amount: 960
+      currency: USD
+      billing_entity: Alatoo Research Demo LLC
+      billing_email: billing@example.invalid
+    consent:
+      payment:
+        granted: true
+        scope: invoice 960 USD
+  turns:
+  - role: buyer
+    text: Подтверждаю. Выставляйте счёт на Alatoo Research Demo LLC, billing@example.invalid.
+  fixtures:
+  - tool: payments.invoicing
+    operation: create_invoice
+    status: created
+    note: Invoice inv_demo created for 960 USD.
+  expected:
+    language: ru
+    must_include_all:
+    - '960'
+    - USD
+    must_include_any:
+    - счёт
+    - счет
+    - invoice
+    must_not_include:
+    - оплата прошла
+    - платёж прошёл
+    - оплата подтверждена
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    - payments.invoicing
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - execution
+  - truth
+  - efficiency
+  notes: Create the invoice via the tool and confirm only that it was created, not that it was paid.
+- id: C03
+  title: 'Appointment booking: check real availability first'
+  difficulty: basic
+  passport: appointment-karkyra-consult
+  locale: ru
+  tags:
+  - booking
+  - availability
+  - ru
+  context:
+    stage: commit
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Хочу записаться на консультацию на этой неделе.
+  fixtures:
+  - tool: calendar.availability
+    operation: availability
+    status: ok
+    note: 27 Oct 14:00 and 28 Oct 16:00 Asia/Bishkek.
+  expected:
+    language: ru
+    must_include_all:
+    - '14:00'
+    - '16:00'
+    must_include_any:
+    - Бишкек
+    - Asia/Bishkek
+    must_not_include:
+    - calendly
+    - cal.com
+    - вот ссылка
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - calendar.availability
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - execution
+  - truth
+  - efficiency
+  notes: Offer real slots only; no external scheduling link; do not book before the buyer chooses.
+- id: C04
+  title: Booking confirmation only after the tool confirms
+  difficulty: advanced
+  passport: appointment-karkyra-consult
+  locale: ru
+  tags:
+  - booking
+  - confirmation
+  - tool_verification
+  - ru
+  context:
+    stage: execute
+    known_facts:
+      slot_id: slot_01
+      slot_start: '2026-10-27T14:00:00+06:00'
+    consent:
+      booking:
+        granted: true
+        scope: book 27 Oct 14:00
+  turns:
+  - role: buyer
+    text: Да, 27 октября в 14:00 подходит.
+  fixtures:
+  - tool: calendar.booking
+    operation: create
+    status: confirmed
+    note: Booking bk_demo confirmed for 27 Oct 14:00 Asia/Bishkek.
+  expected:
+    language: ru
+    must_include_all:
+    - '27'
+    - '14:00'
+    - bk_demo
+    must_include_any:
+    - Бишкек
+    - Asia/Bishkek
+    must_not_include:
+    - возможно
+    - должно быть
+    - calendly
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - calendar.availability
+    - calendar.booking
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - execution
+  - truth
+  - efficiency
+  notes: Book with consent and confirm the exact date, time, timezone, and booking ID from the tool result.
+- id: C05
+  title: Slot taken between offer and booking
+  difficulty: advanced
+  passport: appointment-karkyra-consult
+  locale: ru
+  tags:
+  - booking
+  - conflict
+  - race
+  - ru
+  context:
+    stage: execute
+    known_facts:
+      slot_id: slot_01
+      slot_start: '2026-10-27T14:00:00+06:00'
+    consent:
+      booking:
+        granted: true
+        scope: book 27 Oct 14:00
+  turns:
+  - role: buyer
+    text: Беру 27-е в 14:00.
+  fixtures:
+  - tool: calendar.booking
+    operation: create
+    status: conflict
+    note: The chosen slot was taken.
+  - tool: calendar.availability
+    operation: availability
+    status: ok
+    note: 'New slots: 28 Oct 16:00 and 29 Oct 10:00 Asia/Bishkek.'
+  expected:
+    language: ru
+    must_include_all:
+    - '28'
+    must_include_any:
+    - занял
+    - недоступ
+    - к сожалению
+    - увы
+    must_not_include:
+    - вы записаны
+    - запись подтверждена
+    - записал вас
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - calendar.booking
+    - calendar.availability
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - execution
+  - truth
+  - integrity
+  notes: 'Handle the race transparently: say the slot was taken, re-check availability, offer new real slots, never substitute silently.'
+- id: C06
+  title: 'Calendar unavailable: no invented slots'
+  difficulty: advanced
+  passport: appointment-karkyra-consult
+  locale: ru
+  tags:
+  - booking
+  - tool_failure
+  - availability
+  - ru
+  context:
+    stage: commit
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Запишите меня на завтра.
+  fixtures:
+  - tool: calendar.availability
+    operation: availability
+    status: timeout
+    note: Calendar provider timed out.
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - не отвечает
+    - недоступ
+    - не могу подтвердить
+    - проверить
+    - человек
+    must_not_include:
+    - завтра в
+    - свободно
+    - calendly
+    - cal.com
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - calendar.availability
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: true
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - execution
+  - truth
+  - integrity
+  notes: Say the calendar cannot be checked; do not invent a time; offer retry or human.
+- id: C07
+  title: Buyer asks for an external scheduling link
+  difficulty: intermediate
+  passport: appointment-karkyra-consult
+  locale: ru
+  tags:
+  - booking
+  - external_link
+  - policy
+  - ru
+  context:
+    stage: commit
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Скиньте Calendly, я сам выберу.
+  fixtures:
+  - tool: calendar.availability
+    operation: availability
+    status: ok
+    note: Two real slots available.
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - здесь
+    - в чате
+    - могу записать
+    - прямо
+    must_not_include:
+    - calendly.com
+    - cal.com
+    - вот ссылка
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - calendar.availability
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - efficiency
+  - consent
+  - execution
+  notes: Keep booking in chat unless the passport explicitly allows the link; offer real slots instead.

@@ -1,0 +1,226 @@
+{
+  "$comment": "Example envelopes for schema validation only. These are not live tool responses.",
+  "requests": [
+    {
+      "contract_version": "1.0.0",
+      "tool": "passport.lookup",
+      "request_id": "req_example_passport",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "params": {
+        "passport_id": "nimbus-notes-direct",
+        "offer_id": "nimbus-notes-team",
+        "locale": "ru",
+        "requested_fields": ["pricing.plans", "pricing.currency"]
+      }
+    },
+    {
+      "contract_version": "1.0.0",
+      "tool": "calendar.availability",
+      "request_id": "req_example_availability",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "params": {
+        "calendar_id": "karkyra-advisory-demo-calendar",
+        "duration_minutes": 30,
+        "timezone": "Asia/Bishkek",
+        "range_start": "2026-10-26T00:00:00+06:00",
+        "range_end": "2026-11-06T23:59:59+06:00"
+      }
+    },
+    {
+      "contract_version": "1.0.0",
+      "tool": "calendar.booking",
+      "request_id": "req_example_booking",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "idempotency_key": "book:tenant_demo:conv_demo:slot_demo",
+      "params": {
+        "operation": "create",
+        "calendar_id": "karkyra-advisory-demo-calendar",
+        "slot_id": "slot_demo",
+        "start": "2026-10-27T14:00:00+06:00",
+        "end": "2026-10-27T14:30:00+06:00",
+        "timezone": "Asia/Bishkek",
+        "attendee": { "name": "Demo Buyer", "email": "buyer@example.invalid" },
+        "consent": { "given": true, "at": "2026-10-23T10:00:00+06:00", "scope": "book this appointment" },
+        "purpose": "Operations Diagnostic Call"
+      }
+    },
+    {
+      "contract_version": "1.0.0",
+      "tool": "payments.invoicing",
+      "request_id": "req_example_payment",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "idempotency_key": "invoice:tenant_demo:conv_demo:annual:8",
+      "params": {
+        "operation": "create_invoice",
+        "offer_id": "nimbus-notes-team",
+        "plan_id": "annual",
+        "quantity": 8,
+        "amount": 960,
+        "currency": "USD",
+        "customer": { "name": "Demo Buyer", "email": "buyer@example.invalid" },
+        "consent": { "given": true, "at": "2026-10-23T10:00:00+06:00", "scope": "issue an invoice" },
+        "payment_method": "bank_transfer",
+        "due_days": 7
+      }
+    },
+    {
+      "contract_version": "1.0.0",
+      "tool": "crm.memory",
+      "request_id": "req_example_crm",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "idempotency_key": "state:tenant_demo:conv_demo:turn_1",
+      "params": {
+        "operation": "update_state",
+        "expected_version": 1,
+        "patch": { "stage": "discover" }
+      }
+    },
+    {
+      "contract_version": "1.0.0",
+      "tool": "human.handoff",
+      "request_id": "req_example_handoff",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "idempotency_key": "handoff:tenant_demo:conv_demo:authority",
+      "params": {
+        "operation": "create",
+        "reason_code": "authority",
+        "priority": "high",
+        "buyer": { "name": "Demo Buyer", "channel": "whatsapp", "language": "ru" },
+        "summary": "Buyer requests a discount above the agent's authority.",
+        "buyer_goal": "Get approval for a larger discount.",
+        "commitments_made": [],
+        "verified_facts": { "offer_id": "nimbus-notes-team" },
+        "open_questions": ["Can the discount be approved?"],
+        "risk_flags": [],
+        "recommended_next_action": "Sales lead reviews the request."
+      }
+    },
+    {
+      "contract_version": "1.0.0",
+      "tool": "messaging.media",
+      "request_id": "req_example_message",
+      "tenant_id": "tenant_demo",
+      "conversation_id": "conv_demo",
+      "actor": { "type": "agent", "id": "sales-agent" },
+      "idempotency_key": "msg:tenant_demo:conv_demo:followup_1",
+      "params": {
+        "operation": "send_text",
+        "channel": "whatsapp",
+        "to": "+996700000000",
+        "locale": "ru",
+        "purpose": "transactional",
+        "text": "Добрый день! Это согласованное напоминание по вашему вопросу.",
+        "consent": { "given": true, "at": "2026-10-23T10:00:00+06:00", "scope": "send the agreed follow-up" }
+      }
+    }
+  ],
+  "responses": [
+    {
+      "ok": true,
+      "status": "ok",
+      "tool": "passport.lookup",
+      "request_id": "req_example_passport",
+      "data": {
+        "passport_id": "nimbus-notes-direct",
+        "version": "1.0.0",
+        "passport_status": "approved",
+        "fields": {}
+      },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "passport-store", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": true,
+      "status": "no_slots",
+      "tool": "calendar.availability",
+      "request_id": "req_example_availability",
+      "data": { "calendar_id": "karkyra-advisory-demo-calendar", "slots": [] },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "calendar-provider", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": true,
+      "status": "confirmed",
+      "tool": "calendar.booking",
+      "request_id": "req_example_booking",
+      "data": { "booking_id": "bk_demo", "start": "2026-10-27T14:00:00+06:00", "end": "2026-10-27T14:30:00+06:00", "timezone": "Asia/Bishkek" },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "calendar-provider", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": true,
+      "status": "created",
+      "tool": "payments.invoicing",
+      "request_id": "req_example_payment",
+      "data": { "invoice_id": "inv_demo", "amount": 960, "currency": "USD", "status": "open" },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "payment-provider", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": true,
+      "status": "ok",
+      "tool": "crm.memory",
+      "request_id": "req_example_crm",
+      "data": { "conversation_id": "conv_demo", "version": 2 },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "crm", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": true,
+      "status": "created",
+      "tool": "human.handoff",
+      "request_id": "req_example_handoff",
+      "data": { "handoff_id": "ho_demo", "status": "queued", "automation_paused": true },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "handoff-service", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": true,
+      "status": "sent",
+      "tool": "messaging.media",
+      "request_id": "req_example_message",
+      "data": { "message_id": "msg_demo", "status": "sent" },
+      "error": null,
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "messaging-provider", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": false,
+      "status": "conflict",
+      "tool": "calendar.booking",
+      "request_id": "req_example_booking_conflict",
+      "data": { "reason": "slot_taken" },
+      "error": { "code": "conflict", "message": "The slot is no longer available.", "retryable": false },
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "calendar-provider", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": false,
+      "status": "timeout",
+      "tool": "payments.invoicing",
+      "request_id": "req_example_payment_timeout",
+      "data": { "payment_id": "pay_demo" },
+      "error": { "code": "timeout", "message": "Provider did not respond.", "retryable": true, "retry_after_ms": 2000 },
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "payment-provider", "contract_version": "1.0.0" }
+    },
+    {
+      "ok": false,
+      "status": "unauthorized",
+      "tool": "human.handoff",
+      "request_id": "req_example_handoff_unauthorized",
+      "data": null,
+      "error": { "code": "unauthorized", "message": "Queue is not available to this tenant.", "retryable": false },
+      "meta": { "server_time": "2026-10-23T10:00:00+06:00", "source": "handoff-service", "contract_version": "1.0.0" }
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/conversation-state.schema.json",
+  "title": "Sales Conversation State",
+  "description": "Minimal, source-labelled state for a universal sales conversation. Not a CRM schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "conversation_id",
+    "tenant_id",
+    "passport_id",
+    "channel",
+    "language",
+    "stage",
+    "fit",
+    "consent",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "conversation_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "passport_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "passport_version": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "channel": {
+      "type": "string",
+      "enum": ["whatsapp", "instagram", "telegram", "webchat", "email", "sms", "other"]
+    },
+    "language": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "enum": ["ru", "ky", "mixed", "en", "other"]
+        },
+        "detected": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ru", "ky", "mixed", "en", "other"]
+          },
+          "uniqueItems": true
+        },
+        "register": {
+          "type": "string",
+          "enum": ["formal", "neutral", "familiar"]
+        }
+      }
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "open",
+        "qualify",
+        "discover",
+        "value",
+        "resolve",
+        "commit",
+        "execute",
+        "confirm",
+        "nurture",
+        "closed_won",
+        "closed_lost",
+        "handoff"
+      ]
+    },
+    "buyer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "display_name": {"type": ["string", "null"], "maxLength": 160},
+        "company": {"type": ["string", "null"], "maxLength": 200},
+        "role": {"type": ["string", "null"], "maxLength": 160},
+        "timezone": {"type": ["string", "null"], "maxLength": 64},
+        "preferred_channel": {
+          "type": ["string", "null"],
+          "enum": ["whatsapp", "instagram", "telegram", "webchat", "email", "sms", "other", null]
+        }
+      }
+    },
+    "fit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["unknown", "qualified", "nurture", "not_fit", "insufficient_info"]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {"type": "string", "maxLength": 500},
+          "maxItems": 10
+        },
+        "disqualifiers": {
+          "type": "array",
+          "items": {"type": "string", "maxLength": 500},
+          "maxItems": 10
+        }
+      }
+    },
+    "needs": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "source", "status"],
+        "properties": {
+          "id": {"type": "string", "maxLength": 64},
+          "statement": {"type": "string", "maxLength": 1000},
+          "source": {
+            "type": "string",
+            "enum": ["buyer", "passport", "tool", "agent_inference"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["stated", "confirmed", "inferred", "retracted", "superseded"]
+          },
+          "impact": {"type": ["string", "null"], "maxLength": 1000},
+          "priority": {
+            "type": "string",
+            "enum": ["unknown", "low", "medium", "high", "critical"]
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "value", "source"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "budget",
+              "timeline",
+              "geography",
+              "language",
+              "compliance",
+              "technical",
+              "capacity",
+              "other"
+            ]
+          },
+          "value": {"type": "string", "maxLength": 500},
+          "source": {
+            "type": "string",
+            "enum": ["buyer", "passport", "tool", "agent_inference"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["current", "superseded", "uncertain"]
+          },
+          "notes": {"type": ["string", "null"], "maxLength": 1000}
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "items": {"type": "string", "maxLength": 500},
+          "maxItems": 15
+        },
+        "process": {"type": ["string", "null"], "maxLength": 2000},
+        "stakeholders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["role"],
+            "properties": {
+              "role": {"type": "string", "maxLength": 160},
+              "name": {"type": ["string", "null"], "maxLength": 160},
+              "influence": {
+                "type": "string",
+                "enum": ["unknown", "low", "medium", "high", "decision_maker"]
+              }
+            }
+          },
+          "maxItems": 20
+        },
+        "authority": {
+          "type": "string",
+          "enum": ["unknown", "buyer", "buyer_with_approval", "influencer", "not_authorized"]
+        },
+        "timeline": {"type": ["string", "null"], "maxLength": 500}
+      }
+    },
+    "objections": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "statement", "status"],
+        "properties": {
+          "id": {"type": "string", "maxLength": 64},
+          "type": {
+            "type": "string",
+            "enum": [
+              "price",
+              "budget",
+              "timing",
+              "trust",
+              "fit",
+              "authority",
+              "status_quo",
+              "competitor",
+              "risk",
+              "need",
+              "stall",
+              "other"
+            ]
+          },
+          "statement": {"type": "string", "maxLength": 1000},
+          "status": {
+            "type": "string",
+            "enum": ["open", "resolved", "accepted_no", "deferred", "escalated"]
+          },
+          "resolution": {"type": ["string", "null"], "maxLength": 2000},
+          "evidence_used": {
+            "type": "array",
+            "items": {"type": "string", "maxLength": 300},
+            "maxItems": 10
+          },
+          "buyer_response": {"type": ["string", "null"], "maxLength": 1000}
+        }
+      }
+    },
+    "next_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "none",
+            "answer_question",
+            "send_info",
+            "proposal",
+            "book",
+            "pay",
+            "human",
+            "follow_up",
+            "close"
+          ]
+        },
+        "description": {"type": ["string", "null"], "maxLength": 1000},
+        "confirmed_by_buyer": {"type": "boolean"},
+        "due_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["follow_up", "booking", "payment", "data_sharing", "marketing"],
+      "properties": {
+        "follow_up": {"$ref": "#/$defs/consentValue"},
+        "booking": {"$ref": "#/$defs/consentValue"},
+        "payment": {"$ref": "#/$defs/consentValue"},
+        "data_sharing": {"$ref": "#/$defs/consentValue"},
+        "marketing": {"$ref": "#/$defs/consentValue"}
+      }
+    },
+    "tool_results": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tool", "status", "checked_at"],
+        "properties": {
+          "tool": {"type": "string", "maxLength": 160},
+          "status": {
+            "type": "string",
+            "enum": ["pending", "confirmed", "failed", "unknown"]
+          },
+          "id": {"type": ["string", "null"], "maxLength": 200},
+          "idempotency_key": {"type": ["string", "null"], "maxLength": 200},
+          "checked_at": {"type": "string", "format": "date-time"},
+          "summary": {"type": ["string", "null"], "maxLength": 1000},
+          "error_code": {"type": ["string", "null"], "maxLength": 100}
+        }
+      }
+    },
+    "promises": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "owner", "status"],
+        "properties": {
+          "text": {"type": "string", "maxLength": 1000},
+          "owner": {"type": "string", "enum": ["agent", "human", "business"]},
+          "due_at": {"type": ["string", "null"], "format": "date-time"},
+          "status": {
+            "type": "string",
+            "enum": ["open", "kept", "missed", "cancelled"]
+          }
+        }
+      }
+    },
+    "handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["none", "requested", "created", "accepted", "failed", "completed"]
+        },
+        "reason_code": {
+          "type": ["string", "null"],
+          "enum": [
+            "explicit_human_request",
+            "out_of_authority",
+            "out_of_capability",
+            "tool_failure",
+            "legal_complexity",
+            "safety",
+            "abuse",
+            "fraud",
+            "repeated_misunderstanding",
+            "passport_rule",
+            null
+          ]
+        },
+        "handoff_id": {"type": ["string", "null"], "maxLength": 200}
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {"type": "string", "maxLength": 1000}
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "consentValue": {
+      "type": "string",
+      "enum": ["granted", "denied", "unknown", "withdrawn"]
+    }
+  }
+}

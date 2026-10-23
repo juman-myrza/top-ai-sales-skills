@@ -1,0 +1,289 @@
+schema_version: 1.0.0
+category: multilingual-multiturn
+scenarios:
+- id: M01
+  title: Russian to Kyrgyz switch
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: ky
+  tags:
+  - language
+  - code_switch
+  - ky
+  context:
+    stage: open
+    known_facts:
+      team_size: 8
+    consent: {}
+  turns:
+  - role: buyer
+    text: Сколько стоит для 8 человек?
+  - role: buyer
+    text: Кыргызча жазсаңыз болобу? Канча турат?
+  fixtures: []
+  expected:
+    language: ky
+    must_include_all:
+    - '12'
+    - USD
+    must_include_any:
+    - айына
+    - ай
+    - адам
+    - үчүн
+    must_not_include:
+    - стоимость
+    - руб
+    - сом
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - language
+  - truth
+  - efficiency
+  notes: Switch fully to Kyrgyz on the latest turn; preserve the exact price. Kyrgyz is a draft pending native review.
+- id: M02
+  title: Natural Russian-Kyrgyz mix
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: mixed
+  tags:
+  - language
+  - code_switch
+  - mixed
+  context:
+    stage: open
+    known_facts:
+      team_size: 5
+    consent: {}
+  turns:
+  - role: buyer
+    text: Салам! Нужен доступ для 5 менеджеров, сколько будет?
+  fixtures: []
+  expected:
+    language: mixed
+    must_include_all:
+    - '12'
+    - USD
+    must_include_any:
+    - менеджер
+    - айына
+    - үчүн
+    - баштапкы
+    must_not_include:
+    - сом
+    - руб
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - language
+  - truth
+  - efficiency
+  notes: Mirror the buyer's natural mix without artificial purity or folk performance.
+- id: M03
+  title: Buyer contradicts team size
+  difficulty: advanced
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - multi_turn
+  - contradiction
+  - state
+  - ru
+  context:
+    stage: discover
+    known_facts:
+      team_size: 3
+    consent: {}
+  turns:
+  - role: buyer
+    text: У нас 3 человека.
+  - role: buyer
+    text: У нас 40 менеджеров. Так сколько будет?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '3'
+    - '40'
+    must_include_any:
+    - уточн
+    - ранее
+    - сейчас
+    - какая цифра
+    - какой
+    must_not_include: []
+    must_not_regex:
+    - \b480\b
+    - (?i)40\s*(пользовател|сотрудник).{0,20}12
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - diagnosis
+  - truth
+  - efficiency
+  notes: Name the discrepancy neutrally and ask which figure is current before quoting a 40-user total.
+- id: M04
+  title: Buyer changes the timeline
+  difficulty: advanced
+  passport: direct-sale-nimbus-notes
+  locale: ru
+  tags:
+  - multi_turn
+  - timeline
+  - state
+  - ru
+  context:
+    stage: discover
+    known_facts:
+      timeline: January
+    consent: {}
+  turns:
+  - role: buyer
+    text: Нужно с января.
+  - role: buyer
+    text: Передумали, нужно срочно, до конца месяца.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - срочно
+    - конец месяца
+    - успе
+    - провер
+    - команд
+    must_not_include:
+    - доплат
+    - за срочность
+    - скидка за срочность
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - diagnosis
+  - truth
+  - consent
+  notes: Update the timeline, confirm feasibility without inventing an expedite fee or false scarcity.
+- id: M05
+  title: 'Unsupported language: Uzbek'
+  difficulty: intermediate
+  passport: direct-sale-nimbus-notes
+  locale: other
+  tags:
+  - language
+  - unsupported
+  - honesty
+  context:
+    stage: open
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Bu xizmat qancha turadi?
+  fixtures: []
+  expected:
+    language: other
+    must_include_all: []
+    must_include_any:
+    - узбек
+    - русск
+    - кыргыз
+    - человек
+    must_not_include: []
+    must_not_regex:
+    - \b12\b
+    - USD
+    max_questions: 1
+    required_tool_calls: []
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - language
+  - integrity
+  - truth
+  notes: Do not fake understanding or machine-translate a price. Offer Russian, Kyrgyz, or a human interpreter.
+- id: M06
+  title: Buyer tests Kyrgyz capability
+  difficulty: basic
+  passport: direct-sale-nimbus-notes
+  locale: ky
+  tags:
+  - language
+  - honesty
+  - ky
+  context:
+    stage: open
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Вы вообще кыргызча сүйлөйсүзбү? Если нет, скажите честно.
+  fixtures: []
+  expected:
+    language: ky
+    must_include_all: []
+    must_include_any:
+    - кыргызча
+    - жаза алам
+    - түшүнөм
+    - ооба
+    must_not_include:
+    - носитель
+    - native
+    - свободно
+    - идеально
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls: []
+    forbidden_tool_calls: []
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: true
+  rubric_focus:
+  - language
+  - integrity
+  - consent
+  notes: Be honest about capability, continue in Kyrgyz without claiming native fluency.

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+*.pem
+*.key
+
+# Test output and recorded responses may contain personal data
+tests/responses/
+tests/output/
+*.jsonl
+!tests/fixtures/*.jsonl
+
+# Hermes and editor state
+.hermes/
+.idea/
+.vscode/
+.DS_Store
+
+# Temporary files
+*.swp
+*.tmp
+*~

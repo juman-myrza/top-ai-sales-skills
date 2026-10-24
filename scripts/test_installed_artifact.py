@@ -131,6 +131,17 @@ def main() -> int:
         failures.append("INSTALL-MANIFEST.json is missing")
     else:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        shared = manifest.get("shared", {})
+        if not shared.get("core_contract_version"):
+            failures.append("manifest does not record shared.core_contract_version")
+        if not shared.get("system_prompt_snippet_sha256"):
+            failures.append("manifest does not record the system-prompt snippet hash")
+        for relative in ("core/CORE-BEHAVIOR-CONTRACT.md", "product-passport/passport.schema.json"):
+            recorded = shared.get("files", {}).get(relative)
+            if not recorded:
+                failures.append(f"manifest does not record a hash for {relative}")
+            elif recorded != hashlib.sha256((ROOT / relative).read_bytes()).hexdigest():
+                failures.append(f"manifest hash for {relative} does not match the source repository")
         for name in EXPECTED:
             entry = manifest.get("skills", {}).get(name)
             if not entry:

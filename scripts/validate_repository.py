@@ -781,6 +781,37 @@ def check_contract_examples() -> None:
                     location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
                     record("contract-request", f"{contract.relative_to(ROOT)}: {location}: {exc.message}")
 
+    # The documented tool examples must carry the load-bearing params the
+    # contracts require. The envelope schema deliberately leaves params open,
+    # so without this the examples can silently drift from the contracts.
+    REQUIRED_TOOL_PARAMS = {
+        "calendar.booking": ["consent"],
+        "payments.invoicing": ["quote_id", "quote_version", "terms_snapshot", "consent"],
+        "messaging.media": ["consent"],
+    }
+    examples = load_json(ROOT / "tools" / "schemas" / "example-envelopes.json") or {}
+    for index, request in enumerate(examples.get("requests", [])):
+        tool = request.get("tool")
+        params = request.get("params", {}) if isinstance(request, dict) else {}
+        for required in REQUIRED_TOOL_PARAMS.get(tool, []):
+            bump()
+            if required not in params:
+                record("tool-param", f"example-envelopes request[{index}] {tool}: missing required param '{required}'")
+        consent = params.get("consent")
+        if consent is not None:
+            bump()
+            if not isinstance(consent, dict) or "status" not in consent:
+                record(
+                    "tool-param",
+                    f"example-envelopes request[{index}] {tool}: consent must be an object with 'status' (the retired 'given' shorthand is not valid)",
+                )
+
+    # No document may reintroduce the retired consent shorthand.
+    for path in [*sorted((ROOT / "tools").rglob("*.md")), *sorted((ROOT / "tools").rglob("*.json"))]:
+        bump()
+        if re.search(r'"given"\s*:', path.read_text(encoding="utf-8")):
+            record("tool-param", f"{path.relative_to(ROOT)}: uses the retired consent 'given' shorthand")
+
     # The documented CRM update patch must merge into the canonical state and validate.
     crm_request = extract_json_block(ROOT / "tools" / "contracts" / "crm-memory.md", "## 4. Request: update state")
     if isinstance(crm_request, dict):

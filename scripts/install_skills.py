@@ -161,6 +161,36 @@ def git_commit() -> str | None:
     return commit if result.returncode == 0 and commit else None
 
 
+def core_contract_version() -> str | None:
+    """Read the declared version from the core behavior contract, if present."""
+    path = ROOT / "core" / "CORE-BEHAVIOR-CONTRACT.md"
+    if not path.is_file():
+        return None
+    match = re.search(r"\*\*Version:\*\*\s*([0-9]+\.[0-9]+\.[0-9]+)", path.read_text(encoding="utf-8"))
+    return match.group(1) if match else None
+
+
+def shared_manifest() -> dict:
+    """Version and hash the shared resources so an evaluation can pin them."""
+    tracked = [
+        "core/CORE-BEHAVIOR-CONTRACT.md",
+        "core/SYSTEM-PROMPT-SNIPPET.md",
+        "core/conversation-state.schema.json",
+        "product-passport/passport.schema.json",
+        "tools/schemas/tool-envelope.schema.json",
+    ]
+    files = {}
+    for relative in tracked:
+        path = ROOT / relative
+        if path.is_file():
+            files[relative] = sha256(path)
+    return {
+        "core_contract_version": core_contract_version(),
+        "system_prompt_snippet_sha256": files.get("core/SYSTEM-PROMPT-SNIPPET.md"),
+        "files": files,
+    }
+
+
 def build_manifest(skill_dirs: dict[str, Path], target: Path) -> dict:
     return {
         "manifest_version": "1.0.0",
@@ -169,6 +199,7 @@ def build_manifest(skill_dirs: dict[str, Path], target: Path) -> dict:
         "source_commit": git_commit(),
         "target": str(target),
         "bundle_dirs": BUNDLE_DIRS,
+        "shared": shared_manifest(),
         "skills": {
             name: {
                 "path": str((Path("skills") / "sales" / name).as_posix()),

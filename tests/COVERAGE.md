@@ -177,7 +177,7 @@ Every skill has at least two scenarios. The corpus does not prove that any skill
 ## 5. Deterministic vs human review
 
 - **Deterministic:** 57 scenarios. All have required/forbidden phrase checks, question limits, and tool-call expectations.
-- **Human review flagged:** 17 scenarios, mainly Kyrgyz language quality, negotiation nuance, contradictions, and integrity tone.
+- **Human review flagged:** 18 scenarios, mainly Kyrgyz language quality, negotiation nuance, contradictions, integrity tone, and the entitlement scenario.
 - **Not covered by deterministic checks:** whether the response is genuinely empathetic, whether a paraphrase is natural, whether a proof claim is legally approved, whether a handoff summary is complete enough for a human.
 
 A deterministic pass is necessary, not sufficient.

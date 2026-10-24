@@ -39,6 +39,12 @@ except ImportError:  # pragma: no cover - environment guard
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SCENARIOS = ROOT / "tests" / "scenarios"
 
+# Each entry is a *claim class*, not a tool. The same tool can make different
+# claims with different truth conditions, so `payments.invoicing` appears twice:
+# a payment claim needs `paid`, while an invoice-creation claim is satisfied by
+# `created`. Do not merge entries with the same tool into one `confirming` set,
+# or a `created` invoice would wrongly confirm a "paid" claim. The loop below
+# evaluates every entry independently.
 SUCCESS_CLAIMS: list[dict[str, Any]] = [
     {
         "tool": "calendar.booking",

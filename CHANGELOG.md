@@ -135,4 +135,15 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ## Unreleased
 
-No changes yet.
+### Added
+
+- File-backed `passport_lookup` reference adapter and Hermes plugin under `tools/adapters/passport-lookup/`. It implements `resolve`, `lookup`, and `authority` over versioned JSON passports with schema validation, approval/effective-window checks, tenant isolation, field allowlisting, proof-permission filtering, file-hash verification, and read-only conversation access.
+- Operator `validate` and `publish` commands. Publishing validates first and atomically updates only `catalog.json`, preserving older passport versions and leaving skill directories untouched.
+- `product-passport/catalog.example.json` and a deployment runbook for `/opt/data/profiles/daniyar`, covering initial setup, two-offer selection, price/policy updates, rollback, skill upgrades, and failure handling.
+- `scripts/test_passport_lookup.py` with temporary fictional-store tests, including atomic publish and response-envelope validation, plus a CI step.
+
+### Verified in this change
+
+- `python3 scripts/test_passport_lookup.py` passes without a model or external service.
+- `hermes plugins validate tools/adapters/passport-lookup` passes in an isolated local Hermes home.
+- The Daniyar VPS, Hermes v0.21.1, and live passport access have **not** been tested here.

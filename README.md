@@ -252,7 +252,8 @@ What the tests can detect: missing required facts or phrases, forbidden claims, 
 | [`core/`](core/) | Behavior contract, conflict resolution, conversation state, system-prompt snippet |
 | [`skills/sales/`](skills/sales/) | Nine skills plus language, cadence, and escalation references |
 | [`product-passport/`](product-passport/) | Template, JSON Schema, three fictional examples |
-| [`tools/`](tools/) | Contracts, envelope schema, example envelopes |
+| [`tools/`](tools/) | Contracts, envelope schema, example envelopes, and the file-backed passport lookup adapter |
+| [`tools/adapters/passport-lookup/`](tools/adapters/passport-lookup/) | Read-only versioned JSON passport adapter and Hermes plugin |
 | [`tests/`](tests/) | Scenario corpus, rubric, coverage, fixtures |
 | [`scripts/`](scripts/) | Validation, evaluation, rendering, isolated loading, installation |
 | [`research/`](research/) | Source register, claim-evidence matrix, decisions, open-source audit |
@@ -263,6 +264,7 @@ Key documents:
 - [System Prompt Snippet](core/SYSTEM-PROMPT-SNIPPET.md)
 - [Product Passport README](product-passport/README.md)
 - [Tool Contracts](tools/README.md)
+- [Passport Lookup Adapter and Deployment Runbook](tools/adapters/passport-lookup/README.md)
 - [Research: Source Register](research/source-register.md)
 - [Research: Claim-Evidence Matrix](research/claim-evidence-matrix.md)
 - [Research: Decisions and Tradeoffs](research/decisions-and-tradeoffs.md)

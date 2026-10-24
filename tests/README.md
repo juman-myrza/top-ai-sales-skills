@@ -14,6 +14,7 @@ This directory contains a **scenario corpus and deterministic checks**, not proo
 | 4. Response checks | A recorded agent response satisfies deterministic rules (required phrases, forbidden claims, question count, tool calls, tool status) | `scripts/evaluate_responses.py` | Implemented; requires a response file |
 | 4a. Checker regression | Nine cases pin known checker false positives and false negatives | `scripts/test_checker.py` | Implemented, no model |
 | 4b. Installed artifact | A skill installed alone still resolves its core contract, contracts, and passport schema | `scripts/test_installed_artifact.py` | Implemented, no model |
+| 4c. Passport adapter | The file-backed `passport_lookup` selects the right offer, enforces approval/tenant/hash rules, and publishes atomically | `scripts/test_passport_lookup.py` | Implemented, no model; not verified against the live profile |
 | 5. Rubric review | Truth, consent, diagnosis, language, integrity, execution quality | human or LLM judge | Rubric written; **not run** |
 | 6. Live tool integration | Real calendar/payment/CRM/messaging adapters | adapter tests | **Not implemented** |
 | 7. Conversion/retention impact | Whether the agent improves revenue without harm | production experiment | **Not run** |

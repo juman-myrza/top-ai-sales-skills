@@ -1,6 +1,6 @@
 # Scripts
 
-Seven small tools for validating, testing, rendering, and installing the repository. None of them calls a language model, a sales tool, or a production API. Only `install_skills.py --apply` writes outside a temporary directory.
+Eight small tools for validating, testing, rendering, and installing the repository. None of them calls a language model, a sales tool, or a production API. Only `install_skills.py --apply` writes outside a temporary directory.
 
 The repository root also ships `install.sh` and `uninstall.sh`: thin POSIX wrappers around `install_skills.py` and the install manifest. They default to a dry run, support `--apply`, and can bootstrap from a clone when piped (`curl … | sh -s -- --apply`). The round-trip is checked by [`test_install_uninstall.sh`](test_install_uninstall.sh). See the [README install and uninstall sections](../README.md#install).
 
@@ -17,6 +17,7 @@ python3 -m pip install -r requirements-dev.txt
 | [`render_scenarios.py`](render_scenarios.py) | scenarios | optional file | no |
 | [`test_checker.py`](test_checker.py) | scenarios | nothing | no |
 | [`test_installed_artifact.py`](test_installed_artifact.py) | skills, validator | temporary directory | no |
+| [`test_passport_lookup.py`](test_passport_lookup.py) | passport adapter + temporary fictional store | temporary directory | no |
 | [`test_hermes_loading.py`](test_hermes_loading.py) | skills | temporary `HERMES_HOME` | yes, `hermes skills list` |
 | [`install_skills.py`](install_skills.py) | skills, validator | target Hermes home, only with `--apply` | no |
 | [`test_install_uninstall.sh`](test_install_uninstall.sh) | root wrappers | temporary home | no |

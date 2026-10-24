@@ -111,7 +111,7 @@ python3 scripts/test_installed_artifact.py  # a skill installed alone resolves i
 python3 scripts/test_hermes_loading.py
 ```
 
-The script creates a temporary `HERMES_HOME`, copies the nine skills into `skills/sales/`, and runs `hermes skills list --source local`. It never reads or writes `~/.hermes`. Hermes may spend a few minutes preparing dependencies the first time it sees a new data root.
+The script creates a temporary `HERMES_HOME`, installs the nine skills through the real installer, and runs `hermes skills list --source local`. It never reads or writes `~/.hermes`. Hermes may spend a few minutes preparing dependencies the first time it sees a new data root.
 
 ### Install
 
@@ -178,20 +178,69 @@ curl -fsSL https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/mai
 
 The uninstaller needs only the target home, not the repository. Backups created by the installer (`.backup-*`) are left in place unless `--purge-backups` is passed. It never touches other skills in the target home.
 
+### Update
+
+Updating the installed skills is independent of the passports and the plugin. Pull the new version and reinstall with `--force`:
+
+```bash
+git pull
+./install.sh --target ~/.hermes/profiles/daniyar --apply --force
+```
+
+- Without `--force` existing skill directories are skipped, so nothing changes.
+- With `--force` each replaced directory is copied to `.backup-<timestamp>` inside `skills/sales/` first (unless `--no-backup`).
+- Passports (`passports/`) and the plugin (`plugins/passport-lookup/`) are **outside** the installer's scope and are never overwritten, deleted, or replaced by an update.
+- `INSTALL-MANIFEST.json` records the source commit, the core contract version, and file hashes, so you can see what is active after an update.
+- Remove accumulated backups with `./uninstall.sh --target <profile> --apply --purge-backups`, or delete them manually.
+
 > Do not install into a live production profile until you have reviewed the [tool limitations](tools/README.md) and run the scenarios against your own model and passport.
 
 ---
 
 ## Product passport workflow
 
-1. Copy [`product-passport/TEMPLATE.md`](product-passport/TEMPLATE.md) and fill one passport per offer.
-2. Encode it as JSON matching [`passport.schema.json`](product-passport/passport.schema.json).
-3. Mark every material fact `verified`, `estimated`, or `unknown`. Never fill an unknown with a guess.
-4. Have finance, legal, operations, and a native Kyrgyz/Russian speaker review the relevant sections.
-5. Approve the version; expose it through the `passport.lookup` contract.
-6. Re-validate and re-run the scenario corpus after every material change.
+The universal skills contain no business facts. One JSON passport per offer supplies them. A passport has two lives: an **authoring draft** (this repository, or wherever you keep the source) and the **authoritative copy** in the Hermes profile's persistent store.
 
-Two complete fictional examples show the format:
+### 1. Author and approve
+
+1. Copy [`product-passport/TEMPLATE.md`](product-passport/TEMPLATE.md) and fill one passport per offer, then encode it as JSON matching [`passport.schema.json`](product-passport/passport.schema.json).
+2. Mark every material fact `verified`, `estimated`, or `unknown`. Never fill an unknown with a guess; list open decisions in `unresolved`.
+3. Have the relevant reviewers (finance, legal, operations, native Kyrgyz/Russian speaker) check the relevant sections.
+4. Keep it `draft` until the commercial decisions are approved. Ready-made drafts live under [`tenants/<tenant>/passports/`](tenants/) — for Daniyar, [`tenants/daniyar/passports/`](tenants/daniyar/passports/offers/).
+5. To release an offer: set `status: approved` plus `approved_by`, `approved_at`, and `effective_from`.
+
+### 2. Put filled passports where the running agent reads them
+
+Authoritative passports live in a **persistent store outside the skills**, so that installing or updating skills never overwrites them. For Daniyar:
+
+```text
+/opt/data/profiles/daniyar/              # the Hermes profile home
+├── passports/                           # authoritative business data (NOT touched by install.sh)
+│   ├── schema/passport.schema.json
+│   ├── offers/<offer_id>/<version>.json
+│   └── catalog.json                     # created / updated by the publish command
+├── plugins/passport-lookup/             # the read-only adapter plugin
+└── skills/sales/                        # installer-managed skills
+```
+
+Copy the drafts into the store on the VPS:
+
+```bash
+export DANIYAR_HOME=/opt/data/profiles/daniyar
+export DANIYAR_PASSPORT_ROOT="$DANIYAR_HOME/passports"
+mkdir -p "$DANIYAR_PASSPORT_ROOT/offers"
+cp -a tenants/daniyar/passports/offers/. "$DANIYAR_PASSPORT_ROOT/offers/"
+```
+
+Then configure the `passport_lookup` plugin, `validate`, and `publish` each offer. Full storage layout, deployment, publish, rollback, failure behavior, and the privacy/security notes are in the [passport-lookup runbook](tools/adapters/passport-lookup/README.md). Source-draft and approval rules are in [`tenants/README.md`](tenants/README.md).
+
+Do **not** put authoritative passports inside `product-passport/` or a skill's `references/shared/` — those are bundled into every installed skill and are replaced on update.
+
+### 3. Change a price or policy without reinstalling
+
+Add a new version file, then `validate` and `publish` it (see the runbook). This changes only `catalog.json` and keeps older versions for rollback. No skill reinstall is needed.
+
+Three complete fictional examples show the format:
 
 - [Direct-sale example](product-passport/examples/direct-sale-nimbus-notes.md) — a digital product bought without a meeting.
 - [Appointment-booking example](product-passport/examples/appointment-karkyra-consult.md) — a consult booked in chat.
@@ -219,7 +268,7 @@ Every request and response uses the [shared envelope schema](tools/schemas/tool-
 
 > **No claim of completion without a confirming tool result.**
 
-All three passport examples mark every binding `not_implemented`. No adapter, credential, webhook, CRM, calendar, or payment provider is included. Claims that an integration works would be false.
+The fictional passport examples mark every binding `not_implemented`. `passport.lookup` now also has a local, file-backed reference adapter ([`tools/adapters/passport-lookup/`](tools/adapters/passport-lookup/)); the other six contracts remain specifications only. No credential, webhook, CRM, calendar, or payment provider is included. Claims that a live integration works would be false.
 
 ---
 
@@ -252,7 +301,9 @@ What the tests can detect: missing required facts or phrases, forbidden claims, 
 | [`core/`](core/) | Behavior contract, conflict resolution, conversation state, system-prompt snippet |
 | [`skills/sales/`](skills/sales/) | Nine skills plus language, cadence, and escalation references |
 | [`product-passport/`](product-passport/) | Template, JSON Schema, three fictional examples |
-| [`tools/`](tools/) | Contracts, envelope schema, example envelopes |
+| [`tools/`](tools/) | Contracts, envelope schema, example envelopes, and the file-backed passport lookup adapter |
+| [`tools/adapters/passport-lookup/`](tools/adapters/passport-lookup/) | Read-only versioned JSON passport adapter and Hermes plugin |
+| [`tenants/`](tenants/) | Tenant business passports as source drafts (outside the bundled skill docs) |
 | [`tests/`](tests/) | Scenario corpus, rubric, coverage, fixtures |
 | [`scripts/`](scripts/) | Validation, evaluation, rendering, isolated loading, installation |
 | [`research/`](research/) | Source register, claim-evidence matrix, decisions, open-source audit |
@@ -263,6 +314,8 @@ Key documents:
 - [System Prompt Snippet](core/SYSTEM-PROMPT-SNIPPET.md)
 - [Product Passport README](product-passport/README.md)
 - [Tool Contracts](tools/README.md)
+- [Passport Lookup Adapter and Deployment Runbook](tools/adapters/passport-lookup/README.md)
+- [Tenant Passport Drafts](tenants/README.md)
 - [Research: Source Register](research/source-register.md)
 - [Research: Claim-Evidence Matrix](research/claim-evidence-matrix.md)
 - [Research: Decisions and Tradeoffs](research/decisions-and-tradeoffs.md)

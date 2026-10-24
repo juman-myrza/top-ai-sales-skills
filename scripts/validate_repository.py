@@ -201,7 +201,17 @@ REQUIRED_PATHS = [
     "product-passport/examples/appointment-karkyra-consult.md",
     "product-passport/examples/consumer-course-example.json",
     "product-passport/examples/consumer-course-example.md",
+    "product-passport/catalog.example.json",
     "tools/README.md",
+    "tools/adapters/README.md",
+    "tools/adapters/passport-lookup/README.md",
+    "tools/adapters/passport-lookup/__init__.py",
+    "tools/adapters/passport-lookup/plugin.yaml",
+    "tools/adapters/passport-lookup/passport_lookup.py",
+    "tools/adapters/passport-lookup/requirements.txt",
+    "tenants/README.md",
+    "tenants/daniyar/passports/offers/ai-agent-implementation/1.0.0.json",
+    "tenants/daniyar/passports/offers/ai-agent-training/1.0.0.json",
     "tools/schemas/tool-envelope.schema.json",
     "tools/schemas/example-envelopes.json",
     "tools/contracts/passport-lookup.md",
@@ -226,6 +236,7 @@ REQUIRED_PATHS = [
     "scripts/README.md",
     "scripts/test_installed_artifact.py",
     "scripts/test_install_uninstall.sh",
+    "scripts/test_passport_lookup.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -428,6 +439,85 @@ def check_passports() -> None:
     bump()
     if "approval" not in template.lower():
         record("passport-template", "TEMPLATE.md has no approval checklist")
+
+
+def check_tenant_passports() -> None:
+    """Validate tenant passport drafts (outside examples/) against the schema.
+
+    These are business-data source drafts; they must not live under
+    product-passport/ (which is bundled into skills).
+    """
+    schema = load_json(ROOT / "product-passport" / "passport.schema.json")
+    if schema is None:
+        return
+    try:
+        validator = Draft202012Validator(schema, format_checker=FormatChecker())
+    except jsonschema.SchemaError as exc:
+        record("tenant-passport", f"invalid schema: {exc.message}")
+        return
+
+    tenant_root = ROOT / "tenants"
+    bump()
+    if not tenant_root.is_dir():
+        record("tenant-passport", "tenants/ is missing")
+        return
+
+    found = sorted(tenant_root.rglob("offers/*/*.json"))
+    bump()
+    if not found:
+        warn("tenant-passport", "no tenant passport drafts found under tenants/")
+    for path in found:
+        data = load_json(path)
+        if data is None:
+            continue
+        bump()
+        errors = sorted(validator.iter_errors(data), key=lambda e: list(e.absolute_path))
+        for exc in errors:
+            location = ".".join(str(p) for p in exc.absolute_path) or "<root>"
+            record("tenant-passport", f"{path.relative_to(ROOT)}: {location}: {exc.message}")
+        bump()
+        offer_id = path.parent.name
+        version = path.stem
+        if data.get("offer", {}).get("id") != offer_id:
+            record("tenant-passport", f"{path.relative_to(ROOT)}: offer.id must match directory {offer_id!r}")
+        if data.get("passport_id") != offer_id:
+            record("tenant-passport", f"{path.relative_to(ROOT)}: passport_id must match directory {offer_id!r} for the file-backed adapter")
+        if data.get("version") != version:
+            record("tenant-passport", f"{path.relative_to(ROOT)}: version must match filename {version!r}")
+        bump()
+        if data.get("status") == "draft" and data.get("metadata", {}).get("fictional") is True:
+            record("tenant-passport", f"{path.relative_to(ROOT)}: a real tenant draft must not be marked fictional")
+
+
+def check_passport_catalog() -> None:
+    path = ROOT / "product-passport" / "catalog.example.json"
+    catalog = load_json(path)
+    if not isinstance(catalog, dict):
+        return
+    bump()
+    if not isinstance(catalog.get("tenant_id"), str) or not catalog["tenant_id"]:
+        record("passport-catalog", "tenant_id must be a non-empty string")
+    offers = catalog.get("offers")
+    bump()
+    if not isinstance(offers, dict) or not offers:
+        record("passport-catalog", "offers must be a non-empty object")
+        return
+    for offer_id, entry in offers.items():
+        bump()
+        if not isinstance(entry, dict):
+            record("passport-catalog", f"{offer_id}: entry must be an object")
+            continue
+        if entry.get("passport_id") != offer_id:
+            record("passport-catalog", f"{offer_id}: passport_id must match the catalog key")
+        version = entry.get("current_version")
+        if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", version):
+            record("passport-catalog", f"{offer_id}: current_version must be semver")
+        relative = entry.get("file")
+        if not isinstance(relative, str) or relative.startswith(("/", "~")) or ".." in Path(relative).parts:
+            record("passport-catalog", f"{offer_id}: file must be a safe relative path")
+        digest = entry.get("sha256")
+        if digest is not None and (not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest)):
+            record("passport-catalog", f"{offer_id}: sha256 must be null or a 64-character lowercase hash")
 
 
 def check_tool_schemas() -> None:
@@ -947,6 +1037,8 @@ def main() -> int:
     check_required_paths()
     check_skills()
     check_passports()
+    check_passport_catalog()
+    check_tenant_passports()
     check_tool_schemas()
     check_scenarios()
     check_state_schema()

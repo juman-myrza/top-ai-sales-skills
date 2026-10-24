@@ -1,0 +1,11 @@
+name: passport-lookup
+version: 0.1.0
+description: "Read approved, versioned product-passport facts from a persistent JSON store. Returns selected fields with passport_id and version; no business data is bundled."
+author: Jumanazar
+kind: standalone
+platforms:
+  - linux
+provides_tools:
+  - passport_lookup
+python_dependencies:
+  - "jsonschema>=4.10,<5"

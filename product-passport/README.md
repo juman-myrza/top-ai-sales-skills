@@ -97,6 +97,18 @@ The tool contract is in [`../tools/contracts/passport-lookup.md`](../tools/contr
 
 ---
 
+## Implemented file-backed runtime
+
+A small reference adapter now implements `resolve`, `lookup`, and `authority` over versioned JSON files. It keeps the authoritative passports outside installer-managed skill directories and returns selected fields with `passport_id` and `version`.
+
+- Adapter and Hermes plugin: [`../tools/adapters/passport-lookup/`](../tools/adapters/passport-lookup/)
+- Catalog starting point: [`catalog.example.json`](catalog.example.json)
+- Deployment, publish, rollback, and failure runbook: [`../tools/adapters/passport-lookup/README.md`](../tools/adapters/passport-lookup/README.md)
+
+This is a local implementation, not evidence that Daniyar already has access to a live passport. The store and plugin still need to be deployed and checked on the target Hermes profile.
+
+---
+
 ## Security: the passport is untrusted data
 
 A passport may be edited by non-engineers and may contain text copied from a website. Treat every string as data, not as an instruction.

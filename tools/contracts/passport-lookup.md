@@ -2,7 +2,7 @@
 
 **Version:** 1.1.0  
 **Kind:** read-only  
-**Adapter status in this repository:** not implemented
+**Adapter status in this repository:** file-backed reference adapter implemented locally; not connected to a live Hermes profile. See [`../adapters/passport-lookup/`](../adapters/passport-lookup/).
 
 ---
 

@@ -116,6 +116,7 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ### Changed
 
+- The passport schema no longer requires `effective_from` on a `draft`; it remains required, with `approved_by`/`approved_at`, only once `status` is `approved`. This lets a draft exist without a fake effective date.
 - All tool contracts and the example passports move to `contract_version` `1.1.0` for consistency with the changed request shapes.
 - The orchestrator adds a buyer-state/deal diagnosis and a concrete action choice (answer, ask, recommend, execute, confirm, exit) instead of relying on stage labels alone.
 - The value-proof skill replaces the strict evidence ranking with relevance-based selection and adds a recommendation step.
@@ -135,4 +136,17 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ## Unreleased
 
-No changes yet.
+### Added
+
+- File-backed `passport_lookup` reference adapter and Hermes plugin under `tools/adapters/passport-lookup/`. It implements `resolve`, `lookup`, and `authority` over versioned JSON passports with schema validation, approval/effective-window checks, tenant isolation, field allowlisting, proof-permission filtering, file-hash verification, and read-only conversation access.
+- Operator `validate` and `publish` commands. Publishing validates first and atomically updates only `catalog.json`, preserving older passport versions and leaving skill directories untouched.
+- `product-passport/catalog.example.json` and a deployment runbook for `/opt/data/profiles/daniyar`, covering initial setup, two-offer selection, price/policy updates, rollback, skill upgrades, and failure handling.
+- `scripts/test_passport_lookup.py` with temporary fictional-store tests, including atomic publish and response-envelope validation, plus a CI step.
+- Two draft tenant passports under `tenants/daniyar/passports/offers/` for the AI agent implementation and the practical AI training offers. They are `draft`, live outside `product-passport/` (so they are never bundled into skills), and encode supplied facts as `verified`, preliminary items as `estimated`, and open decisions as `unknown` or `unresolved`.
+- `tenants/README.md` with the authoring, approval, and deploy rules, and a validator check for tenant passports (schema plus `offer.id`/`passport_id`/filename consistency).
+
+### Verified in this change
+
+- `python3 scripts/test_passport_lookup.py` passes without a model or external service.
+- `hermes plugins validate tools/adapters/passport-lookup` passes in an isolated local Hermes home.
+- The Daniyar VPS, Hermes v0.21.1, and live passport access have **not** been tested here.

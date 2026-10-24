@@ -1,0 +1,17 @@
+{
+  "tenant_id": "your-tenant-id",
+  "offers": {
+    "example-offer-a": {
+      "passport_id": "example-offer-a",
+      "current_version": "1.0.0",
+      "file": "offers/example-offer-a/1.0.0.json",
+      "sha256": null
+    },
+    "example-offer-b": {
+      "passport_id": "example-offer-b",
+      "current_version": "1.0.0",
+      "file": "offers/example-offer-b/1.0.0.json",
+      "sha256": null
+    }
+  }
+}

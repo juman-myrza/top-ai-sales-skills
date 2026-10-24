@@ -1,0 +1,1077 @@
+{
+  "schema_version": "1.1.0",
+  "passport_id": "ai-agent-training",
+  "version": "1.0.0",
+  "status": "draft",
+  "default_locale": "ru",
+  "business": {
+    "legal_name": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Legal entity name not supplied in the brief."
+    },
+    "display_name": "Practical AI Training (working title)",
+    "description": {
+      "value": "Practical, recorded training that teaches people to build AI assistants and automation systems.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "website": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Website not supplied in the brief."
+    },
+    "markets": [
+      {
+        "value": null,
+        "status": "unknown",
+        "notes": "Markets not supplied; confirm with the owner."
+      }
+    ],
+    "timezone": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Business timezone not supplied; prices are quoted in KGS."
+    },
+    "support_contact": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Support contact not supplied in the brief."
+    },
+    "languages": [
+      "ru",
+      "ky"
+    ]
+  },
+  "offer": {
+    "id": "ai-agent-training",
+    "name": "Practical AI Agents & Automation Training",
+    "type": "program",
+    "buyer_types": [
+      "b2c",
+      "b2b"
+    ],
+    "one_liner": {
+      "value": "Recorded, practical, step-by-step training on building AI assistants and useful automations.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "outcomes": [
+      {
+        "value": "Participants follow the recorded steps and reproduce the demonstrated systems.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Intended outcome; not yet validated.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Participants develop an understanding of how to continue building independently.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Intended outcome; not yet validated.",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "includes": [
+      {
+        "value": "Recorded, practical, step-by-step video instruction demonstrating how systems are built and configured.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Potential topic: AI assistants that perform useful tasks and use tools.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Potential topic; not a confirmed curriculum module.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Potential topic: AI sales systems that qualify prospects and handle objections.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Potential topic; not a confirmed curriculum module. Daniyar is an example of this direction.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Potential topic: business process automation for selected workflows.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Potential topic; not a confirmed curriculum module.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Potential topic: selected social-media and direct-message automations.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Potential topic; supported platforms not finalized.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Potential topic: analytics and reporting assistants (an Aisha-style example).",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Potential topic; does not confirm a specific analytics module.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Potential topic: content, blogging, and video workflows.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Potential topic; degree of automation not determined.",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "excludes": [
+      {
+        "value": "A fully implemented business solution; that is the implementation offer, not the course.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Unlimited private consulting or custom development.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Any guarantee of income, employment, business success, or mastery of every AI technology.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Templates, source files, repositories, or deployment assistance.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Not yet decided whether these are provided.",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "prerequisites": [
+      {
+        "value": null,
+        "status": "unknown",
+        "notes": "Required technical knowledge, software, accounts, and infrastructure are not finalized."
+      }
+    ],
+    "support": {
+      "value": "Intended support period of up to three months to help participants with questions.",
+      "status": "estimated",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "notes": "Start date, channel, response time, and limits are not finalized.",
+      "verified_at": "2026-10-24"
+    },
+    "status": "paused"
+  },
+  "pricing": {
+    "currency": {
+      "value": "KGS",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "tax_behavior": "unknown",
+    "plans": [
+      {
+        "id": "training-full-course",
+        "name": "Complete Practical AI Training",
+        "billing_period": "one_time",
+        "price": {
+          "value": 100000,
+          "status": "estimated",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "notes": "Preliminary price target of approximately 100,000 KGS. An estimate, not an approved final price.",
+          "verified_at": "2026-10-24"
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24",
+          "notes": "No separate setup fee."
+        },
+        "minimum_term": {
+          "value": "One-time course purchase; no recurring commitment defined.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "cancellation": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Cancellation and course-access conditions not confirmed."
+        },
+        "refund": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Refund terms not confirmed."
+        },
+        "status": "paused"
+      }
+    ],
+    "payment_methods": [
+      {
+        "value": null,
+        "status": "unknown",
+        "notes": "Payment arrangements not finalized."
+      }
+    ],
+    "invoice_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Tax treatment, payment arrangements, installment plans, refunds, and course-access conditions are not confirmed."
+    },
+    "discount_policy": {
+      "allowed": false,
+      "max_percent": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No discount authority defined."
+      },
+      "approval_threshold_percent": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No discount authority defined."
+      },
+      "stacking": {
+        "value": "Not applicable.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      "conditions": [
+        {
+          "value": null,
+          "status": "unknown",
+          "notes": "No discount conditions are approved; any discount requires the owner."
+        }
+      ]
+    },
+    "quote_policy": {
+      "required_for_discount": true,
+      "required_for_custom_terms": true,
+      "validity_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not finalized."
+      },
+      "terms_snapshot_required": true,
+      "approved_quote_required_for_payment": true
+    }
+  },
+  "qualification": {
+    "fit_criteria": [
+      {
+        "value": "People or businesses that want to learn to build AI assistants and automations for real tasks.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Intended segment; not a finalized ICP.",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "The person's goal is learning, not a delivered solution.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Not a finalized criterion.",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "disqualifiers": [
+      {
+        "value": "A person who needs a fully implemented business solution is better suited to the implementation offer, not a disqualifier against contact.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "required_fields": [
+      "goal",
+      "experience",
+      "priorities"
+    ],
+    "decision_roles": [
+      {
+        "value": "The individual learner is usually the buyer.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Not specified in the brief.",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "service_area": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Service area and delivery scope not supplied."
+    }
+  },
+  "discovery": {
+    "required_fields": [
+      "goal",
+      "experience"
+    ],
+    "optional_fields": [
+      "intended_project",
+      "prior_tools",
+      "budget_range",
+      "language"
+    ],
+    "recommendation_rules": [
+      {
+        "value": "Determine whether the person wants to learn to build systems or needs a solution delivered; explain the difference rather than pushing the more expensive option.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Do not present potential topics as confirmed curriculum.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Present the course price as a preliminary target, not an approved final price.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "If the curriculum does not establish whether a requested project is covered, say so and arrange verification.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ]
+  },
+  "proof": {
+    "cases": [],
+    "testimonials": [],
+    "certifications": [],
+    "stats": [],
+    "prohibited_claims": [
+      {
+        "value": "Do not claim guaranteed employment, business success, income, or revenue.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Do not claim participants will be able to build every possible AI system.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Do not invent case studies, testimonials, or statistics.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ]
+  },
+  "fulfillment": {
+    "mode": "direct_purchase",
+    "delivery": {
+      "value": "Recorded, practical, step-by-step video instruction, primarily screen recordings.",
+      "status": "estimated",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "notes": "Format is intended but the course is not yet fully packaged.",
+      "verified_at": "2026-10-24"
+    },
+    "booking": {
+      "required": false,
+      "calendar_id": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No calendar configured."
+      },
+      "duration_minutes": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "timezone": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not configured."
+      },
+      "slot_interval_minutes": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "buffer_before_minutes": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "buffer_after_minutes": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "availability_window_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "offer_slot_count": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "reschedule_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "cancellation_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "no_show_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "reminder_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "external_link_allowed": false
+    },
+    "proposal": {
+      "required": false,
+      "template_id": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "validity_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "approval_required": false
+    }
+  },
+  "sales_policy": {
+    "authority_limits": {
+      "max_discount_percent_without_approval": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No discount authority defined."
+      },
+      "can_customize_contract": false,
+      "can_change_refund_terms": false,
+      "can_waive_fees": false
+    },
+    "approval_matrix": [
+      {
+        "condition": {
+          "value": "Any discount, refund, or custom term",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "approver": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Owner"
+        },
+        "channel": {
+          "value": "Handoff tool, reason code authority",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      },
+      {
+        "condition": {
+          "value": "A question about whether a specific project is covered by the curriculum",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "approver": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Owner"
+        },
+        "channel": {
+          "value": "Handoff tool, reason code capability",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      }
+    ],
+    "verified_scarcity": [],
+    "competitor_policy": {
+      "value": "Do not state unverified competitor facts or disparage other courses.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "custom_terms": {
+      "value": "The agent explains the standard, preliminary structure; refunds, custom terms, and installments require the owner.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "contract_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Not finalized."
+    },
+    "call_recording_policy": {
+      "value": "Not applicable to text chat.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "negotiation": {
+      "tradables": [],
+      "non_negotiables": [
+        {
+          "value": "No discount authority; price is preliminary until approved.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      ],
+      "walk_away": {
+        "value": "If the buyer needs terms outside the offer, route to the owner; do not improvise.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    }
+  },
+  "sales_guidance": {
+    "segments": [
+      {
+        "id": "practical-ai-learners",
+        "name": "People who want to build AI systems",
+        "description": {
+          "value": "Entrepreneurs, business owners, professionals, and creators who want practical AI-building skills.",
+          "status": "estimated",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "notes": "Potential segment; not a finalized ICP.",
+          "verified_at": "2026-10-24"
+        },
+        "buyer_types": [
+          "b2c",
+          "b2b"
+        ],
+        "fit_signals": [
+          {
+            "value": "They want to build or automate something specific.",
+            "status": "estimated",
+            "source": "Business brief (2026-10-24), supplied by the owner",
+            "notes": "Intended signal.",
+            "verified_at": "2026-10-24"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": null,
+            "status": "unknown",
+            "notes": "Not documented."
+          }
+        ],
+        "buying_triggers": [],
+        "default_motion": "direct_purchase"
+      }
+    ],
+    "objection_guidance": [
+      {
+        "id": "obj-price",
+        "objection_type": "price",
+        "guidance": {
+          "value": "Present the price honestly as a preliminary target, not an approved final price, and never invent a discount or deadline.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not present the estimate as fixed.",
+            "status": "verified",
+            "source": "Business brief (2026-10-24), supplied by the owner",
+            "verified_at": "2026-10-24"
+          }
+        ]
+      },
+      {
+        "id": "obj-complexity",
+        "objection_type": "fit",
+        "guidance": {
+          "value": "Do not promise the course suits every level; required knowledge is not finalized, so say so and offer verification.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not guarantee mastery.",
+            "status": "verified",
+            "source": "Business brief (2026-10-24), supplied by the owner",
+            "verified_at": "2026-10-24"
+          }
+        ]
+      },
+      {
+        "id": "obj-income",
+        "objection_type": "trust",
+        "guidance": {
+          "value": "Monetization may be discussed as a possible application of the skills, never as a promised financial outcome.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not promise income or employment.",
+            "status": "verified",
+            "source": "Business brief (2026-10-24), supplied by the owner",
+            "verified_at": "2026-10-24"
+          }
+        ]
+      },
+      {
+        "id": "obj-coverage",
+        "objection_type": "need",
+        "guidance": {
+          "value": "If it is not established whether a specific project is covered, say so and arrange verification with the owner.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not claim a module exists before it is confirmed.",
+            "status": "verified",
+            "source": "Business brief (2026-10-24), supplied by the owner",
+            "verified_at": "2026-10-24"
+          }
+        ]
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "The implementation offer",
+        "category": "do it for me",
+        "our_advantage": {
+          "value": "The customer gets a working agent without building it themselves.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "our_tradeoff": {
+          "value": "Higher cost and a defined scope rather than learning.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "source": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Internal."
+        },
+        "last_checked": "2026-10-24"
+      },
+      {
+        "name": "Free tutorials and documentation",
+        "category": "self-study",
+        "our_advantage": {
+          "value": "Structured, practical, step-by-step recorded training.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "our_tradeoff": {
+          "value": "Requires time and effort from the learner.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "source": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Not researched."
+        },
+        "last_checked": "2026-10-24"
+      }
+    ]
+  },
+  "handoff": {
+    "routes": [
+      {
+        "reason_code": "human_request",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "human.handoff tool (Discord handoff already in use).",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      },
+      {
+        "reason_code": "authority",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "human.handoff tool (Discord handoff already in use).",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      },
+      {
+        "reason_code": "capability",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "human.handoff tool (Discord handoff already in use).",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      },
+      {
+        "reason_code": "legal",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "human.handoff tool (Discord handoff already in use).",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      },
+      {
+        "reason_code": "complaint",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "human.handoff tool (Discord handoff already in use).",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Business brief (2026-10-24), supplied by the owner",
+          "verified_at": "2026-10-24"
+        }
+      }
+    ],
+    "required_fields": [
+      "buyer_goal",
+      "verified_facts",
+      "open_questions",
+      "requested_scope"
+    ],
+    "automation_pause": true,
+    "human_takeover_policy": {
+      "value": "A human owns the thread after a handoff; automation stays paused until a human resumes it.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    }
+  },
+  "follow_up": {
+    "allowed": true,
+    "basis": [
+      "buyer_requested",
+      "agreed_next_step",
+      "buyer_initiated_inquiry"
+    ],
+    "channels": [
+      "telegram",
+      "whatsapp",
+      "email"
+    ],
+    "quiet_hours": {
+      "start": "20:00",
+      "end": "09:00",
+      "timezone": "Asia/Bishkek"
+    },
+    "allowed_days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat"
+    ],
+    "max_attempts_per_reason": {
+      "value": 2,
+      "status": "estimated",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "notes": "Placeholder; not approved.",
+      "verified_at": "2026-10-24"
+    },
+    "max_attempts_per_conversation": {
+      "value": 3,
+      "status": "estimated",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "notes": "Placeholder; not approved.",
+      "verified_at": "2026-10-24"
+    },
+    "min_interval_hours": {
+      "value": 48,
+      "status": "estimated",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "notes": "Placeholder; not approved.",
+      "verified_at": "2026-10-24"
+    },
+    "close_out_after_days": {
+      "value": 21,
+      "status": "estimated",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "notes": "Placeholder; not approved.",
+      "verified_at": "2026-10-24"
+    },
+    "opt_out_keywords": [
+      "стоп",
+      "не пишите",
+      "отписаться"
+    ],
+    "marketing_consent_required": true
+  },
+  "privacy": {
+    "data_collected": [
+      {
+        "value": null,
+        "status": "unknown",
+        "notes": "Data-collection list not finalized; collect only what the next step needs."
+      }
+    ],
+    "purposes": [
+      {
+        "value": "Respond to the buyer's inquiry and, if agreed, provide the offer.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "retention": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Retention period not finalized."
+    },
+    "deletion_process": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Deletion process not finalized; route requests to the owner."
+    },
+    "sharing": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Data-sharing scope not finalized."
+    },
+    "pii_rules": [
+      {
+        "value": "Do not collect payment card data, passwords, or government identifiers in chat.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Collect only the information needed for the current decision.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "legal_basis": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Legal basis and jurisdiction-specific review not completed."
+    }
+  },
+  "safety": {
+    "emergency_protocol": {
+      "value": null,
+      "status": "unknown",
+      "notes": "No emergency protocol defined for this offer."
+    },
+    "emergency_resources": [],
+    "minors_policy": {
+      "value": "The offer is not directed at minors; guardian consent is required if a minor is involved.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "vulnerability_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Not defined; do not use any buyer's vulnerability as leverage."
+    }
+  },
+  "tools": {
+    "passport_lookup": {
+      "adapter_id": "daniyar-passport-lookup",
+      "status": "not_implemented",
+      "contract_version": "1.1.0",
+      "notes": "Reference adapter exists in the skills repository; not yet deployed to this profile."
+    },
+    "calendar_availability": {
+      "adapter_id": "adapter-calendar_availability",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "calendar_booking": {
+      "adapter_id": "adapter-calendar_booking",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "payments_invoicing": {
+      "adapter_id": "adapter-payments_invoicing",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "crm_memory": {
+      "adapter_id": "adapter-crm_memory",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "human_handoff": {
+      "adapter_id": "adapter-human_handoff",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "messaging_media": {
+      "adapter_id": "adapter-messaging_media",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    }
+  },
+  "metadata": {
+    "owner": "Business owner (Daniyar project)",
+    "approved_by": null,
+    "approved_at": null,
+    "created_at": "2026-10-24",
+    "updated_at": "2026-10-24",
+    "source_of_truth": "Business brief (2026-10-24), supplied by the owner",
+    "review_cycle_days": 90,
+    "fictional": false,
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-10-24",
+        "change": "Initial draft from the business brief. Not approved for publication."
+      }
+    ]
+  },
+  "unresolved": [
+    "Exact curriculum and module list are not finalized; listed topics are potential only.",
+    "Course duration, prerequisites, required software/accounts/infrastructure, and participant deliverables are not finalized.",
+    "Course access duration, assessment, completion criteria, and whether templates/source files are included are undecided.",
+    "The 100,000 KGS price is a preliminary target, not an approved final price; tax, payment, refunds, and installments are unconfirmed.",
+    "Support period is intended as up to three months; start, channel, and limits are not finalized.",
+    "Legal entity, website, support contact, markets, and timezone were not supplied."
+  ]
+}

@@ -1,6 +1,6 @@
 # Tool Contracts
 
-This directory defines the external actions the sales agent may request. It contains **contracts and schemas, not implementations**. No calendar, payment provider, CRM, messaging channel, or human-handoff system is connected by this repository.
+This directory defines the external actions the sales agent may request. Most components are **contracts and schemas, not implementations**. A local file-backed `passport_lookup` adapter is now included under [`adapters/passport-lookup/`](adapters/passport-lookup/), but it is not connected to a live profile. No calendar, payment provider, CRM, messaging channel, or human-handoff system is connected by this repository.
 
 The core rule:
 
@@ -22,7 +22,7 @@ A skill may say what it would do. It may not say a booking exists, a payment suc
 | [`human-handoff.md`](contracts/human-handoff.md) | Create a human handoff and pause automation | Yes | Yes |
 | [`messaging-media.md`](contracts/messaging-media.md) | Send messages, templates, and approved media | Yes | Yes |
 
-A passport declares which adapter is bound to each contract and whether it is `implemented`, `degraded`, or `not_implemented`. The examples in this repository use `not_implemented` for every binding.
+A passport declares which adapter is bound to each contract and whether it is `implemented`, `degraded`, or `not_implemented`. The fictional passport examples still use `not_implemented` for every binding. The separately deployable [`adapters/passport-lookup/`](adapters/passport-lookup/) package implements the passport lookup contract for a versioned JSON store; it is not proof of a live integration.
 
 ---
 
@@ -193,7 +193,8 @@ The repository provides scenario-level expectations, not adapter implementations
 | Contract documents | Written |
 | Common envelope schema | Written |
 | Example payloads | In each contract |
-| Reference adapters | **Not implemented** |
+| Passport lookup reference adapter | Implemented locally; plugin validation passed |
+| Other reference adapters | **Not implemented** |
 | Live provider tests | **Not run** |
 | Webhook verification | **Not implemented** |
 | Retry/idempotency runtime | **Not implemented** |

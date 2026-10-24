@@ -179,6 +179,8 @@ FIXTURE_KEYS = {"tool", "operation", "status", "note"}
 REQUIRED_PATHS = [
     "README.md",
     "CHANGELOG.md",
+    "install.sh",
+    "uninstall.sh",
     "LICENSE",
     "ATTRIBUTION.md",
     "CONTRIBUTING.md",
@@ -223,6 +225,7 @@ REQUIRED_PATHS = [
     "research/open-source-audit.md",
     "scripts/README.md",
     "scripts/test_installed_artifact.py",
+    "scripts/test_install_uninstall.sh",
     ".github/workflows/validate.yml",
 ]
 

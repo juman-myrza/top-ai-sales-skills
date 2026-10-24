@@ -109,6 +109,7 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 - A third fictional passport example, `consumer-course-example`, for a B2C direct purchase.
 - A `consumer-direct` scenario category (B01–B04), an adoption-risk scenario (O09), and an entitlement-correction scenario (O10). The corpus is now 57 scenarios in nine categories.
 - `required_tool_sequence` and `expected_final_state` checker fields, with `state` on the response record.
+- Root `install.sh` and `uninstall.sh` wrappers: POSIX `sh`, dry-run by default, `--apply` to write. The installer wrapper works from a checkout or bootstraps from a clone when piped (`curl … | sh -s -- --apply`). The uninstaller is manifest-driven: it removes only the manifested skill directories plus the activation files and manifest, refuses to guess without a manifest, and leaves backups unless `--purge-backups` is passed. A round-trip test (`scripts/test_install_uninstall.sh`) runs in CI.
 - `tests/schema-invalid/` with ten deliberately invalid documents the schemas must reject, checked by the validator.
 - Checker semantics documentation, new rubric sub-dimensions (`recommendation`, `barrier`, `progression`), and a behavioral-evaluation design document.
 - CI steps for the checker regression test and the installed-artifact test.

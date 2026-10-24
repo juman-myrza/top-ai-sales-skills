@@ -115,15 +115,47 @@ The script creates a temporary `HERMES_HOME`, copies the nine skills into `skill
 
 ### Install
 
-```bash
-# Dry run first; nothing is written
-python3 scripts/install_skills.py
+Shell wrapper (dry run by default; add `--apply` to write):
 
-# Install into a chosen Hermes home
+```bash
+# From a checkout
+./install.sh --target ~/.hermes --apply
+
+# Remote, review-first (recommended)
+curl -fsSLO https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/main/install.sh
+less install.sh
+sh install.sh --target ~/.hermes --apply
+
+# Remote, piped (convenient, less review)
+curl -fsSL https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/main/install.sh \
+  | sh -s -- --apply
+```
+
+Or call the Python installer directly:
+
+```bash
+python3 scripts/install_skills.py            # dry run; nothing is written
 python3 scripts/install_skills.py --target ~/.hermes --apply
 ```
 
 The installer validates the repository, creates `skills/sales/<name>/`, copies the shared `core/`, `tools/`, `product-passport/`, and `research/` documents into each skill under `references/shared/`, and rewrites each skill's links to point there, so an installed skill still resolves its dependencies when the checkout is gone. It writes an `INSTALL-MANIFEST.json` and an `ACTIVATION.md`. It skips existing directories unless `--force` is passed, and backs up replaced directories by default. It installs instructions only — not tool adapters, credentials, cron jobs, or a model.
+
+When the wrapper is piped, it clones the repository into a temporary directory because the installer needs the whole checkout (the shared bundle is more than one file). Override the source with `SALES_SKILLS_REPO` and `SALES_SKILLS_REF`.
+
+### Uninstall
+
+The uninstaller is manifest-driven: it removes only the skill directories listed in `INSTALL-MANIFEST.json`, plus the activation files and the manifest. If the manifest is missing, it refuses to guess.
+
+```bash
+# From a checkout (dry run by default; add --apply to remove)
+./uninstall.sh --target ~/.hermes --apply
+
+# Remote
+curl -fsSL https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/main/uninstall.sh \
+  | sh -s -- --target ~/.hermes --apply
+```
+
+Backups created by the installer (`.backup-*`) are left in place unless `--purge-backups` is passed. The uninstaller never touches other skills in the target home.
 
 > Do not install into a live production profile until you have reviewed the [tool limitations](tools/README.md) and run the scenarios against your own model and passport.
 

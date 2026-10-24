@@ -43,6 +43,9 @@ jobs:
       - name: Verify the installed artifact is self-contained
         run: python scripts/test_installed_artifact.py
 
+      - name: Round-trip the shell install and uninstall wrappers
+        run: sh scripts/test_install_uninstall.sh
+
       - name: Verify the scenario corpus renders as JSONL
         run: |
           python scripts/render_scenarios.py \

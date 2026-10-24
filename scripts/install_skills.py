@@ -2,6 +2,8 @@
 """Install the nine skills into a Hermes profile, with a dry run by default.
 
 Default target: ~/.hermes  (skills go to ~/.hermes/skills/sales/<name>/)
+For one specific agent (Hermes profile), target that profile home instead:
+    --target ~/.hermes/profiles/<name>  ->  ~/.hermes/profiles/<name>/skills/sales/<name>/
 Nothing is written unless --apply is passed.
 
 The universal skills depend on shared documents (the core behavior contract,
@@ -261,7 +263,7 @@ def main() -> int:
         "--target",
         type=Path,
         default=Path.home() / ".hermes",
-        help="Hermes home directory (default: ~/.hermes)",
+        help="Hermes home directory (default: ~/.hermes). For one profile, pass ~/.hermes/profiles/<name>",
     )
     parser.add_argument("--apply", action="store_true", help="write changes; default is a dry run")
     parser.add_argument("--force", action="store_true", help="replace existing skill directories")

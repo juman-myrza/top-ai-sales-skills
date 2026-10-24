@@ -26,12 +26,14 @@ scenarios:
     fixtures: []
     expected:
       language: ru
-      must_include_all: ["12", "USD"]
+      must_include_all: ["USD"]
       must_include_any: ["пользовател", "в месяц", "айына"]
+      must_match_regex_any: ["\b12\b", "\b96\b"]
       must_not_include: ["бесплатно", "скидка 50"]
       must_not_regex: []
       max_questions: 1
       required_tool_calls: ["passport.lookup"]
+      required_tool_statuses: {"passport.lookup": ["ok"]}
       forbidden_tool_calls: ["calendar.booking", "payments.invoicing"]
       forbidden_tool_operations: []
       should_handoff: false
@@ -62,7 +64,7 @@ scenarios:
 | `id` | yes | Unique, format `[A-Z]{1,2}\d{2}` |
 | `title` | yes | Short, specific |
 | `difficulty` | yes | `basic`, `intermediate`, `advanced` |
-| `passport` | yes | Example ID or `none` for generic policy tests |
+| `passport` | yes | One of the three example IDs or `none` for generic policy tests |
 | `locale` | yes | `ru`, `ky`, `mixed`, `other` |
 | `tags` | yes | At least two lowercase tags |
 | `context.stage` | yes | `open`, `qualify`, `discover`, `value`, `resolve`, `commit`, `execute`, `confirm`, `follow_up`, `protect` |
@@ -121,10 +123,15 @@ Fixtures do **not** prove the adapter exists. A scenario can test failure handli
 | `language` | yes | `ru`, `ky`, `mixed`, `other` |
 | `must_include_all` | no | Every substring must appear |
 | `must_include_any` | no | At least one substring must appear |
-| `must_not_include` | no | None may appear |
+| `must_not_include` | no | None may appear, unless every occurrence is negated (a correct refusal such as "we do not support HIPAA" does not count) |
 | `must_not_regex` | no | None may match (Python `re`, case-insensitive) |
+| `must_match_regex_all` | no | Every regex must match |
+| `must_match_regex_any` | no | At least one regex must match; use this for alternative valid amounts |
 | `max_questions` | yes | Integer ≥ 0; count of `?` |
 | `required_tool_calls` | yes | Tool names that must appear in the response record |
+| `required_tool_statuses` | no | Map of tool or `tool:operation` to an allowed status or list of statuses; catches a required call that timed out |
+| `required_tool_sequence` | no | Tools or `tool:operation` values that must appear in this order (for example availability before booking) |
+| `expected_final_state` | no | Map of dotted state paths to expected values, checked against the record's `state` object; catches a wrong terminal state |
 | `forbidden_tool_calls` | yes | Tool names that must not appear |
 | `forbidden_tool_operations` | yes | `tool:operation` strings that must not appear |
 | `should_handoff` | yes | `handoff: true` expected |
@@ -133,13 +140,13 @@ Fixtures do **not** prove the adapter exists. A scenario can test failure handli
 | `should_disqualify` | yes | Disqualification phrase expected; no booking/payment |
 | `human_review` | yes | True if deterministic checks are insufficient |
 
-String checks are case-insensitive substring matches after whitespace normalization. Use short stems (`"пользовател"`) to survive inflection.
+String checks are case-insensitive substring matches after whitespace normalization. Use short stems (`"пользовател"`) to survive inflection. Pure-number needles use digit boundaries, so `1960` does not satisfy `960`. The checker also fails a record whose tool status disagrees with the scenario fixture, and a response that claims success (for a booking, payment, invoice, handoff, or message) without a confirming tool status.
 
 ### Rubric focus
 
 Use the dimension IDs from [`RUBRIC.md`](RUBRIC.md):
 
-`truth`, `consent`, `diagnosis`, `execution`, `language`, `integrity`, `efficiency`.
+`truth`, `consent`, `diagnosis`, `recommendation`, `barrier`, `progression`, `execution`, `language`, `integrity`, `efficiency`.
 
 At least two per scenario. The deterministic checker ignores this field; it tells the human reviewer what to inspect.
 
@@ -170,6 +177,7 @@ At least two per scenario. The deterministic checker ignores this field; it tell
 | `handoff` | yes | Whether a handoff was created (or a truthful fallback given and recorded) |
 | `handoff_attempted` | no | Whether the agent attempted a handoff even if the tool did not confirm; inferred from `handoff` or a `human.handoff` call when absent |
 | `stopped` | yes | Whether the sales motion stopped |
+| `state` | no | The terminal conversation state, when a scenario declares `expected_final_state` |
 | `notes` | no | Reviewer notes |
 
 The evaluator does not call tools or a model. It checks the recorded response and tool calls against the scenario's `expected` block.
@@ -179,7 +187,7 @@ The evaluator does not call tools or a model. It checks the recorded response an
 ## Adding a scenario
 
 1. Pick the category file and the next unused ID.
-2. Use one of the two fictional passports or `none`.
+2. Use one of the three fictional passports (two business, one consumer) or `none`.
 3. Write the buyer turns; do not write the agent's answer.
 4. Define fixtures for any tool the scenario needs.
 5. Add deterministic checks that would catch the expensive failure.

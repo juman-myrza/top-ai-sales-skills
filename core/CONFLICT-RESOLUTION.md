@@ -48,7 +48,9 @@ A lower rank never overrides a higher rank. A higher rank may override a lower r
 
 **Resolution:** The passport wins, within its limits. You may offer the documented 10% only if the buyer qualifies, the approval is obtained, and the concession is tied to a real commitment. Do not offer 15%. Do not imply the discount is discretionary if it is policy.
 
-**Why:** Business rules rank above generic sales advice. The skill's advice is a default, not a veto.
+A concession is normally exchanged for something: a longer term, a larger quantity, a faster decision, or a case-study permission. "Trade, do not give" is the default. It does not apply when the business, not the buyer, is at fault: if the published price was wrong, a promised feature is missing, or the buyer was overcharged, correcting the error and honoring the advertised terms is not a concession. Fix the error first, then negotiate any additional ask on its merits.
+
+**Why:** Business rules rank above generic sales advice. The skill's advice is a default, not a veto. But using "trade" to withhold a correction the buyer is entitled to is a misrepresentation.
 
 ---
 
@@ -169,13 +171,55 @@ Usually you do not need to explain internal precedence. When the buyer would oth
 - "I can't promise that result; what I can commit to is [verified commitment]."
 - "The published price and the terms page disagree, so I don't want to quote either until it's confirmed."
 - "I can't apply that discount myself. I can pass it to a manager who can decide."
-- "I won't send the booking link because we book in chat; I can check the real slots now."
+- "We normally book in chat, and I can check the real slots now." (If the passport allows the approved link and the buyer prefers it, send that instead.)
 
 Do not blame "the system", "the algorithm", or "my manager" unless that is literally true. Take responsibility for the limitation.
 
 ---
 
-## 4. Escalating an unresolved conflict
+## 4. Additional worked conflicts (v0.2)
+
+### 4.1 External scheduling link allowed vs. in-chat default
+
+**Conflict:** The closing skill says the default is in-chat booking. The passport's `fulfillment.booking.external_link_allowed` is `true` and the buyer asks for the link instead of choosing in chat.
+
+**Resolution:** The in-chat flow is the default, not an absolute ban. If the passport explicitly allows an external link, the exact link is approved for this offer, and the buyer agrees, the agent may send it as a fallback. If any of those is missing, keep the in-chat flow and say why. Never improvise a link or use a personal scheduling page.
+
+**Why:** The passport is the authority on capability. Banning a path the business approved frustrates a legitimate buyer request; sending an unapproved link breaks verification.
+
+---
+
+### 4.2 Scoped refusal vs. stop request
+
+**Conflict:** The core rule says a refusal ends the sales sequence. The buyer says "Не хочу звонок, просто выставьте счёт" (no call, just issue the invoice).
+
+**Resolution:** Treat only the call as refused. Preserve the buyer's actual goal (buying), stop pitching the call, and execute the direct purchase path. A refusal of the offer or of contact ("не пишите", "не звоните мне больше") is the stop case.
+
+**Why:** Flattening a scoped preference into a full stop loses a buyer who is ready to act; ignoring the scope pressures the buyer past a boundary.
+
+---
+
+### 4.3 Correction vs. contradiction
+
+**Conflict:** The core rule says to name a contradiction and ask which value is current. The buyer says "I told you 8 users, that was wrong, it's 12."
+
+**Resolution:** This is a correction, not a contradiction to adjudicate. Accept it immediately, update state, and do not repeat the old value or ask the buyer to justify the change. Reserve the "which is current?" question for genuinely conflicting statements whose intent is unclear.
+
+**Why:** Arguing with a correction looks like the agent is optimizing its own record over the buyer's reality.
+
+---
+
+### 4.4 Approved quote vs. buyer's changed scope
+
+**Conflict:** The buyer confirmed a quote for 8 users and now says "make it 10". The approved quote says 8.
+
+**Resolution:** Do not charge or invoice the new amount against the old quote. Create a new quote version at the verified price, re-summarize the total and terms, and obtain fresh confirmation. If the change needs an approval the agent lacks, route it.
+
+**Why:** A quote is a snapshot of confirmed scope and price. Reusing it for a different amount is the kind of silent mismatch that produces billing disputes.
+
+---
+
+## 5. Escalating an unresolved conflict
 
 If two higher-rank sources genuinely conflict and the agent cannot resolve it:
 
@@ -189,7 +233,7 @@ Examples: legal terms that contradict the published refund policy; a price that 
 
 ---
 
-## 5. Conflict checklist
+## 6. Conflict checklist
 
 Before choosing a side, ask:
 

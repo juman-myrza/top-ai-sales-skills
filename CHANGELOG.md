@@ -76,6 +76,63 @@ First research and structural release. This version is installable as instructio
 - Credentials, API keys, webhooks, or deployment automation.
 - A guarantee of sales performance, legal compliance, or language quality.
 
+## [0.2.0] — 2026-10-23
+
+Remediation release based on the accepted deep audit (`research/audits/2026-10-23-daniyar-deep-audit.md`). It fixes confirmed defects and contradictions. It does **not** claim improved sales effectiveness; no live model has been evaluated.
+
+### Fixed
+
+- **Installation packaging.** `install_skills.py` now copies the shared `core/`, `tools/`, `product-passport/`, and `research/` documents into each skill under `references/shared/` and rewrites each skill's links to point there. An installed skill no longer loses its core behavior contract, tool contracts, or passport schema. The installer also writes `INSTALL-MANIFEST.json` and `ACTIVATION.md`. A new `scripts/test_installed_artifact.py` verifies a fresh install.
+- **Conversation state.** `conversation-state.schema.json` is now `1.1.0`: consent is a per-purpose object with status, time, scope, and source; `mode`, `known_facts`, `diagnosis`, `follow_up`, and `quote` have canonical representations; handoff reason codes match `human.handoff`; tool-result statuses match the tool envelope. `core/example-state.json` is validated by the repository validator.
+- **CRM contract.** The documented patch now validates against the canonical state schema. Consent objects, known facts, next steps, quote, and follow-up lifecycle are aligned; the adapter is required to reject schema-invalid patches.
+- **Payment execution.** `payments.invoicing` now requires an approved quote ID/version and an exact terms snapshot; the server recomputes and rejects any mismatch. Discounted or custom quotes require an approval reference. Added quote-expiry and discount-authority failure paths.
+- **Follow-up scheduling.** `messaging.media` adds `schedule_text`, `cancel_scheduled`, and `get_scheduled`. A scheduled message is explicitly not "sent", and the adapter re-checks consent and opt-out at dispatch. The follow-up skill adds the `buyer_initiated_inquiry` basis and a scheduling lifecycle.
+- **Tool names.** Removed the `calendar.check_availability` and `calendar.book` drift; the closing skill uses `calendar.availability` and `calendar.booking`.
+- **External-link contradiction.** The core contract, system prompt, closing skill, and conflict resolution now agree: use an approved external link only when the passport explicitly allows it, the exact link is approved, and the buyer agrees. Closing Example 5 no longer claims the in-chat path is "faster".
+- **Response checker.** `evaluate_responses.py` now uses digit boundaries for numeric amounts, treats a negated forbidden phrase as a refusal rather than a violation, supports `must_match_regex_all/any`, `required_tool_statuses`, `required_tool_sequence`, and `expected_final_state`, fails a record whose tool status contradicts the scenario fixture, and fails a success claim with no confirming tool result. The P01 scenario now rejects a monthly price of 120 (the annual figure) while accepting the correct monthly 12/96 and annual 120. `scripts/test_checker.py` pins twelve scenario cases and three synthetic terminal-state cases.
+- **Scenario renderer.** `render_scenarios.py` omits hidden tool fixtures and the evaluator title from the default JSONL packet, so a responder cannot see the expected outcome before calling a tool. Opt in with `--include-fixtures` / `--include-title` for offline analysis only.
+- **Contract conformance.** The validator now checks every documented tool request against the shared envelope, requires the load-bearing params (`quote_id`/`quote_version`/`terms_snapshot`, booking/payment/messaging `consent.status`), rejects the retired `consent.given` shorthand, and merges the documented CRM update patch into the canonical state to prove it validates. The `example-envelopes.json` payment, booking, messaging, and handoff examples were updated to the canonical consent shape.
+- **Activation version record.** The install manifest records `shared.core_contract_version`, the system-prompt snippet hash, and hashes of the core contract, state schema, passport schema, and envelope schema, so an evaluation can pin the active versions.
+- **Discovery-test fidelity.** `test_hermes_loading.py` now installs through the real installer (shared references, activation block, manifest) instead of copying bare skill directories.
+- **Scenario count consistency.** The `human_review` flag count in `COVERAGE.md` was corrected to 18 after the entitlement scenario was added.
+- **Follow-up scheduling.** The messaging contract documents replace/cancel semantics: a new schedule for the same follow-up task supersedes the old one, and `cancel_scheduled` cannot retract a sent message.
+- **Tool envelope tenant binding.** The response may carry `tenant_id`; the runtime must bind responses to the request it actually sent rather than trusting a model-selected ID.
+- **Quote validity.** An open-ended quote (`valid_until: null`) is allowed when the passport documents a review policy, instead of forcing an artificial expiry.
+- **Research traceability.** Added the official EU AI Act, official EU GDPR text, and the FTC dark-patterns report to the source register, and replaced the unofficial `gdpr.eu` link in the skills.
+- **B2B-only assumption.** Qualification now reads `offer.buyer_types` and `sales_guidance.segments` instead of disqualifying consumers by default; the `audience`/`constraints` phantom fields are replaced with real passport paths.
+- **Scoped refusal and correction.** The core contract, orchestrator, and conflict resolution distinguish a refusal of one element ("no call") from a refusal of the offer, and distinguish a buyer correction from a contradiction.
+
+### Added
+
+- Typed commercial values in the passport schema: `moneyFact`, `percentFact`, `integerFact`, and `currencyFact`. A plan price cannot be a non-numeric string; a verified fact cannot have a null value; an approved passport needs an approver and an effective date.
+- `sales_guidance` (segments, objection guidance, alternatives), `sales_policy.negotiation` (tradables, non-negotiables, walk-away), `pricing.quote_policy`, `offer.buyer_types`, and case evidence-quality fields (`segment`, `baseline`, `intervention`, `measurement_period`, `limitations`).
+- A third fictional passport example, `consumer-course-example`, for a B2C direct purchase.
+- A `consumer-direct` scenario category (B01–B04), an adoption-risk scenario (O09), and an entitlement-correction scenario (O10). The corpus is now 57 scenarios in nine categories.
+- `required_tool_sequence` and `expected_final_state` checker fields, with `state` on the response record.
+- Root `install.sh` and `uninstall.sh` wrappers: POSIX `sh`, dry-run by default, `--apply` to write. The installer wrapper works from a checkout or bootstraps from a clone when piped (`curl … | sh -s -- --apply`). The uninstaller is manifest-driven: it removes only the manifested skill directories plus the activation files and manifest, refuses to guess without a manifest, and leaves backups unless `--purge-backups` is passed. A round-trip test (`scripts/test_install_uninstall.sh`) runs in CI.
+- `tests/schema-invalid/` with ten deliberately invalid documents the schemas must reject, checked by the validator.
+- Checker semantics documentation, new rubric sub-dimensions (`recommendation`, `barrier`, `progression`), and a behavioral-evaluation design document.
+- CI steps for the checker regression test and the installed-artifact test.
+
+### Changed
+
+- All tool contracts and the example passports move to `contract_version` `1.1.0` for consistency with the changed request shapes.
+- The orchestrator adds a buyer-state/deal diagnosis and a concrete action choice (answer, ask, recommend, execute, confirm, exit) instead of relying on stage labels alone.
+- The value-proof skill replaces the strict evidence ranking with relevance-based selection and adds a recommendation step.
+- The objection skill adds implementation/adoption barriers and an entitlement-versus-concession rule: correcting the business's own error is not a trade.
+- The language skill honors an explicit language preference over the last message and removes the oversimplified Kyrgyz word-order rule.
+
+### Verified in this release
+
+- `python3 scripts/validate_repository.py` passes (`0 errors`).
+- `python3 scripts/test_checker.py` passes twelve scenario cases and three synthetic terminal-state cases without a model.
+- `python3 scripts/test_installed_artifact.py` confirms all nine skills install self-contained.
+- All three fictional passports validate; all ten invalid fixtures are rejected.
+
+### Known limitations (unchanged)
+
+- No live-model behavioral test, no tool adapter, no native Kyrgyz review, no jurisdiction review, and no conversion measurement. See `0.1.0` for the full list.
+
 ## Unreleased
 
 No changes yet.

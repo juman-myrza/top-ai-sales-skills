@@ -1,6 +1,6 @@
 # Contract: `human.handoff`
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Kind:** write (create / update / close) + read  
 **Adapter status in this repository:** not implemented
 
@@ -44,7 +44,7 @@ A handoff is not a way to avoid a difficult but answerable question. It is for e
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "human.handoff",
   "request_id": "req_01J9Z8F1",
   "tenant_id": "tenant_demo",
@@ -62,9 +62,9 @@ A handoff is not a way to avoid a difficult but answerable question. It is for e
       "language": "ru",
       "timezone": "Asia/Bishkek",
       "consent": {
-        "follow_up": true,
-        "marketing": false,
-        "data_sharing": false
+        "follow_up": { "status": "granted", "at": "2026-10-23T10:00:00+06:00", "scope": "reply about this discount request", "source": "buyer_message" },
+        "marketing": { "status": "denied", "at": "2026-10-23T10:00:00+06:00", "scope": null, "source": "buyer_message" },
+        "data_sharing": { "status": "unknown", "at": null, "scope": null, "source": "none" }
       }
     },
     "summary": "Buyer wants a 20% discount on the annual plan; the agent's limit is 10%. Buyer is ready to pay this week if approved.",
@@ -110,9 +110,13 @@ A handoff is not a way to avoid a difficult but answerable question. It is for e
 
 Do not include full card numbers, passwords, government IDs, or unnecessary sensitive data. Mask identifiers.
 
+`buyer.consent` uses the canonical state records (`status`, `at`, `scope`, `source`), not a boolean shorthand. Include only the purposes relevant to the handoff.
+
 ### Reason codes
 
 `human_request`, `authority`, `capability`, `safety`, `legal`, `fraud`, `privacy`, `complaint`, `minor`, `coercion`, `abuse`, `tool_failure`, `agent_error`, `loop`.
+
+These are the same values as `handoff.reason_code` in [`../../core/conversation-state.schema.json`](../../core/conversation-state.schema.json). Do not invent a synonym such as `out_of_authority`.
 
 ---
 
@@ -138,7 +142,7 @@ Do not include full card numbers, passwords, government IDs, or unnecessary sens
   "meta": {
     "server_time": "2026-10-23T10:07:00+06:00",
     "source": "handoff-service",
-    "contract_version": "1.0.0",
+    "contract_version": "1.1.0",
     "trace_id": "trace_abc128"
   }
 }

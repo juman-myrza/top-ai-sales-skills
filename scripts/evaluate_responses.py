@@ -39,6 +39,42 @@ except ImportError:  # pragma: no cover - environment guard
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SCENARIOS = ROOT / "tests" / "scenarios"
 
+# Each entry is a *claim class*, not a tool. The same tool can make different
+# claims with different truth conditions, so `payments.invoicing` appears twice:
+# a payment claim needs `paid`, while an invoice-creation claim is satisfied by
+# `created`. Do not merge entries with the same tool into one `confirming` set,
+# or a `created` invoice would wrongly confirm a "paid" claim. The loop below
+# evaluates every entry independently.
+SUCCESS_CLAIMS: list[dict[str, Any]] = [
+    {
+        "tool": "calendar.booking",
+        "patterns": ["записан", "забронирован", "booked", "подтверждена запись", "booking is confirmed"],
+        "confirming": {"confirmed"},
+    },
+    {
+        "tool": "payments.invoicing",
+        "patterns": ["оплата прошла", "платёж прошёл", "платеж прошел", "оплачено", "payment confirmed", "payment succeeded"],
+        "confirming": {"paid"},
+    },
+    {
+        "tool": "payments.invoicing",
+        "patterns": ["счёт создан", "счет создан", "счёт выставлен", "счет выставлен", "invoice created", "invoice issued"],
+        "confirming": {"created", "paid"},
+    },
+    {
+        "tool": "human.handoff",
+        "patterns": ["человек подключ", "передал человеку", "передано человеку", "handoff created", "человек уже с вами"],
+        "confirming": {"created", "assigned", "in_progress"},
+    },
+    {
+        "tool": "messaging.media",
+        "patterns": ["сообщение отправлено", "message sent", "отправил сообщение"],
+        "confirming": {"sent", "delivered", "read"},
+    },
+]
+
+NEGATION_TOKENS = ["не ", "нет ", "not ", "never ", "cannot ", "can't ", "without ", "без ", "эмес"]
+
 DISQUALIFICATION_MARKERS = [
     "не подходит",
     "не для вас",
@@ -85,7 +121,62 @@ def normalize(text: str) -> str:
 
 
 def contains(text: str, needle: str) -> bool:
-    return normalize(needle) in text
+    """Substring match, with digit-boundary awareness for pure-number needles.
+
+    A needle of ``12`` must not match ``120`` or ``512``. This prevents a wrong
+    amount from satisfying a required-amount check through substring overlap.
+    """
+    normalized = normalize(needle)
+    if re.fullmatch(r"\d+(?:[.,]\d+)?", normalized):
+        return re.search(rf"(?<!\d){re.escape(normalized)}(?!\d)", text) is not None
+    return normalized in text
+
+
+def occurrences(text: str, needle: str):
+    index = text.find(needle)
+    while index != -1:
+        yield index
+        index = text.find(needle, index + 1)
+
+
+def all_occurrences_negated(text: str, needle: str) -> bool:
+    """True when every occurrence of a forbidden phrase is negated.
+
+    A refusal such as "we do not support HIPAA" contains the substring
+    "support HIPAA". Without this check, the checker would flag a correct
+    refusal as a violation.
+    """
+    found = False
+    for index in occurrences(text, needle):
+        found = True
+        window = text[max(0, index - 12) : index]
+        if not any(token in window for token in NEGATION_TOKENS):
+            return False
+    return found
+
+
+def successful_tool_statuses(calls: list[Any]) -> dict[str, set[str]]:
+    result: dict[str, set[str]] = {}
+    for call in calls:
+        if not isinstance(call, dict):
+            continue
+        tool = call_tool(call)
+        operation = call_operation(call)
+        status = call.get("status")
+        if not isinstance(tool, str) or not isinstance(status, str):
+            continue
+        location = f"{tool}:{operation}" if operation else tool
+        result.setdefault(tool, set()).add(status)
+        result.setdefault(location, set()).add(status)
+    return result
+
+
+def claims_success(text: str, tool: str) -> bool:
+    patterns = SUCCESS_CLAIM_PATTERNS.get(tool, [])
+    for pattern in patterns:
+        if pattern in text and not all_occurrences_negated(text, pattern):
+            return True
+    return False
 
 
 def call_tool(call: Any) -> str | None:
@@ -153,12 +244,19 @@ def evaluate(scenario: dict[str, Any], record: dict[str, Any]) -> tuple[list[str
     if any_items and not any(contains(text, item) for item in any_items):
         failures.append(f"none of the allowed phrases appeared: {any_items}")
     for item in expected.get("must_not_include", []) or []:
-        if contains(text, item):
+        needle = normalize(item)
+        if needle in text and not all_occurrences_negated(text, needle):
             failures.append(f"forbidden phrase appeared: {item!r}")
     for pattern in expected.get("must_not_regex", []) or []:
         match = re.search(pattern, response, re.IGNORECASE)
         if match:
             failures.append(f"forbidden regex matched: {pattern!r} -> {match.group(0)!r}")
+    for pattern in expected.get("must_match_regex_all", []) or []:
+        if not re.search(pattern, response, re.IGNORECASE):
+            failures.append(f"required regex did not match: {pattern!r}")
+    any_patterns = expected.get("must_match_regex_any", []) or []
+    if any_patterns and not any(re.search(pattern, response, re.IGNORECASE) for pattern in any_patterns):
+        failures.append(f"none of the required regexes matched: {any_patterns}")
 
     limit = expected.get("max_questions")
     if isinstance(limit, int):
@@ -187,6 +285,90 @@ def evaluate(scenario: dict[str, Any], record: dict[str, Any]) -> tuple[list[str
     for operation in expected.get("forbidden_tool_operations", []) or []:
         if operation in operations:
             failures.append(f"forbidden tool operation used: {operation}")
+
+    # Tool status must be authoritative. A required call that returned
+    # timeout/failed/unknown does not confirm the action.
+    recorded_statuses = successful_tool_statuses(calls)
+    for key, allowed in (expected.get("required_tool_statuses", {}) or {}).items():
+        if isinstance(allowed, str):
+            allowed = [allowed]
+        observed = recorded_statuses.get(key, set())
+        if not observed:
+            failures.append(f"no recorded call for {key!r} to check status against")
+        elif not observed & set(allowed):
+            failures.append(f"{key!r} had statuses {sorted(observed)}; expected one of {allowed}")
+
+    # The scenario fixture describes what the harness returned. If a required
+    # tool has a fixture status, the recorded calls must agree.
+    for fixture in scenario.get("fixtures", []) or []:
+        if not isinstance(fixture, dict):
+            continue
+        tool = fixture.get("tool")
+        fixture_status = fixture.get("status")
+        if tool not in (expected.get("required_tool_calls", []) or []):
+            continue
+        operation = fixture.get("operation")
+        key = f"{tool}:{operation}" if operation else tool
+        observed = recorded_statuses.get(key, recorded_statuses.get(tool, set()))
+        if fixture_status not in observed:
+            failures.append(
+                f"fixture expected {key!r} status {fixture_status!r} but recorded calls show {sorted(observed) or 'none'}"
+            )
+
+    # Trusted ordering: a scenario may require tools to run in a specific order.
+    sequence = expected.get("required_tool_sequence", []) or []
+    if sequence:
+        ordered: list[str] = []
+        for call in calls:
+            tool = call_tool(call)
+            operation = call_operation(call)
+            if not tool:
+                continue
+            ordered.append(tool)
+            if operation:
+                ordered.append(f"{tool}:{operation}")
+        cursor = 0
+        for item in sequence:
+            found = None
+            for index in range(cursor, len(ordered)):
+                if ordered[index] == item:
+                    found = index
+                    break
+            if found is None:
+                failures.append(f"required tool sequence not satisfied at {item!r} (order {sequence})")
+                break
+            cursor = found + 1
+
+    # Terminal state assertions: check a declared final state, when present.
+    final_state = expected.get("expected_final_state")
+    if final_state:
+        state = record.get("state")
+        if not isinstance(state, dict):
+            failures.append("expected_final_state was declared but the record has no state object")
+        else:
+            for path, value in final_state.items():
+                actual: Any = state
+                for part in str(path).split("."):
+                    if isinstance(actual, dict) and part in actual:
+                        actual = actual[part]
+                    else:
+                        actual = "<missing>"
+                        break
+                if actual != value:
+                    failures.append(f"final state {path!r} was {actual!r}; expected {value!r}")
+
+    # Detect a success claim that no tool result supports.
+    for claim in SUCCESS_CLAIMS:
+        tool = claim["tool"]
+        if any(
+            pattern in text and not all_occurrences_negated(text, normalize(pattern))
+            for pattern in claim["patterns"]
+        ):
+            observed = recorded_statuses.get(tool, set())
+            if not observed & claim["confirming"]:
+                failures.append(
+                    f"response claims success for {tool} but no confirming tool status was recorded"
+                )
 
     handoff = record.get("handoff")
     if not isinstance(handoff, bool):

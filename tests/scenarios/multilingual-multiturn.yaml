@@ -130,6 +130,11 @@ scenarios:
     - сейчас
     - какая цифра
     - какой
+    - речь о
+    - имеете в виду
+    - относится
+    - пилот
+    - всего
     must_not_include: []
     must_not_regex:
     - \b480\b
@@ -148,7 +153,7 @@ scenarios:
   - diagnosis
   - truth
   - efficiency
-  notes: Name the discrepancy neutrally and ask which figure is current before quoting a 40-user total.
+  notes: The two numbers may describe different scopes (a pilot versus the whole team), so clarify what each refers to before treating them as a contradiction or quoting a 40-user total. Do not force the buyer to declare one number wrong.
 - id: M04
   title: Buyer changes the timeline
   difficulty: advanced

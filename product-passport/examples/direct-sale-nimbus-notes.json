@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0.0",
-  "passport_id": "nimbus-notes-direct",
-  "version": "1.0.0",
+  "schema_version": "1.1.0",
+  "passport_id": "direct-sale-nimbus-notes",
+  "version": "1.1.0",
   "status": "approved",
   "effective_from": "2026-01-01",
   "effective_to": "2026-12-31",
@@ -53,7 +53,11 @@
       "source": "Fictional example — support plan",
       "verified_at": "2026-10-20"
     },
-    "languages": ["ru", "ky", "en"]
+    "languages": [
+      "ru",
+      "ky",
+      "en"
+    ]
   },
   "offer": {
     "id": "nimbus-notes-team",
@@ -133,7 +137,10 @@
       "source": "Fictional example — support plan",
       "verified_at": "2026-10-20"
     },
-    "status": "active"
+    "status": "active",
+    "buyer_types": [
+      "b2b"
+    ]
   },
   "pricing": {
     "currency": {
@@ -274,6 +281,18 @@
           "verified_at": "2026-10-20"
         }
       ]
+    },
+    "quote_policy": {
+      "required_for_discount": true,
+      "required_for_custom_terms": true,
+      "validity_days": {
+        "value": 14,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      },
+      "terms_snapshot_required": true,
+      "approved_quote_required_for_payment": true
     }
   },
   "qualification": {
@@ -305,7 +324,13 @@
         "verified_at": "2026-10-20"
       }
     ],
-    "required_fields": ["team_size", "use_case", "current_tool", "timeline", "decision_role"],
+    "required_fields": [
+      "team_size",
+      "use_case",
+      "current_tool",
+      "timeline",
+      "decision_role"
+    ],
     "decision_roles": [
       {
         "value": "Team lead or operations lead — primary user and champion",
@@ -334,8 +359,19 @@
     }
   },
   "discovery": {
-    "required_fields": ["team_size", "primary_use_case", "current_process", "decision_process", "target_start_date"],
-    "optional_fields": ["security_requirements", "integrations_needed", "budget_range", "past_tool_experience"],
+    "required_fields": [
+      "team_size",
+      "primary_use_case",
+      "current_process",
+      "decision_process",
+      "target_start_date"
+    ],
+    "optional_fields": [
+      "security_requirements",
+      "integrations_needed",
+      "budget_range",
+      "past_tool_experience"
+    ],
     "recommendation_rules": [
       {
         "value": "If the buyer expects to use the workspace for 12+ months, show the annual plan and the effective monthly price; do not push it if cash flow is a stated constraint.",
@@ -378,6 +414,36 @@
           "value": "Fictional example — approved case study PDF v2",
           "status": "verified",
           "source": "Fictional example — permission record",
+          "verified_at": "2026-10-20"
+        },
+        "segment": {
+          "value": "40-person research team",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "baseline": {
+          "value": "Three separate note tools before the change.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "intervention": {
+          "value": "Consolidated into one workspace; no controlled comparison was run.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "measurement_period": {
+          "value": "Not measured; client report after rollout.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "limitations": {
+          "value": "Single self-reported case; no independent measurement or control group.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
           "verified_at": "2026-10-20"
         }
       },
@@ -617,6 +683,42 @@
       "status": "verified",
       "source": "Fictional example — privacy policy",
       "verified_at": "2026-10-20"
+    },
+    "negotiation": {
+      "tradables": [
+        {
+          "value": "Billing period: monthly or annual, if the buyer qualifies for the published plan.",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        {
+          "value": "Payment method: card or bank transfer against an invoice, per the published policy.",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        }
+      ],
+      "non_negotiables": [
+        {
+          "value": "No discount above 10% without sales-lead approval.",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        {
+          "value": "No HIPAA BAA, on-premise deployment, or custom contract on this offer.",
+          "status": "verified",
+          "source": "Fictional example — product scope",
+          "verified_at": "2026-10-20"
+        }
+      ],
+      "walk_away": {
+        "value": "If the buyer requires terms outside the approved offer, decline that path and offer a human review; do not improvise.",
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      }
     }
   },
   "handoff": {
@@ -877,14 +979,27 @@
   },
   "follow_up": {
     "allowed": true,
-    "basis": ["buyer_requested", "agreed_next_step", "existing_customer"],
-    "channels": ["whatsapp", "email"],
+    "basis": [
+      "buyer_requested",
+      "agreed_next_step",
+      "buyer_initiated_inquiry"
+    ],
+    "channels": [
+      "whatsapp",
+      "email"
+    ],
     "quiet_hours": {
       "start": "20:00",
       "end": "09:00",
       "timezone": "Asia/Bishkek"
     },
-    "allowed_days": ["mon", "tue", "wed", "thu", "fri"],
+    "allowed_days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ],
     "max_attempts_per_reason": {
       "value": 2,
       "status": "verified",
@@ -909,7 +1024,13 @@
       "source": "Fictional example — follow-up policy",
       "verified_at": "2026-10-20"
     },
-    "opt_out_keywords": ["stop", "не пишите", "отпишите", "керек эмес", "жазбаңыз"],
+    "opt_out_keywords": [
+      "stop",
+      "не пишите",
+      "отпишите",
+      "керек эмес",
+      "жазбаңыз"
+    ],
     "marketing_consent_required": true
   },
   "privacy": {
@@ -1000,38 +1121,38 @@
     "passport_lookup": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0",
+      "contract_version": "1.1.0",
       "notes": "This example is a static file; no lookup service is included."
     },
     "calendar_availability": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0"
+      "contract_version": "1.1.0"
     },
     "calendar_booking": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0"
+      "contract_version": "1.1.0"
     },
     "payments_invoicing": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0"
+      "contract_version": "1.1.0"
     },
     "crm_memory": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0"
+      "contract_version": "1.1.0"
     },
     "human_handoff": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0"
+      "contract_version": "1.1.0"
     },
     "messaging_media": {
       "adapter_id": "unconfigured",
       "status": "not_implemented",
-      "contract_version": "1.0.0"
+      "contract_version": "1.1.0"
     }
   },
   "metadata": {
@@ -1048,6 +1169,11 @@
         "version": "1.0.0",
         "date": "2026-10-20",
         "change": "Initial fictional direct-sale example."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2026-10-23",
+        "change": "Added typed commercial values, approval conditions, quote policy, buyer types, sales guidance, negotiation limits, and evidence-quality metadata."
       }
     ]
   },
@@ -1056,5 +1182,157 @@
     "The annual plan's effective monthly price is shown for comparison only and must not be presented as a separate monthly price.",
     "Kyrgyz copy requires native-speaker review.",
     "No tool adapter is implemented; transactions cannot be executed from this repository."
-  ]
+  ],
+  "sales_guidance": {
+    "segments": [
+      {
+        "id": "operations-teams",
+        "name": "Operations and research teams",
+        "description": {
+          "value": "Teams of 3–200 people that share notes, tasks, and customer research across several tools.",
+          "status": "verified",
+          "source": "Fictional example — ideal customer profile",
+          "verified_at": "2026-10-20"
+        },
+        "buyer_types": [
+          "b2b"
+        ],
+        "fit_signals": [
+          {
+            "value": "Two or more people regularly duplicate notes or task updates.",
+            "status": "verified",
+            "source": "Fictional example — sales playbook",
+            "verified_at": "2026-10-20"
+          },
+          {
+            "value": "The team uses a cloud workspace and can adopt a browser-based tool.",
+            "status": "verified",
+            "source": "Fictional example — product scope",
+            "verified_at": "2026-10-20"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Knowledge is split across chat, documents, and personal notes.",
+            "status": "verified",
+            "source": "Fictional example — discovery guide",
+            "verified_at": "2026-10-20"
+          },
+          {
+            "value": "Managers cannot see who owns a task without asking in chat.",
+            "status": "verified",
+            "source": "Fictional example — discovery guide",
+            "verified_at": "2026-10-20"
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "A new team lead wants one source of truth.",
+            "status": "verified",
+            "source": "Fictional example — sales playbook",
+            "verified_at": "2026-10-20"
+          },
+          {
+            "value": "An upcoming audit or handover exposes messy records.",
+            "status": "verified",
+            "source": "Fictional example — sales playbook",
+            "verified_at": "2026-10-20"
+          }
+        ],
+        "default_motion": "direct_purchase"
+      }
+    ],
+    "objection_guidance": [
+      {
+        "id": "obj-price",
+        "objection_type": "price",
+        "guidance": {
+          "value": "Clarify the comparison basis: per-user monthly price, annual prepayment, or total team cost. Do not discount before understanding the gap.",
+          "status": "verified",
+          "source": "Fictional example — sales playbook",
+          "verified_at": "2026-10-20"
+        },
+        "evidence_ids": [
+          "case-1"
+        ],
+        "avoid": [
+          {
+            "value": "Do not claim a competitor is more expensive without a current verified source.",
+            "status": "verified",
+            "source": "Fictional example — sales policy",
+            "verified_at": "2026-10-20"
+          }
+        ]
+      },
+      {
+        "id": "obj-adoption",
+        "objection_type": "adoption",
+        "guidance": {
+          "value": "Ask who must change their workflow, what training is available, and what would make the first 30 days successful.",
+          "status": "verified",
+          "source": "Fictional example — sales playbook",
+          "verified_at": "2026-10-20"
+        },
+        "evidence_ids": [
+          "case-2"
+        ],
+        "avoid": [
+          {
+            "value": "Do not promise adoption results that were not measured.",
+            "status": "verified",
+            "source": "Fictional example — compliance policy",
+            "verified_at": "2026-10-20"
+          }
+        ]
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "Spreadsheets and shared drives",
+        "category": "status quo",
+        "our_advantage": {
+          "value": "One searchable workspace instead of separate files and folders.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "our_tradeoff": {
+          "value": "Requires migrating habits and agreeing on a workspace structure.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "source": {
+          "value": "Fictional example — positioning brief",
+          "status": "verified",
+          "source": "Fictional example — marketing approval",
+          "verified_at": "2026-10-20"
+        },
+        "last_checked": "2026-10-20"
+      },
+      {
+        "name": "General-purpose team wiki",
+        "category": "adjacent product",
+        "our_advantage": {
+          "value": "Notes, tasks, and customer research share one permission model.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "our_tradeoff": {
+          "value": "A general wiki may have more flexible page templates.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "source": {
+          "value": "Fictional example — positioning brief",
+          "status": "verified",
+          "source": "Fictional example — marketing approval",
+          "verified_at": "2026-10-20"
+        },
+        "last_checked": "2026-10-20"
+      }
+    ]
+  }
 }

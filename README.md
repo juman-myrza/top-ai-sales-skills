@@ -4,7 +4,7 @@ A researched, Hermes-compatible skill set for text-based sales conversations, pl
 
 The repository is designed for a sales assistant that can qualify, discover, handle objections, close, book, invoice, follow up, escalate, and speak Russian, Kyrgyz, or a natural mix — **without hardcoding a company, product, price, or calendar into the skills**. It is not a working sales platform. It contains instructions, contracts, examples, and tests; every external integration is still to be built.
 
-> **Status:** v0.1.0, research and structural validation complete. No live model was evaluated, no tool adapter is connected, and no native Kyrgyz review has been completed. See [What is and is not verified](#what-is-and-is-not-verified).
+> **Status:** v0.2.0, research and structural validation complete. No live model was evaluated, no tool adapter is connected, and no native Kyrgyz review has been completed. See [What is and is not verified](#what-is-and-is-not-verified).
 
 ---
 
@@ -30,8 +30,8 @@ core/                       constitutional rules: truth, consent, tools, escalat
 skills/sales/               nine universal skills (no product facts)
 product-passport/           business-specific facts, schema, fictional examples
 tools/                      seven tool contracts and envelope schemas
-tests/                      51 scenarios, rubric, coverage, response checker fixture
-scripts/                    validation, evaluation, rendering, isolated loading, install
+tests/                      57 scenarios, rubric, coverage, response checker and installed-artifact tests
+scripts/                    validation, checker tests, installed-artifact test, rendering, isolated loading, install
 research/                   sources, claim-evidence matrix, decisions, repo audit
 ```
 
@@ -88,7 +88,7 @@ Each skill follows the Hermes `SKILL.md` format: YAML `name` and `description` (
 python3 scripts/validate_repository.py
 ```
 
-This checks file structure, skill frontmatter and sections, passport schemas, tool envelopes, 51 scenario definitions, coverage IDs, local links, obvious secrets, and hardcoded fictional facts. Passing is **structural** validation, not a behavioral test.
+This checks file structure, skill frontmatter and sections, passport schemas, tool envelopes, 57 scenario definitions, coverage IDs, local links, obvious secrets, and hardcoded fictional facts. It also validates the example state, the three passport examples, and a set of deliberately invalid schema fixtures that the schemas must reject. Passing is **structural** validation, not a behavioral test.
 
 ### Check the response-checker contract
 
@@ -98,7 +98,12 @@ python3 scripts/evaluate_responses.py \
   --allow-partial
 ```
 
-The fixture is hand-written to exercise the checker, not model output.
+The fixture is hand-written to exercise the checker, not model output. Two further test scripts run without a model:
+
+```bash
+python3 scripts/test_checker.py           # must-pass / must-fail checker cases
+python3 scripts/test_installed_artifact.py  # a skill installed alone resolves its shared docs
+```
 
 ### Test Hermes discovery without touching the live profile
 
@@ -110,15 +115,68 @@ The script creates a temporary `HERMES_HOME`, copies the nine skills into `skill
 
 ### Install
 
-```bash
-# Dry run first; nothing is written
-python3 scripts/install_skills.py
+The wrapper is a dry run by default; add `--apply` to write.
 
-# Install into a chosen Hermes home
+**Option A — from a checkout (works for public or private repos).** Clone first, then run the wrapper from inside the repository:
+
+```bash
+git clone https://github.com/juman-myrza/top-ai-sales-skills.git
+cd top-ai-sales-skills
+./install.sh --target ~/.hermes --apply     # or: sh install.sh ... if not executable
+```
+
+`./install.sh` finds `scripts/install_skills.py` next to it and installs from this checkout. You must `cd` into the repository (or pass the path); running `./install.sh` from an unrelated directory will not find it.
+
+**Install for one specific agent (Hermes profile).** `--target ~/.hermes` writes to the shared root home. Hermes keeps per-profile skills under `~/.hermes/profiles/<name>/skills/`, so to scope the install to one agent, target that profile home instead:
+
+```bash
+ls ~/.hermes/profiles                              # list profiles (agents)
+./install.sh --target ~/.hermes/profiles/tom --apply
+hermes skills list --source local -p tom           # confirm they load for that agent
+```
+
+Use the root target (`~/.hermes`) only if you intend the shared home, and a profile target to install for exactly one agent. To remove them again, use the same `--target` with `./uninstall.sh`.
+
+**Option B — remote one-liner (public repos only).** This downloads *just* the wrapper; the wrapper then clones the repository into a temporary directory. `raw.githubusercontent.com` serves only public repositories, so this does not work for a private repo.
+
+```bash
+# review-first (recommended)
+curl -fsSLO https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/main/install.sh
+less install.sh
+sh install.sh --target ~/.hermes --apply
+
+# piped (convenient, less review)
+curl -fsSL https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/main/install.sh \
+  | sh -s -- --apply
+```
+
+These URLs only resolve once `install.sh` is committed and pushed to `main`, and only if the repository is public. Override the clone source with `SALES_SKILLS_REPO` and `SALES_SKILLS_REF` (or `--ref=BRANCH`).
+
+Or call the Python installer directly from a checkout:
+
+```bash
+python3 scripts/install_skills.py            # dry run; nothing is written
 python3 scripts/install_skills.py --target ~/.hermes --apply
 ```
 
-The installer validates the repository, creates `skills/sales/<name>/`, skips existing directories unless `--force` is passed, and backs up replaced directories by default. It installs instructions only — not tool adapters, credentials, cron jobs, or a model.
+The installer validates the repository, creates `skills/sales/<name>/`, copies the shared `core/`, `tools/`, `product-passport/`, and `research/` documents into each skill under `references/shared/`, and rewrites each skill's links to point there, so an installed skill still resolves its dependencies when the checkout is gone. It writes an `INSTALL-MANIFEST.json` and an `ACTIVATION.md`. It skips existing directories unless `--force` is passed, and backs up replaced directories by default. It installs instructions only — not tool adapters, credentials, cron jobs, or a model.
+
+### Uninstall
+
+The uninstaller is manifest-driven: it removes only the skill directories listed in `INSTALL-MANIFEST.json`, plus the activation files and the manifest. If the manifest is missing, it refuses to guess.
+
+```bash
+# From a checkout (dry run by default; add --apply to remove)
+git clone https://github.com/juman-myrza/top-ai-sales-skills.git
+cd top-ai-sales-skills
+./uninstall.sh --target ~/.hermes --apply
+
+# Remote (public repos only; requires uninstall.sh on main)
+curl -fsSL https://raw.githubusercontent.com/juman-myrza/top-ai-sales-skills/main/uninstall.sh \
+  | sh -s -- --target ~/.hermes --apply
+```
+
+The uninstaller needs only the target home, not the repository. Backups created by the installer (`.backup-*`) are left in place unless `--purge-backups` is passed. It never touches other skills in the target home.
 
 > Do not install into a live production profile until you have reviewed the [tool limitations](tools/README.md) and run the scenarios against your own model and passport.
 
@@ -137,8 +195,9 @@ Two complete fictional examples show the format:
 
 - [Direct-sale example](product-passport/examples/direct-sale-nimbus-notes.md) — a digital product bought without a meeting.
 - [Appointment-booking example](product-passport/examples/appointment-karkyra-consult.md) — a consult booked in chat.
+- [Consumer example](product-passport/examples/consumer-course-example.md) — a B2C course bought directly, with no meeting.
 
-Both use `.example.invalid` domains and are explicitly fictional. Do not copy their facts.
+All three use `.example.invalid` domains and are explicitly fictional. Do not copy their facts.
 
 ---
 
@@ -160,28 +219,29 @@ Every request and response uses the [shared envelope schema](tools/schemas/tool-
 
 > **No claim of completion without a confirming tool result.**
 
-Both passport examples mark every binding `not_implemented`. No adapter, credential, webhook, CRM, calendar, or payment provider is included. Claims that an integration works would be false.
+All three passport examples mark every binding `not_implemented`. No adapter, credential, webhook, CRM, calendar, or payment provider is included. Claims that an integration works would be false.
 
 ---
 
 ## Evaluation
 
-The corpus contains **51 scenarios** in eight categories:
+The corpus contains **57 scenarios** in nine categories:
 
 | Category | Count | Focus |
 |---|---|---|
 | Price and intent | 6 | Price questions, budget, buying signals, direct purchase |
 | Qualification and discovery | 6 | Fit, poor fit, authority, discovery quality |
-| Objections and negotiation | 8 | Price, timing, competitors, trust, discount limits |
+| Objections and negotiation | 10 | Price, timing, competitors, trust, discount limits, adoption risk, entitlement correction |
 | Closing and booking | 7 | Direct close, invoice, in-chat booking, confirmation |
 | Tool failures | 6 | Timeout, conflict, false success, handoff failure |
 | Handoff and safety | 6 | Human request, legal complexity, abuse, privacy |
 | Multilingual and multi-turn | 6 | Russian, Kyrgyz, mixed language, contradictions |
 | Follow-up and refusal | 6 | Consent, cadence, no-show, opt-out |
+| Consumer direct purchase | 4 | B2C price, scoped refusal, adoption, direct buy |
 
 Start with [tests/README.md](tests/README.md), [SCENARIO-FORMAT.md](tests/SCENARIO-FORMAT.md), [RUBRIC.md](tests/RUBRIC.md), and [COVERAGE.md](tests/COVERAGE.md).
 
-What the tests can detect: missing required facts or phrases, forbidden claims, excess questions, missing or forbidden tool calls, handoff/stop mismatches, and language-marker misses. What they cannot detect: tone, empathy, naturalness, strategic quality, or whether a true-sounding statement is actually true in a way the scenario did not anticipate.
+What the tests can detect: missing required facts or phrases, forbidden claims, excess questions, missing or forbidden tool calls, a tool status that contradicts the fixture, a required tool order that was violated, a wrong terminal state, a success claim with no confirming result, handoff/stop mismatches, and language-marker misses. What they cannot detect: tone, empathy, naturalness, strategic quality, or whether a true-sounding statement is actually true in a way the scenario did not anticipate.
 
 ---
 
@@ -191,7 +251,7 @@ What the tests can detect: missing required facts or phrases, forbidden claims, 
 |---|---|
 | [`core/`](core/) | Behavior contract, conflict resolution, conversation state, system-prompt snippet |
 | [`skills/sales/`](skills/sales/) | Nine skills plus language, cadence, and escalation references |
-| [`product-passport/`](product-passport/) | Template, JSON Schema, two fictional examples |
+| [`product-passport/`](product-passport/) | Template, JSON Schema, three fictional examples |
 | [`tools/`](tools/) | Contracts, envelope schema, example envelopes |
 | [`tests/`](tests/) | Scenario corpus, rubric, coverage, fixtures |
 | [`scripts/`](scripts/) | Validation, evaluation, rendering, isolated loading, installation |

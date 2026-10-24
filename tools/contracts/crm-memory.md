@@ -1,6 +1,6 @@
 # Contract: `crm.memory`
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Kind:** read/write  
 **Adapter status in this repository:** not implemented
 
@@ -31,9 +31,9 @@ Product facts come from `passport.lookup`. Payment truth comes from `payments.in
 | `get_conversation` | Load state by conversation ID | No |
 | `append_event` | Append a turn/event to the history | Required |
 | `upsert_contact` | Create/update buyer contact fields | Required |
-| `update_state` | Update stage, needs, objections, promises | Required |
-| `set_consent` | Record consent/opt-out by purpose | Required |
-| `get_consent` | Read current consent flags | No |
+| `update_state` | Update stage, mode, diagnosis, needs, objections, promises, quote, follow-up lifecycle | Required |
+| `set_consent` | Record consent/opt-out by purpose with scope and source | Required |
+| `get_consent` | Read current consent records | No |
 | `update_deal` | Update deal stage/status (not won before payment) | Required |
 | `request_deletion` | Route a deletion request | Required |
 
@@ -45,7 +45,7 @@ An implementation may expose a subset. If it does, the missing operation is `not
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "crm.memory",
   "request_id": "req_01J9Z7E1",
   "tenant_id": "tenant_demo",
@@ -58,19 +58,45 @@ An implementation may expose a subset. If it does, the missing operation is `not
     "patch": {
       "stage": "commit",
       "mode": "confirm",
-      "language": "ru",
-      "known_facts": {
-        "team_size": { "value": 8, "source": "buyer", "confidence": "high" },
-        "current_tool": { "value": "spreadsheets", "source": "buyer", "confidence": "high" }
+      "language": { "primary": "ru", "detected": ["ru"], "register": "neutral" },
+      "known_facts": [
+        { "key": "team_size", "value": 8, "source": "buyer", "status": "current", "confidence": "high", "checked_at": "2026-10-23T10:00:00+06:00" },
+        { "key": "current_tool", "value": "spreadsheets", "source": "buyer", "status": "current", "confidence": "high", "checked_at": "2026-10-23T10:00:00+06:00" }
+      ],
+      "diagnosis": {
+        "primary_problem": "Fragmented team knowledge",
+        "barrier": "none",
+        "buying_readiness": "committed",
+        "recommended_action": "Confirm billing details and issue the approved invoice"
       },
       "objections": [
-        { "type": "price", "status": "resolved", "note": "Buyer accepted annual plan." }
+        { "id": "obj_1", "type": "price", "statement": "It is too expensive", "status": "resolved", "resolution": "Buyer accepted the annual plan." }
       ],
       "consent": {
-        "follow_up": { "granted": true, "at": "2026-10-23T10:00:00+06:00", "scope": "send the agreed summary" },
-        "marketing": { "granted": false, "at": null, "scope": null }
+        "follow_up": { "status": "granted", "at": "2026-10-23T10:00:00+06:00", "scope": "send the agreed summary", "source": "buyer_message" },
+        "marketing": { "status": "denied", "at": "2026-10-23T10:00:00+06:00", "scope": null, "source": "buyer_message" }
       },
-      "next_step": { "action": "send invoice", "owner": "agent", "confirmed": true },
+      "next_step": { "type": "pay", "description": "Issue the approved invoice after billing details are confirmed.", "owner": "agent", "confirmed_by_buyer": true, "due_at": null },
+      "quote": {
+        "quote_id": "quote_demo_001",
+        "version": "1.0.0",
+        "status": "approved",
+        "offer_id": "nimbus-notes-team",
+        "plan_id": "annual",
+        "quantity": 8,
+        "unit_amount": 120,
+        "subtotal": 960,
+        "discount_percent": 0,
+        "discount_amount": 0,
+        "tax_amount": 0,
+        "total_amount": 960,
+        "currency": "USD",
+        "terms": "Annual plan for 8 users. 960 USD before tax. 14-day money-back on the first purchase.",
+        "approval_ref": null,
+        "issued_at": "2026-10-23T10:05:00+06:00",
+        "valid_until": "2026-11-06T23:59:59+06:00"
+      },
+      "follow_up": { "status": "none", "basis": "none", "attempts": 0, "next_due_at": null },
       "open_questions": []
     }
   }
@@ -86,11 +112,13 @@ An implementation may expose a subset. If it does, the missing operation is `not
 | `patch` | object | update operations | Only allowlisted fields |
 | `event` | object | append_event | Type, timestamp, summary, tool result reference |
 | `contact` | object | upsert_contact | Name, handle, channel, company, locale, timezone |
-| `consent` | object | set_consent | Purpose, granted, timestamp, scope, source |
+| `consent` | object | set_consent | Purpose, status, timestamp, scope, source |
 | `deal` | object | update_deal | Stage, amount, currency, offer ID, status |
 | `deletion_request` | object | request_deletion | Requester, scope, verification reference |
 
-Allowlisted state fields follow [`../../core/conversation-state.schema.json`](../../core/conversation-state.schema.json). Do not store arbitrary blobs.
+Allowlisted state fields follow [`../../core/conversation-state.schema.json`](../../core/conversation-state.schema.json). Do not store arbitrary blobs. A `patch` may set a subset of fields: the adapter merges it into the stored state and rejects the **merged result** if it does not validate against the schema. It must not validate the partial patch in isolation, and it must not write a partial object that would fail the schema on its own. Consent changes go through `set_consent`; a generic `update_state` patch must not grant consent.
+
+A `quote` may be marked `accepted` only after the buyer confirms the exact quote version and the confirmation is recorded. A CRM write does not make a quote approved, paid, or accepted by itself. Approval comes from the passport authority owner or an approved quote tool; payment comes from `payments.invoicing`.
 
 ### Deal-stage rule
 
@@ -118,14 +146,14 @@ A buyer saying "I'll pay" is not a won deal.
     "state": {
       "stage": "commit",
       "mode": "confirm",
-      "next_step": { "action": "send invoice", "owner": "agent", "confirmed": true }
+      "next_step": { "type": "pay", "description": "Issue the approved invoice after billing details are confirmed.", "owner": "agent", "confirmed_by_buyer": true, "due_at": null }
     }
   },
   "error": null,
   "meta": {
     "server_time": "2026-10-23T10:06:00+06:00",
     "source": "crm",
-    "contract_version": "1.0.0",
+    "contract_version": "1.1.0",
     "trace_id": "trace_abc127"
   }
 }
@@ -166,23 +194,25 @@ Retry: one retry on transient errors with the same idempotency key. On `conflict
 
 ## 7. Consent model
 
-Consent is per purpose, not a single boolean:
+Consent is per purpose, not a single boolean. This is the canonical state shape; do not use the older `granted: true` shorthand.
 
 ```json
 {
-  "follow_up": { "granted": true, "at": "2026-10-23T10:00:00+06:00", "scope": "send the agreed summary", "source": "buyer_message" },
-  "marketing": { "granted": false, "at": null, "scope": null, "source": null },
-  "booking": { "granted": true, "at": "2026-10-23T10:02:00+06:00", "scope": "book 27 Oct 14:00", "source": "buyer_message" },
-  "payment": { "granted": true, "at": "2026-10-23T10:05:00+06:00", "scope": "invoice 960 USD", "source": "buyer_message" },
-  "data_sharing": { "granted": false, "at": null, "scope": null, "source": null }
+  "follow_up": { "status": "granted", "at": "2026-10-23T10:00:00+06:00", "scope": "send the agreed summary", "source": "buyer_message" },
+  "marketing": { "status": "denied", "at": "2026-10-23T10:03:00+06:00", "scope": null, "source": "buyer_message" },
+  "booking": { "status": "granted", "at": "2026-10-23T10:02:00+06:00", "scope": "book 27 Oct 14:00", "source": "buyer_message" },
+  "payment": { "status": "granted", "at": "2026-10-23T10:05:00+06:00", "scope": "invoice 960 USD", "source": "buyer_message" },
+  "data_sharing": { "status": "unknown", "at": null, "scope": null, "source": "none" }
 }
 ```
 
 Rules:
 
+- `status` is `granted`, `denied`, `unknown`, or `withdrawn`.
+- A granted or withdrawn record requires `at`, `scope`, and `source`. A denied record requires `at` and `source`.
 - Opt-out is sticky until an explicit new opt-in for that purpose.
 - Transactional consent is not marketing consent.
-- A consent record includes timestamp, scope, and source.
+- Consent is limited to the recorded scope and purpose. A new amount, date, recipient, or channel requires a new scope check.
 - Deleting a conversation must respect retention and legal-hold rules.
 
 ---
@@ -204,13 +234,16 @@ Rules:
 1. `get_conversation` returns the latest state and version.
 2. `update_state` with a stale version → `conflict`; no overwrite.
 3. Same idempotency key replayed → no duplicate event.
-4. Consent set for follow-up does not enable marketing.
-5. Opt-out is preserved after a later generic "ok".
-6. `update_deal` cannot set `won` without a verified payment/contract reference.
-7. CRM timeout → agent does not claim persistence.
-8. Deletion request failure → agent does not claim deletion.
-9. Cross-tenant read → `unauthorized`, no data.
-10. Prompt-injection string in a note → stored as text, not executed.
+4. A merged state that would violate [`../../core/conversation-state.schema.json`](../../core/conversation-state.schema.json) → `invalid_request`; no partial write. A valid partial patch that merges cleanly is accepted.
+5. Consent set for follow-up does not enable marketing.
+6. Opt-out is preserved after a later generic "ok".
+7. A bare consent string or `granted: true` shorthand → `invalid_request`.
+8. A quote marked `accepted` without a buyer-confirmed exact quote version → `invalid_request` or ignored.
+9. `update_deal` cannot set `won` without a verified payment/contract reference.
+10. CRM timeout → agent does not claim persistence.
+11. Deletion request failure → agent does not claim deletion.
+12. Cross-tenant read → `unauthorized`, no data.
+13. Prompt-injection string in a note → stored as text, not executed.
 
 ---
 
@@ -218,7 +251,8 @@ Rules:
 
 An adapter must:
 
-- validate patches against the state schema;
+- validate patches against the state schema, including nested consent objects;
+- preserve quote versions and never promote a quote without buyer confirmation and the required approval reference;
 - enforce optimistic concurrency;
 - be idempotent on the provided key;
 - keep an append-only event log for material actions;

@@ -11,13 +11,15 @@ If a fact is not in an approved passport or returned by a tool, the agent must n
 | File | Purpose |
 |---|---|
 | [`TEMPLATE.md`](TEMPLATE.md) | Human-readable template and approval checklist |
-| [`passport.schema.json`](passport.schema.json) | Machine-readable JSON Schema (Draft 2020-12) |
+| [`passport.schema.json`](passport.schema.json) | Machine-readable JSON Schema (Draft 2020-12), version 1.1.0 |
 | [`examples/direct-sale-nimbus-notes.json`](examples/direct-sale-nimbus-notes.json) | Fictional direct-purchase example |
 | [`examples/direct-sale-nimbus-notes.md`](examples/direct-sale-nimbus-notes.md) | Human-readable companion |
 | [`examples/appointment-karkyra-consult.json`](examples/appointment-karkyra-consult.json) | Fictional appointment-booking example |
 | [`examples/appointment-karkyra-consult.md`](examples/appointment-karkyra-consult.md) | Human-readable companion |
+| [`examples/consumer-course-example.json`](examples/consumer-course-example.json) | Fictional B2C direct-purchase example |
+| [`examples/consumer-course-example.md`](examples/consumer-course-example.md) | Human-readable companion |
 
-Both examples are **fictional**. Names, domains (`.example.invalid`), prices, case studies, and calendars are invented to demonstrate the format. They are not real offers and must not be copied into production as facts.
+All three examples are **fictional**. Names, domains (`.example.invalid`), prices, case studies, and calendars are invented to demonstrate the format. They are not real offers and must not be copied into production as facts.
 
 ---
 
@@ -51,9 +53,10 @@ Every material fact in the JSON is an envelope:
 
 Rules enforced by the schema:
 
-- `verified` requires `source` and `verified_at`.
+- `verified` requires `source`, a non-null `verified_at`, and a non-null `value`.
 - `estimated` requires `source` and `notes`.
 - `unknown` may have `value: null`.
+- Money, percent, integer, and currency fields are typed: a plan price cannot be `"banana"`, and a discount percent cannot exceed 100.
 
 An empty field is not a fact. A field marked `unknown` is not permission to improvise.
 
@@ -83,7 +86,9 @@ Minimum behavior:
 - proof → `proof`, filtered by permission;
 - booking → `fulfillment.booking` + real calendar tool;
 - payment → `pricing`, `fulfillment.delivery` + payment tool;
-- discount request → `pricing.discount_policy`, `sales_policy.authority_limits`;
+- discount request → `pricing.discount_policy`, `sales_policy.authority_limits`, `sales_policy.negotiation`;
+- payment/quote → `pricing.quote_policy` + approved quote snapshot;
+- segment and objection guidance → `sales_guidance`;
 - follow-up → `follow_up`;
 - handoff → `handoff.routes`;
 - safety/privacy → `safety`, `privacy`.

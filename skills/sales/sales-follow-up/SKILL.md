@@ -1,7 +1,7 @@
 ---
 name: sales-follow-up
 description: "Follow up with consent, context, and a clean stop."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -31,13 +31,15 @@ This skill defines eligibility, timing, content, cadence, and stop rules. All ca
 - The buyer missed a booked appointment and the passport allows a recovery message.
 - A purchase is complete and a transactional onboarding check-in is appropriate.
 - A customer asked a question that could not be answered in the previous turn.
+- The buyer started a sales inquiry and the passport permits a bounded follow-up on that inquiry even though the buyer has not separately consented to marketing.
 - A legitimate re-engagement is permitted by consent and the passport.
 
 ## When Not to Use
 
 - The buyer refused, opted out, or asked not to be contacted.
 - The buyer asked for a human and the handoff is active.
-- There is no new information, no agreed next step, and no consent.
+- There is no new information, no agreed next step, no buyer-initiated inquiry, and no consent.
+- The passport's `follow_up.basis` does not include any basis that applies to this thread.
 - The passport has no cadence and the buyer did not request contact.
 - The message would be pure pressure ("just following up", "any update?", "last chance").
 - The buyer is in distress, angry, or a safety situation; use the integrity path.
@@ -51,7 +53,7 @@ This skill defines eligibility, timing, content, cadence, and stop rules. All ca
 | Consent to follow up | state / buyer's request | Do not send; ask once or stop |
 | Reason for the follow-up | state / agreed next step | Do not send |
 | New value or answer to deliver | passport / tool / human | Do not send a content-free reminder |
-| Cadence, channel, quiet hours | passport `follow_up` | Send only if buyer-initiated; otherwise stop |
+| Cadence, channel, quiet hours | passport `follow_up` | Send only if the basis and passport allow it; otherwise stop |
 | Attempt count and last contact | state / CRM | Treat as unknown; do not restart a sequence |
 | Timezone | buyer or passport | Ask before scheduling |
 | Opt-out status | state / CRM | Treat as opted out until verified |
@@ -63,27 +65,30 @@ This skill defines eligibility, timing, content, cadence, and stop rules. All ca
 
 A follow-up is eligible only if all are true:
 
-1. **Basis:** the buyer requested it, both sides agreed to it, or the passport explicitly permits this contact.
-2. **Consent:** the buyer has not opted out and the purpose matches the consent.
+1. **Basis:** one of the passport's `follow_up.basis` values applies. That includes `buyer_requested`, `agreed_next_step`, `existing_customer`, and `buyer_initiated_inquiry` (the buyer started the sales inquiry and the passport permits a bounded, transactional follow-up about it). `marketing_consent` is separate and never implied by a sales inquiry.
+2. **Consent:** the buyer has not opted out and the purpose matches the consent record.
 3. **Reason:** there is a concrete reason code, not "it's been a few days".
 4. **Value:** the message will add a fact, answer, document, decision aid, or verified next step.
 5. **Ownership:** no human has taken over the conversation.
 6. **Timing:** it is inside the passport's cadence and quiet hours.
 7. **Channel:** it is an approved channel for this buyer.
 
+A buyer-initiated inquiry is not an opt-in to marketing. It permits a short, relevant continuation of the buyer's own request, within the passport's attempt limit. It never permits an unrelated promotion.
+
 If any answer is no, do not send. Record why.
 
 Reason codes:
 
-| Reason code | Example |
-|---|---|
-| `buyer_requested` | "Напишите мне в понедельник" |
-| `agreed_next_step` | "I'll send the calculation by Thursday" |
-| `document_ready` | The proposal or invoice is ready |
-| `answer_ready` | The human/technical answer arrived |
-| `appointment_recovery` | The buyer missed a booked appointment |
-| `post_purchase` | Onboarding or delivery check-in |
-| `re_engagement` | Permitted marketing consent, with something new |
+| Reason code | Example | Basis |
+|---|---|---|
+| `buyer_requested` | "Напишите мне в понедельник" | `buyer_requested` |
+| `agreed_next_step` | "I'll send the calculation by Thursday" | `agreed_next_step` |
+| `buyer_initiated_inquiry` | The buyer asked for a price, then went quiet | `buyer_initiated_inquiry` |
+| `document_ready` | The proposal or invoice is ready | `agreed_next_step` |
+| `answer_ready` | The human/technical answer arrived | `buyer_requested` or `buyer_initiated_inquiry` |
+| `appointment_recovery` | The buyer missed a booked appointment | `agreed_next_step` |
+| `post_purchase` | Onboarding or delivery check-in | `existing_customer` |
+| `re_engagement` | Permitted marketing consent, with something new | `marketing_consent` |
 
 ### Step 2 — Choose the timing
 
@@ -138,6 +143,17 @@ Follow `sales-language-adaptation`:
 - Do not send the same content on two channels "just in case".
 - Do not schedule a message outside quiet hours because the tool is convenient.
 
+Scheduling lifecycle:
+
+1. Decide eligibility (Step 1) and the exact time (Step 2).
+2. Call the messaging adapter's `schedule_text` or `schedule_template` with the consent record, reason code, timezone, and `send_at`.
+3. A `created` response with a `scheduled_message_id` means the message is **queued, not sent**. Record it in `state.follow_up` (`status: scheduled`, `scheduled_message_id`, `next_due_at`).
+4. The adapter re-checks consent and opt-out at dispatch. If the buyer opted out or replied, the scheduled message must be cancelled; mark `close_reason`.
+5. The message is `sent` only when the adapter returns `sent`.
+6. When the buyer replies, mark `follow_up.status: replied` and cancel any pending schedule.
+
+Never tell the buyer a scheduled message was sent. Never let a scheduler bypass an opt-out.
+
 ### Step 6 — Interpret the response
 
 | Buyer response | Action |
@@ -155,15 +171,25 @@ Follow `sales-language-adaptation`:
 
 Silence is not consent. A read receipt is not consent. A click is not consent to a sales sequence.
 
+Distinguish the kinds of silence:
+
+- **Silence after a buyer-initiated inquiry** is not a refusal. If the passport's `basis` includes `buyer_initiated_inquiry`, one or two bounded, value-carrying follow-ups about that inquiry are allowed, then close the loop.
+- **Silence after an agreed next step** is not a refusal either, but it is the buyer's timing, not the agent's. Honor the cadence and stop at the limit.
+- **Silence after a refusal or an opt-out is not silence at all.** It is a stop. No further sends.
+
+Do not treat the absence of a reply as permission for marketing.
+
 ### Step 7 — Update state and close the loop
 
-Record:
+Record in `state.follow_up` and the CRM:
 
 - reason code, channel, timestamp, and send result;
+- basis (`buyer_requested`, `agreed_next_step`, `buyer_initiated_inquiry`, `existing_customer`, or `marketing_consent`);
+- lifecycle status (`none`, `eligible`, `scheduled`, `sent`, `replied`, `closed`, `blocked`);
 - attempt number for this reason and this conversation;
 - buyer response and sentiment;
-- next scheduled touch, if any;
-- opt-out status;
+- `scheduled_message_id` and next scheduled touch, if any;
+- opt-out status and any `close_reason`;
 - whether the thread is now owned by a human.
 
 When the cadence ends without a response, send at most one clean close-out if the passport allows it. Then stop. Do not restart the sequence under a new reason code to evade the limit.
@@ -348,7 +374,7 @@ Why: factual, no blame, offers a real path, accepts a no.
 
 ## Sources
 
-- Consent and electronic-marketing rules vary by jurisdiction. This skill follows the conservative rule of explicit, purpose-specific consent and immediate opt-out; it is not legal advice. See the U.S. FTC's CAN-SPAM guidance and the EU GDPR information on consent: <https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business> and <https://gdpr.eu/what-is-gdpr/>.
+- Consent and electronic-marketing rules vary by jurisdiction. This skill follows the conservative rule of explicit, purpose-specific consent and immediate opt-out; it is not legal advice. See the U.S. FTC's CAN-SPAM guidance and the official EU GDPR text on consent: <https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business> and <https://eur-lex.europa.eu/eli/reg/2016/679/oj>.
 - The "add value, not reminders" rule is an engineering decision informed by practitioner writing on follow-up, not a controlled study. No response-rate benchmark is claimed.
 - Gartner's B2B buying research describes buyers spending more time away from sellers and completing research independently; this supports usefulness over volume but does not prove a specific cadence: <https://www.gartner.com/en/sales/insights/b2b-buying-journey>.
 - Agent Skills specification for progressive disclosure: <https://agentskills.io/specification>.

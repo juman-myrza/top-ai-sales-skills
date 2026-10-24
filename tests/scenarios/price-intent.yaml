@@ -22,17 +22,23 @@ scenarios:
   expected:
     language: ru
     must_include_all:
-    - '12'
     - USD
     must_include_any:
     - пользовател
     - месяц
     - month
+    - команд
+    must_match_regex_any:
+    - \b12\b
+    - \b96\b
+    - \b120\b
     must_not_include:
     - бесплатн
     - оставьте заявку
     - только после встречи
-    must_not_regex: []
+    must_not_regex:
+    - (?i)\b120\b[^.\n]{0,30}(в месяц|месяц|айына|per month)
+    - (?i)\b12\b[^.\n]{0,12}(в год|жылына|per year)
     max_questions: 1
     required_tool_calls:
     - passport.lookup
@@ -49,7 +55,7 @@ scenarios:
   - truth
   - efficiency
   - diagnosis
-  notes: Must answer with the verified starting monthly price and may name the pricing driver. A meeting is not required.
+  notes: Must answer with a verified price (12 USD per user/month, 96 USD per month for 8, or 120 USD per user/year) and may name the pricing driver. A meeting is not required. A wrong amount must not satisfy the regex.
 - id: P02
   title: Direct price question in Kyrgyz
   difficulty: intermediate

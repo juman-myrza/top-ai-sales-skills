@@ -15,7 +15,7 @@ They are prior art for "sales skills for AI agents." The goal was to learn what 
 |---|---|---|---|---|
 | [`louisblythe/Sales-Skills`](https://github.com/louisblythe/Sales-Skills) | 122 skills: core sales, strategy, AI-SDR/bot | MIT per README (fork; GitHub API shows no license on the fork) | Breadth; names the operational gaps (handoff, timezone, compliance, memory); simple `SKILL.md` structure | Adds a strict passport boundary, tool-confirmation rules, failure semantics, a scenario corpus, and a multilingual focus |
 | [`aixier/top_ai_sales`](https://github.com/aixier/top_ai_sales) | Chinese AI sales assistant concept | MIT | Modular skill idea; CRM/knowledge-base ambition; explicit privacy intent | Rejects unverifiable success-rate claims; provides runnable validation and explicit "not implemented" boundaries |
-| [`TheCraigHewitt/sales-skills`](https://github.com/TheCraigHewitt/sales-skills) | 21 B2B lifecycle skills | MIT | Clear lifecycle coverage; shared `sales-context`; validator script; practical tone | Separates facts from instructions; adds machine-readable passport, tool contracts, and 51 test scenarios |
+| [`TheCraigHewitt/sales-skills`](https://github.com/TheCraigHewitt/sales-skills) | 21 B2B lifecycle skills | MIT | Clear lifecycle coverage; shared `sales-context`; validator script; practical tone | Separates facts from instructions; adds machine-readable passport, tool contracts, and 57 test scenarios |
 
 ---
 
@@ -145,7 +145,7 @@ They are prior art for "sales skills for AI agents." The goal was to learn what 
 | In-chat booking | Often a Calendly link | Availability → consent → booking → confirmation, with conflict/timeout scenarios |
 | Russian/Kyrgyz/mixed | Rare | Dedicated skill, phrasebook, scenarios, native-review flag |
 | Integrity and refusal | Mixed; some collections include pressure tactics | Hard fails for fabrication, fake identity/scarcity, privacy, minors, fraud |
-| Test corpus | Usually none | 51 scenarios, deterministic checker, rubric, coverage map |
+| Test corpus | Usually none | 57 scenarios, deterministic checker, checker regression tests, rubric, coverage map |
 | Honest implementation status | Often implied working integrations | Every example binding says `not_implemented`; contracts are specifications |
 | License and attribution | Varies | MIT for original code/text; sources attributed; no copied skill text |
 

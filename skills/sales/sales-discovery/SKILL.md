@@ -1,7 +1,7 @@
 ---
 name: sales-discovery
 description: "Diagnose buyer pain, impact, and decision criteria."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -50,10 +50,12 @@ Product-specific pains, use cases, and qualifiers come from the passport. This s
 
 | Input | Source | Why |
 |---|---|---|
-| Passport problem/use-case map | passport `offer`, `audience` | Keeps questions relevant |
+| Offer, outcomes, and segments | passport `offer`, `sales_guidance.segments` | Keeps questions relevant and grounds insights |
+| Recommendation rules | passport `discovery.recommendation_rules` | Tells you which fact changes the recommendation |
 | Qualification outcome | state | Avoids discovering with a non-fit |
 | Known facts | state | Prevents repetition |
 | Product constraints | passport `fulfillment`, `pricing` | Avoids recommending something impossible |
+| Objection guidance and alternatives | passport `sales_guidance.objection_guidance`, `sales_guidance.alternatives` | Distinguishes a real barrier from a scripted objection |
 | Buyer's language/register | state | Natural questioning |
 | Consent to continue | conversation | Discovery is a voluntary conversation, not an interrogation |
 
@@ -91,6 +93,21 @@ Move from symptom to cause:
 
 Do not accept the first framing. A buyer may say "we need more leads" when the real issue is follow-up speed. Test the framing gently, not argumentatively.
 
+### Step 3a — Reframe with a verified insight, as a hypothesis
+
+A relevant insight can help the buyer see their situation differently. It must come from a verified passport fact, be connected to what the buyer said, and be offered as something they can reject.
+
+Shape: "[buyer's situation] means [verified mechanism], which is why [verified consequence]. Does that match how it works for you?"
+
+Example: "You said evening messages wait until morning. In the documented onboarding report, the teams that fixed response time changed the routing rule, not the number of staff. Is the routing rule something you control today?"
+
+Rules:
+
+- The insight must be relevant to the buyer's stated problem, not a memorized industry statistic.
+- Never manufacture a problem or amplify fear. If the passport has no relevant insight, ask another diagnostic question instead.
+- If the buyer disagrees, accept it, update the diagnosis, and do not repeat the reframe.
+- A reframe is not a pitch. Do not attach a feature to it in the same breath; let the buyer react first.
+
 ### Step 4 — Explore impact, with the buyer's numbers
 
 Impact can be revenue, cost, time, risk, customer experience, or stress. Ask which impact matters to the buyer; do not assume it is money.
@@ -98,6 +115,8 @@ Impact can be revenue, cost, time, risk, customer experience, or stress. Ask whi
 Use buyer-provided numbers. If the buyer does not know, offer a range and label it as an estimate. Never invent a baseline to make the gap look bigger.
 
 Example: "You said about 30 inquiries a week and roughly 1 in 5 waits more than an hour. That's about 6 delayed inquiries a week — is that roughly right, or is the delay more frequent?"
+
+Keep the arithmetic defensible. A theoretical ceiling built from gross revenue can dominate the conversation while ignoring margin, fulfillment capacity, implementation effort, and the share of inquiries that could realistically be recovered. Prefer the buyer's own recoverable estimate, name what the number excludes, and if the inputs are too weak, offer a measurement plan instead of a dramatic upper bound. Do not invent a plausible-sounding assumption just to finish a formula.
 
 ### Step 5 — Define the future state
 
@@ -124,6 +143,30 @@ Understand, without interrogating:
 
 Record what is explicit versus inferred.
 
+### Step 6a — Diagnose the barrier and adoption risk
+
+Before recommending, identify the main barrier and any adoption risk. A purchase that is technically a fit can still fail because the team will not use it.
+
+Ask, without interrogating:
+
+- What has the buyer already tried, and why did it stop working?
+- Who has to change how they work if this is adopted?
+- What would make the first 30 days a success, or a failure?
+- Is the blocker the decision, the money, the timing, the trust, or the change itself?
+
+Record the barrier in `diagnosis.barrier` and the readiness in `diagnosis.buying_readiness`. Different barriers need different moves:
+
+| Barrier | Likely next move |
+|---|---|
+| `unclear_value` | Connect a verified capability to the buyer's stated outcome |
+| `no_urgency` | Ask what the cost of waiting is, in the buyer's own terms; do not invent a deadline |
+| `no_trust` | Offer verifiable evidence, a smaller step, or a human reference process |
+| `price` or `budget` | Clarify the comparison basis and the decision constraints before discussing any concession |
+| `authority` | Equip the buyer with accurate material for the decider; do not ask them to sell blind |
+| `status_quo` | Compare the cost of the current process using the buyer's numbers |
+| `risk` or `adoption` | Address the implementation path, who owns it, and what has failed before |
+| `fit` | Stop and disqualify honestly |
+
 ### Step 7 — Summarize and confirm
 
 Before moving to value or closing, summarize in the buyer's language:
@@ -136,11 +179,14 @@ A good summary does three things: proves listening, exposes misunderstandings, a
 
 Discovery is complete when you can make a relevant recommendation and identify the next decision. It is not complete when you have asked every question in a framework.
 
+When a new answer changes the recommendation, say so and update it. Discovery that never changes the agent's mind is a questionnaire.
+
 Signs you have enough:
 
 - you can state the buyer's problem in one sentence they agree with;
 - you know which capability is relevant and which is not;
 - you know the main decision criterion and who decides;
+- you know the main barrier and any adoption risk;
 - you know the constraint that could block the sale;
 - further questions would not change the recommendation.
 
@@ -207,6 +253,27 @@ Signs you have enough:
 - Ask one question to determine relevance.
 - Do not launch into a full feature list.
 - Offer a link or document only if it is approved and useful.
+
+### Buyer tried something similar and it failed
+
+- Ask what specifically failed: the tool, the process, the adoption, or the ownership.
+- Do not dismiss the prior experience or blame the buyer.
+- Check whether the passport's documented mechanism addresses that failure.
+- If it does not, say so; do not invent a fix.
+
+### Buyer worries the team will not use it
+
+- Treat adoption as a real objection, not a delay tactic.
+- Ask who has to change, what training or support exists, and what a successful first month looks like.
+- Recommend the smallest adoption path the passport supports.
+- Do not promise adoption outcomes that were not measured.
+
+### Buyer is buying for someone else (consumer or gift)
+
+- Check `offer.buyer_types`. If `b2c` is allowed, qualify the end user's situation.
+- Ask what the recipient needs, without collecting unnecessary personal data about a third party.
+- Confirm who will pay, who will use, and what data is required at purchase.
+- Do not pressure a gift decision with false deadlines.
 
 ## Stopping Conditions
 
@@ -293,6 +360,9 @@ Why: does not push; asks what the decision will be judged on.
 - **Endless discovery:** refusing to recommend until the buyer fills a 20-field form.
 - **Weaponized silence:** using pauses or guilt to force the buyer to reveal more.
 - **Ignoring the answer:** asking the next scripted question when the buyer just revealed the real issue.
+- **Manufactured insight:** delivering a "nobody tells you this" reframe that is not in the passport or not connected to the buyer's situation.
+- **Adoption blind spot:** recommending a solution without asking who has to change their work or why the last one failed.
+- **Frozen diagnosis:** collecting a new answer that contradicts the current recommendation and never updating it.
 
 ## Dependencies
 

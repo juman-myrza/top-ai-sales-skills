@@ -72,9 +72,33 @@ def main() -> int:
     temp_root = Path(tempfile.mkdtemp(prefix="hermes-skills-", dir=os.environ.get("TMPDIR", "/tmp/opencode")))
     home = temp_root
     destination = home / "skills" / "sales"
-    destination.mkdir(parents=True)
-    for skill_md in skills:
-        shutil.copytree(skill_md.parent, destination / skill_md.parent.name)
+    # Install with the real installer so discovery runs against the artifact a
+    # user actually gets (shared references, activation block, manifest), not a
+    # bare copy of the skill directories.
+    install = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "install_skills.py"),
+            "--target",
+            str(home),
+            "--apply",
+            "--force",
+            "--skip-validate",
+            "--no-backup",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if install.returncode != 0:
+        print("FAIL  installer could not prepare the isolated home", file=sys.stderr)
+        print(install.stdout, file=sys.stderr)
+        print(install.stderr, file=sys.stderr)
+        return 1
+    if not destination.is_dir():
+        print(f"FAIL  installer did not create {destination}", file=sys.stderr)
+        return 1
 
     env = os.environ.copy()
     env.update(

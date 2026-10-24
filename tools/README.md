@@ -32,7 +32,7 @@ Every request uses the shape in [`schemas/tool-envelope.schema.json`](schemas/to
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "calendar.availability",
   "request_id": "req_01J...",
   "tenant_id": "tenant_demo",
@@ -57,7 +57,7 @@ Every response:
   "meta": {
     "server_time": "2026-10-23T10:00:00+06:00",
     "source": "calendar-provider",
-    "contract_version": "1.0.0"
+    "contract_version": "1.1.0"
   }
 }
 ```
@@ -69,7 +69,7 @@ Rules:
 - `error.code` is for the runtime and logs, not for the buyer. The buyer gets a plain-language message.
 - `meta.source` and `meta.server_time` are required for audit.
 - A response without a matching `request_id` is invalid.
-- A response from a different `tenant_id` is invalid.
+- When the response includes `tenant_id`, it must equal the request's `tenant_id`. The runtime must bind a response to the request it actually sent and reject a mismatched or unsolicited response. Do not trust a model-selected `request_id` or `tenant_id` as proof of isolation; the binding must be held by the runtime, not re-derived from model output.
 
 ---
 

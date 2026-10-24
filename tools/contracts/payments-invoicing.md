@@ -1,6 +1,6 @@
 # Contract: `payments.invoicing`
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Kind:** write (payment request / invoice / refund) + read (status)  
 **Adapter status in this repository:** not implemented
 
@@ -43,7 +43,7 @@ An agent should normally use `create_payment_request` or `create_invoice`; `refu
 
 ```json
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "tool": "payments.invoicing",
   "request_id": "req_01J9Z6D1",
   "tenant_id": "tenant_demo",
@@ -52,11 +52,15 @@ An agent should normally use `create_payment_request` or `create_invoice`; `refu
   "idempotency_key": "invoice:tenant_demo:conv_123:nimbus-notes-team:annual:8:usd",
   "params": {
     "operation": "create_invoice",
+    "quote_id": "quote_demo_001",
+    "quote_version": "1.0.0",
     "offer_id": "nimbus-notes-team",
     "plan_id": "annual",
     "quantity": 8,
     "amount": 960,
     "currency": "USD",
+    "terms_snapshot": "Annual plan for 8 users. 960 USD before tax. Taxes excluded. 14-day money-back on the first purchase.",
+    "discount_approval_ref": null,
     "description": "Nimbus Notes Team, annual, 8 users",
     "customer": {
       "name": "Айжан",
@@ -66,9 +70,10 @@ An agent should normally use `create_payment_request` or `create_invoice`; `refu
       "tax_id": null
     },
     "consent": {
-      "given": true,
+      "status": "granted",
       "at": "2026-10-23T10:05:00+06:00",
-      "scope": "issue an invoice for 960 USD and send it to the provided email"
+      "scope": "issue an invoice for quote_demo_001 version 1.0.0, 960 USD, and send it to the provided email",
+      "source": "buyer_message"
     },
     "payment_method": "bank_transfer",
     "due_days": 7
@@ -81,23 +86,30 @@ An agent should normally use `create_payment_request` or `create_invoice`; `refu
 | Field | Type | Required | Rules |
 |---|---|---|---|
 | `operation` | enum | yes | See operations |
-| `offer_id` / `plan_id` | string | yes | Must exist in the approved passport |
-| `quantity` | integer | yes | 1–10000; must be explicit |
-| `amount` | number | yes | Must equal `unit_price × quantity` within rounding; server recomputes |
-| `currency` | ISO 4217 | yes | Must match the passport |
+| `quote_id` / `quote_version` | string | yes | Must reference an approved, unexpired quote snapshot; server loads it and ignores client-side price changes |
+| `offer_id` / `plan_id` | string | yes | Must exist in the approved passport and match the quote |
+| `quantity` | integer | yes | 1–10000; must equal the quote quantity |
+| `amount` | number | yes | Must equal the quote `total_amount` within rounding; server recomputes and rejects any mismatch |
+| `currency` | ISO 4217 | yes | Must match the passport and quote |
+| `terms_snapshot` | string | yes | The exact terms the buyer confirmed; must match the stored quote terms hash/text |
+| `discount_approval_ref` | string or null | discount | Required when discount > agent authority or custom terms are used |
 | `description` | string | yes | Plain, accurate, no marketing |
 | `customer.name` | string | yes | Buyer-provided |
 | `customer.email` | string | yes | Buyer-provided; do not guess |
 | `customer.legal_entity` | string or null | invoice | Required for B2B invoice if the passport requires it |
 | `customer.billing_country` | ISO 3166-1 alpha-2 | invoice | Used for tax; do not infer from language |
 | `customer.tax_id` | string or null | no | Only if required and consented |
-| `consent.given` | boolean | yes | Must be true |
-| `consent.at` | ISO-8601 | yes | When the buyer confirmed the amount and terms |
+| `consent.status` | `granted, denied, unknown, withdrawn` | yes | Must be `granted`; anything else is a hard stop |
+| `consent.at` | ISO-8601 | yes | When the buyer confirmed the exact quote version, amount, and terms |
+| `consent.scope` | string | yes | Must name the quote ID/version and total |
+| `consent.source` | enum | yes | Copy from canonical state |
 | `payment_method` | enum | yes | From passport (`card`, `bank_transfer`, etc.) |
 | `due_days` | integer | invoice | From passport; server caps |
 | `payment_request_id` / `invoice_id` | string | status/refund/void | Existing resource |
 
-The server must recompute the amount from the approved price book. If the request amount differs, return `invalid_request` or `conflict`; never charge the requested amount silently.
+The server must load the approved quote referenced by `quote_id` and `quote_version`, then recompute the amount from the approved price book and the recorded scope. If the request amount, currency, quantity, tax treatment, or terms differ from the quote, return `invalid_request` or `conflict`; never charge the requested amount silently.
+
+A discounted or custom quote is valid only when its `approval_ref` is present and resolves to an approval from the passport's authority owner. A standard quote may have `approval_ref: null`. An expired quote returns `expired`; the agent must re-quote and obtain fresh confirmation. A quote with `valid_until: null` is open-ended only when the passport documents an open-ended validity plus a review policy; the tool must still reject it after the passport's review window or on a version change.
 
 ---
 
@@ -129,7 +141,7 @@ The server must recompute the amount from the approved price book. If the reques
   "meta": {
     "server_time": "2026-10-23T10:05:02+06:00",
     "source": "payment-provider",
-    "contract_version": "1.0.0",
+    "contract_version": "1.1.0",
     "trace_id": "trace_abc126"
   }
 }
@@ -161,7 +173,7 @@ The server must recompute the amount from the approved price book. If the reques
   "meta": {
     "server_time": "2026-10-23T10:10:00+06:00",
     "source": "payment-provider",
-    "contract_version": "1.0.0"
+    "contract_version": "1.1.0"
   }
 }
 ```
@@ -209,6 +221,8 @@ The server must recompute the amount from the approved price book. If the reques
 | Payment pending | "Платёж пока в обработке. Я не буду отмечать его как оплаченный, пока статус не подтвердится." | "Оплачено" because the buyer said so |
 | Card declined | "Платёж не прошёл. Банк не подтвердил операцию. Могу предложить другой способ или повтор." | Ask for card details in chat |
 | Amount mismatch | "Сумма не совпала с утверждённой. Я не буду выставлять счёт, пока не проверю." | Charge the buyer's stated amount |
+| Quote expired | "Срок предложения истёк. Проверю актуальные условия и попрошу подтвердить новую версию." | Reuse the old amount or imply it is still guaranteed |
+| Discount above authority | "Эта скидка требует согласования. Я не буду выставлять счёт по несогласованной сумме." | Charge first and seek approval later |
 | Currency mismatch | "Валюта не совпадает с условиями. Передам человеку." | Convert silently |
 | Timeout | "Статус платежа неизвестен. Проверю по номеру; если не получится — передам человеку." | Retry with a new key |
 | Duplicate request | Return original invoice/payment | Create a second charge |
@@ -255,19 +269,21 @@ Retry: query status first. Retry a write only with the same idempotency key and 
 
 ## 12. Acceptance tests
 
-1. Create invoice → `created`, correct amount, no "paid" claim.
-2. Amount mismatch → rejected; no charge.
-3. Currency mismatch → rejected.
-4. Same idempotency key replayed → same invoice, no duplicate.
-5. Same key with different amount → `idempotency_conflict`.
-6. Payment pending → agent says pending, does not mark won.
-7. Payment paid via verified webhook → agent confirms with receipt.
-8. Buyer says "I paid" but status pending → agent does not confirm.
-9. Timeout → status query by key; no second charge.
-10. Refund without authority → handoff; no promise.
-11. Refund confirmed → agent states amount and verified timeline.
-12. Webhook with bad signature → rejected.
-13. Unrecognized status → not paid.
+1. Create invoice from an approved quote → `created`, correct amount, no "paid" claim.
+2. Missing or mismatched `quote_id`/`quote_version` → rejected; no charge.
+3. Amount, quantity, currency, or terms mismatch against the quote → rejected; no charge.
+4. A discounted quote without a valid approval reference → rejected.
+5. An expired quote → `expired`; no charge.
+6. Same idempotency key replayed → same invoice, no duplicate.
+7. Same key with different amount → `idempotency_conflict`.
+8. Payment pending → agent says pending, does not mark won.
+9. Payment paid via verified webhook → agent confirms with receipt.
+10. Buyer says "I paid" but status pending → agent does not confirm.
+11. Timeout → status query by key; no second charge.
+12. Refund without authority → handoff; no promise.
+13. Refund confirmed → agent states amount and verified timeline.
+14. Webhook with bad signature → rejected.
+15. Unrecognized status → not paid.
 
 ---
 
@@ -275,8 +291,9 @@ Retry: query status first. Retry a write only with the same idempotency key and 
 
 An adapter must:
 
-- recompute amounts from the approved price book;
-- enforce currency, tax behavior, and plan status;
+- load and validate the approved quote version before creating anything;
+- recompute amounts from the approved price book and recorded quote scope;
+- enforce currency, tax behavior, quote validity, discount approval, and plan status;
 - support idempotency keys and status lookup;
 - verify webhooks;
 - separate `created`, `pending`, `paid`, `failed`, and `refunded`;

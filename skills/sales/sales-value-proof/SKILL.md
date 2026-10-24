@@ -1,7 +1,7 @@
 ---
 name: sales-value-proof
 description: "Prove value with verified evidence, never invented claims."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -68,18 +68,24 @@ If the buyer corrects you, update before continuing. A proof aimed at the wrong 
 
 ### Step 2 — Choose the smallest relevant proof
 
-Use the evidence hierarchy:
+There is no single "best" evidence type. Choose the evidence that best matches the claim and the buyer's actual uncertainty. A verified generic fact does not beat the buyer's own number when the question is about the buyer's situation; a documented outcome beats a generic fact when the question is "does this actually work?".
 
-| Rank | Evidence | Use when | Rule |
-|---|---|---|---|
-| 1 | Verified passport fact about the offer | Always | State directly with scope/conditions |
-| 2 | Verified customer outcome with permission | Buyer asks for results | Name the source only if permitted; otherwise anonymize as allowed |
-| 3 | Verified third-party data | Buyer asks for market context | Cite source and date |
-| 4 | Buyer-provided numbers in a calculation | Buyer wants a business case | Show formula and assumptions |
-| 5 | Clearly labeled estimate or scenario | No measured data exists | Say "estimate" and explain assumptions |
-| 6 | General principle or analogy | Buyer needs orientation | Do not dress it as a result |
+| Evidence | Best for | Rule |
+|---|---|---|
+| Verified passport fact about the offer | "What does it do?" | State directly with scope and conditions |
+| Verified customer outcome with permission | "What results did others get?" | Match the segment and mechanism; name the source only if permitted |
+| Verified third-party data | "What is normal in the market?" | Cite source and date |
+| Buyer-provided numbers in a calculation | "What would this mean for us?" | Show the formula and assumptions; attribute the numbers |
+| Clearly labeled estimate or scenario | "What could happen?" when no measured data exists | Say "estimate" and explain assumptions |
+| General principle or analogy | Orientation only | Do not dress it as a result |
 
-Never upgrade a lower-ranked item into a higher one. A scenario is not a case study. A case study is not a guarantee.
+Rules:
+
+- Never upgrade a weaker item into a stronger one. A scenario is not a case study. A case study is not a guarantee.
+- Relevance beats volume: one matching proof is better than five adjacent ones.
+- If the case study's segment or mechanism differs from the buyer's, say that it is adjacent, not equivalent.
+- State the uncertainty the evidence does not remove. Do not let a strong case study imply a guarantee.
+- If the buyer's own data contradicts a passport statistic, use the buyer's data for their calculation and present the passport figure only as a labeled benchmark.
 
 ### Step 3 — Connect capability → mechanism → outcome
 
@@ -131,6 +137,19 @@ Ask:
 - "Does that answer the question, or is there a gap?"
 
 Do not ask "Do you see the value now?" That invites performance, not honesty. Do not treat silence as agreement.
+
+### Step 6a — Make a recommendation, not a menu
+
+When the buyer is choosing between plans or options, do not hand over an unranked feature table. Synthesize:
+
+- the one option that best fits the buyer's stated criteria;
+- the reason it fits, tied to a verified fact;
+- the trade-off the buyer accepts by choosing it;
+- the one condition that would change the recommendation.
+
+Shape: "For [stated goal] and [main criterion], I would start with [option] because [verified reason]. The trade-off is [verified limitation]. If [condition] matters more than we discussed, [other option] would be worth a look."
+
+If the buyer genuinely has two equally valid paths, say what each path optimizes and ask which matters more. Do not present ten options and call it helpful.
 
 ### Step 7 — Stop when the value is clear or the gap is evidence
 
@@ -263,6 +282,9 @@ Why: fair, specific, admits the gap, and returns the decision to the buyer's cri
 - **Testimonial without permission:** sharing a customer name or quote that is not approved.
 - **False uniqueness:** "На рынке нет никого, кто это делает" without evidence.
 - **Pressure through ROI:** "Вы же не хотите терять такие деньги?" used to force a decision.
+- **Evidence dump:** every case study and statistic, whether or not it matches the buyer's situation.
+- **Menu, not advice:** listing five plans with no recommendation and calling it neutrality.
+- **Misapplied proof:** presenting an adjacent-segment case as if it were the buyer's segment.
 
 ## Dependencies
 

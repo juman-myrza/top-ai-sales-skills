@@ -1,0 +1,1338 @@
+{
+  "schema_version": "1.1.0",
+  "passport_id": "direct-sale-nimbus-notes",
+  "version": "1.1.0",
+  "status": "approved",
+  "effective_from": "2026-01-01",
+  "effective_to": "2026-12-31",
+  "default_locale": "ru",
+  "business": {
+    "legal_name": {
+      "value": "Nimbus Notes Demo LLC",
+      "status": "verified",
+      "source": "Fictional example — not a real company",
+      "verified_at": "2026-10-20"
+    },
+    "display_name": "Nimbus Notes",
+    "description": {
+      "value": "A fictional shared workspace for small teams to organize notes, tasks, and customer research.",
+      "status": "verified",
+      "source": "Fictional example — not a real product",
+      "verified_at": "2026-10-20"
+    },
+    "website": {
+      "value": "https://nimbus-notes.example.invalid",
+      "status": "verified",
+      "source": "Fictional example — reserved .invalid domain",
+      "verified_at": "2026-10-20"
+    },
+    "markets": [
+      {
+        "value": "Kyrgyzstan",
+        "status": "verified",
+        "source": "Fictional example — market plan",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Kazakhstan",
+        "status": "estimated",
+        "source": "Fictional example — expansion plan",
+        "verified_at": null,
+        "notes": "Planned for 2027; not yet approved for sales."
+      }
+    ],
+    "timezone": {
+      "value": "Asia/Bishkek",
+      "status": "verified",
+      "source": "Fictional example — operating plan",
+      "verified_at": "2026-10-20"
+    },
+    "support_contact": {
+      "value": "support@nimbus-notes.example.invalid, Mon–Fri 09:00–18:00 Asia/Bishkek",
+      "status": "verified",
+      "source": "Fictional example — support plan",
+      "verified_at": "2026-10-20"
+    },
+    "languages": [
+      "ru",
+      "ky",
+      "en"
+    ]
+  },
+  "offer": {
+    "id": "nimbus-notes-team",
+    "name": "Nimbus Notes Team",
+    "type": "subscription",
+    "one_liner": {
+      "value": "A shared workspace for team notes, tasks, and customer research, with role-based access.",
+      "status": "verified",
+      "source": "Fictional example — product brief",
+      "verified_at": "2026-10-20"
+    },
+    "outcomes": [
+      {
+        "value": "Team notes, tasks, and research live in one searchable workspace.",
+        "status": "verified",
+        "source": "Fictional example — product brief",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Admins can assign viewer, editor, and admin roles.",
+        "status": "verified",
+        "source": "Fictional example — product brief",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "includes": [
+      {
+        "value": "Unlimited notes and tasks for licensed users",
+        "status": "verified",
+        "source": "Fictional example — plan description",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Role-based access and audit log",
+        "status": "verified",
+        "source": "Fictional example — plan description",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Email support during business hours",
+        "status": "verified",
+        "source": "Fictional example — support plan",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "excludes": [
+      {
+        "value": "On-premise deployment",
+        "status": "verified",
+        "source": "Fictional example — product brief",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "HIPAA business associate agreement",
+        "status": "verified",
+        "source": "Fictional example — compliance scope",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Custom development",
+        "status": "verified",
+        "source": "Fictional example — product brief",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "prerequisites": [
+      {
+        "value": "A supported browser and an email address for each user",
+        "status": "verified",
+        "source": "Fictional example — product brief",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "support": {
+      "value": "Email support, Mon–Fri 09:00–18:00 Asia/Bishkek; no 24/7 SLA on this plan.",
+      "status": "verified",
+      "source": "Fictional example — support plan",
+      "verified_at": "2026-10-20"
+    },
+    "status": "active",
+    "buyer_types": [
+      "b2b"
+    ]
+  },
+  "pricing": {
+    "currency": {
+      "value": "USD",
+      "status": "verified",
+      "source": "Fictional example — price book",
+      "verified_at": "2026-10-20"
+    },
+    "tax_behavior": "excluded",
+    "plans": [
+      {
+        "id": "monthly",
+        "name": "Monthly",
+        "billing_period": "monthly",
+        "price": {
+          "value": 12,
+          "status": "verified",
+          "source": "Fictional example — price book 2026",
+          "verified_at": "2026-10-20",
+          "notes": "USD per user per month, taxes excluded."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Fictional example — price book 2026",
+          "verified_at": "2026-10-20"
+        },
+        "minimum_term": {
+          "value": "None; month-to-month",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-20"
+        },
+        "cancellation": {
+          "value": "Cancel anytime; access continues until the end of the paid month. No partial-month refund.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-20"
+        },
+        "refund": {
+          "value": "14-day money-back on the first purchase, one refund per customer.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-20"
+        },
+        "status": "active"
+      },
+      {
+        "id": "annual",
+        "name": "Annual",
+        "billing_period": "annual",
+        "price": {
+          "value": 120,
+          "status": "verified",
+          "source": "Fictional example — price book 2026",
+          "verified_at": "2026-10-20",
+          "notes": "USD per user per year, equivalent to 10 monthly payments; taxes excluded."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Fictional example — price book 2026",
+          "verified_at": "2026-10-20"
+        },
+        "minimum_term": {
+          "value": "12 months from activation",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-20"
+        },
+        "cancellation": {
+          "value": "Cancel anytime; no refund for the remaining term after the 14-day window.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-20"
+        },
+        "refund": {
+          "value": "14-day money-back on the first purchase, one refund per customer.",
+          "status": "verified",
+          "source": "Fictional example — terms",
+          "verified_at": "2026-10-20"
+        },
+        "status": "active"
+      }
+    ],
+    "payment_methods": [
+      {
+        "value": "Card payment through the approved payment provider",
+        "status": "verified",
+        "source": "Fictional example — billing plan",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Bank transfer against an invoice for annual plans",
+        "status": "verified",
+        "source": "Fictional example — billing plan",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "invoice_policy": {
+      "value": "Invoices are issued for annual bank-transfer purchases after the buyer confirms the legal entity and billing details. Card purchases receive a receipt from the payment provider.",
+      "status": "verified",
+      "source": "Fictional example — billing plan",
+      "verified_at": "2026-10-20"
+    },
+    "discount_policy": {
+      "allowed": true,
+      "max_percent": {
+        "value": 150,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      },
+      "approval_threshold_percent": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20",
+        "notes": "At or below 10% may be offered by the agent; above 10% requires a sales lead."
+      },
+      "stacking": {
+        "value": "Not allowed; one discount per order.",
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      },
+      "conditions": [
+        {
+          "value": "Annual prepayment only",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        {
+          "value": "Registered nonprofit discount of 10%, subject to verification",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        }
+      ]
+    },
+    "quote_policy": {
+      "required_for_discount": true,
+      "required_for_custom_terms": true,
+      "validity_days": {
+        "value": 14,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      },
+      "terms_snapshot_required": true,
+      "approved_quote_required_for_payment": true
+    }
+  },
+  "qualification": {
+    "fit_criteria": [
+      {
+        "value": "A team of 3–200 people that regularly shares notes, tasks, or customer research.",
+        "status": "verified",
+        "source": "Fictional example — ideal customer profile",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "The buyer can use a cloud workspace and does not require on-premise deployment.",
+        "status": "verified",
+        "source": "Fictional example — ideal customer profile",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "disqualifiers": [
+      {
+        "value": "Requires an on-premise deployment.",
+        "status": "verified",
+        "source": "Fictional example — product scope",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Requires a HIPAA business associate agreement.",
+        "status": "verified",
+        "source": "Fictional example — compliance scope",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "required_fields": [
+      "team_size",
+      "use_case",
+      "current_tool",
+      "timeline",
+      "decision_role"
+    ],
+    "decision_roles": [
+      {
+        "value": "Team lead or operations lead — primary user and champion",
+        "status": "verified",
+        "source": "Fictional example — sales playbook",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "IT/admin — reviews access and data handling for larger teams",
+        "status": "verified",
+        "source": "Fictional example — sales playbook",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Finance — approves annual prepayment above the agent's authority",
+        "status": "verified",
+        "source": "Fictional example — sales playbook",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "service_area": {
+      "value": "Kyrgyzstan; other markets require a human check because tax and payment support are unverified.",
+      "status": "verified",
+      "source": "Fictional example — market plan",
+      "verified_at": "2026-10-20"
+    }
+  },
+  "discovery": {
+    "required_fields": [
+      "team_size",
+      "primary_use_case",
+      "current_process",
+      "decision_process",
+      "target_start_date"
+    ],
+    "optional_fields": [
+      "security_requirements",
+      "integrations_needed",
+      "budget_range",
+      "past_tool_experience"
+    ],
+    "recommendation_rules": [
+      {
+        "value": "If the buyer expects to use the workspace for 12+ months, show the annual plan and the effective monthly price; do not push it if cash flow is a stated constraint.",
+        "status": "verified",
+        "source": "Fictional example — sales playbook",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "If the buyer requires SSO, on-premise, or a HIPAA BAA, stop and disqualify; these are not included.",
+        "status": "verified",
+        "source": "Fictional example — product scope",
+        "verified_at": "2026-10-20"
+      }
+    ]
+  },
+  "proof": {
+    "cases": [
+      {
+        "id": "case-1",
+        "title": {
+          "value": "A 40-person research team consolidated three note tools into one workspace",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "client_name": {
+          "value": "Fictional client: Alatoo Research",
+          "status": "verified",
+          "source": "Fictional example — written permission on file",
+          "verified_at": "2026-10-20"
+        },
+        "outcome": {
+          "value": "The team reported one workspace and a single search flow; no revenue or time-savings figure was independently measured.",
+          "status": "verified",
+          "source": "Fictional example — case study, client-approved",
+          "verified_at": "2026-10-20"
+        },
+        "permission": "public",
+        "source": {
+          "value": "Fictional example — approved case study PDF v2",
+          "status": "verified",
+          "source": "Fictional example — permission record",
+          "verified_at": "2026-10-20"
+        },
+        "segment": {
+          "value": "40-person research team",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "baseline": {
+          "value": "Three separate note tools before the change.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "intervention": {
+          "value": "Consolidated into one workspace; no controlled comparison was run.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "measurement_period": {
+          "value": "Not measured; client report after rollout.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "limitations": {
+          "value": "Single self-reported case; no independent measurement or control group.",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "id": "case-2",
+        "title": {
+          "value": "An anonymized operations team reduced duplicate task tracking",
+          "status": "verified",
+          "source": "Fictional example — case study library",
+          "verified_at": "2026-10-20"
+        },
+        "client_name": {
+          "value": "Anonymized; name under NDA",
+          "status": "verified",
+          "source": "Fictional example — NDA",
+          "verified_at": "2026-10-20"
+        },
+        "outcome": {
+          "value": "The team moved task tracking into the workspace; the exact time saved was not measured.",
+          "status": "verified",
+          "source": "Fictional example — anonymized case study",
+          "verified_at": "2026-10-20"
+        },
+        "permission": "anonymized",
+        "source": {
+          "value": "Fictional example — approved anonymized summary",
+          "status": "verified",
+          "source": "Fictional example — permission record",
+          "verified_at": "2026-10-20"
+        }
+      }
+    ],
+    "testimonials": [
+      {
+        "id": "t-1",
+        "quote": {
+          "value": "We finally have one place for notes and tasks.",
+          "status": "verified",
+          "source": "Fictional example — approved testimonial",
+          "verified_at": "2026-10-20"
+        },
+        "attribution": {
+          "value": "Fictional operations lead, Alatoo Research",
+          "status": "verified",
+          "source": "Fictional example — permission record",
+          "verified_at": "2026-10-20"
+        },
+        "permission": "public",
+        "source": {
+          "value": "Fictional example — testimonial release",
+          "status": "verified",
+          "source": "Fictional example — permission record",
+          "verified_at": "2026-10-20"
+        }
+      }
+    ],
+    "certifications": [],
+    "stats": [
+      {
+        "value": "Median onboarding time was 6 business days across 18 fictional customers between January and March 2026.",
+        "status": "verified",
+        "source": "Fictional example — internal onboarding report, not independently audited",
+        "verified_at": "2026-10-20",
+        "notes": "Small sample; do not present as a guarantee."
+      }
+    ],
+    "prohibited_claims": [
+      {
+        "value": "Do not claim the product doubles revenue, eliminates all manual work, or guarantees compliance.",
+        "status": "verified",
+        "source": "Fictional example — compliance policy",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Do not claim HIPAA, SOC 2, or ISO 27001 certification; none is approved for this example.",
+        "status": "verified",
+        "source": "Fictional example — compliance policy",
+        "verified_at": "2026-10-20"
+      }
+    ]
+  },
+  "fulfillment": {
+    "mode": "direct_purchase",
+    "delivery": {
+      "value": "After confirmed payment, the workspace is provisioned within one business day and the buyer receives an invite by email.",
+      "status": "verified",
+      "source": "Fictional example — onboarding plan",
+      "verified_at": "2026-10-20"
+    },
+    "booking": {
+      "required": false,
+      "calendar_id": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No booking is required for direct purchase. A human can offer an optional onboarding call, but it is not part of the sales path."
+      },
+      "duration_minutes": {
+        "value": null,
+        "status": "unknown"
+      },
+      "timezone": {
+        "value": "Asia/Bishkek",
+        "status": "verified",
+        "source": "Fictional example — operating plan",
+        "verified_at": "2026-10-20"
+      },
+      "slot_interval_minutes": {
+        "value": null,
+        "status": "unknown"
+      },
+      "buffer_before_minutes": {
+        "value": null,
+        "status": "unknown"
+      },
+      "buffer_after_minutes": {
+        "value": null,
+        "status": "unknown"
+      },
+      "availability_window_days": {
+        "value": null,
+        "status": "unknown"
+      },
+      "offer_slot_count": {
+        "value": null,
+        "status": "unknown"
+      },
+      "reschedule_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable to this direct-purchase example."
+      },
+      "cancellation_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable to this direct-purchase example."
+      },
+      "no_show_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable to this direct-purchase example."
+      },
+      "reminder_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable to this direct-purchase example."
+      },
+      "external_link_allowed": false
+    },
+    "proposal": {
+      "required": false,
+      "template_id": {
+        "value": null,
+        "status": "unknown"
+      },
+      "validity_days": {
+        "value": null,
+        "status": "unknown"
+      },
+      "approval_required": false
+    }
+  },
+  "sales_policy": {
+    "authority_limits": {
+      "max_discount_percent_without_approval": {
+        "value": 10,
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      },
+      "can_customize_contract": false,
+      "can_change_refund_terms": false,
+      "can_waive_fees": false
+    },
+    "approval_matrix": [
+      {
+        "condition": {
+          "value": "Discount above 10%",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        "approver": {
+          "value": "Sales lead",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "Handoff tool, reason code authority",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "condition": {
+          "value": "Custom contract or non-standard refund terms",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        "approver": {
+          "value": "Legal",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "Handoff tool, reason code authority",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        }
+      }
+    ],
+    "verified_scarcity": [],
+    "competitor_policy": {
+      "value": "Compare only on verified, current facts. Do not quote a competitor's price or capability without a current source. Do not disparage.",
+      "status": "verified",
+      "source": "Fictional example — sales policy",
+      "verified_at": "2026-10-20"
+    },
+    "custom_terms": {
+      "value": "The agent may explain the standard terms but cannot draft or agree to custom terms. Route to a human.",
+      "status": "verified",
+      "source": "Fictional example — sales policy",
+      "verified_at": "2026-10-20"
+    },
+    "contract_policy": {
+      "value": "Standard online terms only. No redlines, no legal advice, no signature by the agent.",
+      "status": "verified",
+      "source": "Fictional example — legal policy",
+      "verified_at": "2026-10-20"
+    },
+    "call_recording_policy": {
+      "value": "Not applicable to text chat. Any future voice channel requires consent and a separate review.",
+      "status": "verified",
+      "source": "Fictional example — privacy policy",
+      "verified_at": "2026-10-20"
+    },
+    "negotiation": {
+      "tradables": [
+        {
+          "value": "Billing period: monthly or annual, if the buyer qualifies for the published plan.",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        {
+          "value": "Payment method: card or bank transfer against an invoice, per the published policy.",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        }
+      ],
+      "non_negotiables": [
+        {
+          "value": "No discount above 10% without sales-lead approval.",
+          "status": "verified",
+          "source": "Fictional example — sales policy",
+          "verified_at": "2026-10-20"
+        },
+        {
+          "value": "No HIPAA BAA, on-premise deployment, or custom contract on this offer.",
+          "status": "verified",
+          "source": "Fictional example — product scope",
+          "verified_at": "2026-10-20"
+        }
+      ],
+      "walk_away": {
+        "value": "If the buyer requires terms outside the approved offer, decline that path and offer a human review; do not improvise.",
+        "status": "verified",
+        "source": "Fictional example — sales policy",
+        "verified_at": "2026-10-20"
+      }
+    }
+  },
+  "handoff": {
+    "routes": [
+      {
+        "reason_code": "human_request",
+        "destination": {
+          "value": "Sales team queue",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Within 4 business hours",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "If the handoff tool fails, tell the buyer the transfer was not created and offer the support email.",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "reason_code": "authority",
+        "destination": {
+          "value": "Sales lead",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Within 4 business hours",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "If the handoff fails, say the request needs approval and offer the support email.",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "reason_code": "capability",
+        "destination": {
+          "value": "Technical support",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Within 1 business day",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "If the handoff fails, provide the support email and do not claim a ticket exists.",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "reason_code": "safety",
+        "destination": {
+          "value": "Duty manager and, if there is immediate danger, local emergency services",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter and phone escalation",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "24/7 for the duty manager",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Immediate page; no chat response-time promise",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "If the page fails, tell the buyer to contact local emergency services; do not invent a hotline.",
+          "status": "verified",
+          "source": "Fictional example — safety plan",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "reason_code": "legal",
+        "destination": {
+          "value": "Legal counsel",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Within 1 business day",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "Do not answer legal questions; give the support email and say counsel will review.",
+          "status": "verified",
+          "source": "Fictional example — legal policy",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "reason_code": "fraud",
+        "destination": {
+          "value": "Billing and security",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek; urgent page after hours",
+          "status": "verified",
+          "source": "Fictional example — operations plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Urgent page for suspected fraud; otherwise within 4 business hours",
+          "status": "verified",
+          "source": "Fictional example — service level",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "Stop the transaction; do not accuse; give the support email.",
+          "status": "verified",
+          "source": "Fictional example — fraud policy",
+          "verified_at": "2026-10-20"
+        }
+      },
+      {
+        "reason_code": "privacy",
+        "destination": {
+          "value": "Privacy owner",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-20"
+        },
+        "channel": {
+          "value": "human_handoff adapter",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-20"
+        },
+        "hours": {
+          "value": "Mon–Fri 09:00–18:00 Asia/Bishkek",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-20"
+        },
+        "response_time": {
+          "value": "Within 2 business days",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-20"
+        },
+        "fallback": {
+          "value": "Do not claim deletion; give the privacy email and log the request.",
+          "status": "verified",
+          "source": "Fictional example — privacy plan",
+          "verified_at": "2026-10-20"
+        }
+      }
+    ],
+    "required_fields": [
+      "buyer",
+      "channel",
+      "language",
+      "reason_code",
+      "summary",
+      "buyer_goal",
+      "commitments_made",
+      "verified_facts",
+      "open_questions",
+      "risk_flags",
+      "recommended_next_action",
+      "handoff_status"
+    ],
+    "automation_pause": true,
+    "human_takeover_policy": {
+      "value": "When a human takes over, automated sales messages stop. Automation resumes only with an explicit instruction from the human owner.",
+      "status": "verified",
+      "source": "Fictional example — operations plan",
+      "verified_at": "2026-10-20"
+    }
+  },
+  "follow_up": {
+    "allowed": true,
+    "basis": [
+      "buyer_requested",
+      "agreed_next_step",
+      "buyer_initiated_inquiry"
+    ],
+    "channels": [
+      "whatsapp",
+      "email"
+    ],
+    "quiet_hours": {
+      "start": "20:00",
+      "end": "09:00",
+      "timezone": "Asia/Bishkek"
+    },
+    "allowed_days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ],
+    "max_attempts_per_reason": {
+      "value": 2,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-20"
+    },
+    "max_attempts_per_conversation": {
+      "value": 4,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-20"
+    },
+    "min_interval_hours": {
+      "value": 48,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-20"
+    },
+    "close_out_after_days": {
+      "value": 14,
+      "status": "verified",
+      "source": "Fictional example — follow-up policy",
+      "verified_at": "2026-10-20"
+    },
+    "opt_out_keywords": [
+      "stop",
+      "не пишите",
+      "отпишите",
+      "керек эмес",
+      "жазбаңыз"
+    ],
+    "marketing_consent_required": true
+  },
+  "privacy": {
+    "data_collected": [
+      {
+        "value": "Name, work email, company, role, and conversation content",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Billing details handled by the payment provider; the agent does not store full card numbers",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "purposes": [
+      {
+        "value": "Respond to inquiries, prepare quotes, fulfill purchases, provide support",
+        "status": "verified",
+        "source": "Fictional example — privacy notice",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "retention": {
+      "value": "24 months after the last contact unless a contract or law requires longer.",
+      "status": "verified",
+      "source": "Fictional example — privacy notice",
+      "verified_at": "2026-10-20"
+    },
+    "deletion_process": {
+      "value": "Route deletion requests to the privacy owner; confirm only after the tool records completion.",
+      "status": "verified",
+      "source": "Fictional example — privacy procedure",
+      "verified_at": "2026-10-20"
+    },
+    "sharing": {
+      "value": "Payment provider and CRM processor only; no sale of personal data.",
+      "status": "verified",
+      "source": "Fictional example — privacy notice",
+      "verified_at": "2026-10-20"
+    },
+    "pii_rules": [
+      {
+        "value": "Never collect full card numbers, CVV codes, passwords, or SMS codes in chat.",
+        "status": "verified",
+        "source": "Fictional example — security policy",
+        "verified_at": "2026-10-20"
+      },
+      {
+        "value": "Mask payment and identity identifiers in summaries.",
+        "status": "verified",
+        "source": "Fictional example — security policy",
+        "verified_at": "2026-10-20"
+      }
+    ],
+    "legal_basis": {
+      "value": "Contract for purchases; consent for follow-up and marketing; legitimate interest for responding to inquiries. Legal review pending for each market.",
+      "status": "estimated",
+      "source": "Fictional example — draft privacy notice",
+      "verified_at": null,
+      "notes": "Requires local counsel review before launch."
+    }
+  },
+  "safety": {
+    "emergency_protocol": {
+      "value": "Stop selling. If there is immediate danger, tell the buyer to contact local emergency services. Page the duty manager. Do not counsel or invent resources.",
+      "status": "verified",
+      "source": "Fictional example — safety plan",
+      "verified_at": "2026-10-20"
+    },
+    "emergency_resources": [],
+    "minors_policy": {
+      "value": "Do not sell to a buyer under 18. Stop, do not collect payment data, and route to the guardian process.",
+      "status": "verified",
+      "source": "Fictional example — safety plan",
+      "verified_at": "2026-10-20"
+    },
+    "vulnerability_policy": {
+      "value": "Pause the sale, do not use distress as leverage, and offer a human. Do not provide financial, medical, or legal advice.",
+      "status": "verified",
+      "source": "Fictional example — safety plan",
+      "verified_at": "2026-10-20"
+    }
+  },
+  "tools": {
+    "passport_lookup": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0",
+      "notes": "This example is a static file; no lookup service is included."
+    },
+    "calendar_availability": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "calendar_booking": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "payments_invoicing": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "crm_memory": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "human_handoff": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "messaging_media": {
+      "adapter_id": "unconfigured",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    }
+  },
+  "metadata": {
+    "owner": "Fictional example owner",
+    "approved_by": "Fictional reviewer (example only)",
+    "approved_at": "2026-10-20",
+    "created_at": "2026-10-01",
+    "updated_at": "2026-10-20",
+    "source_of_truth": "This file is a fictional example and is not connected to a real price book.",
+    "review_cycle_days": 90,
+    "fictional": true,
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-10-20",
+        "change": "Initial fictional direct-sale example."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2026-10-23",
+        "change": "Added typed commercial values, approval conditions, quote policy, buyer types, sales guidance, negotiation limits, and evidence-quality metadata."
+      }
+    ]
+  },
+  "unresolved": [
+    "Tax treatment for each market is not fully verified; checkout must calculate tax or route to finance.",
+    "The annual plan's effective monthly price is shown for comparison only and must not be presented as a separate monthly price.",
+    "Kyrgyz copy requires native-speaker review.",
+    "No tool adapter is implemented; transactions cannot be executed from this repository."
+  ],
+  "sales_guidance": {
+    "segments": [
+      {
+        "id": "operations-teams",
+        "name": "Operations and research teams",
+        "description": {
+          "value": "Teams of 3–200 people that share notes, tasks, and customer research across several tools.",
+          "status": "verified",
+          "source": "Fictional example — ideal customer profile",
+          "verified_at": "2026-10-20"
+        },
+        "buyer_types": [
+          "b2b"
+        ],
+        "fit_signals": [
+          {
+            "value": "Two or more people regularly duplicate notes or task updates.",
+            "status": "verified",
+            "source": "Fictional example — sales playbook",
+            "verified_at": "2026-10-20"
+          },
+          {
+            "value": "The team uses a cloud workspace and can adopt a browser-based tool.",
+            "status": "verified",
+            "source": "Fictional example — product scope",
+            "verified_at": "2026-10-20"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Knowledge is split across chat, documents, and personal notes.",
+            "status": "verified",
+            "source": "Fictional example — discovery guide",
+            "verified_at": "2026-10-20"
+          },
+          {
+            "value": "Managers cannot see who owns a task without asking in chat.",
+            "status": "verified",
+            "source": "Fictional example — discovery guide",
+            "verified_at": "2026-10-20"
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "A new team lead wants one source of truth.",
+            "status": "verified",
+            "source": "Fictional example — sales playbook",
+            "verified_at": "2026-10-20"
+          },
+          {
+            "value": "An upcoming audit or handover exposes messy records.",
+            "status": "verified",
+            "source": "Fictional example — sales playbook",
+            "verified_at": "2026-10-20"
+          }
+        ],
+        "default_motion": "direct_purchase"
+      }
+    ],
+    "objection_guidance": [
+      {
+        "id": "obj-price",
+        "objection_type": "price",
+        "guidance": {
+          "value": "Clarify the comparison basis: per-user monthly price, annual prepayment, or total team cost. Do not discount before understanding the gap.",
+          "status": "verified",
+          "source": "Fictional example — sales playbook",
+          "verified_at": "2026-10-20"
+        },
+        "evidence_ids": [
+          "case-1"
+        ],
+        "avoid": [
+          {
+            "value": "Do not claim a competitor is more expensive without a current verified source.",
+            "status": "verified",
+            "source": "Fictional example — sales policy",
+            "verified_at": "2026-10-20"
+          }
+        ]
+      },
+      {
+        "id": "obj-adoption",
+        "objection_type": "adoption",
+        "guidance": {
+          "value": "Ask who must change their workflow, what training is available, and what would make the first 30 days successful.",
+          "status": "verified",
+          "source": "Fictional example — sales playbook",
+          "verified_at": "2026-10-20"
+        },
+        "evidence_ids": [
+          "case-2"
+        ],
+        "avoid": [
+          {
+            "value": "Do not promise adoption results that were not measured.",
+            "status": "verified",
+            "source": "Fictional example — compliance policy",
+            "verified_at": "2026-10-20"
+          }
+        ]
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "Spreadsheets and shared drives",
+        "category": "status quo",
+        "our_advantage": {
+          "value": "One searchable workspace instead of separate files and folders.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "our_tradeoff": {
+          "value": "Requires migrating habits and agreeing on a workspace structure.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "source": {
+          "value": "Fictional example — positioning brief",
+          "status": "verified",
+          "source": "Fictional example — marketing approval",
+          "verified_at": "2026-10-20"
+        },
+        "last_checked": "2026-10-20"
+      },
+      {
+        "name": "General-purpose team wiki",
+        "category": "adjacent product",
+        "our_advantage": {
+          "value": "Notes, tasks, and customer research share one permission model.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "our_tradeoff": {
+          "value": "A general wiki may have more flexible page templates.",
+          "status": "verified",
+          "source": "Fictional example — positioning brief",
+          "verified_at": "2026-10-20"
+        },
+        "source": {
+          "value": "Fictional example — positioning brief",
+          "status": "verified",
+          "source": "Fictional example — marketing approval",
+          "verified_at": "2026-10-20"
+        },
+        "last_checked": "2026-10-20"
+      }
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 ---
 name: sales-conversation-orchestrator
 description: "Orchestrate sales stages while keeping context and truth."
-version: 1.0.0
+version: 1.1.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -53,9 +53,10 @@ Do not use it to generate a product pitch from memory. Product facts belong to t
 | Buyer's latest message | yes | channel | wait; do not invent a turn |
 | Conversation state | yes | state store | initialize from schema |
 | Approved passport (or at least offer + pricing + fulfillment + policy) | yes for product claims | passport lookup | do not quote; say you need to verify |
+| Buyer types, segments, objection guidance | yes for relevance | passport `offer.buyer_types`, `sales_guidance` | use only generic logic; do not invent a segment |
 | Tool contracts and availability | yes for actions | tools layer | degrade to information/handoff |
-| Language preference | no | detected | mirror the latest message |
-| Consent flags | yes for follow-up/booking/payment | state | treat as unknown; ask or stop |
+| Language preference | no | state `language.primary`, else latest message | mirror the latest message |
+| Consent records | yes for follow-up/booking/payment | state | treat as unknown; ask or stop |
 
 ## Procedure
 
@@ -65,11 +66,22 @@ Identify, in order:
 
 1. **What the buyer actually asked or asserted.** If there is a question, answer it first.
 2. **Emotional and urgency signals.** Frustration, confusion, excitement, distrust, time pressure. Do not diagnose personality.
-3. **Stage evidence.** What has the buyer already confirmed? What is still unknown?
-4. **Risk flags.** Stop request, human request, legal issue, safety issue, PII, abuse, tool failure, contradiction.
-5. **The smallest useful next step.** Usually one of: answer, ask one question, recommend, execute, confirm, or exit.
+3. **Buyer state and deal diagnosis.** What problem is real, what is the impact, what is the barrier, and how ready is the buyer? Update `diagnosis` rather than guessing.
+4. **Stage evidence.** What has the buyer already confirmed? What is still unknown?
+5. **Risk flags.** Stop request, human request, legal issue, safety issue, PII, abuse, tool failure, contradiction.
+6. **The smallest useful next step.** Usually one of: answer, ask one question, recommend, execute, confirm, or exit.
 
 If the message contains more than one request, handle the highest-risk one first, then the others. Do not ignore a direct question in order to run a script.
+
+Before choosing a move, answer five questions:
+
+1. What does the buyer want to happen?
+2. What is actually blocking it (value, trust, timing, price, authority, status quo, risk, adoption, fit)?
+3. What do I know for sure, and what am I assuming?
+4. What is the single most useful thing I can say or ask now?
+5. Is it time to recommend or ask for the decision, rather than ask another question?
+
+If the answer to question five is "yes", make the recommendation. Continuing to ask after the evidence is sufficient is a failure mode, not caution.
 
 ### Step 2 — Apply conflict precedence
 
@@ -101,6 +113,27 @@ If a lower rule would produce a false or coercive message, discard it. Explain t
 
 Modes are not stages. The agent may answer a pricing question during discovery, or close during value proof.
 
+### Step 3a — Choose the action, not just the topic
+
+For the chosen mode, decide the concrete action:
+
+| Action | Use when | Stop condition |
+|---|---|---|
+| **Answer** | The buyer asked a factual or procedural question | The question is answered; do not append a pitch |
+| **Ask** | One missing fact would change the recommendation | The fact is known; do not keep asking |
+| **Recommend** | Enough is known to name the best option and its trade-off | The buyer accepts, rejects, or asks a question |
+| **Execute** | The buyer agreed to a verified next step | A tool result confirms or fails |
+| **Confirm** | An action returned a result | The buyer has the confirmation and next step |
+| **Exit / stop** | Refusal, opt-out, no fit, safety, or a clean close | No further sales message |
+
+Rules:
+
+- Prefer the action that most reduces uncertainty for the buyer, not the one that keeps the conversation open.
+- A recommendation is an action, not a stage. If the buyer is stuck between options, recommend; do not collect more data indefinitely.
+- If the barrier is adoption or implementation, the next action is to address that barrier, not to re-prove value.
+- If a scoped refusal removes one option, execute the remaining legitimate path instead of treating the whole conversation as over.
+- Do not end a turn with a question by default. Ask only when the answer is genuinely required.
+
 ### Step 4 — Compose the turn
 
 Use this order:
@@ -124,16 +157,19 @@ Rules:
 After composing (or before sending, if the action is irreversible), update:
 
 - stage and mode;
+- `diagnosis`: problem, impact, barrier, readiness, recommended action;
 - known facts and their source;
 - needs/constraints/decision criteria;
 - objections and status;
-- consent flags;
+- consent records (status, scope, time, source);
+- the approved `quote` version when a commercial term changes;
+- `follow_up` lifecycle when a follow-up is scheduled or cancelled;
 - next step and whether the buyer confirmed it;
 - tool results;
 - promises and open questions;
 - language/register.
 
-Then check: is there any promised action I have not done? Any question I have not answered? Any fact I am about to repeat that is stale?
+Then check: is there any promised action I have not done? Any question I have not answered? Any fact I am about to repeat that is stale? Has the buyer's answer made my current recommendation wrong?
 
 ### Step 6 — Decide whether to continue
 
@@ -184,9 +220,20 @@ Examples: "Price?", "Yes", "No", "Hmm".
 
 ### Buyer contradicts an earlier fact
 
-- Name the discrepancy neutrally: "Earlier you mentioned X; now it sounds like Y. Which is current?"
+- If the new statement is clearly a correction ("I was wrong, it's 12 not 8"), accept it immediately. Do not ask the buyer to adjudicate their own correction.
+- Two numbers may describe different scopes rather than a contradiction ("3" pilot users versus "40" total managers). Ask what each number refers to before assuming one is wrong.
+- If the statements genuinely conflict and the intent is unclear, name the discrepancy neutrally: "Earlier you mentioned X; now it sounds like Y. Which is current?"
 - Update state and do not repeat the old value.
-- If the contradiction changes fit or price, re-check before recommending.
+- If the change affects fit, price, quantity, or terms, re-check and re-quote before recommending.
+
+### Buyer refuses one part but not the offer
+
+- Identify the scope: a meeting, a channel, a plan, a discount, a time, or the whole offer.
+- Stop only the refused element. Preserve the buyer's actual goal.
+- Offer the shortest legitimate alternative: a direct purchase, a different plan, a written option, or a human.
+- If the buyer refuses the offer or contact itself, stop the sales sequence.
+
+Example: "Не хочу звонок, просто выставьте счёт" means no call, not no purchase. Confirm the terms and execute the direct path if the passport allows it.
 
 ### Buyer changes language mid-thread
 
@@ -290,6 +337,19 @@ Better: "Небольшое уточнение: в начале вы упомя�
 
 Why: names the discrepancy without accusing, and prevents a wrong recommendation.
 
+### Example 5 — Same words, different action based on history
+
+Buyer A (has completed discovery, criteria met): "Дорого."
+
+Buyer B (has never described a problem): "Дорого."
+
+The same word leads to different actions:
+
+- Buyer A: compare the total to the stated budget, clarify the comparison basis, and if the fit is clear, make a recommendation. Do not restart discovery.
+- Buyer B: the objection may be real or may be a request for relevance. Ask one question about the outcome they want, then connect a verified capability to it. Do not discount.
+
+Why: the orchestrator chooses the move from history and diagnosis, not from the literal word. A rule that maps "дорого" to one script would be wrong for at least one of these buyers.
+
 ## Counterexamples
 
 - **Interrogation:** five discovery questions in one message before answering the buyer's price question.
@@ -300,6 +360,9 @@ Why: names the discrepancy without accusing, and prevents a wrong recommendation
 - **Stage theater:** "Мы прошли этап квалификации, теперь переходим к презентации."
 - **Mirroring abuse:** responding to rudeness with sarcasm or dominance.
 - **Guessing:** giving a price because the lookup failed.
+- **Question loop:** asking another qualifying question when the agent already has enough to recommend.
+- **Barrier blindness:** answering every hesitation with more value proof instead of diagnosing trust, timing, authority, or adoption.
+- **False stop:** ending the whole conversation when the buyer refused only a meeting or a channel.
 
 ## Dependencies
 

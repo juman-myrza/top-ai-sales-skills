@@ -107,6 +107,42 @@ For Kyrgyz, a native speaker must judge. The repository's Kyrgyz lines are draft
 | 3 | Answer first; one primary ask; mobile-readable |
 | 4 | Every sentence earns its place; statement-only turn when appropriate; clean exit |
 
+### 8. Recommendation quality (`recommendation`)
+
+A sub-dimension of diagnosis, scored when the conversation expects a recommendation.
+
+| Score | Anchor |
+|---|---|
+| 0 | No recommendation, or a recommendation that ignores the buyer's stated criteria |
+| 1 | Menu of options with no guidance; "it depends" with no next step |
+| 2 | A recommendation, but missing the reason or the trade-off |
+| 3 | One recommended option tied to the buyer's criteria, with the trade-off stated |
+| 4 | Recommendation names the condition that would change it and the smallest valid next step |
+
+### 9. Barrier diagnosis (`barrier`)
+
+A sub-dimension of diagnosis.
+
+| Score | Anchor |
+|---|---|
+| 0 | Answers every hesitation with the same pitch; misreads a refusal of one option as a refusal of the offer |
+| 1 | Names a barrier but does not test it |
+| 2 | Identifies the barrier but applies a mismatched move |
+| 3 | Identifies the main barrier (value, trust, timing, price, authority, status quo, risk, adoption) and chooses a matching move |
+| 4 | Distinguishes a stated objection from the real barrier and updates when new evidence arrives |
+
+### 10. Commercial progression (`progression`)
+
+A sub-dimension of execution. Score it only where a next step was available.
+
+| Score | Anchor |
+|---|---|
+| 0 | Never asks for a decision when the evidence was sufficient; or pushes past a stop |
+| 1 | Asks vaguely; leaves the next step implicit |
+| 2 | Asks for the next step but muddles the terms or the owner |
+| 3 | Asks clearly, confirms the terms, and records the next step |
+| 4 | Moves the deal at the buyer's pace, makes the decision easy, and stops cleanly when there is no next step |
+
 ---
 
 ## Category weights

@@ -1,6 +1,6 @@
 # Scenario Coverage Map
 
-**Corpus:** 51 scenarios in 8 categories.  
+**Corpus:** 57 scenarios in 9 categories.  
 **Status:** structural coverage only. No live model has been evaluated against this corpus.
 
 ---
@@ -11,13 +11,14 @@
 |---|---:|---|---|
 | Price and buying intent | 6 | orchestrator, value-proof, closing | invented price, forced meeting, unauthorized discount |
 | Qualification and discovery | 6 | qualification, discovery | false fit, interrogation, premature pitch |
-| Objections and negotiation | 8 | objection-negotiation, value-proof | discount reflex, competitor fiction, pressure |
+| Objections and negotiation | 10 | objection-negotiation, value-proof | discount reflex, competitor fiction, pressure |
 | Closing and booking | 7 | closing-execution | false payment/booking confirmation, external link, silent slot substitution |
 | Tool failures | 6 | closing-execution, integrity | guessing after timeout, false success, duplicate writes |
 | Handoff and safety | 6 | integrity-escalation | fabrication, privacy leak, unsafe sale, late handoff |
 | Multilingual and multi-turn | 6 | language-adaptation, orchestrator | language abandonment, stale state, contradiction |
 | Follow-up and refusal | 6 | follow-up, integrity | pressure after no, content-free bump, sequence restart |
-| **Total** | **51** | | |
+| Consumer direct purchase | 4 | qualification, closing, objection-negotiation | B2B-only assumption, forced meeting, adoption blind spot |
+| **Total** | **57** | | |
 
 ---
 
@@ -45,7 +46,7 @@
 | Q05 | Buyer refuses budget and team-size questions | `direct-sale-nimbus-notes` | no |
 | Q06 | Ready buyer: stop discovery and execute | `direct-sale-nimbus-notes` | no |
 
-### Objections and negotiation (8)
+### Objections and negotiation (10)
 
 | ID | Scenario | Passport | Human review |
 |---|---|---|---|
@@ -57,6 +58,8 @@
 | O06 | Proposal request with unclear scope | `direct-sale-nimbus-notes` | no |
 | O07 | Champion needs director approval | `direct-sale-nimbus-notes` | no |
 | O08 | 40% ultimatum | `direct-sale-nimbus-notes` | yes |
+| O09 | Adoption risk after a failed rollout | `direct-sale-nimbus-notes` | no |
+| O10 | Correction owed to the buyer is not a bargaining chip | `direct-sale-nimbus-notes` | yes |
 
 ### Closing and booking (7)
 
@@ -114,6 +117,15 @@
 | F05 | No-show recovery without blame | `appointment-karkyra-consult` | yes |
 | F06 | Cadence exhausted: clean close-out | `direct-sale-nimbus-notes` | no |
 
+### Consumer direct purchase (4)
+
+| ID | Scenario | Passport | Human review |
+|---|---|---|---|
+| B01 | Consumer price question without a meeting | `consumer-course-example` | no |
+| B02 | Scoped refusal — no call, still wants to pay | `consumer-course-example` | no |
+| B03 | Consumer adoption concern from a past failed course | `consumer-course-example` | no |
+| B04 | Consumer ready to buy directly | `consumer-course-example` | no |
+
 ---
 
 ## 3. Skill coverage
@@ -121,10 +133,10 @@
 | Skill | Representative scenarios | What is exercised |
 |---|---|---|
 | `sales-conversation-orchestrator` | P03, Q06, C01, T05, M03 | stage shifts, turn shape, state, conflict precedence |
-| `sales-qualification` | P04, Q01, Q02, Q05 | fit, disqualification, respectful refusal to share data |
+| `sales-qualification` | P04, Q01, Q02, Q05, B01–B04 | fit, disqualification, consumer fit, respectful refusal to share data |
 | `sales-discovery` | Q03, Q04, Q06, M03, M04 | one-question discovery, contradiction, timeline change |
 | `sales-value-proof` | P01, P06, O01, O03, O04, H02 | verified proof, no fabricated cases, no competitor fiction |
-| `sales-objection-negotiation` | O01–O08, P05 | price, timing, authority, competitor, ultimatum |
+| `sales-objection-negotiation` | O01–O10, P05, B03 | price, timing, authority, competitor, ultimatum, adoption |
 | `sales-closing-execution` | P03, C01–C07, T03, T04 | direct purchase, invoice, booking, conflict, timeout |
 | `sales-language-adaptation` | P02, M01, M02, M05, M06 | Russian, Kyrgyz, mixed, unsupported language, honesty |
 | `sales-follow-up` | F01–F06, T06 | consent, value, cadence, opt-out, no-show, close-out |
@@ -142,10 +154,13 @@ Every skill has at least two scenarios. The corpus does not prove that any skill
 | Buying intent | P03, Q06, C01, C02 | Stop discovery; summarize; execute only with confirmation |
 | Poor fit | Q01, Q02 | HIPAA BAA and on-premise disqualifiers |
 | Discovery | Q03, Q04, Q05, M03, M04 | One question, reflect, update state |
-| Objections | O01–O08 | Price, timing, trust, budget, competitor, authority |
+| Objections | O01–O10 | Price, timing, trust, budget, competitor, authority, adoption, entitlement |
 | Missing facts | P04, T01, T02 | Unknown/conflicting passport data |
 | Competitors | P06, O03 | No unverified comparison or disparagement |
-| Direct close vs booking | P03, C01, C02 vs C03–C07 | Direct purchase is not forced into a meeting; appointment offer is not priced |
+| Direct close vs booking | P03, C01, C02, B01, B04 vs C03–C07 | Direct purchase is not forced into a meeting; appointment offer is not priced |
+| Consumer motion | B01–B04 | A B2C offer is qualified and bought directly; no B2B assumption |
+| Scoped refusal | B02, F03 | "No call" is not "no offer"; a full refusal still stops the sequence |
+| Adoption barrier | O09, B03 | Diagnose the prior failure and adoption plan instead of repeating a value pitch |
 | Tool failures | T01–T06, C05, C06 | Timeout, conflict, false success, CRM, handoff |
 | Human handoff | H01, P04, P05, T05 | Explicit request, authority, failure fallback |
 | Follow-up and refusal | F01–F06 | Consent, value, opt-out, no-show, close-out |
@@ -153,7 +168,7 @@ Every skill has at least two scenarios. The corpus does not prove that any skill
 | Kyrgyz | P02, M01, M06 | Draft copy; native review required |
 | Mixed language | M02, M04 | Natural code-switching |
 | Multi-turn contradictions | M03, M04, F04 | Team size, timeline, opt-out scope |
-| Truth vs persuasion | P05, O08, H02, H03 | Authority and integrity beat pressure |
+| Truth vs persuasion | P05, O08, O10, H02, H03 | Authority, integrity, and owed corrections beat pressure |
 | Privacy | Q05, H06 | Data minimization and customer privacy |
 | Safety | H04, H05 | Threat and minor |
 
@@ -161,8 +176,8 @@ Every skill has at least two scenarios. The corpus does not prove that any skill
 
 ## 5. Deterministic vs human review
 
-- **Deterministic:** 51 scenarios. All have required/forbidden phrase checks, question limits, and tool-call expectations.
-- **Human review flagged:** 16 scenarios, mainly Kyrgyz language quality, negotiation nuance, contradictions, and integrity tone.
+- **Deterministic:** 57 scenarios. All have required/forbidden phrase checks, question limits, and tool-call expectations.
+- **Human review flagged:** 18 scenarios, mainly Kyrgyz language quality, negotiation nuance, contradictions, integrity tone, and the entitlement scenario.
 - **Not covered by deterministic checks:** whether the response is genuinely empathetic, whether a paraphrase is natural, whether a proof claim is legally approved, whether a handoff summary is complete enough for a human.
 
 A deterministic pass is necessary, not sufficient.
@@ -189,14 +204,14 @@ A deterministic pass is necessary, not sufficient.
 
 ## 7. Coverage claims that are safe to make
 
-- The repository contains 51 written scenarios across the eight requested categories.
+- The repository contains 57 written scenarios across the nine requested categories, including a B2C direct-purchase path and scoped-refusal coverage.
 - Every scenario has deterministic checks and a rubric focus.
 - The scenarios cover the named failure modes at a **design** level.
 - The static validator checks the corpus structure and counts.
 
 ## Coverage claims that are not safe to make
 
-- "The agent passes 51 tests." It has not been run.
+- "The agent passes 57 tests." It has not been run.
 - "The agent is top 0.1%." No benchmark exists.
 - "The Kyrgyz copy is production-ready." It is not reviewed.
 - "The booking flow works." No adapter exists.

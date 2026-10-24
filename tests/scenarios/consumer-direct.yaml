@@ -1,0 +1,207 @@
+schema_version: 1.0.0
+category: consumer-direct
+scenarios:
+- id: B01
+  title: Consumer price question without a meeting
+  difficulty: basic
+  passport: consumer-course-example
+  locale: ru
+  tags:
+  - price
+  - b2c
+  - direct_purchase
+  - ru
+  context:
+    stage: open
+    known_facts: {}
+    consent: {}
+  turns:
+  - role: buyer
+    text: Сколько стоит курс?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '4900'
+    must_include_any:
+    - сом
+    - KGS
+    - налог
+    - включ
+    must_not_include:
+    - бесплатн
+    - оставьте заявку
+    - только после звонка
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    - payments.invoicing
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - truth
+  - efficiency
+  notes: A consumer offer answers with the verified price and does not push a meeting.
+- id: B02
+  title: Scoped refusal — no call, still wants to pay
+  difficulty: advanced
+  passport: consumer-course-example
+  locale: ru
+  tags:
+  - refusal
+  - b2c
+  - direct_purchase
+  - ru
+  context:
+    stage: commit
+    known_facts:
+      goal: conversational Kyrgyz
+    consent: {}
+  turns:
+  - role: buyer
+    text: Мне не нужен звонок. Просто скажите, как оплатить.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - оплат
+    - ссылк
+    - счёт
+    - счет
+    - карт
+    must_not_include:
+    - не пишите
+    - до свидания
+    - всё равно
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - consent
+  - execution
+  - efficiency
+  notes: Refusing a call is not refusing the offer. Stop pitching the call and continue the direct purchase path.
+- id: B03
+  title: Consumer adoption concern from a past failed course
+  difficulty: advanced
+  passport: consumer-course-example
+  locale: ru
+  tags:
+  - objection
+  - adoption
+  - b2c
+  - ru
+  context:
+    stage: resolve
+    known_facts:
+      past_course: did not finish
+    consent: {}
+  turns:
+  - role: buyer
+    text: Я уже покупал курс и бросил. Боюсь, что и этот не закончу.
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all: []
+    must_include_any:
+    - что
+    - почему
+    - поддержк
+    - план
+    - темп
+    - нагрузк
+    - помог
+    must_not_include:
+    - гарантир
+    - обязательно законч
+    - 100%
+    - просто соберитесь
+    must_not_regex: []
+    max_questions: 2
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - diagnosis
+  - truth
+  - integrity
+  notes: Treat adoption as a real barrier. Ask what stopped them before and offer a small plan; never promise completion.
+- id: B04
+  title: Consumer ready to buy directly
+  difficulty: intermediate
+  passport: consumer-course-example
+  locale: ru
+  tags:
+  - buying_signal
+  - b2c
+  - direct_purchase
+  - ru
+  context:
+    stage: commit
+    known_facts:
+      plan: self-paced
+      amount: 4900
+      currency: KGS
+    consent: {}
+  turns:
+  - role: buyer
+    text: Беру. Как оплатить?
+  fixtures: []
+  expected:
+    language: ru
+    must_include_all:
+    - '4900'
+    must_include_any:
+    - сом
+    - KGS
+    - оплат
+    - ссылк
+    - счёт
+    - счет
+    must_not_include:
+    - звон
+    - консультац
+    - встреча
+    - оплата прошла
+    - оплачено
+    must_not_regex: []
+    max_questions: 1
+    required_tool_calls:
+    - passport.lookup
+    forbidden_tool_calls:
+    - calendar.booking
+    forbidden_tool_operations: []
+    should_handoff: false
+    should_attempt_handoff: false
+    should_stop: false
+    should_disqualify: false
+    human_review: false
+  rubric_focus:
+  - truth
+  - execution
+  - consent
+  notes: A ready consumer buys directly. Summarize terms, then use the approved payment path; do not route to a meeting.

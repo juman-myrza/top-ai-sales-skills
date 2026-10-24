@@ -1,16 +1,16 @@
 {
-  "tenant_id": "daniyar",
+  "tenant_id": "your-tenant-id",
   "offers": {
-    "ai-agent-implementation": {
-      "passport_id": "ai-agent-implementation",
+    "example-offer-a": {
+      "passport_id": "example-offer-a",
       "current_version": "1.0.0",
-      "file": "offers/ai-agent-implementation/1.0.0.json",
+      "file": "offers/example-offer-a/1.0.0.json",
       "sha256": null
     },
-    "ai-agent-training": {
-      "passport_id": "ai-agent-training",
+    "example-offer-b": {
+      "passport_id": "example-offer-b",
       "current_version": "1.0.0",
-      "file": "offers/ai-agent-training/1.0.0.json",
+      "file": "offers/example-offer-b/1.0.0.json",
       "sha256": null
     }
   }

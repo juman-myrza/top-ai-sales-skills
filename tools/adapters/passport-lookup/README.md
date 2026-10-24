@@ -56,11 +56,26 @@ export DANIYAR_TENANT_ID=daniyar
 mkdir -p "$DANIYAR_PASSPORT_ROOT"/{schema,offers,incoming}
 cp product-passport/passport.schema.json \
   "$DANIYAR_PASSPORT_ROOT/schema/passport.schema.json"
-cp product-passport/catalog.example.json \
-  "$DANIYAR_PASSPORT_ROOT/catalog.json"
 ```
 
-`catalog.example.json` is only a starting point. The first `publish` fills the real file hashes. `incoming/` is optional staging space; the adapter never reads it.
+`catalog.json` is created and updated by `publish`; you do not need to write it by hand. Do **not** copy `product-passport/catalog.example.json` — it contains placeholder offer IDs for illustration only (see the shape below). `incoming/` is optional staging space; the adapter never reads it.
+
+`catalog.json` shape after publishing one offer:
+
+```json
+{
+  "tenant_id": "daniyar",
+  "offers": {
+    "ai-agent-training": {
+      "passport_id": "ai-agent-training",
+      "current_version": "1.0.0",
+      "file": "offers/ai-agent-training/1.0.0.json",
+      "sha256": "<64-char lowercase sha256>"
+    }
+  },
+  "updated_at": "2026-10-24T12:00:00+00:00"
+}
+```
 
 ### 2.3 Install the plugin files
 
@@ -108,10 +123,12 @@ This note contains no product names, prices, or file locations.
 
 ## 3. Publishing a passport
 
-For this simple store, `passport_id`, `offer.id`, the catalog key, and the `offers/<offer_id>/` directory name must be the same identifier:
+For this simple store, `passport_id`, `offer.id`, the catalog key, and the `offers/<offer_id>/` directory name must be the same identifier. The Daniyar drafts in this repository use:
 
-- `ai-agent-implementation`
-- `ai-agent-training`
+- `ai-agent-implementation` — [`../../../tenants/daniyar/passports/offers/ai-agent-implementation/1.0.0.json`](../../../tenants/daniyar/passports/offers/ai-agent-implementation/1.0.0.json)
+- `ai-agent-training` — [`../../../tenants/daniyar/passports/offers/ai-agent-training/1.0.0.json`](../../../tenants/daniyar/passports/offers/ai-agent-training/1.0.0.json)
+
+Both are `draft`, so `publish` refuses them until the owner resolves the open items and sets `status: approved` with `approved_by`, `approved_at`, and `effective_from`.
 
 A version file must be named `offers/<offer_id>/<version>.json`, and its internal `version` must match the filename.
 

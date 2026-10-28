@@ -55,7 +55,7 @@ A booking is confirmed only when this tool returns `status: "confirmed"` with a 
     "end": "2026-10-27T14:30:00+06:00",
     "timezone": "Asia/Bishkek",
     "attendee": {
-      "name": "Айжан",
+      "name": "Aizhan",
       "email": "aizhan@example.invalid",
       "phone": null
     },
@@ -114,7 +114,7 @@ Do not collect a home address, government ID, or payment data for a booking unle
     "status": "confirmed",
     "confirmed_at": "2026-10-23T10:02:01+06:00",
     "attendee": {
-      "name": "Айжан",
+      "name": "Aizhan",
       "email": "aizhan@example.invalid"
     },
     "join_url": "https://meet.example.invalid/abc",
@@ -198,9 +198,9 @@ The agent must:
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| Slot taken | "Это время только что заняли. Не буду записывать вас на другое без согласия. Вот новые реальные варианты…" | Book a different time silently |
-| Timeout | "Запись пока не подтверждена. Проверю статус; если не получится — передам человеку." | "Вы записаны" |
-| Provider down | "Календарь недоступен, поэтому подтвердить запись не могу. Могу передать человеку." | Send an external link as a workaround unless approved |
+| Slot taken | "That slot was just taken. I will not book a different time without your consent. Here are new real options..." | Book a different time silently |
+| Timeout | "The booking is not confirmed yet. I will check the status; if that fails, I will hand off to a human." | "You are booked" |
+| Provider down | "The calendar is unavailable, so I cannot confirm the booking. I can hand off to a human." | Send an external link as a workaround unless approved |
 | Invalid email | Ask the buyer to confirm the email | Invent an email |
 | Consent missing | Ask for explicit confirmation of the exact slot | Treat "ok" as consent for a different slot |
 | Duplicate request | Return the original booking; do not create a second | Create another event |

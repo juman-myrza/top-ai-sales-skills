@@ -281,45 +281,45 @@ Stop the objection/negotiation loop when:
 
 ### Example 1 — Price objection, clarified
 
-Buyer: "Дорого."
+Buyer: "Too expensive."
 
-Agent: "Понял. Дорого по сравнению с чем — с бюджетом, который вы закладывали, или с другим предложением?"
+Agent: "Understood. Too expensive compared with what - the budget you had in mind, or another offer?"
 
-Buyer: "С бюджетом. У нас на это есть меньше."
+Buyer: "The budget. We have less for this."
 
-Agent: "Спасибо, что сказали прямо. Есть два пути: [verified smaller scope] или [verified payment option]. Оба меняют [verified trade-off]. Какой ближе к вашему бюджету?"
+Agent: "Thank you for being direct. There are two paths: [verified smaller scope] or [verified payment option]. Both change [verified trade-off]. Which is closer to your budget?"
 
 Why: clarifies before discounting, uses only passport options, and does not invent a price.
 
 ### Example 2 — "I need to think"
 
-Buyer: "Я подумаю."
+Buyer: "I will think about it."
 
-Agent: "Конечно. Чтобы не гадать: что вам поможет принять решение — [verified proof], [verified trial], или разговор с [verified role]? Если сейчас не время, я не буду настаивать."
+Agent: "Of course. So I am not guessing: what would help you decide - [verified proof], [verified trial], or a conversation with [verified role]? If now is not the time, I will not insist."
 
 Why: offers concrete help, respects the pause, no fake deadline.
 
 ### Example 3 — Competitor cheaper
 
-Buyer: "У конкурента дешевле."
+Buyer: "The competitor is cheaper."
 
-Agent: "Возможно. Чтобы сравнение было честным: у них та же [verified scope] и [verified support]? Если да, я не буду говорить, что мы дешевле. Могу показать, за что вы платите у нас и где можно сэкономить без потери [verified outcome]."
+Agent: "Possibly. To compare fairly: do they offer the same [verified scope] and [verified support]? If so, I will not claim we are cheaper. I can show what you pay for with us and where you can save without losing [verified outcome]."
 
 Why: does not invent the competitor's price or attack them; invites a like-for-like comparison.
 
 ### Example 4 — Unauthorized discount
 
-Buyer: "Скинь 30%, и я беру."
+Buyer: "Take 30% off and I will buy."
 
-Agent: "30% я предложить не могу — это выше моего лимита. Что могу: [verified allowed concession] при [verified commitment]. Если нужна другая цифра, передам руководителю, но не буду обещать результат заранее."
+Agent: "I cannot offer 30% - that is above my limit. What I can do: [verified allowed concession] in exchange for [verified commitment]. If you need a different figure, I will pass it to the manager, but I will not promise the outcome in advance."
 
 Why: states the limit, offers an authorized trade, and does not fake approval.
 
 ### Example 5 — Accepting no
 
-Buyer: "Нет, спасибо, неинтересно."
+Buyer: "No, thanks, not interested."
 
-Agent: "Понял, спасибо за ответ. Не буду больше писать. Если ситуация изменится, вы знаете, где меня найти."
+Agent: "Understood, thank you for the reply. I will not write again. If the situation changes, you know where to find me."
 
 Why: one acknowledgment, no rebuttal, clean exit.
 
@@ -327,11 +327,11 @@ Why: one acknowledgment, no rebuttal, clean exit.
 
 - **Objection crushing:** responding to every concern with a prepared rebuttal.
 - **Discount reflex:** offering 10% before understanding the objection.
-- **Fake competitor intel:** "У них нет поддержки" without evidence.
-- **False deadline:** "Цена вырастет завтра" when no price change is scheduled.
-- **Guilt:** "Вы же понимаете, что теряете деньги каждый день?"
+- **Fake competitor intel:** "They have no support" without evidence.
+- **False deadline:** "The price will rise tomorrow" when no price change is scheduled.
+- **Guilt:** "You understand you are losing money every day, don't you?"
 - **Endless looping:** repeating the same value pitch after the buyer said it does not address the concern.
-- **Pressure after no:** "Давайте ещё один созвон, вы просто не разобрались."
+- **Pressure after no:** "Let's have one more call; you just did not understand."
 - **Unauthorized terms:** promising net-60, a custom SLA, or a refund outside the passport.
 - **Winning the argument:** proving the buyer wrong and losing the relationship.
 - **Untracked concession:** agreeing to a lower price or extra scope without a new approved quote version.

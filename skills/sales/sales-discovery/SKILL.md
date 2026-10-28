@@ -303,58 +303,58 @@ Do not stop just because the buyer gave a short answer. A concise buyer may stil
 
 ### Example 1 — From symptom to cause
 
-Buyer: "Клиенты жалуются, что мы долго отвечаем."
+Buyer: "Customers complain that we take too long to respond."
 
-Agent: "Понял. А в какие моменты задержка заметнее всего — в течение дня, вечером или в выходные?"
+Agent: "Understood. When is the delay most noticeable - during the day, in the evening, or on weekends?"
 
-Buyer: "Вечером, после закрытия."
+Buyer: "In the evening, after closing."
 
-Agent: "Что происходит с сообщением, которое приходит после закрытия?"
+Agent: "What happens to a message that arrives after closing?"
 
-Buyer: "Оно висит до утра, иногда человек уже не отвечает."
+Buyer: "It sits until morning; sometimes the person no longer replies."
 
-Agent: "То есть проблема не только в скорости, но и в том, что вечерний поток остаётся без ответа до утра. Сколько примерно таких сообщений за вечер?"
+Agent: "So the problem is not only speed: the evening flow stays unanswered until morning. Roughly how many such messages arrive in an evening?"
 
 Why: moves from complaint to specific mechanism, then quantifies without inventing.
 
 ### Example 2 — Impact without exaggeration
 
-Buyer: "Наверное, теряем какие-то продажи."
+Buyer: "We are probably losing some sales."
 
-Agent: "Сколько примерно заявок в неделю остаются без ответа в тот же день?"
+Agent: "Roughly how many inquiries per week go unanswered the same day?"
 
-Buyer: "Не знаю, может, 5–10."
+Buyer: "I do not know, maybe 5-10."
 
-Agent: "Если взять 5–10 и ваш средний чек, диапазон потерь получится [calculation]. Это верхняя граница, потому что не каждая заявка стала бы продажей. Как вам кажется, ближе к 5 или к 10?"
+Agent: "If we take 5-10 and your average order value, the loss range is [calculation]. That is an upper bound, because not every inquiry would have become a sale. Does it look closer to 5 or to 10?"
 
 Why: uses the buyer's range, labels the estimate, and asks the buyer to calibrate.
 
 ### Example 3 — Future state
 
-Buyer: "Хочу, чтобы менеджеры не отвлекались на ерунду."
+Buyer: "I want my managers to stop getting distracted by busywork."
 
-Agent: "Что бы они делали вместо этого, если бы рутина ушла?"
+Agent: "What would they do instead if the routine work disappeared?"
 
-Buyer: "Работали бы с крупными клиентами."
+Buyer: "They would work with larger clients."
 
-Agent: "То есть цель не просто «быстрее отвечать», а освободить время на крупные сделки. Если рутина уйдёт, сколько часов в неделю это вернёт команде?"
+Agent: "So the goal is not just to respond faster, but to free time for larger deals. If the routine work disappeared, how many hours a week would that return to the team?"
 
 Why: surfaces the outcome the buyer actually wants, not the feature.
 
 ### Example 4 — Decision criteria
 
-Buyer: "Мне нужно подумать."
+Buyer: "I need to think about it."
 
-Agent: "Конечно. Чтобы вы думали с полной картиной: что для вас будет главным при решении — [verified criterion A], [verified criterion B] или что-то ещё?"
+Agent: "Of course. So you can think with the full picture: what will matter most in your decision - [verified criterion A], [verified criterion B], or something else?"
 
 Why: does not push; asks what the decision will be judged on.
 
 ## Counterexamples
 
 - **Interrogation:** 10 questions before answering the buyer's first question.
-- **Pain theatre:** "Представьте, как вы теряете деньги каждый день" without evidence.
-- **Leading questions:** "Вы же не хотите терять клиентов, правда?"
-- **Invented baseline:** "У таких компаний обычно 40% потерь" with no source.
+- **Pain theatre:** "Imagine losing money every day" without evidence.
+- **Leading questions:** "You do not want to lose customers, right?"
+- **Invented baseline:** "Companies like yours usually lose 40%" with no source.
 - **Feature fishing:** asking about tools only to find a place to pitch a feature.
 - **Therapy:** probing childhood, health, or personal relationships under the guise of discovery.
 - **Endless discovery:** refusing to recommend until the buyer fills a 20-field form.

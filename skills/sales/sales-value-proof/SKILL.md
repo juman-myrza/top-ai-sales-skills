@@ -241,47 +241,47 @@ Stop proving value when:
 
 ### Example 1 — Verified proof with scope
 
-Buyer: "А какие результаты у других клиентов?"
+Buyer: "What results have other clients had?"
 
-Agent: "В [verified case], [verified segment] reduced [verified metric] from [verified before] to [verified after] over [verified period]. Это один подтверждённый случай, не гарантия для вашей ситуации. Хотите, покажу, какие условия там совпадают с вашими, а какие нет?"
+Agent: "In [verified case], [verified segment] reduced [verified metric] from [verified before] to [verified after] over [verified period]. That is one confirmed case, not a guarantee for your situation. Would you like me to show which conditions there match yours and which do not?"
 
 Why: cites only approved facts, states the limit, and invites the buyer to test relevance.
 
 ### Example 2 — Honest ROI range
 
-Buyer: "Сколько я сэкономлю?"
+Buyer: "How much will I save?"
 
-Agent: "Зависит от двух цифр: [input A] и [input B]. Если взять ваш диапазон [A] и [B], получается [range] в месяц. Это оценка сверху: она предполагает, что [assumption], и не учитывает [excluded cost]. Давайте подставим ваши реальные цифры — какие из них вы знаете точно?"
+Agent: "It depends on two figures: [input A] and [input B]. Using your range [A] and [B], the result is [range] per month. That is an upper-bound estimate: it assumes [assumption] and does not include [excluded cost]. Let's use your real numbers - which ones do you know exactly?"
 
 Why: formula, range, assumptions, exclusions, and a request for better data.
 
 ### Example 3 — No proof available
 
-Buyer: "У вас есть кейс в моей нише?"
+Buyer: "Do you have a case study in my niche?"
 
-Agent: "Подтверждённого кейса именно в [niche] у нас пока нет. Есть [verified adjacent case] и [verified product fact]. Я не хочу выдавать одно за другое. Могу показать демо на вашем сценарии или организовать разговор с [verified reference type], если это полезно."
+Agent: "We do not have a confirmed case study specifically in [niche] yet. There are [verified adjacent case] and [verified product fact]. I do not want to present one as the other. I can show a demo on your scenario or arrange a conversation with [verified reference type], if that helps."
 
 Why: does not fabricate a case; offers real alternatives.
 
 ### Example 4 — Competitor comparison
 
-Buyer: "Чем вы лучше [competitor]?"
+Buyer: "How are you better than [competitor]?"
 
-Agent: "Зависит от того, что для вас важнее. По [verified criterion A] у нас [verified fact]; по [verified criterion B] — [verified trade-off]. По [competitor] у меня нет проверенных данных, поэтому не буду их придумывать. Какие два критерия для вас решающие?"
+Agent: "It depends on what matters most to you. On [verified criterion A] we have [verified fact]; on [verified criterion B] - [verified trade-off]. For [competitor] I do not have verified data, so I will not invent it. Which two criteria are decisive for you?"
 
 Why: fair, specific, admits the gap, and returns the decision to the buyer's criteria.
 
 ## Counterexamples
 
-- **Fabricated case study:** "У нас был клиент, который увеличил выручку на 300%" with no source.
-- **Fake precision:** "Вы сэкономите ровно 47 382" from invented inputs.
-- **Guarantee inflation:** "Мы гарантируем результат" when the passport has no guarantee.
+- **Fabricated case study:** "We had a client who increased revenue by 300%" with no source.
+- **Fake precision:** "You will save exactly 47,382" from invented inputs.
+- **Guarantee inflation:** "We guarantee the result" when the passport has no guarantee.
 - **Feature dump:** 12 bullets with no connection to the buyer's problem.
-- **Borrowed authority:** "Нам доверяют все крупные компании" without evidence.
-- **Competitor smear:** "У них всё сломано" without verified facts.
+- **Borrowed authority:** "All the big companies trust us" without evidence.
+- **Competitor smear:** "Everything is broken over there" without verified facts.
 - **Testimonial without permission:** sharing a customer name or quote that is not approved.
-- **False uniqueness:** "На рынке нет никого, кто это делает" without evidence.
-- **Pressure through ROI:** "Вы же не хотите терять такие деньги?" used to force a decision.
+- **False uniqueness:** "No one else on the market does this" without evidence.
+- **Pressure through ROI:** "You do not want to lose that much money, do you?" used to force a decision.
 - **Evidence dump:** every case study and statistic, whether or not it matches the buyer's situation.
 - **Menu, not advice:** listing five plans with no recommendation and calling it neutrality.
 - **Misapplied proof:** presenting an adjacent-segment case as if it were the buyer's segment.

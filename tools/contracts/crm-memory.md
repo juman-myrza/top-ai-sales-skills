@@ -181,7 +181,7 @@ A buyer saying "I'll pay" is not a won deal.
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| CRM down | "Не могу сейчас сохранить данные, но продолжу разговор. Перед оплатой попрошу подтвердить ключевые детали." | "Ваша заявка сохранена" |
+| CRM down | "I cannot save the data right now, but I will continue the conversation. Before payment I will ask you to confirm the key details." | "Your request has been saved" |
 | Version conflict | Re-read state and reconcile; if unclear, ask the buyer | Overwrite newer data |
 | Consent write fails | Treat consent as unknown; ask again before a sensitive action | Assume consent |
 | Deletion request write fails | Say the request is not confirmed; route to human | Claim deletion |

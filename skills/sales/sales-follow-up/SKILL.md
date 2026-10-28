@@ -81,7 +81,7 @@ Reason codes:
 
 | Reason code | Example | Basis |
 |---|---|---|
-| `buyer_requested` | "Напишите мне в понедельник" | `buyer_requested` |
+| `buyer_requested` | "Message me on Monday" | `buyer_requested` |
 | `agreed_next_step` | "I'll send the calculation by Thursday" | `agreed_next_step` |
 | `buyer_initiated_inquiry` | The buyer asked for a price, then went quiet | `buyer_initiated_inquiry` |
 | `document_ready` | The proposal or invoice is ready | `agreed_next_step` |
@@ -165,7 +165,7 @@ Never tell the buyer a scheduled message was sent. Never let a scheduler bypass 
 | Question | Answer it; do not treat it as consent to continue selling |
 | Silence | Follow the passport's attempt limit; then close the loop |
 | Anger or complaint | Acknowledge, stop selling, offer a human if appropriate |
-| "Stop" / "unsubscribe" / "не пишите" / "керек эмес" | Stop immediately; one neutral acknowledgment at most |
+| "Stop" / "unsubscribe" (and the passport's per-language opt-out keywords) | Stop immediately; one neutral acknowledgment at most |
 | Auto-reply / out of office | Do not count it as a real response; follow the stated return date if reliable |
 | Wrong person | Ask for the right contact or close politely; do not pitch them |
 
@@ -198,7 +198,7 @@ When the cadence ends without a response, send at most one clean close-out if th
 
 ### Buyer says "write later" without a date
 
-Ask once: "Когда вам удобнее — назовите день, и я напишу только тогда." If the buyer gives no date, close the loop: "Хорошо, не буду напоминать. Напишите, когда будет актуально."
+Ask once: "When would be convenient - give me a day and I will write only then." If the buyer gives no date, close the loop: "Understood, I will not remind you again. Write when it becomes relevant."
 
 Do not choose a date for the buyer and call it agreed.
 
@@ -214,7 +214,7 @@ Do not send a countdown. Ask what would help: a summary, a calculation, a compar
 
 The proposal follow-up must reference the actual document and a specific open question:
 
-> "Я отправил предложение [id] [date]. В нём [one verified point]. Успели посмотреть раздел [section]? Если удобнее, могу ответить на вопросы письменно."
+> "I sent proposal [id] on [date]. It covers [one verified point]. Have you had a chance to review [section]? If it is easier, I can answer questions in writing."
 
 Do not send "any thoughts?" with no context.
 
@@ -222,7 +222,7 @@ Do not send "any thoughts?" with no context.
 
 Check the passport's no-show policy. Send one factual message:
 
-> "Сегодня была запись на [date/time]. Вы не подключились. Хотите перенести? Если передумали — скажите, и я закрою вопрос."
+> "You had a booking today at [date/time] and did not join. Would you like to reschedule? If you have changed your mind, tell me and I will close the matter."
 
 Do not imply the buyer wasted your time. Do not charge a no-show fee unless the passport authorizes it and the buyer was told in advance.
 
@@ -254,7 +254,7 @@ Do not claim delivery. Retry once if the contract allows. If it fails again, log
 
 Acknowledge, state the reason in one line, and offer to stop:
 
-> "Вы просили вернуться к вопросу [date]. Если это больше не актуально — скажите, и я не буду писать."
+> "You asked me to follow up on [date]. If it is no longer relevant, tell me and I will not write again."
 
 If the buyer says stop, stop. Do not defend the cadence.
 
@@ -303,47 +303,47 @@ Placeholders must be replaced with verified values.
 
 ### Example 1 — Buyer-requested follow-up
 
-Buyer (Monday): "Напишите в среду, я обсужу с командой."
+Buyer (Monday): "Message me on Wednesday; I will discuss it with the team."
 
-Agent: "Хорошо, напишу в среду. Если раньше появятся вопросы — пишите сюда."
+Agent: "Okay, I will write on Wednesday. If questions come up sooner, write here."
 
 Wednesday:
 
-Agent: "Добрый день! Вы планировали обсудить [verified topic] с командой. Подготовил короткое резюме: [verified scope], [verified price], [verified next step]. Посмотрели? Если удобнее, могу ответить на вопросы письменно."
+Agent: "Hello! You planned to discuss [verified topic] with your team. I prepared a short summary: [verified scope], [verified price], [verified next step]. Have you had a chance to look? If it is easier, I can answer questions in writing."
 
 Why: honors the agreed date, adds a summary, asks one question, and does not invent urgency.
 
 ### Example 2 — Proposal follow-up with a real reason
 
-Agent: "Я отправил предложение [id] [date]. В нём [verified key term]. Успели посмотреть раздел [section]? Если есть вопрос по [verified topic], отвечу здесь."
+Agent: "I sent proposal [id] on [date]. It covers [verified key term]. Have you had a chance to review [section]? If you have a question about [verified topic], I will answer here."
 
 Why: references the actual document and a specific section. Not "any update?".
 
 ### Example 3 — No response, close-out
 
-Agent: "Не буду больше напоминать по этому вопросу. Если он вернётся, напишите сюда — помогу. Спасибо."
+Agent: "I will not remind you about this again. If it comes back, write here and I will help. Thank you."
 
 Why: clean exit, no guilt, no fake deadline. The buyer can return without friction.
 
-### Example 4 — Kyrgyz follow-up
+### Example 4 — Follow-up in the buyer's language (English reference)
 
-Buyer: "Шаршембиде жазыңыз, команда менен сүйлөшөм."
+Buyer: "Write to me on Wednesday; I will discuss it with the team."
 
-Agent (Wednesday): "Салам! [Verified topic] боюнча команда менен сүйлөшө турган болчуңуз. Кыскача корутунду даярдадым: [verified scope], [verified price], [verified next step]. Карап чыктыңызбы? Суроо болсо, ушул жерге жазыңыз."
+Agent (Wednesday): "Hello! You planned to discuss [verified topic] with your team. I prepared a short summary: [verified scope], [verified price], [verified next step]. Have you had a chance to look? If you have questions, write here."
 
-Why: mirrors Kyrgyz, keeps the promise, adds value, one question. Kyrgyz is a draft and needs native review.
+Why: the reply is written in the buyer's own language and register (see the language-adaptation skill); it keeps the promise, adds value, and asks one question. The body above is the English reference; ship it in the buyer's language.
 
 ### Example 5 — Refusal
 
-Buyer: "Не пишите больше, неинтересно."
+Buyer: "Do not write anymore, not interested."
 
-Agent: "Понял, больше не пишу. Спасибо за ответ."
+Agent: "Understood, I will not write again. Thank you for the reply."
 
 Why: one acknowledgment, no pitch, no "final offer". The sequence ends.
 
 ### Example 6 — No-show recovery
 
-Agent: "Сегодня была запись на [date/time] с [verified role]. Вы не подключились. Хотите перенести на другое реальное время? Если вопрос больше не актуален — скажите, и я закрою его."
+Agent: "You had a booking today at [date/time] with [verified role] and did not join. Would you like to reschedule to another real time? If the matter is no longer relevant, tell me and I will close it."
 
 Why: factual, no blame, offers a real path, accepts a no.
 

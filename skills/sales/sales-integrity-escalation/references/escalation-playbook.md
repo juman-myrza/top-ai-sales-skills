@@ -181,7 +181,7 @@ Response:
 
 First boundary:
 
-> "Я готов помочь с вопросом, но не буду продолжать в таком тоне. Если хотите, продолжим по делу; если нет — завершу разговор."
+> "I am ready to help with the issue, but I will not continue in this tone. If you want, we can continue on the matter; if not, I will end the conversation."
 
 If the abuse continues:
 

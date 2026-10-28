@@ -91,55 +91,55 @@ Never include:
 
 ## 4. Templates
 
-Replace `[verified …]` from the passport. Do not send placeholders. Kyrgyz lines are drafts pending native review.
+Replace `[verified …]` from the passport and render each message in the buyer's own language and register (see the language-adaptation skill). Do not send placeholders.
 
-### 4.1 Buyer-requested follow-up (Russian)
+### 4.1 Buyer-requested follow-up
 
-> Добрый день! Вы просили вернуться к вопросу [verified topic] [date/time]. Подготовил [verified value: summary/answer/document]. [One ask]. Если сейчас не время — скажите, и я закрою вопрос.
+> Hello! You asked me to follow up on [verified topic] on [date/time]. I prepared [verified value: summary/answer/document]. [One ask]. If now is not the time, tell me and I will close the matter.
 
-### 4.2 Buyer-requested follow-up (Kyrgyz, draft)
+### 4.2 Buyer-requested follow-up (variation)
 
-> Салам! [Verified topic] боюнча [date/time] кайра кайрылууну сурангансыз. [Verified value] даярдадым. [One ask]. Азыр убакыт туура келбесе, айтыңыз — суроону жабам.
+> Hello! You asked me to get back to you about [verified topic] on [date/time]. I prepared [verified value]. [One ask]. If now is not the time, tell me and I will close the matter.
 
 ### 4.3 Agreed next step
 
-> Мы договорились вернуться [date/time] к [verified next step]. [Verified status/value]. [One ask]. Если планы изменились — напишите, подстроюсь.
+> We agreed to return to [verified next step] on [date/time]. [Verified status/value]. [One ask]. If plans changed, write and I will adjust.
 
 ### 4.4 Document ready
 
-> Как обещал, отправил [document name] [id]. В нём [one verified point]. Посмотрите раздел [section] — если есть вопрос, отвечу здесь. Если документ не открывается, скажите, пришлю другой формат.
+> As promised, I sent [document name] [id]. It covers [one verified point]. Look at [section] - if you have a question, I will answer here. If the document does not open, tell me and I will send another format.
 
 ### 4.5 Proposal sent, decision date agreed
 
-> Предложение [id] отправлено [date]. Вы планировали решение к [date]. [One verified point or answer to a known question]. Успели посмотреть? Если нужен разговор с [verified role], предложу реальное время.
+> Proposal [id] was sent on [date]. You planned a decision by [date]. [One verified point or answer to a known question]. Have you had a chance to look? If you want to talk with [verified role], I will offer a real time.
 
 ### 4.6 Answer ready after escalation
 
-> Вернулся с ответом по [verified question]. [Verified answer, with source/qualifier]. [One ask or next step]. Если этого достаточно, могу [verified next action].
+> I am back with an answer about [verified question]. [Verified answer, with source/qualifier]. [One ask or next step]. If that is enough, I can [verified next action].
 
 ### 4.7 No-show recovery
 
-> Сегодня была запись на [date/time] с [verified role]. Вы не подключились. Хотите перенести? Есть [slot A] и [slot B] — проверены в календаре. Если вопрос больше не актуален, скажите, и я закрою его.
+> You had a booking today at [date/time] with [verified role] and did not join. Would you like to reschedule? There are [slot A] and [slot B] - checked in the calendar. If the matter is no longer relevant, tell me and I will close it.
 
 ### 4.8 No-response close-out
 
-> Не буду больше напоминать по этому вопросу. Если он вернётся, напишите сюда — помогу. Спасибо.
+> I will not remind you about this again. If it comes back, write here and I will help. Thank you.
 
 ### 4.9 Post-purchase onboarding check-in
 
-> Как проходит [verified onboarding step]? Если что-то не работает или непонятно, напишите — передам в поддержку. [Verified support channel]. Это сообщение не про апсейл; просто проверяю, что всё в порядке.
+> How is [verified onboarding step] going? If something is not working or is unclear, write and I will pass it to support. [Verified support channel]. This message is not about an upsell; I am simply checking that everything is fine.
 
 ### 4.10 Re-engagement with marketing consent
 
-> Вы разрешили присылать обновления по [verified topic]. Появилось [verified new fact: feature, date, document]. Если это больше не нужно — ответьте «стоп», и я отпишу.
+> You agreed to receive updates about [verified topic]. There is [verified new fact: feature, date, document]. If you no longer want these, reply "stop" and I will unsubscribe you.
 
 ### 4.11 Wrong person
 
-> Похоже, я написал не тому человеку. Извините за беспокойство. Подскажите, пожалуйста, кто занимается [verified topic], или я закрою вопрос.
+> It looks like I wrote to the wrong person. Apologies for the interruption. Please tell me who handles [verified topic], or I will close the matter.
 
 ### 4.12 Buyer angry about the follow-up
 
-> Вы правы, я написал без достаточного повода. Больше не буду. Если вопрос вернётся, вы можете написать сюда.
+> You are right; I wrote without a sufficient reason. I will not do that again. If the matter comes back, you can write here.
 
 ---
 

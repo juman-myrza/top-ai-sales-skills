@@ -63,7 +63,7 @@ An agent should normally use `create_payment_request` or `create_invoice`; `refu
     "discount_approval_ref": null,
     "description": "Nimbus Notes Team, annual, 8 users",
     "customer": {
-      "name": "Айжан",
+      "name": "Aizhan",
       "email": "aizhan@example.invalid",
       "legal_entity": "Alatoo Research Demo LLC",
       "billing_country": "KG",
@@ -130,7 +130,7 @@ A discounted or custom quote is valid only when its `approval_ref` is present an
     "payment_url": "https://pay.example.invalid/inv_01J9Z6E4",
     "expires_at": "2026-10-30T23:59:59+06:00",
     "customer": {
-      "name": "Айжан",
+      "name": "Aizhan",
       "email": "aizhan@example.invalid",
       "legal_entity": "Alatoo Research Demo LLC"
     },
@@ -147,7 +147,7 @@ A discounted or custom quote is valid only when its `approval_ref` is present an
 }
 ```
 
-`status: "created"` means the invoice exists. It does **not** mean it was paid. The agent may say: "Счёт создан, ссылка на оплату…". It may not say "оплачено".
+`status: "created"` means the invoice exists. It does **not** mean it was paid. The agent may say: "Invoice created, here is the payment link...". It may not say "paid".
 
 ---
 
@@ -182,13 +182,13 @@ A discounted or custom quote is valid only when its `approval_ref` is present an
 
 | Provider status | Agent may say | Agent must not say |
 |---|---|---|
-| `created` / `open` | "Счёт создан" | "Оплачено" |
-| `pending` / `processing` | "Платёж в обработке" | "Оплата прошла" |
-| `paid` / `succeeded` | "Оплата подтверждена" + receipt/next step | "Скоро придёт" without a verified next step |
-| `failed` | "Платёж не прошёл" + plain cause | "Попробуйте ещё раз" without a recovery path |
-| `cancelled` / `void` | "Счёт отменён" | "Оплачен" |
-| `refunded` | "Возврат подтверждён" | "Возврат придёт завтра" without a verified timeline |
-| `partially_refunded` | "Возврат выполнен частично" + amount | "Полный возврат" |
+| `created` / `open` | "Invoice created" | "Paid" |
+| `pending` / `processing` | "Payment processing" | "Payment went through" |
+| `paid` / `succeeded` | "Payment confirmed" + receipt/next step | "It will arrive soon" without a verified next step |
+| `failed` | "Payment did not go through" + plain cause | "Try again" without a recovery path |
+| `cancelled` / `void` | "Invoice cancelled" | "Paid" |
+| `refunded` | "Refund confirmed" | "The refund will arrive tomorrow" without a verified timeline |
+| `partially_refunded` | "Refund issued in part" + amount | "Full refund" |
 
 **Unrecognized status = not paid.**
 
@@ -218,16 +218,16 @@ A discounted or custom quote is valid only when its `approval_ref` is present an
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| Payment pending | "Платёж пока в обработке. Я не буду отмечать его как оплаченный, пока статус не подтвердится." | "Оплачено" because the buyer said so |
-| Card declined | "Платёж не прошёл. Банк не подтвердил операцию. Могу предложить другой способ или повтор." | Ask for card details in chat |
-| Amount mismatch | "Сумма не совпала с утверждённой. Я не буду выставлять счёт, пока не проверю." | Charge the buyer's stated amount |
-| Quote expired | "Срок предложения истёк. Проверю актуальные условия и попрошу подтвердить новую версию." | Reuse the old amount or imply it is still guaranteed |
-| Discount above authority | "Эта скидка требует согласования. Я не буду выставлять счёт по несогласованной сумме." | Charge first and seek approval later |
-| Currency mismatch | "Валюта не совпадает с условиями. Передам человеку." | Convert silently |
-| Timeout | "Статус платежа неизвестен. Проверю по номеру; если не получится — передам человеку." | Retry with a new key |
+| Payment pending | "The payment is still processing. I will not mark it as paid until the status confirms it." | "Paid" because the buyer said so |
+| Card declined | "The payment did not go through. The bank did not confirm it. I can offer another method or a retry." | Ask for card details in chat |
+| Amount mismatch | "The amount does not match the approved one. I will not issue the invoice until I check." | Charge the buyer's stated amount |
+| Quote expired | "The quote has expired. I will check the current terms and ask you to confirm a new version." | Reuse the old amount or imply it is still guaranteed |
+| Discount above authority | "That discount requires approval. I will not issue an invoice for an unapproved amount." | Charge first and seek approval later |
+| Currency mismatch | "The currency does not match the terms. I will hand off to a human." | Convert silently |
+| Timeout | "The payment status is unknown. I will check by reference; if that fails, I will hand off to a human." | Retry with a new key |
 | Duplicate request | Return original invoice/payment | Create a second charge |
 | Refund request | Follow policy; route if outside authority | Promise a refund before the tool confirms |
-| Provider down | "Оплата сейчас недоступна. Не буду просить вас платить по неподтверждённой ссылке." | Send a personal account as a workaround |
+| Provider down | "Payment is unavailable right now. I will not ask you to pay through an unverified link." | Send a personal account as a workaround |
 
 Retry: query status first. Retry a write only with the same idempotency key and only if the provider confirms the original did not complete. Never retry a charge with a new key.
 

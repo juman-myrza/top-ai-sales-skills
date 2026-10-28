@@ -196,7 +196,7 @@
         "to": "+996700000000",
         "locale": "ru",
         "purpose": "transactional",
-        "text": "Добрый день! Это согласованное напоминание по вашему вопросу.",
+        "text": "Hello! This is the agreed reminder about your question.",
         "consent": {
           "status": "granted",
           "at": "2026-10-23T10:00:00+06:00",

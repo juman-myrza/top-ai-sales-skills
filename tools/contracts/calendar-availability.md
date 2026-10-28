@@ -89,7 +89,7 @@ The server must validate that `calendar_id` belongs to the tenant. A calendar ID
         "slot_id": "slot_01J9Z4B7",
         "start": "2026-10-27T14:00:00+06:00",
         "end": "2026-10-27T14:30:00+06:00",
-        "display": "27 октября, вторник, 14:00",
+        "display": "Tue 27 Oct, 14:00",
         "timezone": "Asia/Bishkek",
         "bookable": true
       },
@@ -97,7 +97,7 @@ The server must validate that `calendar_id` belongs to the tenant. A calendar ID
         "slot_id": "slot_01J9Z4B8",
         "start": "2026-10-27T16:00:00+06:00",
         "end": "2026-10-27T16:30:00+06:00",
-        "display": "27 октября, вторник, 16:00",
+        "display": "Tue 27 Oct, 16:00",
         "timezone": "Asia/Bishkek",
         "bookable": true
       }
@@ -179,9 +179,9 @@ The server must validate that `calendar_id` belongs to the tenant. A calendar ID
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| Timeout | "Календарь сейчас не отвечает, поэтому я не могу подтвердить свободное время. Повторю или передам человеку." | "Обычно после обеда свободно" |
-| No slots | "В этом диапазоне подтверждённых окон нет. Могу проверить другую неделю или передать человеку." | Invent a slot |
-| Calendar unauthorized | "Не могу проверить календарь. Передам человеку, чтобы он подтвердил время." | Send a link as a workaround |
+| Timeout | "The calendar is not responding, so I cannot confirm availability. I will retry or hand off to a human." | "Afternoons are usually free" |
+| No slots | "There are no confirmed openings in that range. I can check another week or hand off to a human." | Invent a slot |
+| Calendar unauthorized | "I cannot check the calendar. I will hand off to a human to confirm the time." | Send a link as a workaround |
 | Bad timezone | Ask the buyer to confirm their timezone | Assume a city |
 | Slots expire before booking | Re-check availability; do not use stale `slot_id` | Book the stale slot and hope |
 

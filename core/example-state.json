@@ -13,7 +13,7 @@
   "stage": "commit",
   "mode": "confirm",
   "buyer": {
-    "display_name": "Айжан",
+    "display_name": "Aizhan",
     "company": "Fictional Example LLC",
     "role": "Operations lead",
     "timezone": "Asia/Bishkek",
@@ -55,7 +55,7 @@
     "stakeholders": [
       {
         "role": "Operations lead",
-        "name": "Айжан",
+        "name": "Aizhan",
         "influence": "decision_maker"
       }
     ],

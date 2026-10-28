@@ -17,7 +17,7 @@ repository checkout is gone.
 Existing skill directories are skipped unless --force is passed. When a
 directory is replaced, it is copied to a timestamped backup first.
 
-This script installs instruction files and an activation template only. It does
+This script installs instruction files and activation notes only. It does
 not install or configure tool adapters, credentials, cron jobs, or a model.
 """
 
@@ -85,7 +85,7 @@ def repo_relative_target(source_file: Path, target: str) -> str | None:
 
 
 def rewrite_links(text: str, source_file: Path, installed_file: Path, skill_root: Path) -> str:
-    """Rewrite bundled repo-relative links to point at references/shared/."""
+    """Rewrite bundled repo-relative links to the skill's references/shared/."""
 
     def replace(match: re.Match[str]) -> str:
         prefix, target, suffix = match.group(1), match.group(2), match.group(3)
@@ -172,11 +172,33 @@ def core_contract_version() -> str | None:
     return match.group(1) if match else None
 
 
+def bundle_file_hashes() -> dict[str, str]:
+    """sha256 of every canonical shared-bundle file, keyed by repo-relative path.
+
+    Hermes serves skill files only from inside a skill directory (skill_view
+    rejects any '..'), so the bundle is copied into every skill rather than
+    shared by reference. The manifest records one canonical hash per bundle
+    file; the installed-artifact check fails if any installed copy drifts from
+    it, so the nine copies cannot silently diverge.
+    """
+    files: dict[str, str] = {}
+    for name in BUNDLE_DIRS:
+        source = ROOT / name
+        if not source.is_dir():
+            continue
+        for path in sorted(source.rglob("*")):
+            if not path.is_file():
+                continue
+            if any(part in BUNDLE_EXCLUDE for part in path.relative_to(source).parts):
+                continue
+            files[path.relative_to(ROOT).as_posix()] = sha256(path)
+    return files
+
+
 def shared_manifest() -> dict:
     """Version and hash the shared resources so an evaluation can pin them."""
     tracked = [
         "core/CORE-BEHAVIOR-CONTRACT.md",
-        "core/SYSTEM-PROMPT-SNIPPET.md",
         "core/conversation-state.schema.json",
         "product-passport/passport.schema.json",
         "tools/schemas/tool-envelope.schema.json",
@@ -186,10 +208,17 @@ def shared_manifest() -> dict:
         path = ROOT / relative
         if path.is_file():
             files[relative] = sha256(path)
+    bundle = bundle_file_hashes()
+    aggregate = hashlib.sha256()
+    for relative in sorted(bundle):
+        aggregate.update(relative.encode("utf-8"))
+        aggregate.update(bundle[relative].encode("utf-8"))
     return {
         "core_contract_version": core_contract_version(),
-        "system_prompt_snippet_sha256": files.get("core/SYSTEM-PROMPT-SNIPPET.md"),
         "files": files,
+        "bundle_file_count": len(bundle),
+        "bundle_sha256": aggregate.hexdigest(),
+        "bundle_files": bundle,
     }
 
 
@@ -219,12 +248,13 @@ These skills are inert instruction files. They do not connect a model, a
 calendar, a payment provider, or a CRM by themselves. Complete these steps
 before production use.
 
-## 1. Load the always-on contract
+## 1. Always-on layer
 
-Add the contents of [`activation/SYSTEM-PROMPT-SNIPPET.md`](activation/SYSTEM-PROMPT-SNIPPET.md)
-to the agent's system prompt. It carries the truth, consent, tool-verification,
-and refusal invariants. Do not paste the nine skill bodies into the system
-prompt; load them as skills on demand.
+The agent's always-on identity and operating rules are the profile files
+`SOUL.md` and `AGENTS.md`. Keep the truth, consent, tool-verification, and
+refusal invariants there (or in the host's equivalent always-on layer). The
+full `core/CORE-BEHAVIOR-CONTRACT.md` loads with the skills on demand. Do not
+paste the nine skill bodies into the system prompt.
 
 ## 2. Approve and connect one passport
 
@@ -233,6 +263,11 @@ The skills contain no business facts. Create one passport per offer from
 validate it against the schema, mark it `approved`, and expose it through the
 `passport.lookup` contract. The bundled copy of the passport schema and examples
 lives under each skill's `references/shared/product-passport/` directory.
+
+The `tools` section of a passport is operator metadata: the lookup adapter does
+not expose it to the model. Express any capability the model may rely on in the
+sections the model can read (`offer`, `pricing`, `fulfillment`, `sales_policy`,
+`sales_guidance`, ...).
 
 ## 3. Do not skip the tool layer
 
@@ -243,17 +278,29 @@ action succeeded. The bundled contracts live under
 
 ## 4. Review the shared bundle
 
-Each installed skill carries a copy of `core/`, `tools/`,
-`product-passport/`, and `research/` under `references/shared/`. The links in
-each `SKILL.md` were rewritten to point there at install time. If you edit a
-shared document, update the source repository and reinstall; editing one
-skill's copy will drift from the others.
+Each installed skill carries an identical copy of `core/`, `tools/`,
+`product-passport/`, and `research/` under `references/shared/`, because the
+host serves skill files only from inside a skill directory. The links in each
+`SKILL.md` point there. `INSTALL-MANIFEST.json` records a sha256 for every
+bundle file; reinstalling restores all copies, and
+`scripts/test_installed_artifact.py` fails if any installed copy drifts. Edit
+the source repository and reinstall rather than editing one installed copy.
 
 ## 5. Verify discovery
 
 Run `hermes skills list --source local` against the target home. The repository
 also provides `scripts/test_installed_artifact.py` to check that every installed
 skill resolves its links and includes the shared contract.
+
+## 6. Minimum toolset for a client-facing agent
+
+The required surface for a client-facing sales agent is:
+`clarify, file, memory, skills, todo, web, passport, escalation, kanban`.
+
+They do **not** use `terminal`, `code_execution`, `cronjob`, `computer_use`, or
+`browser`. Granting those to a client-facing sales agent is an operator choice
+(for operator tooling), not a requirement of the sales flow; the skills never
+invoke them.
 """
 
 
@@ -345,10 +392,7 @@ def main() -> int:
                 shutil.rmtree(final)
             shutil.move(str(stage / name), str(final))
 
-        # Operator-facing artifacts live at the target root.
-        activation_dir = target / "activation"
-        activation_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(ROOT / "core" / "SYSTEM-PROMPT-SNIPPET.md", activation_dir / "SYSTEM-PROMPT-SNIPPET.md")
+        # Operator-facing notes live at the target root.
         (target / "ACTIVATION.md").write_text(ACTIVATION, encoding="utf-8")
 
         manifest = build_manifest({name: destination / name for name in installed}, target)

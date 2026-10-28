@@ -14,6 +14,7 @@ Exit codes:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -191,7 +192,6 @@ REQUIRED_PATHS = [
     "core/CONVERSATION-STATE.md",
     "core/conversation-state.schema.json",
     "core/example-state.json",
-    "core/SYSTEM-PROMPT-SNIPPET.md",
     "product-passport/README.md",
     "product-passport/TEMPLATE.md",
     "product-passport/passport.schema.json",
@@ -487,6 +487,73 @@ def check_tenant_passports() -> None:
         bump()
         if data.get("status") == "draft" and data.get("metadata", {}).get("fictional") is True:
             record("tenant-passport", f"{path.relative_to(ROOT)}: a real tenant draft must not be marked fictional")
+
+    # Mirror integrity: the tenant tree is a byte-for-byte mirror of the profile's
+    # authoritative store. The profile owns passports/**; this repo only mirrors it.
+    # Enforce internal consistency (catalog.json <-> offer files) and the recorded
+    # SHA-256 in MIRROR.sha256, so the mirror cannot silently describe stale facts.
+    canonical_schema = ROOT / "product-passport" / "passport.schema.json"
+    for passports_dir in sorted(tenant_root.glob("*/passports")):
+        rel = passports_dir.relative_to(ROOT)
+        catalog_path = passports_dir / "catalog.json"
+        mirror_path = passports_dir / "MIRROR.sha256"
+        schema_copy = passports_dir / "schema" / "passport.schema.json"
+
+        bump()
+        for required in (catalog_path, mirror_path, schema_copy):
+            if not required.is_file():
+                record("tenant-passport", f"{required.relative_to(ROOT)}: missing")
+
+        if schema_copy.is_file():
+            bump()
+            if schema_copy.read_bytes() != canonical_schema.read_bytes():
+                record("tenant-passport", f"{schema_copy.relative_to(ROOT)}: must be byte-identical to product-passport/passport.schema.json")
+
+        disk_offers = {p.parent.name: p for p in sorted(passports_dir.rglob("offers/*/*.json"))}
+        if catalog_path.is_file():
+            catalog = load_json(catalog_path)
+            bump()
+            offers_map = catalog.get("offers") if isinstance(catalog, dict) else None
+            if not isinstance(offers_map, dict):
+                record("tenant-passport", f"{catalog_path.relative_to(ROOT)}: must contain an offers object")
+            else:
+                for offer_id, offer_path in disk_offers.items():
+                    entry = offers_map.get(offer_id)
+                    bump()
+                    if not isinstance(entry, dict):
+                        record("tenant-passport", f"{catalog_path.relative_to(ROOT)}: missing entry for {offer_id!r}")
+                        continue
+                    expected_file = offer_path.relative_to(passports_dir).as_posix()
+                    if entry.get("passport_id") != offer_id or entry.get("current_version") != offer_path.stem or entry.get("file") != expected_file:
+                        record("tenant-passport", f"{catalog_path.relative_to(ROOT)}: entry {offer_id!r} does not match {offer_path.relative_to(ROOT)}")
+                    bump()
+                    if entry.get("sha256") != hashlib.sha256(offer_path.read_bytes()).hexdigest():
+                        record("tenant-passport", f"{catalog_path.relative_to(ROOT)}: sha256 for {offer_id!r} does not match {offer_path.relative_to(ROOT)}")
+                for offer_id in offers_map:
+                    bump()
+                    if offer_id not in disk_offers:
+                        record("tenant-passport", f"{catalog_path.relative_to(ROOT)}: entry {offer_id!r} has no offer file")
+
+        if mirror_path.is_file():
+            recorded: dict[str, str] = {}
+            for line in mirror_path.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                parts = line.split(None, 1)
+                if len(parts) != 2 or not re.fullmatch(r"[0-9a-f]{64}", parts[0]):
+                    record("tenant-passport", f"{mirror_path.relative_to(ROOT)}: malformed line {line!r}")
+                    continue
+                recorded[parts[1].strip()] = parts[0]
+            for relative_file, digest in recorded.items():
+                target = passports_dir / relative_file
+                bump()
+                if not target.is_file():
+                    record("tenant-passport", f"{mirror_path.relative_to(ROOT)}: lists missing file {relative_file!r}")
+                    continue
+                actual = hashlib.sha256(target.read_bytes()).hexdigest()
+                if actual != digest:
+                    record("tenant-passport", f"{target.relative_to(ROOT)}: sha256 {actual[:12]}… does not match the recorded {digest[:12]}… (mirror drifted; re-sync from the profile and update {mirror_path.name})")
 
 
 def check_passport_catalog() -> None:
@@ -961,6 +1028,10 @@ def check_invalid_fixtures() -> None:
 def iter_markdown_files() -> Iterable[Path]:
     for path in sorted(ROOT.rglob("*.md")):
         if ".git" in path.parts:
+            continue
+        # Audits are frozen records of a past snapshot; their links describe the
+        # tree as it existed then and must not be rewritten when files move.
+        if "audits" in path.parts:
             continue
         yield path
 

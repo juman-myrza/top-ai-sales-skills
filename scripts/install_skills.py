@@ -395,7 +395,10 @@ def main() -> int:
         # Operator-facing notes live at the target root.
         (target / "ACTIVATION.md").write_text(ACTIVATION, encoding="utf-8")
 
-        manifest = build_manifest({name: destination / name for name in installed}, target)
+        manifest_skills = {
+            name: destination / name for name in EXPECTED if (destination / name).is_dir()
+        }
+        manifest = build_manifest(manifest_skills, target)
         (target / "INSTALL-MANIFEST.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
@@ -407,7 +410,9 @@ def main() -> int:
     finally:
         shutil.rmtree(stage, ignore_errors=True)
 
-    print(f"\nInstalled {sum(1 for _, action in actions if not action.startswith('skip'))} skill(s).")
+    print(f"\nInstalled {sum(1 for _, action in actions if not action.startswith('skip'))} skill(s); kept {sum(1 for _, action in actions if action.startswith('skip'))} existing skill(s) unchanged.")
+    if any(action.startswith("skip") for _, action in actions):
+        print("Pass --force to update the existing skill directories.")
     print(f"Manifest: {target / 'INSTALL-MANIFEST.json'}")
     print(f"Activation notes: {target / 'ACTIVATION.md'}")
     print("Check discovery with: hermes skills list --source local")

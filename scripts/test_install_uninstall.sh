@@ -35,6 +35,14 @@ if [ ! -d "$home/skills/sales/sales-conversation-orchestrator/references/shared/
     fail "shared bundle not installed into the skill"
 fi
 
+# 2b. A no-force reinstall must keep the manifest complete (it must not drop
+# the skill list, which would break uninstall).
+sh "$root/install.sh" --target "$home" --apply --skip-validate >/dev/null
+listed=$(python3 -c 'import json,sys; print(len(json.load(open(sys.argv[1]))["skills"]))' "$home/INSTALL-MANIFEST.json")
+if [ "$listed" -ne 9 ]; then
+    fail "no-force reinstall dropped manifest skills (found $listed, expected 9)"
+fi
+
 # 3. Uninstall dry run must not remove anything.
 sh "$root/uninstall.sh" --target "$home" >/dev/null
 if [ ! -d "$home/skills/sales/sales-closing-execution" ]; then

@@ -298,7 +298,7 @@ What the tests can detect: missing required facts or phrases, forbidden claims, 
 
 | Path | Contents |
 |---|---|
-| [`core/`](core/) | Behavior contract, conflict resolution, conversation state, system-prompt snippet |
+| [`core/`](core/) | Behavior contract, conflict resolution, conversation state |
 | [`skills/sales/`](skills/sales/) | Nine skills plus language, cadence, and escalation references |
 | [`product-passport/`](product-passport/) | Template, JSON Schema, three fictional examples |
 | [`tools/`](tools/) | Contracts, envelope schema, example envelopes, and the file-backed passport lookup adapter |
@@ -311,7 +311,6 @@ What the tests can detect: missing required facts or phrases, forbidden claims, 
 Key documents:
 
 - [Core Behavior Contract](core/CORE-BEHAVIOR-CONTRACT.md)
-- [System Prompt Snippet](core/SYSTEM-PROMPT-SNIPPET.md)
 - [Product Passport README](product-passport/README.md)
 - [Tool Contracts](tools/README.md)
 - [Passport Lookup Adapter and Deployment Runbook](tools/adapters/passport-lookup/README.md)

@@ -110,6 +110,11 @@ def main() -> int:
         return 2
 
     failures: list[str] = []
+    # The profile owns passports/state/, and the mirror lives in the repo; the
+    # installer must never write either.
+    for forbidden in ("passports", "state", "tenants"):
+        if (target / forbidden).exists():
+            failures.append(f"install must not create <target>/{forbidden}")
     skills_root = target / "skills" / "sales"
     for name in EXPECTED:
         skill_dir = skills_root / name
@@ -121,8 +126,6 @@ def main() -> int:
             if not (skill_dir / BUNDLE_ROOT / relative).is_file():
                 failures.append(f"{name}: missing bundled {relative}")
 
-    if not (target / "activation" / "SYSTEM-PROMPT-SNIPPET.md").is_file():
-        failures.append("activation/SYSTEM-PROMPT-SNIPPET.md is missing")
     if not (target / "ACTIVATION.md").is_file():
         failures.append("ACTIVATION.md is missing")
 
@@ -134,14 +137,39 @@ def main() -> int:
         shared = manifest.get("shared", {})
         if not shared.get("core_contract_version"):
             failures.append("manifest does not record shared.core_contract_version")
-        if not shared.get("system_prompt_snippet_sha256"):
-            failures.append("manifest does not record the system-prompt snippet hash")
         for relative in ("core/CORE-BEHAVIOR-CONTRACT.md", "product-passport/passport.schema.json"):
             recorded = shared.get("files", {}).get(relative)
             if not recorded:
                 failures.append(f"manifest does not record a hash for {relative}")
             elif recorded != hashlib.sha256((ROOT / relative).read_bytes()).hexdigest():
                 failures.append(f"manifest hash for {relative} does not match the source repository")
+        # OC-1 fallback: every skill must carry the identical canonical bundle.
+        bundle = shared.get("bundle_files", {})
+        if not isinstance(bundle, dict) or not bundle:
+            failures.append("manifest does not record shared.bundle_files")
+        elif shared.get("bundle_file_count") != len(bundle):
+            failures.append("manifest shared.bundle_file_count does not match shared.bundle_files")
+        else:
+            for name in EXPECTED:
+                skill_dir = skills_root / name
+                if not skill_dir.is_dir():
+                    continue
+                installed_bundle = skill_dir / BUNDLE_ROOT
+                installed_rel = (
+                    {p.relative_to(installed_bundle).as_posix() for p in installed_bundle.rglob("*") if p.is_file()}
+                    if installed_bundle.is_dir()
+                    else set()
+                )
+                for relative in sorted(set(bundle) - installed_rel):
+                    failures.append(f"{name}: missing bundled {relative}")
+                for relative in sorted(installed_rel - set(bundle)):
+                    failures.append(f"{name}: unexpected bundled file {relative}")
+                for relative, expected_hash in sorted(bundle.items()):
+                    copied = installed_bundle / relative
+                    if copied.is_file():
+                        actual_hash = hashlib.sha256(copied.read_bytes()).hexdigest()
+                        if actual_hash != expected_hash:
+                            failures.append(f"{name}: bundled {relative} differs from the canonical source")
         for name in EXPECTED:
             entry = manifest.get("skills", {}).get(name)
             if not entry:
@@ -150,6 +178,21 @@ def main() -> int:
             actual = directory_hash(skills_root / name)
             if entry.get("sha256") != actual:
                 failures.append(f"{name}: manifest hash does not match installed files")
+
+    # OC-6: the sales skills must not require operator-only tools.
+    forbidden_tool_words = (
+        "terminal", "code_execution", "cronjob", "computer_use", "browser",
+        "execute_code", "delegate_task",
+    )
+    shared_marker = BUNDLE_ROOT.as_posix()
+    for path in sorted((target / "skills").rglob("*.md")):
+        rel = path.relative_to(target / "skills").as_posix()
+        if shared_marker in rel:  # the bundled references are not the skills' own text
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace").lower()
+        for word in forbidden_tool_words:
+            if word in text:
+                failures.append(f"{rel}: references operator-only tool {word!r}")
 
     shutil.rmtree(temp_root, ignore_errors=True)
 

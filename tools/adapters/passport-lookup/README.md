@@ -1,6 +1,21 @@
 # File-backed `passport_lookup` Adapter
 
-**Status:** implemented as a local adapter and Hermes plugin. It has unit tests, but it has **not** been verified against the Daniyar VPS or Hermes v0.21.1. No business passport is bundled here.
+**Status:** implemented as a local adapter and Hermes plugin, with unit tests in this repository, and **verified in the installed Daniyar profile on 2026-10-28**. In that deployment `resolve`, `authority`, and `lookup` answered correctly against the profile's approved passport store; the plugin was enabled for the profile; and the runtime guard read approved prices/links through it (prices `{35000, 100000, 10000}`, links `{}` → fail-closed). No business passport is bundled in this repository. Re-verify against the target Hermes version when deploying elsewhere.
+
+Verified as deployed (Daniyar profile, 2026-10-28): `resolve` listed the published offers, `authority` returned only the authority fields, and `lookup` returned the requested fields with `passport_id` and `version`, all against the profile's approved passport store:
+
+```bash
+python3 tools/adapters/passport-lookup/passport_lookup.py --root "$STORE" --tenant-id daniyar \
+  lookup <<'JSON'
+{"operation": "resolve"}
+JSON
+python3 tools/adapters/passport-lookup/passport_lookup.py --root "$STORE" --tenant-id daniyar \
+  lookup <<'JSON'
+{"operation": "lookup", "offer_id": "<offer>", "requested_fields": ["pricing.plans"]}
+JSON
+```
+
+Observed: the lookup returned `pricing.plans` (including `35000`, `100000`, `10000`) with `passport_id`/`version`; no booking link was present in the store, so link reads came back empty and the runtime guard failed closed (`links {}`). Re-run the commands above against the target store to reproduce.
 
 This is the smallest reliable way to give Daniyar approved product facts without coupling them to the universal sales skills:
 
@@ -287,14 +302,13 @@ HERMES_HOME=/tmp/opencode/passport-plugin-check \
   hermes plugins validate tools/adapters/passport-lookup
 ```
 
-On the VPS, repeat that validation against the actual Hermes v0.21.1 installation before enabling the plugin for buyers.
+Repeat that validation against the target host's installed Hermes version before enabling the plugin for buyers. The adapter is verified as deployed (see Status, above); this repository only ships the adapter and its tests.
 
 ---
 
 ## 9. Deliberate limits
 
-- No live VPS integration has been run from this repository.
-- No claim is made that Daniyar already reads the passports.
+- This repository ships the adapter and its tests; the live deployment is where it was verified (2026-10-28). A different host or Hermes version must be re-verified.
 - No cache is used; correctness and simple updates take priority over optimization.
 - The adapter does not prove business truth. Your approval process does that.
 - A profile-scoped plugin is not an OS security sandbox. Use normal filesystem permissions for the store and keep its commercial data non-secret.

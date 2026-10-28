@@ -385,6 +385,8 @@ If safety policy is missing, the agent must stop selling when a safety issue app
 
 The repository ships **contracts, not adapters**. Mark `not_implemented` honestly. A skill may describe what it would do; it may not claim a tool exists.
 
+`tools` is **operator metadata**: the `passport.lookup` adapter does not expose this section to the model. Express any capability the model may rely on in the sections the model can read (`offer`, `pricing`, `fulfillment`, `sales_policy`, `sales_guidance`, ...).
+
 ---
 
 ## 15. Metadata and unresolved decisions

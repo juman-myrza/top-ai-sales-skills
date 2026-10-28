@@ -2,8 +2,9 @@
   "schema_version": "1.1.0",
   "passport_id": "ai-agent-training",
   "version": "1.0.0",
-  "status": "draft",
+  "status": "approved",
   "default_locale": "ru",
+  "effective_from": "2026-10-25",
   "business": {
     "legal_name": {
       "value": null,
@@ -165,7 +166,7 @@
       "notes": "Start date, channel, response time, and limits are not finalized.",
       "verified_at": "2026-10-24"
     },
-    "status": "paused"
+    "status": "active"
   },
   "pricing": {
     "currency": {
@@ -384,39 +385,53 @@
     "booking": {
       "required": false,
       "calendar_id": {
-        "value": null,
-        "status": "unknown",
-        "notes": "No calendar configured."
+        "value": "juman.kg.agent@gmail.com",
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "Primary calendar of the owner account; read/written only by the calendar-booking adapter.",
+        "verified_at": "2026-10-28"
       },
       "duration_minutes": {
-        "value": null,
-        "status": "unknown",
-        "notes": "Not applicable."
+        "value": 20,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "INTERNAL scheduling value (owner decision 2026-10-28). Never stated to a client: daniyar-guard rejects any stated length.",
+        "verified_at": "2026-10-28"
       },
       "timezone": {
-        "value": null,
-        "status": "unknown",
-        "notes": "Not configured."
+        "value": "Asia/Bishkek",
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
       },
       "slot_interval_minutes": {
-        "value": null,
-        "status": "unknown",
-        "notes": "Not applicable."
+        "value": 30,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "Slot start step = duration (20) + buffer (10).",
+        "verified_at": "2026-10-28"
       },
       "buffer_before_minutes": {
-        "value": null,
-        "status": "unknown",
-        "notes": "Not applicable."
+        "value": 10,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
       },
       "buffer_after_minutes": {
-        "value": null,
-        "status": "unknown",
-        "notes": "Not applicable."
+        "value": 10,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
       },
       "availability_window_days": {
-        "value": null,
-        "status": "unknown",
-        "notes": "Not applicable."
+        "value": 14,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
       },
       "offer_slot_count": {
         "value": null,
@@ -485,10 +500,10 @@
           "notes": "Owner"
         },
         "channel": {
-          "value": "Handoff tool, reason code authority",
+          "value": "Kanban card, assignee `default` (reason code authority)",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       },
       {
@@ -504,10 +519,10 @@
           "notes": "Owner"
         },
         "channel": {
-          "value": "Handoff tool, reason code capability",
+          "value": "Kanban card, assignee `default` (reason code capability)",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       }
     ],
@@ -724,10 +739,10 @@
           "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
         },
         "channel": {
-          "value": "human.handoff tool (Discord handoff already in use).",
+          "value": "Kanban card, assignee `default`",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         },
         "hours": {
           "value": null,
@@ -740,10 +755,10 @@
           "notes": "No SLA approved; do not promise a response time."
         },
         "fallback": {
-          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       },
       {
@@ -754,10 +769,10 @@
           "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
         },
         "channel": {
-          "value": "human.handoff tool (Discord handoff already in use).",
+          "value": "Kanban card, assignee `default`",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         },
         "hours": {
           "value": null,
@@ -770,10 +785,10 @@
           "notes": "No SLA approved; do not promise a response time."
         },
         "fallback": {
-          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       },
       {
@@ -784,10 +799,10 @@
           "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
         },
         "channel": {
-          "value": "human.handoff tool (Discord handoff already in use).",
+          "value": "Kanban card, assignee `default`",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         },
         "hours": {
           "value": null,
@@ -800,10 +815,10 @@
           "notes": "No SLA approved; do not promise a response time."
         },
         "fallback": {
-          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       },
       {
@@ -814,10 +829,10 @@
           "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
         },
         "channel": {
-          "value": "human.handoff tool (Discord handoff already in use).",
+          "value": "Kanban card, assignee `default`",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         },
         "hours": {
           "value": null,
@@ -830,10 +845,10 @@
           "notes": "No SLA approved; do not promise a response time."
         },
         "fallback": {
-          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       },
       {
@@ -844,10 +859,10 @@
           "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
         },
         "channel": {
-          "value": "human.handoff tool (Discord handoff already in use).",
+          "value": "Kanban card, assignee `default`",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         },
         "hours": {
           "value": null,
@@ -860,10 +875,10 @@
           "notes": "No SLA approved; do not promise a response time."
         },
         "fallback": {
-          "value": "If the handoff tool fails, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
           "status": "verified",
-          "source": "Business brief (2026-10-24), supplied by the owner",
-          "verified_at": "2026-10-24"
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
         }
       }
     ],
@@ -1014,19 +1029,21 @@
   "tools": {
     "passport_lookup": {
       "adapter_id": "daniyar-passport-lookup",
-      "status": "not_implemented",
+      "status": "implemented",
       "contract_version": "1.1.0",
-      "notes": "Reference adapter exists in the skills repository; not yet deployed to this profile."
+      "notes": "Installed and verified 2026-10-28: the passport-lookup plugin is enabled in this profile and the guard reads approved prices and booking links through it (adapter daniyar-passport-lookup). Verified by resolving both approved offers through the adapter."
     },
     "calendar_availability": {
-      "adapter_id": "adapter-calendar_availability",
-      "status": "not_implemented",
-      "contract_version": "1.1.0"
+      "adapter_id": "daniyar-calendar-booking",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "calendar_availability tool: real free slots from the primary calendar (20 min slot, 10 min buffer, Asia/Bishkek). Verified live on 2026-10-28."
     },
     "calendar_booking": {
-      "adapter_id": "adapter-calendar_booking",
-      "status": "not_implemented",
-      "contract_version": "1.1.0"
+      "adapter_id": "daniyar-calendar-booking",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "calendar_booking tool: creates one event with a Meet link, idempotent per request key, re-checks the slot before booking. Verified live (create + retry + cancel) on 2026-10-28."
     },
     "payments_invoicing": {
       "adapter_id": "adapter-payments_invoicing",
@@ -1051,8 +1068,8 @@
   },
   "metadata": {
     "owner": "Business owner (Daniyar project)",
-    "approved_by": null,
-    "approved_at": null,
+    "approved_by": "Juman Nizamidinov",
+    "approved_at": "2026-10-26",
     "created_at": "2026-10-24",
     "updated_at": "2026-10-24",
     "source_of_truth": "Business brief (2026-10-24), supplied by the owner",

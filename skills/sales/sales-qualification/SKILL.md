@@ -223,13 +223,13 @@ Do not stop just because the buyer gave a short answer. One-word answers can be 
 
 ### Example 1 — Fit confirmed in two turns
 
-Buyer: "У меня небольшой магазин, хотим быстрее отвечать клиентам."
+Buyer: "I have a small shop; we want to respond to customers faster."
 
-Agent: "Понял. Сколько примерно обращений в день приходит и в каком канале больше всего?"
+Agent: "Understood. Roughly how many inquiries arrive per day, and in which channel most often?"
 
-Buyer: "Около 40 в Instagram, отвечаем вручную."
+Buyer: "About 40 on Instagram; we answer manually."
 
-Agent: "Это подходит по [verified ICP criterion]. Основная задача — [verified use case]. Следующий шаг — [verified next step]. Вам удобнее [option A] или [option B]?"
+Agent: "That matches [verified ICP criterion]. The main task is [verified use case]. The next step is [verified next step]. Is [option A] or [option B] easier for you?"
 
 Why: two questions, both decision-relevant; no product dump; fit tied to a passport criterion.
 
@@ -237,9 +237,9 @@ Why: two questions, both decision-relevant; no product dump; fit tied to a passp
 
 Passport fact: `offer.buyer_types = ["b2b"]`.
 
-Buyer: "Я хочу купить это для себя, я не бизнес."
+Buyer: "I want to buy this for myself; I am not a business."
 
-Agent: "Спасибо, что написали. Это решение для команд [verified segment]; для личного использования оно не подходит. Не хочу тратить ваше время. Если появится [verified qualifying situation], напишите — буду рад помочь."
+Agent: "Thank you for writing. This is a solution for teams [verified segment]; it is not intended for personal use. I do not want to waste your time. If [verified qualifying situation] comes up, write and I will be glad to help."
 
 Why: clear, kind, no fake alternative, no data collection. The disqualification comes from `offer.buyer_types`, not from a universal "consumers are not buyers" rule.
 
@@ -247,40 +247,40 @@ Why: clear, kind, no fake alternative, no data collection. The disqualification 
 
 Passport fact: `offer.buyer_types = ["b2c"]`; consumer segment exists.
 
-Buyer: "Хочу купить курс для себя."
+Buyer: "I want to buy the course for myself."
 
-Agent: "Отлично, курс рассчитан как раз на самостоятельных учеников. Чтобы порекомендовать формат, один вопрос: [one consumer fit question]."
+Agent: "Great - the course is designed for independent learners. To recommend the right format, one question: [one consumer fit question]."
 
 Why: the same logic serves a consumer when the passport authorizes it. Do not route a legitimate consumer to a "not a fit" branch that assumes B2B.
 
 ### Example 3 — Authority gap
 
-Buyer: "Мне нравится, но решение принимает финансовый директор."
+Buyer: "I like it, but the finance director makes the decision."
 
-Agent: "Понял. Чтобы не готовить материалы вслепую: какие критерии для неё важнее всего — [verified criterion A] или [verified criterion B]? Я подготовлю короткое резюме, которое вы сможете ей передать."
+Agent: "Understood. So I do not prepare the wrong material: which criteria matter most to them - [verified criterion A] or [verified criterion B]? I will prepare a short summary you can pass on."
 
 Why: qualifies the path to the decision-maker without asking the buyer to close for the agent.
 
 ### Example 4 — Insufficient information
 
-Buyer: "Сколько стоит?"
+Buyer: "How much does it cost?"
 
-Agent: "Зависит от [verified pricing driver]. Чтобы назвать точную цифру, нужен один факт: [question]. Если не хотите сейчас обсуждать, могу дать вилку [verified range] и список того, что в неё входит."
+Agent: "It depends on [verified pricing driver]. To give an exact figure I need one fact: [question]. If you do not want to discuss it now, I can give a [verified range] and a list of what it covers."
 
 Why: does not guess, offers a low-friction path, and respects the buyer's choice.
 
 ## Counterexamples
 
-- **Quiz bot:** "Ответьте на 8 вопросов, чтобы получить расчёт."
+- **Quiz bot:** "Answer 8 questions to get a quote."
 - **Gatekeeping:** refusing a price until the buyer discloses budget and company size.
-- **False flattery:** "Вы идеальный клиент!" before any fit check.
+- **False flattery:** "You are the ideal client!" before any fit check.
 - **Snob filter:** disqualifying a buyer for typos or an informal tone.
 - **Universal B2B assumption:** telling a consumer "this is not for you" when the passport's `buyer_types` includes `b2c`.
 - **Protected-trait filter:** using age, gender, or nationality as a fit signal.
 - **Premature nurture:** adding a curious visitor to a follow-up sequence without consent.
 - **Endless qualification:** asking more questions after the buyer has said "I'm ready to buy."
-- **Fake authority:** "Я согласую скидку" when the agent has no approval.
-- **Disqualifying on price alone:** "Дорого? Тогда до свидания" before exploring value or budget.
+- **Fake authority:** "I will get the discount approved" when the agent has no approval.
+- **Disqualifying on price alone:** "Too expensive? Then goodbye" before exploring value or budget.
 
 ## Dependencies
 

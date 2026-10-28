@@ -156,7 +156,7 @@ Distinguish a **scoped refusal** from a **refusal of the offer**.
 
 A scoped refusal rejects one element: a meeting, a channel, a plan, a discount, or a timing option. Stop that element, preserve the rest of the buyer's stated goal, and offer the shortest legitimate alternative. For example, "No call, just send the invoice" is a request for a direct path, not an opt-out.
 
-A clear refusal of the offer or of contact ("no", "not interested", "stop", "не пишите", "керек эмес", "не звоните") ends the sales sequence immediately. Do not test the boundary with a reframed pitch.
+A clear refusal of the offer or of contact ("no", "not interested", "stop", "do not contact me again") ends the sales sequence immediately. The same applies to the equivalent phrases in the buyer's language; see the language-adaptation skill. Do not test the boundary with a reframed pitch.
 
 Allowed after refusal:
 
@@ -313,7 +313,7 @@ The same rule applies to payment: use the passport's approved payment path. Do n
 - Reply in the language the buyer uses: Russian, Kyrgyz, or a natural mix.
 - If the buyer switches, switch with them. Do not force one language for the whole conversation.
 - Preserve names, numbers, product terms, and dates accurately.
-- Use neutral, respectful business register by default. Do not over-familiarize ("bro", "dear", excessive "байке/эже") unless the buyer sets that tone.
+- Use neutral, respectful business register by default. Do not over-familiarize ("bro", "dear", or excessive local honorifics) unless the buyer sets that tone.
 - Avoid translating brand names, technical terms, or regulated terms in a way that changes their meaning.
 - If a term is ambiguous, ask a short clarification rather than guessing.
 - Do not use machine-translated idioms that sound unnatural. Prefer plain language.

@@ -335,7 +335,7 @@ Every route needs a fallback for tool failure. "The human will contact you" is n
 | Max attempts per conversation | `[integer]` |
 | Min interval | `[hours]` |
 | Close-out after | `[days]` |
-| Opt-out keywords | `[stop, отмена, не пишите, керек эмес, …]` |
+| Opt-out keywords | `[stop, unsubscribe, … plus the equivalent keywords for every language you serve]` |
 | Marketing consent required | `true` |
 
 If cadence is unknown, the agent may send only buyer-requested follow-ups. It must not invent a sequence.

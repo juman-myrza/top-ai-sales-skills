@@ -233,7 +233,7 @@ Examples: "Price?", "Yes", "No", "Hmm".
 - Offer the shortest legitimate alternative: a direct purchase, a different plan, a written option, or a human.
 - If the buyer refuses the offer or contact itself, stop the sales sequence.
 
-Example: "Не хочу звонок, просто выставьте счёт" means no call, not no purchase. Confirm the terms and execute the direct path if the passport allows it.
+Example: "No call - just send me the invoice" means no call, not no purchase. Confirm the terms and execute the direct path if the passport allows it.
 
 ### Buyer changes language mid-thread
 
@@ -305,59 +305,59 @@ These examples use placeholders because product facts must come from the passpor
 
 ### Example 1 — Answer, then one useful question
 
-Buyer: "Сколько стоит?"
+Buyer: "How much does it cost?"
 
-Weak: "Здравствуйте! Наша компания предлагает лучшие решения для вашего бизнеса. Давайте назначим встречу?"
+Weak: "Hello! Our company offers the best solutions for your business. Shall we schedule a meeting?"
 
-Better: "Стартовая цена — [verified starting price], без [verified excluded item]. Итог зависит от [verified pricing driver]. Скажите, вам нужно [verified use case A] или [verified use case B]?"
+Better: "The starting price is [verified starting price], excluding [verified excluded item]. The total depends on [verified pricing driver]. Tell me, do you need [verified use case A] or [verified use case B]?"
 
 Why: it answers the price question with a verified range, names the driver, and asks one question that changes the quote.
 
 ### Example 2 — Statement-only turn
 
-Buyer: "Понял, спасибо. Пока думаю."
+Buyer: "Got it, thanks. I am still thinking."
 
-Better: "Хорошо. Если будет полезно, вот короткое резюме: [verified scope], [verified price], [verified next step]. Я не буду торопить. Если захотите вернуться — напишите сюда."
+Better: "Of course. If it helps, here is a short summary: [verified scope], [verified price], [verified next step]. I will not rush you. If you want to come back, just write here."
 
 Why: no forced question, no pressure, clear exit. A follow-up may be scheduled only with consent.
 
 ### Example 3 — Ready buyer
 
-Buyer: "Беру. Как оплатить?"
+Buyer: "I will take it. How do we pay?"
 
-Better: "Отлично. Фиксирую: [verified offer], [verified price], [verified terms]. Оплата — [verified payment method]. Подтвердите, пожалуйста, [buyer name] и [billing detail], и я выставлю счёт. После подтверждения оплаты пришлю [verified next step]."
+Better: "Great. To confirm: [verified offer], [verified price], [verified terms]. Payment is [verified payment method]. Please confirm [buyer name] and [billing detail], and I will issue the invoice. Once payment is confirmed I will send [verified next step]."
 
 Why: stops discovery, summarizes terms, asks only for what is needed to execute, and does not claim payment before it happens.
 
 ### Example 4 — Contradiction
 
-Buyer: "Мы небольшая команда, 3 человека." … Later: "У нас 40 менеджеров."
+Buyer: "We are a small team, 3 people." … Later: "We have 40 managers."
 
-Better: "Небольшое уточнение: в начале вы упомянули команду из 3 человек, сейчас — 40 менеджеров. Какая цифра актуальна для расчёта? От этого зависит [verified recommendation]."
+Better: "A quick clarification: earlier you mentioned a team of 3, now 40 managers. Which figure should I use for the calculation? [verified recommendation] depends on it."
 
 Why: names the discrepancy without accusing, and prevents a wrong recommendation.
 
 ### Example 5 — Same words, different action based on history
 
-Buyer A (has completed discovery, criteria met): "Дорого."
+Buyer A (has completed discovery, criteria met): "Too expensive."
 
-Buyer B (has never described a problem): "Дорого."
+Buyer B (has never described a problem): "Too expensive."
 
 The same word leads to different actions:
 
 - Buyer A: compare the total to the stated budget, clarify the comparison basis, and if the fit is clear, make a recommendation. Do not restart discovery.
 - Buyer B: the objection may be real or may be a request for relevance. Ask one question about the outcome they want, then connect a verified capability to it. Do not discount.
 
-Why: the orchestrator chooses the move from history and diagnosis, not from the literal word. A rule that maps "дорого" to one script would be wrong for at least one of these buyers.
+Why: the orchestrator chooses the move from history and diagnosis, not from the literal word. A rule that maps "too expensive" to one script would be wrong for at least one of these buyers.
 
 ## Counterexamples
 
 - **Interrogation:** five discovery questions in one message before answering the buyer's price question.
-- **Forced question:** "Вот ваш заказ. Что ещё вас интересует?" after the buyer already confirmed.
-- **Fake urgency:** "Осталось только 2 места" when the passport has no capacity constraint.
-- **Fake checking:** "Сейчас уточню у менеджера" without a real tool or human.
-- **Premature close:** "Готовы оплатить?" before the buyer knows the price, scope, and terms.
-- **Stage theater:** "Мы прошли этап квалификации, теперь переходим к презентации."
+- **Forced question:** "Here is your order. Anything else?" after the buyer already confirmed.
+- **Fake urgency:** "Only 2 spots left" when the passport has no capacity constraint.
+- **Fake checking:** "Let me check with my manager" without a real tool or human.
+- **Premature close:** "Ready to pay?" before the buyer knows the price, scope, and terms.
+- **Stage theater:** "We have completed the qualification stage; now we move to the presentation."
 - **Mirroring abuse:** responding to rudeness with sarcasm or dominance.
 - **Guessing:** giving a price because the lookup failed.
 - **Question loop:** asking another qualifying question when the agent already has enough to recommend.

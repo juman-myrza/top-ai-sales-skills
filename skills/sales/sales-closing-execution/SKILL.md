@@ -116,7 +116,7 @@ Before any irreversible action, restate:
 - the buyer's identity and billing details needed;
 - the next step after payment/booking.
 
-Ask for explicit confirmation: "Подтверждаете? / Do you confirm?" Do not treat "ok" as confirmation of a charge unless the context clearly shows the buyer understood the terms. If the amount is material, ask a direct yes/no.
+Ask for explicit confirmation: "Do you confirm?" Do not treat "ok" as confirmation of a charge unless the context clearly shows the buyer understood the terms. If the amount is material, ask a direct yes/no.
 
 ### Step 4A — Direct purchase
 
@@ -318,49 +318,49 @@ Do not stop at "I sent the request" unless the tool confirms it was sent. Do not
 
 ### Example 1 — Direct purchase
 
-Buyer: "Готовы. Как оплатить?"
+Buyer: "Ready. How do we pay?"
 
-Agent: "Отлично. Фиксирую: [verified offer], [verified price] [currency], [verified billing period], [verified included/excluded]. Оплата — [verified method]. Подтвердите, пожалуйста, что условия верны, и я выставлю счёт."
+Agent: "Great. To confirm: [verified offer], [verified price] [currency], [verified billing period], [verified included/excluded]. Payment is [verified method]. Please confirm the terms are correct and I will issue the invoice."
 
-Buyer: "Да, верно."
+Buyer: "Yes, that is right."
 
-Agent: "Счёт [invoice id] создан на [amount] [currency]. Ссылка на оплату: [verified payment link]. После оплаты пришлю подтверждение и [verified next step]. Если ссылка не открывается, скажите — помогу."
+Agent: "Invoice [invoice id] was created for [amount] [currency]. Payment link: [verified payment link]. Once payment is confirmed I will send the receipt and [verified next step]. If the link does not open, tell me and I will help."
 
-After webhook: "Оплата подтверждена. [Receipt/next step]. Спасибо."
+After webhook: "Payment confirmed. [Receipt/next step]. Thank you."
 
 Why: terms first, consent, verified invoice, no claim of payment before confirmation.
 
 ### Example 2 — In-chat booking
 
-Buyer: "Хочу записаться на консультацию."
+Buyer: "I would like to book a consultation."
 
-Agent: "Конечно. Консультация — [verified duration], [verified timezone]. Вам удобнее на этой неделе или в начале следующей?"
+Agent: "Of course. The consultation is [verified duration], [verified timezone]. Is this week better, or the start of next week?"
 
-Buyer: "На этой."
+Buyer: "This week."
 
-Agent: [checks calendar] "Есть два реальных окна: [date/time A] и [date/time B]. Какое выбрать?"
+Agent: [checks calendar] "There are two real openings: [date/time A] and [date/time B]. Which one works?"
 
 Buyer: "A."
 
-Agent: [books with consent] "Подтверждаю: [date/time A], [timezone], [duration]. Запись [booking id] создана. За день до визита придёт напоминание, если оно включено в [verified process]. Если планы изменятся — [verified reschedule policy]."
+Agent: [books with consent] "Confirmed: [date/time A], [timezone], [duration]. Booking [booking id] is created. A reminder arrives one day before if it is part of [verified process]. If plans change - [verified reschedule policy]."
 
 Why: real slots, buyer chooses, booking confirmed only after the tool, exact details.
 
 ### Example 3 — Slot taken
 
-Agent: "Есть [slot A] и [slot B]."
+Agent: "There are [slot A] and [slot B]."
 
 Buyer: "A."
 
-Agent: [booking returns conflict] "К сожалению, [slot A] только что заняли. Не буду записывать вас на другое время без вашего согласия. Сейчас есть [slot C] и [slot D]. Какой подходит?"
+Agent: [booking returns conflict] "Unfortunately [slot A] was just taken. I will not book a different time without your consent. [slot C] and [slot D] are available now. Which one works?"
 
 Why: transparent, no silent substitution, re-checks real availability.
 
 ### Example 4 — Payment pending
 
-Buyer: "Оплатил."
+Buyer: "I have paid."
 
-Agent: "Спасибо. Проверяю статус… [tool says pending]. Платёж пока в обработке, подтверждения от банка ещё нет. Я не буду отмечать его как оплаченный, пока статус не изменится. Обычно это занимает [verified time]. Если через [time] статус не изменится, я передам вопрос человеку."
+Agent: "Thank you. Checking the status... [tool says pending]. The payment is still processing and there is no bank confirmation yet. I will not mark it as paid until the status changes. This usually takes [verified time]. If the status has not changed after [time], I will hand the case to a human."
 
 Why: does not take the buyer's word as payment confirmation; gives a verified expectation.
 
@@ -368,23 +368,23 @@ Why: does not take the buyer's word as payment confirmation; gives a verified ex
 
 Passport fact: `fulfillment.booking.external_link_allowed = false`.
 
-Buyer: "Скиньте Calendly, я сам выберу."
+Buyer: "Send me the Calendly link; I will pick a time myself."
 
-Agent: "В этом предложении запись идёт прямо в чате — так я вижу реальные окна и сразу подтверждаю. Есть [slot A] и [slot B]. Какое время удобнее?"
+Agent: "For this offer, booking happens in chat, so I can see real openings and confirm immediately. There are [slot A] and [slot B]. Which time is better?"
 
 Why: respects the passport's booking policy and offers real alternatives. If the passport allowed the approved link and the buyer preferred it, the agent could send that approved link instead; it must not send an unapproved link or claim the in-chat path is "faster" as a fact.
 
 ## Counterexamples
 
-- **False confirmation:** "Записал вас на завтра" without a booking result.
+- **False confirmation:** "You are booked for tomorrow" without a booking result.
 - **External link reflex:** sending a scheduling link before checking availability.
 - **Silent substitution:** booking a different slot when the chosen one is taken.
-- **Payment fiction:** "Оплата прошла" because the buyer said so.
+- **Payment fiction:** "The payment went through" because the buyer said so.
 - **Double charge:** retrying a payment without checking status/idempotency.
 - **Card data collection:** asking for full card number, CVV, or password in chat.
 - **Unapproved account:** sending a personal wallet or bank account.
 - **Skipping terms:** charging before the buyer sees the price, currency, and cancellation policy.
-- **Marketing after confirmation:** "Кстати, у нас есть ещё..." instead of a clean receipt.
+- **Marketing after confirmation:** "By the way, we also have..." instead of a clean receipt.
 - **Forcing a meeting:** refusing a direct purchase when the passport allows it.
 - **Stale quote:** charging an amount the buyer did not confirm after the quantity, plan, or discount changed.
 - **Unapproved link:** sending a scheduling or payment link the passport does not allow.

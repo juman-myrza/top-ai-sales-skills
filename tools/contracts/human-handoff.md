@@ -56,7 +56,7 @@ A handoff is not a way to avoid a difficult but answerable question. It is for e
     "reason_code": "authority",
     "priority": "high",
     "buyer": {
-      "name": "Айжан",
+      "name": "Aizhan",
       "handle": "+996700000000",
       "channel": "whatsapp",
       "language": "ru",
@@ -136,7 +136,7 @@ These are the same values as `handoff.reason_code` in [`../../core/conversation-
     "created_at": "2026-10-23T10:07:00+06:00",
     "response_time_commitment": null,
     "automation_paused": true,
-    "buyer_message": "Передал вопрос человеку. Автоматические сообщения по этому вопросу остановлены."
+    "buyer_message": "I have passed this to a human. Automated messages on this issue are paused."
   },
   "error": null,
   "meta": {
@@ -171,10 +171,10 @@ These are the same values as `handoff.reason_code` in [`../../core/conversation-
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| Handoff tool down | "Не смог создать передачу автоматически. Не буду говорить, что человек уже подключён. Вот что можно сделать…" | "Менеджер уже с вами свяжется" |
-| Timeout | "Передача пока не подтверждена. Повторю или дам прямой контакт, если он утверждён." | Claim success |
+| Handoff tool down | "I could not create the handoff automatically. I will not say a human is already involved. Here is what we can do..." | "A manager will contact you" |
+| Timeout | "The handoff is not confirmed yet. I will retry or give a direct contact if one is approved." | Claim success |
 | Duplicate | Return the existing handoff ID | Create another |
-| No queue available | "Сейчас нет доступной очереди. Вот утверждённый контакт…" | Invent a person or SLA |
+| No queue available | "There is no queue available right now. Here is the approved contact..." | Invent a person or SLA |
 | Emergency | Follow the safety protocol; do not rely on the handoff tool alone | Wait for a queue while someone is in danger |
 | Resume without authorization | Keep automation paused | Assume a human reading the thread means resume |
 
@@ -200,7 +200,7 @@ The agent may state a response time only if:
 1. the handoff tool returns a `response_time_commitment`, or
 2. the approved passport route has a verified response time and the handoff was created.
 
-Otherwise say: "Передал человеку; точное время ответа подтвердить не могу." Do not say "within 15 minutes" because it sounds helpful.
+Otherwise say: "I have passed this to a human; I cannot confirm a response time." Do not say "within 15 minutes" because it sounds helpful.
 
 ---
 

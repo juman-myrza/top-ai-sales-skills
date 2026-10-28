@@ -177,12 +177,12 @@ Every returned fact keeps `value`, `status`, `source`, `verified_at`, and option
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| Passport absent | "У меня нет утверждённой информации по этому предложению. Могу передать человеку или проверить позже." | Invent a price or offer |
-| Passport expired | "Данные по этому предложению устарели. Не хочу называть неверную цену — передам человеку." | Use the old price because it is close |
-| Conflicting versions | "Есть расхождение в утверждённых данных. Передам человеку, чтобы не ошибиться." | Pick the newer-looking one |
-| Field `unknown` | "Эту деталь я подтвердить не могу. Могу уточнить у человека." | Fill the gap with a plausible value |
-| Timeout | "Не могу сейчас подтвердить условия. Повторю или передам человеку." | Say "probably" or "usually" |
-| Unauthorized | "Не могу получить эти данные." + handoff | Reveal that another tenant exists |
+| Passport absent | "I do not have approved information for this offer. I can hand off to a human or check later." | Invent a price or offer |
+| Passport expired | "The data for this offer is out of date. I do not want to quote a wrong price, so I will hand off to a human." | Use the old price because it is close |
+| Conflicting versions | "There is a discrepancy in the approved data. I will hand off to a human to avoid an error." | Pick the newer-looking one |
+| Field `unknown` | "I cannot confirm that detail. I can check with a human." | Fill the gap with a plausible value |
+| Timeout | "I cannot confirm the terms right now. I will retry or hand off to a human." | Say "probably" or "usually" |
+| Unauthorized | "I cannot retrieve that data." + handoff | Reveal that another tenant exists |
 
 Retry: one read retry after a transient `timeout`/`unavailable`, with backoff. Never retry `not_found`, `expired`, `conflict`, `unauthorized`, or `invalid_request` unchanged.
 

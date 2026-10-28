@@ -62,7 +62,7 @@ A new schedule for the same `metadata.follow_up_task_id` replaces the prior one;
     "to": "+996700000000",
     "locale": "ru",
     "purpose": "transactional",
-    "text": "Добрый день! Вы просили вернуться к вопросу о годовом плане. Подготовил короткое резюме: 8 пользователей, 960 USD в год, налоги отдельно. Посмотрели? Если удобнее, отвечу на вопросы здесь.",
+    "text": "Hello! You asked me to follow up on the annual plan. I prepared a short summary: 8 users, 960 USD per year, taxes separate. Have you had a chance to look? If it is easier, I will answer questions here.",
     "consent": {
       "status": "granted",
       "at": "2026-10-23T10:00:00+06:00",
@@ -148,11 +148,11 @@ The server must reject:
 
 | Status | Meaning | Agent may say |
 |---|---|---|
-| `sent` | Provider accepted the message | "Отправил" |
-| `delivered` | Provider confirmed delivery to the device | "Доставлено" |
-| `read` | Provider confirmed read | "Прочитано", only if the product surfaces read receipts |
-| `pending` | Queued, not accepted | "Отправляется" / "пока не отправлено" |
-| `failed` | Not sent | "Не удалось отправить" |
+| `sent` | Provider accepted the message | "Sent" |
+| `delivered` | Provider confirmed delivery to the device | "Delivered" |
+| `read` | Provider confirmed read | "Read", only if the product surfaces read receipts |
+| `pending` | Queued, not accepted | "Sending" / "not sent yet" |
+| `failed` | Not sent | "Could not send" |
 | `blocked` | Recipient blocked or opted out | Do not retry; respect it |
 | `invalid_request` | Bad recipient/template/media | Fix once |
 | `rate_limited` | Too many messages | Wait; do not hammer |
@@ -170,10 +170,10 @@ A successful `schedule_text` or `schedule_template` returns `status: "created"` 
 
 | Failure | Agent says | Agent does not |
 |---|---|---|
-| Send timeout | "Сообщение не подтверждено. Повторю или передам человеку." | "Я отправил" |
-| Recipient blocked | "Сообщение не доставлено: получатель закрыл этот канал." | Try another channel without consent |
-| Template rejected | "Шаблон не принят. Отправлю текстом, если это разрешено." | Alter the template to sneak it through |
-| Media too large | "Файл не отправляется. Могу дать ссылку или другой формат." | Compress and claim it is the same document |
+| Send timeout | "The message is not confirmed. I will retry or hand off to a human." | "I sent it" |
+| Recipient blocked | "The message was not delivered: the recipient has blocked this channel." | Try another channel without consent |
+| Template rejected | "The template was rejected. I will send it as plain text if that is allowed." | Alter the template to sneak it through |
+| Media too large | "The file will not send. I can provide a link or another format." | Compress and claim it is the same document |
 | Rate limited | Wait `retry_after_ms`; do not send duplicates | Send on another channel |
 | Opt-out | Stop; one neutral acknowledgment at most | Send a "final" message |
 | Wrong recipient | Apologize once; do not pitch | Continue the sales message |

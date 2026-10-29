@@ -105,7 +105,7 @@ Use the Challenger idea as a compact conversation move, not as a rigid script:
 
 1. **Teach:** offer one relevant insight or reframe that helps the buyer see a material trade-off they may have missed.
 2. **Tailor:** connect it to this buyer's stated situation, role, or decision criterion.
-3. **Lead:** state the recommendation or next step that follows from the insight.
+3. **Take control of the process:** state the recommendation or next step that follows from the insight. Guide the decision process; do not try to control the buyer.
 
 Build a reframe from the buyer's own facts or a verified source. If it is an inference, label it as a possibility and invite correction. Do not manufacture a hidden problem, claim that the buyer is losing money without their numbers, invent market norms, or present generic advice as proprietary expertise.
 

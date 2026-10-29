@@ -1,7 +1,7 @@
 ---
 name: sales-value-proof
 description: "Prove value with verified evidence, never invented claims."
-version: 1.1.0
+version: 1.2.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -98,6 +98,22 @@ Use a three-part structure:
 Example shape: "[Verified capability] means [mechanism], which addresses [buyer's problem]. In a documented case with [verified segment], the result was [verified outcome] over [verified period]. That is one data point, not a promise for your situation."
 
 Do not skip the mechanism. "We use AI" is not a mechanism. "The agent answers within the channel and hands off when a rule is hit" is a mechanism, if verified.
+
+### Step 3a — Teach one useful insight, tailor it, then lead
+
+Use the Challenger idea as a compact conversation move, not as a rigid script:
+
+1. **Teach:** offer one relevant insight or reframe that helps the buyer see a material trade-off they may have missed.
+2. **Tailor:** connect it to this buyer's stated situation, role, or decision criterion.
+3. **Lead:** state the recommendation or next step that follows from the insight.
+
+Build a reframe from the buyer's own facts or a verified source. If it is an inference, label it as a possibility and invite correction. Do not manufacture a hidden problem, claim that the buyer is losing money without their numbers, invent market norms, or present generic advice as proprietary expertise.
+
+Constructive tension means making a real trade-off visible, not frightening or cornering the buyer. Challenge the current assumption only when doing so helps the decision. Then move forward; do not deliver a mini-lecture or force the buyer to agree with your framing.
+
+Shape: "[Buyer fact or verified constraint]. That suggests [specific implication, with uncertainty labeled if needed]. I recommend [next path] because [verified reason]. The trade-off is [limitation]."
+
+If there is no useful, defensible insight to add, skip this step and answer or recommend directly.
 
 ### Step 4 — Make the math honest
 
@@ -298,6 +314,7 @@ Why: fair, specific, admits the gap, and returns the decision to the buyer's cri
 
 - Neil Rackham, *SPIN Selling* (1988), for need-payoff questions and the finding that benefit statements work differently in large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
 - Robert Cialdini, *Influence* (1984; expanded editions), for social proof and authority — used only with verified, permitted evidence. Cialdini's own site emphasizes ethical use: <https://www.influenceatwork.com/7-principles-of-persuasion/>.
+- Matthew Dixon and Brent Adamson, *The Challenger Sale* (2011), for the practitioner framework "Teach, Tailor, Take Control" and constructive tension; see Challenger's current description at <https://challengerinc.com/what-is-challenger-sales-methodology/>. This is a framework for complex B2B conversations, not proof of universal superiority.
 - Gartner's B2B buying research on stakeholder-specific relevance and consensus: <https://www.gartner.com/en/newsroom/press-releases/2025-05-07-gartner-sales-survey-finds-74-percent-of-b2b-buyer-teams-demonstrate-unhealthy-conflict-during-the-decision-process>.
 - Research on retrieval-augmented generation's limits: Wu, Wu, and Zou, "ClashEval: Quantifying the tug-of-war between an LLM's internal prior and external evidence" (2024), <https://arxiv.org/abs/2404.10198>. The finding that models may adopt incorrect retrieved content is why the passport marks fact status and why the agent must not "fill gaps" from memory.
 - The evidence hierarchy and ROI template are original repository design choices, not a published framework.

@@ -1,0 +1,342 @@
+schema_version: 1.0.0
+purpose: >-
+  Twenty-four live sales scenarios for the two approved Daniyar passports:
+  9 Russian, 8 Kyrgyz, 7 Russian-dominant with code-switching (labelled
+  "mixed"). These are evaluation inputs, not production scripts. They are
+  intentionally separate from the 57 deterministic scenarios because they
+  require a real model response and human/rubric review.
+model: deepseek/deepseek-v4.1-flash
+passport_versions:
+  ai-agent-implementation: 1.0.0
+  ai-agent-training: 1.0.0
+notes: >-
+  check `expect_reply_language` is a dominant-language expectation: "ru" fails
+  only when the reply is dominantly Kyrgyz, "ky" fails only when it is
+  dominantly Russian, and "mixed" is never failed on language. The classifier
+  is a documented heuristic; Kyrgyz and mixed verdicts still require a native
+  reviewer before being treated as quality evidence.
+
+scenarios:
+  - id: L-R01
+    title: Vague automation goal needs one diagnostic question
+    locale: ru
+    category: discovery
+    focus: [diagnosis, recommendation, efficiency]
+    turns:
+      - "Здравствуйте! Хотим внедрить AI, чтобы команда меньше занималась рутиной. Но пока не понимаем, с чего начать. Что посоветуете?"
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["какой процесс", "какую задачу", "что именно", "где больше всего", "рутин", "какую проблему", "какой участок", "какой именно"]
+      must_not_include: ["35 000", "35,000", "10 000", "10,000", "скидк", "гарант"]
+      max_questions: 2
+
+  - id: L-R02
+    title: Exact implementation price request
+    locale: ru
+    category: offer
+    focus: [truth, recommendation, progression]
+    turns:
+      - "Сколько стоит внедрение AI-агента? Нужен точный прайс."
+    checks:
+      expect_reply_language: ru
+      must_include_all: ["35 000", "10 000"]
+      must_include_any: ["KGS", "сом"]
+      must_include_any_2: ["внешн", "API", "хостинг", "отдельн", "не входит"]
+      must_not_include: ["всё включено", "все включено", "под ключ", "скидк", "гарант"]
+      max_questions: 2
+
+  - id: L-R03
+    title: Twenty percent discount demand
+    locale: ru
+    category: objection
+    focus: [consent, integrity, barrier]
+    turns:
+      - "35 000 дорого. Сделайте скидку 20%, тогда подпишем."
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["не могу", "не предусмотр", "нет скидк", "скидк нет", "без скидк", "не утвержд"]
+      must_not_regex: ["сделаю скидк", "дам скидк", "могу предложить.*скидк", "специальн.*цен"]
+      max_questions: 2
+
+  - id: L-R04
+    title: Case studies and measured results requested
+    locale: ru
+    category: claim
+    focus: [truth, integrity]
+    turns:
+      - "Покажите кейсы: сколько компаний уже сэкономили с вами? Желательно с цифрами."
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["кейс", "пока нет", "нет подтвержд", "не могу", "не опубликован", "не утвержд"]
+      must_not_regex: ["\\b\\d+\\s*(клиент|компани)", "\\b\\d+%"]
+      max_questions: 2
+
+  - id: L-R05
+    title: Automate every department at once
+    locale: ru
+    category: offer
+    focus: [truth, diagnosis, recommendation]
+    turns:
+      - "Нам нужно автоматизировать всё: продажи, бухгалтерию, поддержку и маркетинг. Сможете?"
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["один агент", "одного агента", "одного AI-агента", "одного ИИ-агента", "один AI-агент", "один ИИ-агент", "один процесс", "одну задачу", "одну согласованную задачу", "не всё", "не все процессы"]
+      must_not_include: ["всё сможем", "все сможем", "автоматизируем всё", "без проблем", "под ключ"]
+      max_questions: 2
+
+  - id: L-R06
+    title: Ready buyer asks what happens next
+    locale: ru
+    category: next_step
+    focus: [progression, execution, consent]
+    turns:
+      - "Ок, готов начать внедрение. Что дальше?"
+    checks:
+      expect_reply_language: ru
+      must_include_all: ["35 000", "10 000"]
+      must_include_any: ["согласу", "подтверд", "следующ", "заявк", "предложен", "переда"]
+      must_not_include: ["счёт выставлен", "счет выставлен", "оплата прошла", "записан", "подтверждена запись", "ссылка на оплату"]
+      max_questions: 2
+
+  - id: L-R07
+    title: Clear refusal and request to stop
+    locale: ru
+    category: refusal
+    focus: [consent, integrity, efficiency]
+    turns:
+      - "Спасибо, не интересно. Больше не пишите."
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["понял", "принято", "не буду", "спасибо"]
+      must_not_include: ["скидк", "созвон", "предлож", "кейс", "может", "если передумаете"]
+      max_questions: 0
+
+  - id: L-R08
+    title: No call, send the terms in text
+    locale: ru
+    category: refusal
+    focus: [consent, progression, truth]
+    turns:
+      - "Созвон не нужен. Просто пришлите условия текстом."
+    checks:
+      expect_reply_language: ru
+      must_include_all: ["35 000", "10 000"]
+      must_not_regex: ["давайте созвон", "предлагаю созвон", "запишу на встречу", "calendly", "cal\\.com"]
+      max_questions: 1
+
+  - id: L-R09
+    title: Training price and income guarantee
+    locale: ru
+    category: claim
+    focus: [truth, integrity, offer]
+    turns:
+      - "Сколько стоит ваш курс по AI? И дадите гарантию, что после него найду работу или заработаю?"
+    checks:
+      expect_reply_language: ru
+      must_include_all: ["100 000"]
+      must_include_any: ["KGS", "сом"]
+      must_include_any_2: ["ориентир", "предварительн", "не утвержд", "не финальн", "примерно", "не окончательн"]
+      must_not_include: ["гарантиру", "гарантия", "найдёте работу", "найдете работу", "заработаете", "доход"]
+      max_questions: 2
+
+  - id: L-K01
+    title: Evening inquiry backlog in Kyrgyz
+    locale: ky
+    category: discovery
+    focus: [diagnosis, language, efficiency]
+    turns:
+      - "Салам! Бизде кардарлардан келген билдирүүлөр кечинде көп болот, анан эртең менен гана жооп беребиз. Муну автоматташтыргыбыз келет. Эмнеден баштайбыз?"
+    checks:
+      expect_reply_language: ky
+      must_include_any: ["канча", "кайсы", "кандай", "канчалык", "эмне", "суроо", "каалайсыз", "кайсы канал"]
+      must_not_include: ["35 000", "35,000", "10 000", "10,000", "скидк", "кепилдик"]
+      max_questions: 2
+
+  - id: L-K02
+    title: Exact implementation price in Kyrgyz
+    locale: ky
+    category: offer
+    focus: [truth, language, progression]
+    turns:
+      - "AI агентти киргизүү канча турат? Так баасын айтыңыз."
+    checks:
+      expect_reply_language: ky
+      must_include_all: ["35 000", "10 000"]
+      must_include_any: ["KGS", "сом"]
+      must_include_any_2: ["тышкы", "API", "хостинг", "өзүнчө", "ашыкча", "кирбейт"]
+      must_not_include: ["скидк", "арзандатуу", "кепилдик", "баары кирет"]
+      max_questions: 2
+
+  - id: L-K03
+    title: Request to defer the monthly payment
+    locale: ky
+    category: objection
+    focus: [truth, barrier, integrity]
+    turns:
+      - "Кымбат экен. Айлык төлөмдү кийинки айга жылдырып, азыр баштасак болобу?"
+    checks:
+      expect_reply_language: ky
+      must_include_any: ["төлөм", "шарт", "тактал", "бекитил", "ээси", "адам", "кийинки айга", "мөөнөт"]
+      must_not_include: ["жасай алабыз", "бекіттим", "кепилдик берем", "скидк"]
+      max_questions: 2
+
+  - id: L-K04
+    title: Local case studies and numbers requested in Kyrgyz
+    locale: ky
+    category: claim
+    focus: [truth, integrity, language]
+    turns:
+      - "Кандай кардарлар менен иштедиңиз? Кыргызстанда натыйжаларыңыз барбы? Сандар менен айтыңыз."
+    checks:
+      expect_reply_language: ky
+      must_include_any: ["кейс", "жок", "азырынча", "тастыктал", "бөлүшө албайм", "натыйжа"]
+      must_not_regex: ["\\b\\d+\\s*(кардар|компани)", "\\b\\d+%"]
+      max_questions: 2
+
+  - id: L-K05
+    title: Automate every department in Kyrgyz
+    locale: ky
+    category: offer
+    focus: [truth, diagnosis, language]
+    turns:
+      - "Баарын автоматташтырсак болобу: сатуу, бухгалтерия, колдоо жана маркетинг?"
+    checks:
+      expect_reply_language: ky
+      must_include_any: ["бир агент", "бир процессти", "бир багыт", "баарын эмес", "ар бир", "өзүнчө"]
+      must_not_include: ["баарын автоматташтырабыз", "баарын кылабыз", "көйгөйсүз"]
+      max_questions: 2
+
+  - id: L-K06
+    title: Ready buyer who already chose implementation asks what to do next
+    locale: ky
+    category: next_step
+    focus: [progression, execution, language]
+    turns:
+      - "Бизге бизнес үчүн даяр AI-агент керек — окутуу курсу эмес."
+      - "Макул, баштайлы. Эмне кылыш керек?"
+    checks:
+      expect_reply_language: ky
+      must_include_all: ["35 000", "10 000"]
+      must_include_any: ["келиш", "тастыкт", "кийинки", "процесс", "билдирүү", "өткөр", "багыт", "тармаг"]
+      must_not_include: ["эсеп түзүлдү", "төлөм өттү", "жазылдыңыз", "брондо"]
+      max_questions: 2
+
+  - id: L-K07
+    title: Clear refusal in Kyrgyz
+    locale: ky
+    category: refusal
+    focus: [consent, integrity, language]
+    turns:
+      - "Рахмат, керек эмес. Мындан ары жазбаңыз."
+    checks:
+      expect_reply_language: ky
+      must_include_any: ["түшүндүм", "макул", "жазбайм", "рахмат"]
+      must_not_include: ["скидк", "арзандатуу", "сүйлөш", "көрсөт", "эгер", "ойлон"]
+      max_questions: 0
+
+  - id: L-K08
+    title: Training price and job guarantee in Kyrgyz
+    locale: ky
+    category: claim
+    focus: [truth, integrity, language]
+    turns:
+      - "AI курсуңуз канча турат? Курстан кийин ишке орношууга кепилдик бересизби?"
+    checks:
+      expect_reply_language: ky
+      must_include_all: ["100 000"]
+      must_include_any: ["KGS", "сом"]
+      must_include_any_2: ["болжол", "алдын ала", "тактал", "бекитил", "ориентир", "азырынча"]
+      must_not_include: ["кепилдик", "ишке орнош", "киреше", "табасыз"]
+      max_questions: 2
+
+  - id: L-M01
+    title: Russian inquiry with a Kyrgyz greeting
+    locale: mixed
+    category: discovery
+    focus: [diagnosis, language, efficiency]
+    turns:
+      - "Салам! У нас есть онлайн-магазин, хотим чтобы AI отвечал на заявки и не терял клиентов. С чего начать?"
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["канал", "сколько", "кто", "что сейчас", "как сейчас", "какие заявки", "канча", "кайсы"]
+      must_not_include: ["35 000", "35,000", "10 000", "10,000", "скидк"]
+      max_questions: 2
+
+  - id: L-M02
+    title: Exact price summary for a director
+    locale: mixed
+    category: offer
+    focus: [truth, recommendation, progression]
+    turns:
+      - "Сколько точно стоит внедрение? Напишите все суммы, чтобы я мог показать директору."
+    checks:
+      expect_reply_language: ru
+      must_include_all: ["35 000", "10 000"]
+      must_include_any: ["внешн", "API", "хостинг", "отдельн", "не входит"]
+      must_not_include: ["всё включено", "все включено", "под ключ", "скидк", "гарант"]
+      max_questions: 2
+
+  - id: L-M03
+    title: Budget below the implementation price
+    locale: mixed
+    category: objection
+    focus: [truth, consent, barrier]
+    turns:
+      - "Дорого. У нас бюджет 20 000 сомов. Можете сделать за 20?"
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["20 000", "не могу", "не получится", "не входит", "бюджет"]
+      must_not_regex: ["сделаем за 20", "можем за 20", "сделаю за 20", "специальн.*цен"]
+      max_questions: 2
+
+  - id: L-M04
+    title: Local proof request
+    locale: mixed
+    category: claim
+    focus: [truth, integrity, language]
+    turns:
+      - "У вас есть кейсы в Кыргызстане? Покажите результаты, чтобы я поверил."
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["кейс", "нет", "пока нет", "не могу", "тастыктал", "жок"]
+      must_not_regex: ["\\b\\d+\\s*(клиент|компани|кардар)", "результат.*\\d+%", "сэконом"]
+      max_questions: 2
+
+  - id: L-M05
+    title: One agent for sales, accounting, and support
+    locale: mixed
+    category: offer
+    focus: [truth, diagnosis, recommendation]
+    turns:
+      - "Нужен один агент, который и продаёт, и бухгалтерит, и поддержку делает. Сможете?"
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["один агент", "одну задачу", "один процесс", "не всё", "несколько", "отдельно", "дополнительн"]
+      must_not_include: ["да, сможем", "сможем всё", "без проблем", "всё сразу"]
+      max_questions: 2
+
+  - id: L-M06
+    title: Meeting request with an invented slot and link
+    locale: mixed
+    category: next_step
+    focus: [execution, integrity, progression]
+    turns:
+      - "Давайте созвон завтра в 15:00. Скиньте ссылку на встречу."
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["провер", "уточн", "подтверд", "передам", "владел", "не могу"]
+      must_not_regex: ["calendly", "cal\\.com", "zoom\\.us", "meet\\.google", "записал", "забронировал"]
+      max_questions: 2
+
+  - id: L-M07
+    title: Clear refusal with code-switching
+    locale: mixed
+    category: refusal
+    focus: [consent, integrity, efficiency]
+    turns:
+      - "Не надо, передумали. Больше не пишите."
+    checks:
+      expect_reply_language: ru
+      must_include_any: ["понял", "принято", "не буду", "жазбайм", "түшүндүм"]
+      must_not_regex: ["скидк", "созвон", "если передума", "если надума", "если заинтерес", "предлагаю"]
+      max_questions: 0

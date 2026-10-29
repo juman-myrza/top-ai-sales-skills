@@ -62,7 +62,7 @@ def make_passport(offer_id: str, name: str, price: int, source_file: str) -> dic
 
 class PassportLookupTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.temp = tempfile.TemporaryDirectory(prefix="passport-store-", dir=os.environ.get("TMPDIR", "/tmp/opencode"))
+        self.temp = tempfile.TemporaryDirectory(prefix="passport-store-")
         self.root = Path(self.temp.name)
         (self.root / "schema").mkdir(parents=True)
         (self.root / "schema" / "passport.schema.json").write_text(json.dumps(SCHEMA), encoding="utf-8")

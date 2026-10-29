@@ -1,0 +1,177 @@
+{
+  "responses": "tests/live/results/candidate/responses-trial1-20261029T110945Z.jsonl",
+  "scenario_count": 24,
+  "recorded": 24,
+  "passed": 24,
+  "failed": 0,
+  "results": [
+    {
+      "scenario_id": "L-R01",
+      "category": "discovery",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R02",
+      "category": "offer",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R03",
+      "category": "objection",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R04",
+      "category": "claim",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R05",
+      "category": "offer",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R06",
+      "category": "next_step",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R07",
+      "category": "refusal",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R08",
+      "category": "refusal",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-R09",
+      "category": "claim",
+      "locale": "ru",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K01",
+      "category": "discovery",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K02",
+      "category": "offer",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K03",
+      "category": "objection",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K04",
+      "category": "claim",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K05",
+      "category": "offer",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K06",
+      "category": "next_step",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K07",
+      "category": "refusal",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-K08",
+      "category": "claim",
+      "locale": "ky",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M01",
+      "category": "discovery",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M02",
+      "category": "offer",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M03",
+      "category": "objection",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M04",
+      "category": "claim",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M05",
+      "category": "offer",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M06",
+      "category": "next_step",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "scenario_id": "L-M07",
+      "category": "refusal",
+      "locale": "mixed",
+      "passed": true,
+      "failures": []
+    }
+  ]
+}

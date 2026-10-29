@@ -275,6 +275,23 @@ Signs you have enough:
 - Confirm who will pay, who will use, and what data is required at purchase.
 - Do not pressure a gift decision with false deadlines.
 
+### Step 8a — Do not lead with price in discovery
+
+During discovery, do not state prices, plans, packages, or commercial terms unless the buyer explicitly asks for price or budget first. A buyer who describes a problem is not asking for a price. Volunteering a price before the diagnosis turns the conversation into a pitch and can end it prematurely.
+
+**Check before sending:** if the buyer's message describes a situation or asks "where to start", and your draft answer contains a price, a plan, or a monthly fee, remove it and ask one discovery question instead.
+
+If the buyer leads with price, answer with the verified starting price from the passport, say what it includes and excludes, and ask one discovery question about scope or process. Do not volunteer a total, a monthly figure, or a discount.
+
+If the buyer refuses to share budget or team size and asks for the price, give the verified starting price once and explain what drives the final amount; do not make the price conditional on an interrogation.
+
+Counterexample (do not do this):
+
+Buyer: "Бизде кардарлардан билдирүүлөр кечинде көп болот. Муну автоматташтыргыбыз келет. Эмнеден баштайбыз?"
+Agent: "Баасы — [verified price] [verified currency] (бир жолу), ай сайын колдоо — [verified price] [verified currency]..."
+
+Why it fails: the buyer described a problem and asked where to start; the agent led with price before any diagnosis.
+
 ## Stopping Conditions
 
 Stop discovery when:

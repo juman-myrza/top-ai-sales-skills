@@ -88,8 +88,22 @@ def check_links(skill_dir: Path) -> list[str]:
     return failures
 
 
+def pick_temp_base() -> str:
+    """Return a temporary-directory base that actually exists.
+
+    ``TMPDIR`` may point at a path that only exists in a specific developer
+    environment (for example ``/tmp/opencode``); on a CI runner that path is
+    absent and ``mkdtemp`` raises ``FileNotFoundError``. Fall back to the
+    system default when the configured base does not exist.
+    """
+    configured = os.environ.get("TMPDIR")
+    if configured and os.path.isdir(configured):
+        return configured
+    return tempfile.gettempdir()
+
+
 def main() -> int:
-    temp_root = Path(tempfile.mkdtemp(prefix="installed-artifact-", dir=os.environ.get("TMPDIR", "/tmp/opencode")))
+    temp_root = Path(tempfile.mkdtemp(prefix="installed-artifact-", dir=pick_temp_base()))
     target = temp_root / "hermes-home"
     command = [
         sys.executable,

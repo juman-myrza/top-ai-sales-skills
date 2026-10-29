@@ -14,6 +14,9 @@
 | `score_live_eval.py` | Applies deterministic checks (dominant reply language, required/forbidden phrases, regexes, question limits) to a recorded response file. |
 | `verify_run.py` | Rebuilds a run's prompt from its recorded commit and checks the SHA-256. |
 | `results/` | One subdirectory per arm (`baseline`, `candidate`) with raw JSONL responses, transcripts, run metadata, and scores. |
+| roleplay-cases.yaml | Five adaptive, synthetic multi-turn buyer personas; no fixed passport prices. |
+| run_roleplay_eval.py | Runs a buyer simulator, Daniyar, and a post-session evidence-based coach; saves transcripts, raw calls, hashes, and scores. |
+| test_roleplay_eval.py | No-network structural tests for roleplay cases, transcript-evidence checking, and JSON parsing. |
 
 ## The 24 scenarios
 
@@ -66,6 +69,32 @@ bash tests/live/run_focused_ab.sh
 ```
 
 The run creates `tests/live/results/focused-ab/` with raw responses, transcripts, metadata, and deterministic scores. Each metadata file records the prompt SHA-256, full scenario-file SHA-256, selected scenario IDs, harness script hashes, model, trial/seed settings, and source commit. Review the raw transcript alongside the score; a deterministic pass is not a quality or conversion verdict. Calls are made through OpenRouter and may incur API charges.
+
+## Adaptive roleplay practice
+
+The roleplay pack is separate from the passport-specific regression scenarios and the existing 24 single-turn tests. It contains five fictional buyer situations: skepticism about AI mistakes, budget/cash-flow pressure, excessive requested scope in Kyrgyz, an internal champion who needs to convince a director, and a mixed-language buyer unsure that automation is worth changing the current process.
+
+Run the harness without model calls first:
+
+```bash
+python3 tests/live/run_roleplay_eval.py --dry-run
+```
+
+Run all five synthetic dialogues when ready:
+
+```bash
+python3 tests/live/run_roleplay_eval.py --trial 1
+```
+
+Or run one focused conversation:
+
+```bash
+python3 tests/live/run_roleplay_eval.py --only RP-RU-TRUST --trial 1
+```
+
+The run writes a timestamped directory under tests/live/results/roleplay/ with one transcript, raw model calls, coach JSON, and a manifest containing the commit, prompt/case/rubric/passport hashes and token usage. It makes model calls through OpenRouter and may incur charges. No production tools, live Hermes profile, or deployment are involved.
+
+The buyer and coach are simulated with the same model family as the seller; their outputs are useful for practice, not independent truth. The coach must quote the transcript for every score and flags quote mismatches. The trust scenario explicitly checks whether technical designs (such as stale-stock detection or human escalation) are clearly conditional until source-system fields, timestamp semantics, and the actual handoff path are verified. Do not treat the score as proof of sales conversion. Kyrgyz language naturalness requires fluent human review.
 
 ## Runtime disclosure (read before trusting any number)
 

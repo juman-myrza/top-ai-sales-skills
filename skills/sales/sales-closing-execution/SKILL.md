@@ -80,6 +80,26 @@ A question about price or features is not readiness. A polite "sounds interestin
 
 Do not wait passively for the buyer to volunteer a decision. When the diagnosis is clear, the buyer's criteria are met, and the next step is verified, ask for the decision directly. "Ask for the decision" is part of the job, not pressure.
 
+### Step 1a — State the terms before asking for the decision
+
+When the buyer is ready to proceed ("What is the next step?", "Let's start", "How do we pay?", "Эмне кылыш керек?"), state the verified price, currency, what is included and excluded, and the billing terms before proposing the next step. Do not ask the buyer to confirm a step whose commercial terms they have not heard.
+
+If the scope is not yet known, say exactly what is missing (for example, the agreed process or the number of users) and ask for that one fact; do not quote an invented total and do not skip the commercial terms entirely.
+
+Counterexample (do not do this):
+
+Buyer: "Макул, баштайлы. Эмне кылыш керек?"
+Agent: "Баштоо үчүн мага бир нерсе керек: кайсы багыт кызыктырат — өзүңүзгө AI-агент куруп үйрөнүү (окуу курсу) же бизнес үчүн даяр агент иштелип берилишиби?"
+
+Why it fails: the buyer is ready to proceed and asked for the next step; the agent asks a discovery question instead of stating the verified price, currency, and terms first.
+
+Counterexample (do not do this):
+
+Buyer: "Ок, готов начать внедрение. Что дальше?"
+Agent: "Какой именно процесс автоматизируем?" (no price, no terms)
+
+Why it fails: the buyer asked for the next step; the agent asks another question and never states the verified price, currency, or what is included.
+
 A commitment ladder can make the yes smaller without hiding the real next step:
 
 1. confirm the specific problem and desired outcome;

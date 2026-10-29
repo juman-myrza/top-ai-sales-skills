@@ -136,6 +136,19 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ## Unreleased
 
+### Fixed
+
+- **Two sales behaviors found by live-model evaluation** (`tests/live/`, 24 scenarios x 3 trials per arm on `deepseek/deepseek-v4.1-flash`, no tools connected; baseline at `f9eb812`, candidate at `e160da2`):
+  - `sales-discovery`: agents must not lead with price, plans, or fees before diagnosis during discovery (new Step 8a with counterexample). Baseline volunteered `35 000 KGS` / `10 000 KGS` before diagnosis in 5 of 6 relevant trials; no candidate trial does.
+  - `sales-language-adaptation`: a Kyrgyz greeting (`салам`, `рахмат`) inside an otherwise Russian message is not a language switch; the reply stays in the buyer's dominant language. The root cause was an internal contradiction in the skill's Example 3, which showed a Kyrgyz-dominant reply to a Russian-dominant buyer; Example 3 was corrected and a new Example 3a and a stronger branch rule were added. Baseline replied in Kyrgyz in 3 of 3 trials; all candidate trials reply in Russian while keeping the greeting.
+- `sales-closing-execution`: Step 1a (state verified price, currency, and terms before proposing a next step) is retained as correct guidance. The scenario that motivated it (L-K06) was **mis-specified** — it did not say which of the two offers the buyer wanted — and has been corrected to a two-turn scenario; with the correction, both arms state the price, so it is not counted as a fixed deficiency.
+- Overall deterministic pass rate: baseline 20–23/24 per trial; candidate 24/24 in all three trials. The improvement is consistent in this sample but three trials per arm is a small sample; effectiveness is not declared proven.
+- **CI:** `scripts/test_installed_artifact.py` created its temp dir under `$TMPDIR` or `/tmp/opencode`; `/tmp/opencode` is absent on the GitHub runner, so `tempfile.mkdtemp` failed and the "installed artifact" CI step was red. It now falls back to the system temp dir when the configured base does not exist.
+
+### Added
+
+- `tests/live/` — live-model evaluation harness: 24 scenarios (9 Russian, 8 Kyrgyz, 7 Russian-dominant with code-switching), runner (`run_live_eval.py`), shared prompt assembly (`prompt_build.py`), deterministic scorer with a dominant-language check (`score_live_eval.py`), a provenance checker (`verify_run.py`), raw baseline and candidate responses with run metadata (`results/`), harness documentation (`README.md`), scoring table (`SCORING.md`), and the before/after report (`BEFORE-AFTER.md`). Evaluated against `deepseek/deepseek-v4.1-flash` on OpenRouter; no tool adapters are connected and the live Hermes profile is never touched.
+
 ### Changed
 
 - Removed the dead always-on snippet: `core/SYSTEM-PROMPT-SNIPPET.md`, its activation copy, and every reference. The always-on layer is the profile's `SOUL.md` + `AGENTS.md`; the full `core/CORE-BEHAVIOR-CONTRACT.md` loads with the skills. This removes a fourth duplicate of the same invariants (task OC-2).

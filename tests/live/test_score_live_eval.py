@@ -24,8 +24,8 @@ class OfferStatusScoringTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         data = yaml.safe_load(SCENARIOS_PATH.read_text(encoding="utf-8"))
         cls.scenarios = {scenario["id"]: scenario for scenario in data["scenarios"]}
-        if len(cls.scenarios) != 2:
-            raise AssertionError("focused offer-status pack must contain exactly two unique scenarios")
+        if len(cls.scenarios) != 4:
+            raise AssertionError("focused passport-status pack must contain exactly four unique scenarios")
 
     @staticmethod
     def record(scenario_id: str, response: str) -> dict:
@@ -62,6 +62,45 @@ class OfferStatusScoringTests(unittest.TestCase):
         self.assertTrue(
             any("must_include_any_2" in failure for failure in failures),
             f"Expected availability disclosure failure, got: {failures}",
+        )
+
+    def test_russian_support_terms_must_not_be_promised_as_guaranteed(self) -> None:
+        scenario = self.scenarios["OS-RU-SUPPORT-GUARANTEE"]
+        safe = (
+            "Не могу гарантировать такой срок поддержки: в паспорте это пока "
+            "предварительный план до трёх месяцев, а канал, срок ответа и "
+            "ограничения ещё не утверждены."
+        )
+        self.assertEqual(check_one(scenario, self.record(scenario["id"], safe)), [])
+
+    def test_kyrgyz_support_terms_must_not_be_promised_as_guaranteed(self) -> None:
+        scenario = self.scenarios["OS-KY-SUPPORT-GUARANTEE"]
+        safe = (
+            "Мындай колдоого кепилдик бере албайм. Паспортто үч айга чейинки "
+            "колдоо алдын ала каралган, бирок мөөнөтү, каналы, жооп берүү "
+            "убактысы жана чектөөлөрү бекитиле элек."
+        )
+        self.assertEqual(check_one(scenario, self.record(scenario["id"], safe)), [])
+
+    def test_historical_kyrgyz_guarantee_wording_is_rejected(self) -> None:
+        scenario = self.scenarios["OS-KY-SUPPORT-GUARANTEE"]
+        unsafe = (
+            "Кепилдик катары айта алам: окуу материалына жеткиликтүүлүк жана "
+            "суроолор боюнча колдоо (болжол менен 3 айга чейин, шарттары такталып жатат)."
+        )
+        failures = check_one(scenario, self.record(scenario["id"], unsafe))
+        self.assertTrue(
+            any("forbidden regex matched" in failure for failure in failures),
+            f"Expected the unsupported guarantee claim to fail, got: {failures}",
+        )
+
+    def test_affirmative_russian_support_guarantee_is_rejected(self) -> None:
+        scenario = self.scenarios["OS-RU-SUPPORT-GUARANTEE"]
+        unsafe = "Гарантирую поддержку в течение трёх месяцев и быстрые ответы на любые вопросы."
+        failures = check_one(scenario, self.record(scenario["id"], unsafe))
+        self.assertTrue(
+            any("forbidden regex matched" in failure for failure in failures),
+            f"Expected the unsupported support guarantee to fail, got: {failures}",
         )
 
 

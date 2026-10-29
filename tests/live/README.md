@@ -27,11 +27,11 @@
 
 Every scenario names the passport version it refers to (`ai-agent-implementation` 1.0.0 or `ai-agent-training` 1.0.0 from `tenants/daniyar/passports/offers/`). The product passport is the only source of prices and terms; the model is given the passports verbatim in the system prompt.
 
-## Focused regression: paused offer / pricing plan
+## Focused regression: passport status and support commitments
 
-The separate `offer-status-scenarios.yaml` pack checks a gap found in the approved Daniyar passport: the training offer is marked `active`, while its only pricing plan is `paused` and its price is `estimated`. Those states must not be collapsed into a claim that the course is available to buy.
+The separate `offer-status-scenarios.yaml` pack checks two passport-driven risks: the training offer is marked `active`, while its only pricing plan is `paused` and its price is `estimated`; and the intended support period (up to three months) is itself marked `estimated`, with the channel, response time and limits not finalized. The agent must not claim that the course is available to buy or turn estimated support into a guarantee.
 
-This pack is intentionally separate from the original 24-scenario results. The previously reported 24/24 candidate score does **not** include this new guard.
+The pack has four focused scenarios (Russian/Kyrgyz for paused-plan availability and estimated-support guarantees). It is intentionally separate from the original 24-scenario results. The previously reported 24/24 candidate score does **not** include these new guards.
 
 Run the focused pack against the current candidate prompt:
 
@@ -49,6 +49,23 @@ python3 tests/live/score_live_eval.py \
 ```
 
 A passing deterministic score is a necessary guard, not proof of naturalness or sales effectiveness. Have a fluent Kyrgyz reviewer inspect the Kyrgyz answer before accepting that part of the evaluation.
+
+## Focused before/after runs
+
+Use the focused runner to test the two targeted guards without re-running the original 24-scenario corpus. It performs two isolated comparisons, three trials per arm:
+
+- **Paused pricing plan:** PR #5 baseline commit `a52574a872c2d8aaccde47a9fdab239a46bfe467` vs. PR #6 candidate commit `6ceb35caf939af227f533edec861d69b48517bb8`.
+- **Estimated support guarantee:** PR #6 baseline commit `6ceb35caf939af227f533edec861d69b48517bb8` vs. the current checked-out commit (PR #7 or a later reviewed commit).
+
+The script copies only the evaluation harness and scenario pack into temporary Git worktrees. The model prompt is assembled from each worktree's pinned core contract, skills, and product passports. It does not write to the active Hermes profile, change passport facts, or deploy anything.
+
+Requirements: Git, Python dependencies from `requirements-dev.txt`, and `OPENROUTER_API_KEY` in the environment or `~/.hermes/.env`. Run from a clean checkout of the candidate branch:
+
+```bash
+bash tests/live/run_focused_ab.sh
+```
+
+The run creates `tests/live/results/focused-ab/` with raw responses, transcripts, metadata, and deterministic scores. Each metadata file records the prompt SHA-256, full scenario-file SHA-256, selected scenario IDs, harness script hashes, model, trial/seed settings, and source commit. Review the raw transcript alongside the score; a deterministic pass is not a quality or conversion verdict. Calls are made through OpenRouter and may incur API charges.
 
 ## Runtime disclosure (read before trusting any number)
 

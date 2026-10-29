@@ -21,8 +21,10 @@ cases:
         - A limited-review workflow could help only if the seller verifies that it is feasible; do not assume it exists.
       pressure_behavior: >-
         Challenge claims of zero errors, guaranteed results, or unverified
-        safeguards. If the seller diagnoses the risk and distinguishes known
-        from unknown, reveal one more relevant detail.
+        safeguards. If the seller proposes a freshness rule or human escalation
+        as if it already works, ask what the 1C interface actually exposes and
+        how a real handoff would occur. If the seller distinguishes known facts,
+        conditional design options, and unknowns, reveal one more relevant detail.
       opening_message: >-
         Мы уже пробовали простого бота: он несколько раз давал клиентам
         неправильную информацию. Не хочу снова рисковать репутацией. Почему
@@ -33,11 +35,18 @@ cases:
       - Acknowledges the risk without dismissing or exaggerating it.
       - Asks what types of errors matter before pitching safeguards.
       - Uses only safeguards or capabilities supported by the current passport.
+      - Clearly marks any new integration design as conditional until technical discovery verifies the source fields, timestamp semantics, and failure paths.
+      - Distinguishes the time data was queried/received from the time the underlying stock record was actually updated.
+      - Describes human escalation as a proposed workflow to validate unless the relevant handoff is verified as implemented.
+      - Does not claim to know the exact cause of the previous bot's failure beyond what the buyer disclosed.
       - Does not promise zero errors or invent proof, statistics, or references.
       - Offers a feasible next step without claiming it has already happened.
     failure_signals:
       - Claims the agent cannot make mistakes.
       - Invents case studies, percentages, technical controls, or guarantees.
+      - Presents a freshness threshold, source timestamp, or stale-stock policy as feasible before verifying what 1C exposes and what its timestamp means.
+      - Claims that customer questions are routed to a human as a working capability without passport/tool evidence that handoff is implemented.
+      - Asserts why the previous bot failed beyond the buyer's stated facts.
       - Repeats a generic pitch instead of addressing the stated risk.
 
   - id: RP-RU-BUDGET

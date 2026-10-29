@@ -94,7 +94,7 @@ python3 tests/live/run_roleplay_eval.py --only RP-RU-TRUST --trial 1
 
 The run writes a timestamped directory under tests/live/results/roleplay/ with one transcript, raw model calls, coach JSON, and a manifest containing the commit, prompt/case/rubric/passport hashes and token usage. It makes model calls through OpenRouter and may incur charges. No production tools, live Hermes profile, or deployment are involved.
 
-The buyer and coach are simulated with the same model family as the seller; their outputs are useful for practice, not independent truth. The coach must quote the transcript for every score and flags quote mismatches. Do not treat the score as proof of sales conversion. Kyrgyz language naturalness requires fluent human review.
+The buyer and coach are simulated with the same model family as the seller; their outputs are useful for practice, not independent truth. The coach must quote the transcript for every score and flags quote mismatches. The trust scenario explicitly checks whether technical designs (such as stale-stock detection or human escalation) are clearly conditional until source-system fields, timestamp semantics, and the actual handoff path are verified. Do not treat the score as proof of sales conversion. Kyrgyz language naturalness requires fluent human review.
 
 ## Runtime disclosure (read before trusting any number)
 

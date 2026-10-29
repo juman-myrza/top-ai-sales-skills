@@ -41,6 +41,16 @@ class RoleplayEvalTests(unittest.TestCase):
             self.assertTrue(case["failure_signals"], case["id"])
             self.assertGreaterEqual(case["max_seller_turns"], 3)
 
+    def test_trust_case_checks_conditional_technical_claims(self) -> None:
+        case = next(item for item in self.cases if item["id"] == "RP-RU-TRUST")
+        success = " ".join(case["success_signals"]).lower()
+        failure = " ".join(case["failure_signals"]).lower()
+        self.assertIn("timestamp semantics", success)
+        self.assertIn("queried/received", success)
+        self.assertIn("handoff", success)
+        self.assertIn("what 1c exposes", failure)
+        self.assertIn("implemented", failure)
+
     def test_json_parser_accepts_plain_and_fenced_objects(self) -> None:
         self.assertEqual(parse_json_object('{"message":"ok","done":true}'), {"message": "ok", "done": True})
         fenced = chr(96) * 3 + 'json\n{"message":"ok","done":false}\n' + chr(96) * 3

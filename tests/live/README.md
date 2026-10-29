@@ -50,6 +50,23 @@ python3 tests/live/score_live_eval.py \
 
 A passing deterministic score is a necessary guard, not proof of naturalness or sales effectiveness. Have a fluent Kyrgyz reviewer inspect the Kyrgyz answer before accepting that part of the evaluation.
 
+## Focused before/after runs
+
+Use the focused runner to test the two targeted guards without re-running the original 24-scenario corpus. It performs two isolated comparisons, three trials per arm:
+
+- **Paused pricing plan:** PR #5 baseline commit `a52574a872c2d8aaccde47a9fdab239a46bfe467` vs. PR #6 candidate commit `6ceb35caf939af227f533edec861d69b48517bb8`.
+- **Estimated support guarantee:** PR #6 baseline commit `6ceb35caf939af227f533edec861d69b48517bb8` vs. the current checked-out commit (PR #7 or a later reviewed commit).
+
+The script copies only the evaluation harness and scenario pack into temporary Git worktrees. The model prompt is assembled from each worktree's pinned core contract, skills, and product passports. It does not write to the active Hermes profile, change passport facts, or deploy anything.
+
+Requirements: Git, Python dependencies from `requirements-dev.txt`, and `OPENROUTER_API_KEY` in the environment or `~/.hermes/.env`. Run from a clean checkout of the candidate branch:
+
+```bash
+bash tests/live/run_focused_ab.sh
+```
+
+The run creates `tests/live/results/focused-ab/` with raw responses, transcripts, metadata, and deterministic scores. Each metadata file records the prompt SHA-256, full scenario-file SHA-256, selected scenario IDs, harness script hashes, model, trial/seed settings, and source commit. Review the raw transcript alongside the score; a deterministic pass is not a quality or conversion verdict. Calls are made through OpenRouter and may incur API charges.
+
 ## Runtime disclosure (read before trusting any number)
 
 - **No tool is connected.** The system prompt tells the model that `calendar.availability`, `calendar.booking`, `payments.invoicing`, `human.handoff`, `messaging.media`, and `crm.memory` are not connected in this channel. A claimed booking/payment/handoff/invoice is therefore a truth failure, not a missing integration.

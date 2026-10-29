@@ -151,6 +151,11 @@ def main() -> int:
     parser.add_argument("--trial", type=int, default=1, help="trial number; changes the per-scenario seed base")
     args = parser.parse_args()
 
+    # Normalize relative paths before metadata records their path relative to ROOT.
+    args.scenarios = args.scenarios.resolve()
+    if not args.scenarios.is_relative_to(ROOT):
+        raise SystemExit(f"scenario file must be inside this checkout: {args.scenarios}")
+
     system_prompt, prompt_hash = build_system_prompt()
     scenarios = load_scenarios(args.scenarios)
     if args.only:
@@ -159,11 +164,22 @@ def main() -> int:
         if not scenarios:
             raise SystemExit("no scenarios matched --only")
 
+    scenario_sha256 = hashlib.sha256(args.scenarios.read_bytes()).hexdigest()
+    selected_scenario_ids = [s["id"] for s in scenarios]
+    harness_sha256 = {
+        "run_live_eval.py": hashlib.sha256(Path(__file__).resolve().read_bytes()).hexdigest(),
+        "prompt_build.py": hashlib.sha256(Path(sys.modules["prompt_build"].__file__).resolve().read_bytes()).hexdigest(),
+        "score_live_eval.py": hashlib.sha256((LIVE / "score_live_eval.py").read_bytes()).hexdigest(),
+    }
+
     if args.dry_run:
         print(json.dumps({
             "model": args.model,
             "prompt_chars": len(system_prompt),
             "prompt_sha256": prompt_hash,
+            "scenario_sha256": scenario_sha256,
+            "selected_scenario_ids": selected_scenario_ids,
+            "harness_sha256": harness_sha256,
             "scenario_count": len(scenarios),
             "source_files": prompt_parts(ROOT),
         }, ensure_ascii=False, indent=2))
@@ -186,10 +202,13 @@ def main() -> int:
         "reasoning_effort": "none",
         "prompt_sha256": prompt_hash,
         "prompt_chars": len(system_prompt),
+        "harness_sha256": harness_sha256,
         "repo_commit": repo_commit(),
         "started_at": datetime.now(timezone.utc).isoformat(),
         "scenario_count": len(scenarios),
+        "selected_scenario_ids": selected_scenario_ids,
         "scenario_file": str(args.scenarios.relative_to(ROOT)),
+        "scenario_sha256": scenario_sha256,
         "tools_connected": [],
         "note": "No tools were connected. The prompt states this explicitly.",
     }
@@ -199,6 +218,8 @@ def main() -> int:
         transcript.write(f"# Live evaluation transcript: {args.arm}\n\n")
         transcript.write(f"- Model: `{args.model}`\n- Temperature: `{args.temperature}`\n")
         transcript.write(f"- Prompt SHA-256: `{prompt_hash}`\n- Commit: `{meta['repo_commit']}`\n")
+        transcript.write(f"- Scenario SHA-256: `{scenario_sha256}`\n")
+        transcript.write(f"- Selected scenario IDs: `{', '.join(selected_scenario_ids)}`\n")
         transcript.write("- Tools connected: none\n\n")
 
         for index, scenario in enumerate(scenarios):

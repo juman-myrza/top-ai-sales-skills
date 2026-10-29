@@ -86,8 +86,9 @@ run_trials() {
 import json, sys
 from pathlib import Path
 data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
-print(f"Score: {data.get('passed', 0)}/{data.get('scenario_count', 0)} passed; "
-      f"{data.get('failed', 0)} failed. Full score: {sys.argv[1]}")
+print(f"Score: {data.get('passed', 0)}/{data.get('recorded', 0)} recorded scenarios passed; "
+      f"{data.get('failed', 0)} failed. "
+      f"Corpus size: {data.get('scenario_count', 0)}. Full score: {sys.argv[1]}")
 PY
   done
 }

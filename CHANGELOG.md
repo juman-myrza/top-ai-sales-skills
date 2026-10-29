@@ -82,6 +82,8 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ### Fixed
 
+- **Support estimate is not a guarantee.** The core contract now explicitly prohibits turning the passport's estimated support period into a warranty, SLA, or promise. Added Russian/Kyrgyz regression scenarios for support guarantees, including the previously observed wording “Кепилдик катары айта алам”.
+
 - **Installation packaging.** `install_skills.py` now copies the shared `core/`, `tools/`, `product-passport/`, and `research/` documents into each skill under `references/shared/` and rewrites each skill's links to point there. An installed skill no longer loses its core behavior contract, tool contracts, or passport schema. The installer also writes `INSTALL-MANIFEST.json` and `ACTIVATION.md`. A new `scripts/test_installed_artifact.py` verifies a fresh install.
 - **Conversation state.** `conversation-state.schema.json` is now `1.1.0`: consent is a per-purpose object with status, time, scope, and source; `mode`, `known_facts`, `diagnosis`, `follow_up`, and `quote` have canonical representations; handoff reason codes match `human.handoff`; tool-result statuses match the tool envelope. `core/example-state.json` is validated by the repository validator.
 - **CRM contract.** The documented patch now validates against the canonical state schema. Consent objects, known facts, next steps, quote, and follow-up lifecycle are aligned; the adapter is required to reject schema-invalid patches.

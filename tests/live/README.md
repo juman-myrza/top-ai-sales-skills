@@ -27,11 +27,11 @@
 
 Every scenario names the passport version it refers to (`ai-agent-implementation` 1.0.0 or `ai-agent-training` 1.0.0 from `tenants/daniyar/passports/offers/`). The product passport is the only source of prices and terms; the model is given the passports verbatim in the system prompt.
 
-## Focused regression: paused offer / pricing plan
+## Focused regression: passport status and support commitments
 
-The separate `offer-status-scenarios.yaml` pack checks a gap found in the approved Daniyar passport: the training offer is marked `active`, while its only pricing plan is `paused` and its price is `estimated`. Those states must not be collapsed into a claim that the course is available to buy.
+The separate `offer-status-scenarios.yaml` pack checks two passport-driven risks: the training offer is marked `active`, while its only pricing plan is `paused` and its price is `estimated`; and the intended support period (up to three months) is itself marked `estimated`, with the channel, response time and limits not finalized. The agent must not claim that the course is available to buy or turn estimated support into a guarantee.
 
-This pack is intentionally separate from the original 24-scenario results. The previously reported 24/24 candidate score does **not** include this new guard.
+The pack has four focused scenarios (Russian/Kyrgyz for paused-plan availability and estimated-support guarantees). It is intentionally separate from the original 24-scenario results. The previously reported 24/24 candidate score does **not** include these new guards.
 
 Run the focused pack against the current candidate prompt:
 

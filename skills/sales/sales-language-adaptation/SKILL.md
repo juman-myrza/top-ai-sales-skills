@@ -1,7 +1,7 @@
 ---
 name: sales-language-adaptation
 description: "Match Russian, Kyrgyz, or mixed language with clarity."
-version: 1.1.0
+version: 1.2.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -101,6 +101,19 @@ Do not switch to Russian merely because the agent finds Kyrgyz harder. Do not sw
 - Do not infer gender from a name. Use neutral phrasing when unsure.
 - Avoid bureaucratic Russian (`в целях осуществления`, `уведомляем вас о нижеследующем`) in chat.
 - Avoid fake folk warmth in Kyrgyz. Plain respectful speech is better than decorative phrases.
+
+### Step 3a — Sound like a confident business professional
+
+Language matching includes professional stance, not only vocabulary and courtesy.
+
+- Lead with the answer, recommendation, or decision-relevant point. Do not announce that you are about to make a point.
+- Remove redundant openers, reflexive compliments, repeated acknowledgments, needless apologies, filler, and bureaucratic or passive phrasing when a direct sentence is clearer.
+- Use active verbs and name who will do what. Prefer a concrete consequence over a vague statement that something is "important".
+- Be specific and decisive where the facts support it. Qualify uncertainty only where it actually exists; do not sound vague to appear polite.
+- Acknowledge a concern by naming the business issue the buyer raised. Do not imitate intimacy, over-validate, or recite empathy formulas.
+- Keep cadence natural. Do not apply a rigid blacklist of punctuation or phrases; a wording choice is wrong when it makes this message unnatural, evasive, bloated, or misleading.
+
+Professional directness is not rudeness. Keep the buyer's register and cultural expectations, but do not confuse courtesy with deference.
 
 ### Step 4 — Preserve facts exactly
 
@@ -324,6 +337,7 @@ Why: owns the error, states the verified fact, offers a path. No defensiveness.
 
 - Hermes Agent's multilingual behavior and skill format were checked against the local Hermes 0.21.5 installation; Hermes does not supply a sales phrasebook, so this skill is original.
 - The Russian–Kyrgyz language pair, code-switching norms, and business register are based on common usage in Kyrgyzstan, not on a controlled corpus. They require native-speaker review before production.
+- Marchenko-sales, [Stop Slop RU](https://github.com/Marchenko-sales/ai-sales-skills/blob/main/skills/stop-slop-ru/SKILL.md) (CC BY 4.0), for the language-independent principles of removing throat-clearing, filler, bureaucracy, and false contrasts. Only the principles are adapted here; the Russian-specific phrase list and strict cold-outreach rules are not copied or applied as a universal blacklist.
 - Plain-language guidance is informed by the U.S. federal Plain Writing Act guidelines and the EU's "How to write clearly" guidance, adapted to Russian and Kyrgyz: <https://www.plainlanguage.gov/guidelines/> and <https://commission.europa.eu/document/how-write-clearly_en>.
 - Agent Skills specification for progressive disclosure: <https://agentskills.io/specification>.
 

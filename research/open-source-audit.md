@@ -159,3 +159,24 @@ They are prior art for "sales skills for AI agents." The goal was to learn what 
 - Star counts and repository contents change. The observations are a snapshot.
 
 The useful conclusion is narrow: **there is a lot of sales-skill content, but very little of it separates facts from instructions, defines tool-failure behavior, or ships a testable evaluation corpus.** That gap is the reason for this repository.
+
+---
+
+## Addendum — 2026-10-29: additional repositories supplied for review
+
+This addendum extends the 2026-10-23 README/structure-level audit. The repositories below were inspected selectively at the files listed in `source-register.md`; this is not an independent behavioral evaluation.
+
+| Repository | Decision for Daniyar | Reusable pattern | Do not import |
+|---|---|---|---|
+| [Anthropic Sales Plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/sales) | Use selected objection and lead-triage principles; do not install wholesale. | Ground objection replies in actual customer context and permitted proof; preserve a clear next action. | Claude connector workflows, CRM-specific procedures, or any implication that Daniyar has win/loss history when no such data is available. |
+| [GTM Skills](https://github.com/zarif3624/gtm-skills) | Use selected reasoning conventions, not its full skill pack. | Separate the buyer's stated objection from hypotheses; preserve verified, inferred, and unknown facts. | Treating the repository's self-reported test scores as independent evidence of conversion improvement. |
+| [Marchenko Sales Skills](https://github.com/Marchenko-sales/ai-sales-skills) | Adapt general writing/diagnosis principles with attribution; do not copy a whole skill. | Remove throat-clearing, filler, bureaucracy, vague phrases, and false contrasts; identify the real objection. | A global banned-phrase list, rigid punctuation rules, or cold-outreach constraints applied to every chat. |
+| [Microsoft CAT B2B Outreach Suite](https://microsoft.github.io/cat-agent-skills/skills/b2b-outreach-suite/) | Keep as a future outbound reference. | Approved-fact grounding and a compact objection-response structure. | Outbound-only constraints in inbound conversations or its platform-specific assumptions. |
+| [Agentic Sales Skills](https://github.com/Autter-dev/agentic-sales-skills) | Keep as a future practice/coaching reference; no role-play or test work in this phase. | Buyer-persona practice and specific transcript feedback. | Adding more agents or skills to the production runtime merely to increase coverage. |
+| [Louis Blythe Sales-Skills](https://github.com/louisblythe/Sales-Skills) | Reference catalog only. | Vocabulary for lifecycle coverage gaps. | Wholesale installation; the inspected fork path did not contain a license file even though its README claims MIT, and the catalog duplicates current coverage. |
+
+### How the existing skills were improved
+
+The runtime remains nine skills. No new skill was added. The selected changes strengthen professional presence in the core/orchestrator, more diagnostic and less submissive objection handling, evidence-based Challenger-style reframing inside value proof, and direct plain-language register. SPIN, Gap Selling, Sandler, Voss, and Cialdini remain complementary sources already recorded in the source register; they are not expanded into separate duplicate skills.
+
+The selection is intentionally small: one consultative/diagnostic base, one evidence-backed reframe, one clear recommendation, one next step. Professional confidence does not authorize unsupported claims, artificial urgency, manipulation, or pressure after a refusal.

@@ -1,6 +1,6 @@
 # Source Register
 
-**Snapshot date:** 2026-10-23  
+**Snapshot date:** 2026-10-29  
 **Scope:** sources used to design the nine skills, the core behavior contract, the product passport, and the scenario corpus.  
 **Status:** a curated register, not a systematic review or meta-analysis. No source here proves that this repository improves sales outcomes.
 
@@ -77,9 +77,15 @@ The README-level audit is in [`open-source-audit.md`](open-source-audit.md). Rep
 
 | ID | Repository | License | Access | Grade | Use |
 |---|---|---|---|---|---|
-| S23 | [`louisblythe/Sales-Skills`](https://github.com/louisblythe/Sales-Skills) | MIT per README; GitHub API reports no license on the fork | README and repository metadata, 2026-10-23 | E | Breadth of sales and AI-SDR topics; no code copied |
+| S23 | [`louisblythe/Sales-Skills`](https://github.com/louisblythe/Sales-Skills) | MIT per README; GitHub API reports no license on the fork | README and repository metadata, 2026-10-23 | E | Breadth of sales and AI-SDR topics; no code copied. Historical snapshot; see S32 for the 2026-10-29 recheck, which still found no license file in the inspected fork path. |
 | S24 | [`aixier/top_ai_sales`](https://github.com/aixier/top_ai_sales) | MIT | README and repository metadata, 2026-10-23 | E | Modular sales-assistant concept; no code copied |
 | S25 | [`TheCraigHewitt/sales-skills`](https://github.com/TheCraigHewitt/sales-skills) | MIT | README and repository metadata, 2026-10-23 | E | Lifecycle coverage and a shared context file; no code copied |
+| S27 | [`anthropics/knowledge-work-plugins/tree/main/sales`](https://github.com/anthropics/knowledge-work-plugins/tree/main/sales) | Apache-2.0 | Sales README and objection/lead-triage skills, inspected 2026-10-29 | E | Evidence-grounded objection handling and lead triage; no code copied. Primarily designed for Claude Cowork/Code and connector-driven workflows, not a Hermes drop-in. |
+| S28 | [`zarif3624/gtm-skills`](https://github.com/zarif3624/gtm-skills) | MIT | Objection skill, evaluation guide, and license inspected 2026-10-29 | E | Separate stated objections from hypotheses; answer with the smallest relevant evidence; preserve verified/inferred/unknown boundaries. Repo-authored evaluation claims are not an independent sales benchmark. No code copied. |
+| S29 | [`Marchenko-sales/ai-sales-skills`](https://github.com/Marchenko-sales/ai-sales-skills) | CC BY 4.0 | `stop-slop-ru`, qualification/objection skill, and license inspected 2026-10-29 | E | Plain-language editing and objection diagnosis. Russian-only; some lexical/punctuation rules are too prescriptive for global use. Only general writing principles were adapted and attributed; no skill body or phrase list copied. |
+| S30 | [`microsoft/cat-agent-skills`](https://github.com/microsoft/cat-agent-skills) | MIT | B2B Outreach Suite and license inspected 2026-10-29 | E | Approved-fact grounding and objection-handling structure for future outbound work. The suite is outbound-oriented and is not added to Daniyar's incoming-chat runtime. No code copied. |
+| S31 | [`Autter-dev/agentic-sales-skills`](https://github.com/Autter-dev/agentic-sales-skills) | MIT | README, Sales Practice Coach and Sales Call Coach inspected 2026-10-29 | E | Reference for adaptive buyer role-play and coaching. Not integrated into runtime; no test work is being pursued in this phase. No code copied. |
+| S32 | [`louisblythe/Sales-Skills`](https://github.com/louisblythe/Sales-Skills) | No license file found in the inspected fork path; README claims MIT | README/tree inspected 2026-10-29 | E | Breadth catalog only. Do not copy or install wholesale until licensing is verified; duplicates most existing lifecycle skills. |
 
 ---
 
@@ -92,6 +98,7 @@ The README-level audit is in [`open-source-audit.md`](open-source-audit.md). Rep
 - **Kyrgyz and Russian:** no native-speaker review has been completed for this snapshot. The language examples are drafts, and the tests flag Kyrgyz/mixed scenarios for human review.
 - **Legal:** the repository is not legal advice. The FTC guide is one jurisdiction's direction; consent, recording, privacy, refunds, and consumer-protection rules must be reviewed for the actual market.
 - **Sales outcome claims:** no source in this register shows that these skills increase revenue, close rates, or retention. That would require a controlled experiment with this implementation.
+- **New repository reviews (2026-10-29):** Anthropic's sales plugin, GTM Skills, Marchenko's sales skills, Microsoft CAT Outreach, Autter's sales agents, and Louis Blythe's catalog were inspected for specific reusable patterns. Only small behavior principles were selected. Their presence, popularity, licenses, or self-reported evaluation results do not establish that they improve Daniyar's sales outcomes. See the addendum in `open-source-audit.md`.
 - **Method coverage gaps:** Oren Klaff's framing vocabulary (S26) was a known gap in the first snapshot. It is now recorded but not adopted: the repository uses only the integrity-compatible idea of reducing perceived risk through verified clarity, and rejects frame-control and status tactics. Adding a method because it is famous is not evidence that it improves behavior.
 - **Consumer and adoption evidence:** the repository's consumer and adoption guidance is a product decision, not a cited finding. Consumer cooling-off law and adoption-success research were not reviewed as primary sources for this snapshot; see the `unresolved` fields in the example passports.
 

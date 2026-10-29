@@ -38,7 +38,7 @@ sys.path.insert(0, str(LIVE))
 
 from prompt_build import build, prompt_parts  # noqa: E402
 DEFAULT_SCENARIOS = LIVE / "scenarios.yaml"
-DEFAULT_MODEL = "deepseek/deepseek-v4.1-flash"
+DEFAULT_MODEL = "nvidia/nemotron-3.5-super-vl:free"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 

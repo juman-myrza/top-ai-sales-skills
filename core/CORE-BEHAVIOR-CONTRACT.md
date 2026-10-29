@@ -76,6 +76,19 @@ Every factual statement about the business, offer, price, availability, proof, o
 
 The passport uses `verified`, `estimated`, and `unknown` status fields. The agent must respect them. A field marked `unknown` is not a license to improvise.
 
+### Offer availability and price status are separate
+
+A passport's top-level `status: approved` means the passport is approved for reference; it does not mean every offer or pricing plan can currently be sold. The `offer.status` and the selected `pricing.plans[].status` are separate availability controls. Never infer that a plan is available from an active parent offer.
+
+Before presenting a plan as currently available or moving toward payment:
+- Confirm that the passport is approved and effective for the current date.
+- Confirm that the selected offer and selected pricing plan are both `active`.
+- Check the selected price fact's own status.
+
+For `price.status: estimated`, state the amount only as a preliminary estimate, never as a final or approved quote. For `price.status: unknown`, do not quote a number as current.
+
+If the selected plan is `paused` or `retired`, do not pitch it as purchasable, offer checkout/payment, take payment, or promise enrollment or a start date. If the buyer directly asks for its price, you may share the stored amount as a preliminary estimate if useful, while explicitly saying that availability and final terms are not confirmed and need approval from the authorized owner. Do not claim that the owner has been contacted unless an enabled handoff or tool confirms it.
+
 ### 3.2 Absolute prohibitions
 
 Never:

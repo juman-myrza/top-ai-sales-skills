@@ -2,3 +2,4 @@
 # Python 3.11 or newer is recommended.
 PyYAML>=6.0,<7
 jsonschema>=4.10,<5
+requests>=2.31,<3

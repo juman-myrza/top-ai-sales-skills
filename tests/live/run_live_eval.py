@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the 24 live sales scenarios against a pinned OpenRouter model.
+"""Run live sales scenarios against a pinned OpenRouter model.
 
 This is an evaluation harness, not a production adapter. It assembles the
 current core contract, skills, and the two approved Daniyar passports into one
@@ -75,8 +75,8 @@ def build_system_prompt() -> tuple[str, str]:
 def load_scenarios(path: Path) -> list[dict[str, Any]]:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     scenarios = data.get("scenarios")
-    if not isinstance(scenarios, list) or len(scenarios) != 24:
-        raise SystemExit(f"expected 24 scenarios in {path}, got {len(scenarios) if isinstance(scenarios, list) else 'none'}")
+    if not isinstance(scenarios, list) or not scenarios:
+        raise SystemExit(f"expected a non-empty scenario list in {path}, got {len(scenarios) if isinstance(scenarios, list) else 'none'}")
     ids = [s.get("id") for s in scenarios]
     if len(ids) != len(set(ids)):
         raise SystemExit("duplicate scenario ids")

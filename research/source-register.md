@@ -77,7 +77,7 @@ The README-level audit is in [`open-source-audit.md`](open-source-audit.md). Rep
 
 | ID | Repository | License | Access | Grade | Use |
 |---|---|---|---|---|---|
-| S23 | [`louisblythe/Sales-Skills`](https://github.com/louisblythe/Sales-Skills) | MIT per README; GitHub API reports no license on the fork | README and repository metadata, 2026-10-23 | E | Breadth of sales and AI-SDR topics; no code copied |
+| S23 | [`louisblythe/Sales-Skills`](https://github.com/louisblythe/Sales-Skills) | MIT per README; GitHub API reports no license on the fork | README and repository metadata, 2026-10-23 | E | Breadth of sales and AI-SDR topics; no code copied. Historical snapshot; see S32 for the 2026-10-29 recheck, which still found no license file in the inspected fork path. |
 | S24 | [`aixier/top_ai_sales`](https://github.com/aixier/top_ai_sales) | MIT | README and repository metadata, 2026-10-23 | E | Modular sales-assistant concept; no code copied |
 | S25 | [`TheCraigHewitt/sales-skills`](https://github.com/TheCraigHewitt/sales-skills) | MIT | README and repository metadata, 2026-10-23 | E | Lifecycle coverage and a shared context file; no code copied |
 | S27 | [`anthropics/knowledge-work-plugins/tree/main/sales`](https://github.com/anthropics/knowledge-work-plugins/tree/main/sales) | Apache-2.0 | Sales README and objection/lead-triage skills, inspected 2026-10-29 | E | Evidence-grounded objection handling and lead triage; no code copied. Primarily designed for Claude Cowork/Code and connector-driven workflows, not a Hermes drop-in. |

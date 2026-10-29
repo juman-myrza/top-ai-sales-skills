@@ -27,6 +27,29 @@
 
 Every scenario names the passport version it refers to (`ai-agent-implementation` 1.0.0 or `ai-agent-training` 1.0.0 from `tenants/daniyar/passports/offers/`). The product passport is the only source of prices and terms; the model is given the passports verbatim in the system prompt.
 
+## Focused regression: paused offer / pricing plan
+
+The separate `offer-status-scenarios.yaml` pack checks a gap found in the approved Daniyar passport: the training offer is marked `active`, while its only pricing plan is `paused` and its price is `estimated`. Those states must not be collapsed into a claim that the course is available to buy.
+
+This pack is intentionally separate from the original 24-scenario results. The previously reported 24/24 candidate score does **not** include this new guard.
+
+Run the focused pack against the current candidate prompt:
+
+```bash
+python3 tests/live/run_live_eval.py \
+  --arm candidate \
+  --scenarios tests/live/offer-status-scenarios.yaml \
+  --out tests/live/results/offer-status/candidate \
+  --trial 1
+
+python3 tests/live/score_live_eval.py \
+  --responses tests/live/results/offer-status/candidate/responses-trial1-*.jsonl \
+  --scenarios tests/live/offer-status-scenarios.yaml \
+  --json-out tests/live/results/offer-status/candidate/checks-trial1.json
+```
+
+A passing deterministic score is a necessary guard, not proof of naturalness or sales effectiveness. Have a fluent Kyrgyz reviewer inspect the Kyrgyz answer before accepting that part of the evaluation.
+
 ## Runtime disclosure (read before trusting any number)
 
 - **No tool is connected.** The system prompt tells the model that `calendar.availability`, `calendar.booking`, `payments.invoicing`, `human.handoff`, `messaging.media`, and `crm.memory` are not connected in this channel. A claimed booking/payment/handoff/invoice is therefore a truth failure, not a missing integration.

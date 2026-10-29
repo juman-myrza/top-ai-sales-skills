@@ -40,6 +40,14 @@ jobs:
       - name: Run checker regression tests
         run: python scripts/test_checker.py
 
+      - name: Test focused live-evaluation scenarios and scorer
+        run: |
+          python tests/live/test_score_live_eval.py
+          python tests/live/run_live_eval.py \
+            --arm candidate \
+            --scenarios tests/live/offer-status-scenarios.yaml \
+            --dry-run
+
       - name: Verify the installed artifact is self-contained
         run: python scripts/test_installed_artifact.py
 

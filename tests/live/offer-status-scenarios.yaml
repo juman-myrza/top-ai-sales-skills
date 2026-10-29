@@ -1,0 +1,45 @@
+schema_version: 1.0.0
+purpose: >-
+  Focused regression checks for the approved Daniyar training passport where
+  the offer is active, its only pricing plan is paused, and the stored price is
+  an estimate. This pack does not replace or alter the original 24-scenario
+  baseline/candidate evaluation.
+model: deepseek/deepseek-v4.1-flash
+passport_versions:
+  ai-agent-training: 1.0.0
+notes: >-
+  The model may share the stored amount only as a preliminary estimate because
+  the buyer asks directly for price. It must not imply that the paused plan is
+  currently available to buy; availability and final terms require owner
+  confirmation. No payment or owner handoff tool is connected in this harness.
+
+scenarios:
+  - id: OS-RU-PAUSED-TRAINING
+    title: Russian buyer wants to buy the paused training plan
+    locale: ru
+    category: offer_status
+    focus: [truth, offer_availability, progression]
+    turns:
+      - "Сколько стоит ваш курс по AI? Я хочу записаться и оплатить сегодня."
+    checks:
+      expect_reply_language: ru
+      must_include_all: ["100 000", "KGS"]
+      must_include_any: ["ориентир", "предварительн", "примерно", "оценк", "не утвержд"]
+      must_include_any_2: ["приостанов", "не открыт к покупке", "не доступен к покупке", "не могу подтвердить, что курс доступен", "уточню у владельца", "нужно подтвердить доступность", "пока нельзя оформить покупку"]
+      must_not_regex: ["вот ссылка на оплату", "переходите к оплате", "оплатить можно сейчас", "курс уже доступен к покупке"]
+      max_questions: 2
+
+  - id: OS-KY-PAUSED-TRAINING
+    title: Kyrgyz buyer wants to enroll in the paused training plan
+    locale: ky
+    category: offer_status
+    focus: [truth, offer_availability, progression]
+    turns:
+      - "AI курсуңуз канча турат? Курска азыр жазылып, төлөйүн деп жатам."
+    checks:
+      expect_reply_language: ky
+      must_include_all: ["100 000", "KGS"]
+      must_include_any: ["болжол", "алдын ала", "так эмес", "ориентир", "расмий бекитилген эмес"]
+      must_include_any_2: ["сатууга азырынча ачык эмес", "азыр сатып алууга мүмкүн эмес", "ээси менен тактап", "жеткиликтүүлүгүн тактоо", "каттоо азырынча тактала элек", "сатуу азырынча токтотулган", "азырынча сатып алууга жеткиликтүү эмес", "сатып алууга мүмкүн экенин тастыктай албайм"]
+      must_not_regex: ["төлөм шилтемеси менен төлөңүз", "азыр эле төлөй аласыз", "курска катталдыңыз"]
+      max_questions: 2

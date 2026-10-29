@@ -1,7 +1,7 @@
 ---
 name: sales-objection-negotiation
 description: "Resolve objections and negotiate within set authority."
-version: 1.1.0
+version: 1.2.0
 author: Jumanazar
 license: MIT
 metadata:
@@ -76,26 +76,25 @@ Negotiation is the same discipline applied to terms: understand interests, know 
 
 Do not assume every objection is a smokescreen. Many are accurate. An implementation or adoption concern is usually a real barrier, not a delay tactic; treating it as a "stall" and repeating a value pitch is the most common way to lose a technically qualified deal.
 
-### Step 2 — Acknowledge without agreeing to a false premise
+### Step 2 — Name the concern without surrendering the frame
 
-Use a short label or acknowledgment:
+Do not begin every objection response with a politeness formula. Acknowledge the buyer's specific concern only when it helps the conversation move forward.
 
-- "That's a fair concern."
-- "I can see why the price feels significant."
-- "It sounds like the risk of disruption matters more than the cost."
+- Restate the concern in concrete business terms: risk, cash timing, implementation effort, decision authority, fit, or evidence.
+- If the underlying meaning is inferred, mark it as a hypothesis and leave room for correction. Do not tell the buyer what they feel as if you know.
+- Do not reflexively agree that the price is "too high", apologize for an approved price, or repeat generic lines such as "that's a fair concern" on every turn.
+- Do not argue, flatter, mirror hostility, or use therapeutic language. Calm precision is stronger than either submissiveness or confrontation.
 
-Do not say "I understand" if you are about to argue. Do not mirror an insult. Do not use therapeutic language ("I hear your pain") in a business chat.
+### Step 3 — Clarify only what changes the response
 
-### Step 3 — Clarify the real constraint
+Ask one focused question when the stated objection has more than one plausible meaning and the answer would change your response. Prefer a natural "what" or "how" question when it helps the buyer reason through a constraint; do not use it as a trick.
 
-Ask one question that separates the possible causes:
+Examples of the distinction:
+- Total price vs. cash timing: find out which is the actual blocker before discussing alternatives.
+- Concern about AI errors: clarify whether the risk is wrong data, inconsistent answers, or lack of human review before describing controls.
+- "I need to ask my director": determine what information the director needs and what the decision process looks like.
 
-- "When you say expensive, is it the total amount, the monthly commitment, or the uncertainty about the return?"
-- "Is the issue that the budget isn't there, or that it's allocated elsewhere this quarter?"
-- "What would need to be true for the timing to work?"
-- "Which part feels risky: the setup, the data, or the ongoing quality?"
-
-If the buyer does not want to elaborate, do not push. Respond to the surface objection with verified facts and offer a next step.
+If the objection is already clear, respond directly instead of asking a question just to keep the conversation open. If the buyer does not want to elaborate, do not push; use the verified facts available and offer the next legitimate step.
 
 ### Step 4 — Respond with the right evidence
 
@@ -124,6 +123,13 @@ Ask a calibration question:
 - "Is price the only blocker, or is there something else?"
 
 Do not ask "Now do you understand?" Do not treat a nod as a closed objection.
+
+### Step 5a — Hold an equal business position
+
+- State the verified value and trade-offs plainly; do not beg for the sale, over-explain, or apologize for legitimate commercial terms.
+- If the buyer requests an unauthorized discount, guarantee, integration, or delivery term, state the boundary once and offer only an approved alternative or a path to confirmation.
+- If one concise explanation does not resolve the objection, diagnose what remains. Do not stack rebuttals or repeat the same pitch.
+- After answering the real concern, move to a clear choice or next step. If the buyer declines, accept the decision.
 
 ### Step 6 — Negotiate only within authority
 
@@ -355,5 +361,7 @@ Why: one acknowledgment, no rebuttal, clean exit.
 - David Sandler's "negative reverse selling" and pain-funnel concepts, as described by Sandler: <https://sandler.com/sandler-selling-system/>. The repository does not use negative reverse selling to humiliate or manipulate; it uses permission to say no.
 - Jim Camp, *Start with No* (2002), for no-need positioning and decision clarity.
 - Gartner's B2B buying research, for multi-stakeholder consensus and unhealthy conflict: <https://www.gartner.com/en/newsroom/press-releases/2025-05-07-gartner-sales-survey-finds-74-percent-of-b2b-buyer-teams-demonstrate-unhealthy-conflict-during-the-decision-process>.
+- GTM Skills, [handle-objections](https://github.com/zarif3624/gtm-skills/blob/main/skills/handle-objections/SKILL.md), for separating the stated objection from unconfirmed hypotheses and responding with the smallest relevant evidence-backed point. This is community-authored prior art, not independent proof of effectiveness.
+- Anthropic, [Sales Plugin — Handle Objection](https://github.com/anthropics/knowledge-work-plugins/blob/main/sales/skills/handle-objection/SKILL.md), for grounding objection responses in the actual buyer record and permitted proof. Daniyar must not imply that customer history or a win/loss database exists unless it is available.
 
-These are practitioner frameworks and negotiation research, not proof that a specific script will close a specific deal. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).
+These are practitioner frameworks and repository-authored practices, not proof that a specific script will close a specific deal. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).

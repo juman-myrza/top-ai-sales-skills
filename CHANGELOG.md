@@ -138,7 +138,7 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ### Fixed
 
-- **Two sales behaviors found by live-model evaluation** (`tests/live/`, 24 scenarios x 3 trials per arm on `deepseek/deepseek-v4.1-flash`, no tools connected; baseline at `f9eb812`, candidate at `e160da2`):
+- **Two sales behaviors found by live-model evaluation** (`tests/live/`, 24 scenarios x 3 trials per arm on `deepseek/deepseek-v4.1-flash`, no tools connected; baseline at `f9eb812`, candidate at `0692b12`):
   - `sales-discovery`: agents must not lead with price, plans, or fees before diagnosis during discovery (new Step 8a with counterexample). Baseline volunteered `35 000 KGS` / `10 000 KGS` before diagnosis in 5 of 6 relevant trials; no candidate trial does.
   - `sales-language-adaptation`: a Kyrgyz greeting (`салам`, `рахмат`) inside an otherwise Russian message is not a language switch; the reply stays in the buyer's dominant language. The root cause was an internal contradiction in the skill's Example 3, which showed a Kyrgyz-dominant reply to a Russian-dominant buyer; Example 3 was corrected and a new Example 3a and a stronger branch rule were added. Baseline replied in Kyrgyz in 3 of 3 trials; all candidate trials reply in Russian while keeping the greeting.
 - `sales-closing-execution`: Step 1a (state verified price, currency, and terms before proposing a next step) is retained as correct guidance. The scenario that motivated it (L-K06) was **mis-specified** — it did not say which of the two offers the buyer wanted — and has been corrected to a two-turn scenario; with the correction, both arms state the price, so it is not counted as a fixed deficiency.

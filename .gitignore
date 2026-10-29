@@ -26,6 +26,9 @@ tests/responses/
 tests/output/
 *.jsonl
 !tests/fixtures/*.jsonl
+# Live-evaluation responses are synthetic (no real customer data) and are
+# committed as evidence; keep them despite the broad *.jsonl ignore above.
+!tests/live/results/**/*.jsonl
 
 # Hermes and editor state
 .hermes/

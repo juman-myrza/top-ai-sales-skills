@@ -8,18 +8,22 @@
 
 | File | Purpose |
 |---|---|
-| `scenarios.yaml` | 24 scenario inputs: 8 Russian, 8 Kyrgyz, 8 mixed. Each has one buyer turn and deterministic checks. |
+| `scenarios.yaml` | 24 scenario inputs: 9 Russian, 8 Kyrgyz, 7 Russian-dominant with code-switching (labelled `mixed`). Each has one or two buyer turns, a dominant reply-language expectation, and deterministic checks. |
 | `run_live_eval.py` | Runs all 24 scenarios against OpenRouter (`deepseek/deepseek-v4.1-flash`, pinned in `meta` of each run) and writes raw responses + run metadata. |
-| `score_live_eval.py` | Applies deterministic checks (required/forbidden phrases, regexes, question limits) to a recorded response file. |
+| `prompt_build.py` | Deterministic prompt assembly, shared by the runner and the verifier. |
+| `score_live_eval.py` | Applies deterministic checks (dominant reply language, required/forbidden phrases, regexes, question limits) to a recorded response file. |
+| `verify_run.py` | Rebuilds a run's prompt from its recorded commit and checks the SHA-256. |
 | `results/` | One subdirectory per arm (`baseline`, `candidate`) with raw JSONL responses, transcripts, run metadata, and scores. |
 
 ## The 24 scenarios
 
-| Locale | IDs | Focus |
-|---|---|---|
-| Russian | L-R01..L-R09 | discovery, exact price, discount refusal, case studies, scope limit, ready buyer, refusal, no-call terms |
-| Kyrgyz | L-K01..L-K08 | same shape as R-scenarios, in Kyrgyz |
-| Mixed | L-M01..L-M07 | Russian–Kyrgyz code-switching, price summary, budget below floor, local proof, scope limit, meeting link, refusal |
+| Locale | Count | IDs | Focus |
+|---|---|---|---|
+| Russian | 9 | L-R01..L-R09 | discovery, exact price, discount refusal, case studies, scope limit, ready buyer, refusal, no-call terms |
+| Kyrgyz | 8 | L-K01..L-K08 | same shape as R-scenarios, in Kyrgyz |
+| Russian-dominant with code-switching | 7 | L-M01..L-M07 | Kyrgyz greeting in a Russian message, price summary, budget below floor, local proof, scope limit, meeting link, refusal |
+
+`L-K06` is two turns: the buyer first selects the implementation offer, then asks what to do next, so the price expectation is unambiguous. Every scenario asserts `expect_reply_language`, a dominant-language expectation (`ru` fails only on a dominantly Kyrgyz reply, `ky` fails only on a dominantly Russian reply, `mixed` is never failed on language).
 
 Every scenario names the passport version it refers to (`ai-agent-implementation` 1.0.0 or `ai-agent-training` 1.0.0 from `tenants/daniyar/passports/offers/`). The product passport is the only source of prices and terms; the model is given the passports verbatim in the system prompt.
 
@@ -29,8 +33,8 @@ Every scenario names the passport version it refers to (`ai-agent-implementation
 - **Single turn per scenario.** One buyer message, one agent response. Multi-turn behavior is not measured here.
 - **Temperature 0.2, `reasoning_effort: none`, seed varied per trial.** Model output is stochastic; three trials per arm are run so a single lucky/unlucky run is not over-interpreted. A single trial is an anecdote, not proof.
 - **Model:** `deepseek/deepseek-v4.1-flash` via OpenRouter (credential from `~/.hermes/.env`, `OPENROUTER_API_KEY`). The same model and the same prompt hash are used within an arm.
-- **Prompt:** core contract + conflict resolution + conversation state + nine `SKILL.md` files + their references + both approved Daniyar passports. The prompt SHA-256 is recorded in every run metadata file; different arms necessarily have different prompt hashes because the skills changed.
-- **Checks are shallow.** Required/forbidden phrases catch wrong prices, invented discounts/guarantees, missing next steps, and language/format violations. They do not measure tone, empathy, or strategic quality. See `SCORING.md` and `tests/RUBRIC.md` for the human/LLM rubric layer, which is not automated here.
+- **Prompt:** core contract + conflict resolution + conversation state + nine `SKILL.md` files + their references + both approved Daniyar passports. The prompt SHA-256 and the git commit are recorded in every run metadata file; different arms necessarily have different prompt hashes because the skills changed. `verify_run.py` rebuilds each prompt from its recorded commit and checks the hash, so a run cannot be silently attributed to the wrong code.
+- **Checks are shallow.** Dominant-language, required/forbidden phrases catch a full-language switch, wrong prices, invented discounts/guarantees, and missing next steps. They do not measure tone, empathy, or strategic quality. The language classifier is a documented heuristic; Kyrgyz and mixed verdicts still require a native reviewer. See `SCORING.md` and `tests/RUBRIC.md` for the human/LLM rubric layer, which is not automated here.
 
 ## Running
 
@@ -55,7 +59,7 @@ python3 tests/live/score_live_eval.py \
 
 ## Cost notice
 
-Each run sends the full core + skills + passports (~1.9–2.0M prompt tokens) per scenario. A full arm of 3 trials × 24 scenarios costs on the order of a few tens of dollars on OpenRouter deepseek-v4.1-flash at current pricing. Runs were executed once per arm/trial and are not repeated for this report.
+Each run sends the full core + skills + passports (~2.0–2.1M prompt tokens) per arm. A full arm of 3 trials × 24 scenarios costs on the order of a few dollars on OpenRouter deepseek-v4.1-flash at current pricing (the baseline arm averaged about $0.10 per trial in this run). Each arm/trial was executed once and is not repeated.
 
 ## What is deliberately absent
 

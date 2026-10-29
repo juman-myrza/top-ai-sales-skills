@@ -84,6 +84,17 @@ def contains(text: str, needle: str) -> bool:
     return needle in text
 
 
+NEG_SUFFIX = re.compile(r"(байт|бейт|байм|бейм|байбыз|бейбиз|байсыз|бейсиз)$")
+
+
+def has_negation(window: str) -> bool:
+    """True if the window contains a negation, including Kyrgyz negative verb
+    suffixes such as 'кылынбайт', 'бербейбиз', 'айтпайм'."""
+    if any(token in window for token in NEGATION_TOKENS):
+        return True
+    return any(NEG_SUFFIX.search(word) for word in re.findall(r"[а-яёңөү]+", window))
+
+
 def sentence_scope(text: str, index: int, end: int) -> str:
     """The sentence containing text[index:end]: from the sentence break before
     the match to the sentence break after it (sentence-ending punctuation or
@@ -105,7 +116,7 @@ def all_occurrences_negated(text: str, needle: str) -> bool:
         found = True
         end = index + len(needle)
         window = sentence_scope(text, index, end)
-        if not any(token in window for token in NEGATION_TOKENS):
+        if not has_negation(window):
             return False
         start = end
 

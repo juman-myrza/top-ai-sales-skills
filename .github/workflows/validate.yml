@@ -49,6 +49,10 @@ jobs:
             --dry-run
           bash -n tests/live/run_focused_ab.sh
 
+      - name: Test adaptive roleplay evaluation harness
+        run: |
+          python tests/live/test_roleplay_eval.py
+          python tests/live/run_roleplay_eval.py --dry-run
       - name: Verify the installed artifact is self-contained
         run: python scripts/test_installed_artifact.py
 

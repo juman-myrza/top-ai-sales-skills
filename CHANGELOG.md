@@ -138,6 +138,11 @@ Remediation release based on the accepted deep audit (`research/audits/2026-10-2
 
 ## Unreleased
 
+### Added
+
+- Adaptive roleplay evaluation for Daniyar in tests/live/roleplay-cases.yaml and run_roleplay_eval.py: five synthetic multi-turn buyer situations covering trust/risk, budget, scope control in Kyrgyz, internal stakeholder alignment, and status-quo resistance. The harness records dialogue, raw calls, model/token metadata, and prompt/case/rubric/passport hashes, then produces a quote-grounded coaching scorecard. It is evaluation-only, does not use production tools or touch the active Hermes profile, and makes no claim that the same-model coach is an independent evaluator.
+
+
 ### Fixed
 
 - **Two sales behaviors found by live-model evaluation** (`tests/live/`, 24 scenarios x 3 trials per arm on `deepseek/deepseek-v4.1-flash`, no tools connected; baseline at `f9eb812`, candidate at `0692b12`):

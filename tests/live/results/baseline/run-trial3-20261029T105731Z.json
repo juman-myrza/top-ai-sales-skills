@@ -1,0 +1,23 @@
+{
+  "arm": "baseline",
+  "trial": 3,
+  "model": "deepseek/deepseek-v4.1-flash",
+  "temperature": 0.2,
+  "max_tokens": 1200,
+  "reasoning_effort": "none",
+  "prompt_sha256": "b7871a7bc550b2ac8e9cace71bd4d4becc3b831fd944f2fcdc009f6f88bed46b",
+  "prompt_chars": 338519,
+  "repo_commit": "f9eb812bf7715be9433a0dd9c797857dd2e34c7a",
+  "started_at": "2026-10-29T10:57:31.799357+00:00",
+  "scenario_count": 24,
+  "scenario_file": "tests/live/scenarios.yaml",
+  "tools_connected": [],
+  "note": "No tools were connected. The prompt states this explicitly.",
+  "finished_at": "2026-10-29T10:59:03.118887+00:00",
+  "usage": {
+    "prompt_tokens": 2033332,
+    "completion_tokens": 4427,
+    "total_tokens": 2037759
+  },
+  "estimated_cost_usd": 0.093713
+}

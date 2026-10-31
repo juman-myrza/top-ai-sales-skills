@@ -43,15 +43,15 @@ Product-specific fit criteria come from the passport. This skill contains the un
 
 ## Required Inputs
 
-| Input | Source | Why |
-|---|---|---|
-| Buyer type and segments | passport `offer.buyer_types`, `sales_guidance.segments` | Tells you whether this is a B2B or B2C motion, and which segment fits |
-| Fit criteria and disqualifiers | passport `qualification.fit_criteria`, `qualification.disqualifiers` | Defines fit without inventing criteria |
-| Offer and fulfillment model | passport `offer`, `fulfillment` | Determines whether a direct sale or booking is possible |
-| Authority and discount limits | passport `sales_policy` | Prevents promising approvals the agent lacks |
-| Service area / eligibility | passport `qualification.service_area` | Prevents wasted conversations |
-| Conversation state | state store | Avoids re-asking |
-| Buyer's messages | channel | Evidence for intent and fit |
+| Input                          | Source                                                               | Why                                                                   |
+| ------------------------------ | -------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Buyer type and segments        | passport `offer.buyer_types`, `sales_guidance.segments`              | Tells you whether this is a B2B or B2C motion, and which segment fits |
+| Fit criteria and disqualifiers | passport `qualification.fit_criteria`, `qualification.disqualifiers` | Defines fit without inventing criteria                                |
+| Offer and fulfillment model    | passport `offer`, `fulfillment`                                      | Determines whether a direct sale or booking is possible               |
+| Authority and discount limits  | passport `sales_policy`                                              | Prevents promising approvals the agent lacks                          |
+| Service area / eligibility     | passport `qualification.service_area`                                | Prevents wasted conversations                                         |
+| Conversation state             | state store                                                          | Avoids re-asking                                                      |
+| Buyer's messages               | channel                                                              | Evidence for intent and fit                                           |
 
 If the passport has no ICP or disqualifiers, do not invent them. Ask the business owner to supply them, or use only the minimum logic: does the buyer have a real problem the offer can solve, and can they decide?
 
@@ -106,13 +106,13 @@ If the passport has a minimum deal size, say so plainly and let the buyer decide
 
 ### Step 5 — Decide the qualification outcome
 
-| Outcome | Criteria | Next action |
-|---|---|---|
-| **Qualified** | Fit criteria met; real need; can decide or has access to the decider; timing plausible; consent to proceed | Move to discovery, value, or close depending on readiness |
-| **Nurture** | Potential fit, but timing, budget, or need is not current; buyer agrees to later contact | Set a specific, consented follow-up; do not keep pitching now |
-| **Not a fit** | Clear passport disqualifier or no problem the offer solves | Say so respectfully; offer an alternative only if verified; stop |
-| **Insufficient information** | Cannot determine fit without more data, and the buyer is unwilling or unable to provide it | Offer a human, a self-serve resource, or a later check; do not pretend |
-| **Handoff** | Complex eligibility, regulated decision, or authority beyond the agent | Escalate with what is known |
+| Outcome                      | Criteria                                                                                                   | Next action                                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Qualified**                | Fit criteria met; real need; can decide or has access to the decider; timing plausible; consent to proceed | Move to discovery, value, or close depending on readiness                                                                                  |
+| **Nurture**                  | Potential fit, but timing, budget, or need is not current; buyer agrees to later contact                   | Before parking, make one attempt to find the real barrier. Then agree a dated, consented follow-up with a reason; do not keep pitching now |
+| **Not a fit**                | Clear passport disqualifier or no problem the offer solves                                                 | Say so respectfully; offer an alternative only if verified; stop                                                                           |
+| **Insufficient information** | Cannot determine fit without more data, and the buyer is unwilling or unable to provide it                 | Offer a human, a self-serve resource, or a later check; do not pretend                                                                     |
+| **Handoff**                  | Complex eligibility, regulated decision, or authority beyond the agent                                     | Escalate with what is known                                                                                                                |
 
 A "hot" buyer who is outside the service area is still not a fit. A quiet buyer who meets every criterion is still qualified. Do not let enthusiasm substitute for fit.
 
@@ -210,14 +210,14 @@ Do not stop just because the buyer gave a short answer. One-word answers can be 
 
 ## Failure Recovery
 
-| Situation | Recovery |
-|---|---|
-| Buyer refuses a question | Explain why it matters, offer a range or a skip, and proceed with an unknown. Do not pressure. |
-| Buyer gives inconsistent answers | Name the discrepancy and ask which is current. |
-| Passport has no ICP | Do not invent one; ask the business owner or limit yourself to need + ability to decide. |
-| Buyer is offended by a question | Apologize briefly, explain the intent, and let them choose whether to continue. |
-| Agent misclassifies a buyer | Correct the classification when new evidence appears; tell the buyer if it changes the next step. |
-| Buyer qualifies but no capacity | Say so; offer a waitlist or human follow-up only if the passport allows it. |
+| Situation                        | Recovery                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Buyer refuses a question         | Explain why it matters, offer a range or a skip, and proceed with an unknown. Do not pressure.    |
+| Buyer gives inconsistent answers | Name the discrepancy and ask which is current.                                                    |
+| Passport has no ICP              | Do not invent one; ask the business owner or limit yourself to need + ability to decide.          |
+| Buyer is offended by a question  | Apologize briefly, explain the intent, and let them choose whether to continue.                   |
+| Agent misclassifies a buyer      | Correct the classification when new evidence appears; tell the buyer if it changes the next step. |
+| Buyer qualifies but no capacity  | Say so; offer a waitlist or human follow-up only if the passport allows it.                       |
 
 ## Examples
 
@@ -294,10 +294,10 @@ Why: does not guess, offers a low-friction path, and respects the buyer's choice
 
 Qualification logic here is a conservative synthesis of:
 
-- Neil Rackham, *SPIN Selling* (1988), especially the distinction between situation, problem, implication, and need-payoff questions, and the finding that closing techniques can hurt large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
+- Neil Rackham, _SPIN Selling_ (1988), especially the distinction between situation, problem, implication, and need-payoff questions, and the finding that closing techniques can hurt large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
 - David Sandler's seven-step system, especially identifying pain, budget, and the decision-making process before presenting a solution: <https://sandler.com/sandler-selling-system/>.
 - MEDDIC-style qualification (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), a practitioner framework originating in 1990s enterprise software sales; used here as a checklist, not a score.
 - Gartner's B2B buying research on multi-stakeholder decisions and consensus: <https://www.gartner.com/en/newsroom/press-releases/2025-05-07-gartner-sales-survey-finds-74-percent-of-b2b-buyer-teams-demonstrate-unhealthy-conflict-during-the-decision-process>.
-- Jim Camp, *Start with No* (2002), for permission to say no and decision clarity.
+- Jim Camp, _Start with No_ (2002), for permission to say no and decision clarity.
 
 These frameworks are practitioner tools, not peer-reviewed laws. The repository uses them as structured questioning aids, not as evidence that a particular script causes a sale. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).

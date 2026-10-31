@@ -48,16 +48,16 @@ Product-specific pains, use cases, and qualifiers come from the passport. This s
 
 ## Required Inputs
 
-| Input | Source | Why |
-|---|---|---|
-| Offer, outcomes, and segments | passport `offer`, `sales_guidance.segments` | Keeps questions relevant and grounds insights |
-| Recommendation rules | passport `discovery.recommendation_rules` | Tells you which fact changes the recommendation |
-| Qualification outcome | state | Avoids discovering with a non-fit |
-| Known facts | state | Prevents repetition |
-| Product constraints | passport `fulfillment`, `pricing` | Avoids recommending something impossible |
-| Objection guidance and alternatives | passport `sales_guidance.objection_guidance`, `sales_guidance.alternatives` | Distinguishes a real barrier from a scripted objection |
-| Buyer's language/register | state | Natural questioning |
-| Consent to continue | conversation | Discovery is a voluntary conversation, not an interrogation |
+| Input                               | Source                                                                      | Why                                                         |
+| ----------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Offer, outcomes, and segments       | passport `offer`, `sales_guidance.segments`                                 | Keeps questions relevant and grounds insights               |
+| Recommendation rules                | passport `discovery.recommendation_rules`                                   | Tells you which fact changes the recommendation             |
+| Qualification outcome               | state                                                                       | Avoids discovering with a non-fit                           |
+| Known facts                         | state                                                                       | Prevents repetition                                         |
+| Product constraints                 | passport `fulfillment`, `pricing`                                           | Avoids recommending something impossible                    |
+| Objection guidance and alternatives | passport `sales_guidance.objection_guidance`, `sales_guidance.alternatives` | Distinguishes a real barrier from a scripted objection      |
+| Buyer's language/register           | state                                                                       | Natural questioning                                         |
+| Consent to continue                 | conversation                                                                | Discovery is a voluntary conversation, not an interrogation |
 
 ## Procedure
 
@@ -118,6 +118,8 @@ Example: "You said about 30 inquiries a week and roughly 1 in 5 waits more than 
 
 Keep the arithmetic defensible. A theoretical ceiling built from gross revenue can dominate the conversation while ignoring margin, fulfillment capacity, implementation effort, and the share of inquiries that could realistically be recovered. Prefer the buyer's own recoverable estimate, name what the number excludes, and if the inputs are too weak, offer a measurement plan instead of a dramatic upper bound. Do not invent a plausible-sounding assumption just to finish a formula.
 
+Cost of inaction is a legitimate lever when it uses the buyer's own numbers: "Per your numbers that is about X per month. What happens if it stays like this for six months?" This is diagnosis, not pain theatre, as long as no number is invented.
+
 ### Step 5 — Define the future state
 
 Ask what "better" would look like in the buyer's terms:
@@ -156,16 +158,16 @@ Ask, without interrogating:
 
 Record the barrier in `diagnosis.barrier` and the readiness in `diagnosis.buying_readiness`. Different barriers need different moves:
 
-| Barrier | Likely next move |
-|---|---|
-| `unclear_value` | Connect a verified capability to the buyer's stated outcome |
-| `no_urgency` | Ask what the cost of waiting is, in the buyer's own terms; do not invent a deadline |
-| `no_trust` | Offer verifiable evidence, a smaller step, or a human reference process |
-| `price` or `budget` | Clarify the comparison basis and the decision constraints before discussing any concession |
-| `authority` | Equip the buyer with accurate material for the decider; do not ask them to sell blind |
-| `status_quo` | Compare the cost of the current process using the buyer's numbers |
-| `risk` or `adoption` | Address the implementation path, who owns it, and what has failed before |
-| `fit` | Stop and disqualify honestly |
+| Barrier              | Likely next move                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| `unclear_value`      | Connect a verified capability to the buyer's stated outcome                                |
+| `no_urgency`         | Ask what the cost of waiting is, in the buyer's own terms; do not invent a deadline        |
+| `no_trust`           | Offer verifiable evidence, a smaller step, or a human reference process                    |
+| `price` or `budget`  | Clarify the comparison basis and the decision constraints before discussing any concession |
+| `authority`          | Equip the buyer with accurate material for the decider; do not ask them to sell blind      |
+| `status_quo`         | Compare the cost of the current process using the buyer's numbers                          |
+| `risk` or `adoption` | Address the implementation path, who owns it, and what has failed before                   |
+| `fit`                | Stop and disqualify honestly                                                               |
 
 ### Step 7 — Summarize and confirm
 
@@ -189,6 +191,8 @@ Signs you have enough:
 - you know the main barrier and any adoption risk;
 - you know the constraint that could block the sale;
 - further questions would not change the recommendation.
+
+**Question budget.** After four buyer answers without a recommendation, stop asking and recommend. Say what you assume and let the buyer correct it. Discovery that runs longer than the buyer's patience loses the deal.
 
 ## Branches
 
@@ -307,14 +311,14 @@ Do not stop just because the buyer gave a short answer. A concise buyer may stil
 
 ## Failure Recovery
 
-| Situation | Recovery |
-|---|---|
-| Buyer says "stop asking questions" | Apologize briefly, answer what you can, offer a direct next step or a human. |
-| Buyer contradicts themselves | Name the discrepancy, ask which is current, update state. |
-| Buyer's problem is outside the offer | Say so; do not force a fit. Offer a verified alternative or end. |
-| The impact is unclear | Say it is unclear; use a range; do not inflate it. |
-| The buyer's numbers are sensitive | Ask only for a range; explain why; allow them to skip. |
-| The conversation loops | Summarize what is known, name the missing fact, ask one direct question or hand off. |
+| Situation                            | Recovery                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------ |
+| Buyer says "stop asking questions"   | Apologize briefly, answer what you can, offer a direct next step or a human.         |
+| Buyer contradicts themselves         | Name the discrepancy, ask which is current, update state.                            |
+| Buyer's problem is outside the offer | Say so; do not force a fit. Offer a verified alternative or end.                     |
+| The impact is unclear                | Say it is unclear; use a range; do not inflate it.                                   |
+| The buyer's numbers are sensitive    | Ask only for a range; explain why; allow them to skip.                               |
+| The conversation loops               | Summarize what is known, name the missing fact, ask one direct question or hand off. |
 
 ## Examples
 
@@ -391,9 +395,9 @@ Why: does not push; asks what the decision will be judged on.
 
 ## Sources
 
-- Neil Rackham, *SPIN Selling* (1988); Huthwaite International describes the four question types and the investigating stage: <https://www.huthwaiteinternational.com/spin-methodology>. The SPIN sequence is a useful structure, not a rigid script; Huthwaite itself describes it as "a logical persuasive framework — rather than a rigid sequence."
-- Keenan, *Gap Selling* (2018), for the current-state → problem → impact → future-state structure: <https://salesgrowth.com/gap-selling-method/>. Gap Selling is a vendor methodology without independent replication in the repository's research.
-- Chris Voss, *Never Split the Difference* (2016), for labels and calibrated questions used to clarify, not to trap.
+- Neil Rackham, _SPIN Selling_ (1988); Huthwaite International describes the four question types and the investigating stage: <https://www.huthwaiteinternational.com/spin-methodology>. The SPIN sequence is a useful structure, not a rigid script; Huthwaite itself describes it as "a logical persuasive framework — rather than a rigid sequence."
+- Keenan, _Gap Selling_ (2018), for the current-state → problem → impact → future-state structure: <https://salesgrowth.com/gap-selling-method/>. Gap Selling is a vendor methodology without independent replication in the repository's research.
+- Chris Voss, _Never Split the Difference_ (2016), for labels and calibrated questions used to clarify, not to trap.
 - David Sandler's pain-funnel concept, as described in the Sandler Selling System: <https://sandler.com/sandler-selling-system/>.
 - Gartner's B2B buying research, for the multi-stakeholder and looping nature of complex decisions: <https://www.gartner.com/en/sales/insights/b2b-buying-journey>.
 

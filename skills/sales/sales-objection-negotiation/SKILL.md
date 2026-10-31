@@ -42,37 +42,37 @@ Negotiation is the same discipline applied to terms: understand interests, know 
 
 ## Required Inputs
 
-| Input | Source | Why |
-|---|---|---|
-| Price, fees, and terms | passport `pricing` | Anchors the response in truth |
-| Discount and concession authority | passport `sales_policy` | Defines what can be offered |
-| Refund/cancellation policy | passport `pricing` / `sales_policy` | Prevents invented risk reversal |
-| Verified proof | passport `proof` | Supports value claims |
-| Objection guidance and alternatives | passport `sales_guidance.objection_guidance`, `sales_guidance.alternatives` | Business-specific responses, not generic rebuttals |
-| Buyer's stated objection and history | state | Avoids repeating a failed response |
-| Decision process and stakeholders | state | Identifies whether the objection is the real blocker |
-| Tradables, non-negotiables, walk-away | passport `sales_policy.negotiation` | Defines what may be traded and when to stop |
-| Current quote / approved terms | state `quote` | Keeps any concession tied to a versioned, approved snapshot |
+| Input                                 | Source                                                                      | Why                                                         |
+| ------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Price, fees, and terms                | passport `pricing`                                                          | Anchors the response in truth                               |
+| Discount and concession authority     | passport `sales_policy`                                                     | Defines what can be offered                                 |
+| Refund/cancellation policy            | passport `pricing` / `sales_policy`                                         | Prevents invented risk reversal                             |
+| Verified proof                        | passport `proof`                                                            | Supports value claims                                       |
+| Objection guidance and alternatives   | passport `sales_guidance.objection_guidance`, `sales_guidance.alternatives` | Business-specific responses, not generic rebuttals          |
+| Buyer's stated objection and history  | state                                                                       | Avoids repeating a failed response                          |
+| Decision process and stakeholders     | state                                                                       | Identifies whether the objection is the real blocker        |
+| Tradables, non-negotiables, walk-away | passport `sales_policy.negotiation`                                         | Defines what may be traded and when to stop                 |
+| Current quote / approved terms        | state `quote`                                                               | Keeps any concession tied to a versioned, approved snapshot |
 
 ## Procedure
 
 ### Step 1 — Classify before responding
 
-| Type | Example | First move |
-|---|---|---|
-| **Price/value** | "Too expensive" | Clarify: compared to what? What outcome is expected? |
-| **Budget** | "No budget this quarter" | Explore timing, approval, and a smaller start |
-| **Timing** | "Not now" | Ask what would make it timely; accept if it is a no |
-| **Trust** | "AI will make mistakes" | Acknowledge, explain verified safeguards, offer a test |
-| **Fit** | "This isn't for us" | Check the criterion; accept if true |
-| **Authority** | "I need my boss" | Map the decision process; support the champion |
-| **Status quo** | "We do it manually" | Understand the cost/benefit of change; do not attack |
-| **Competitor** | "X is cheaper" | Clarify criteria; compare verified facts |
-| **Risk** | "What if it fails?" | Explain verified risk controls and exit terms |
+| Type               | Example                          | First move                                                                       |
+| ------------------ | -------------------------------- | -------------------------------------------------------------------------------- |
+| **Price/value**    | "Too expensive"                  | Clarify: compared to what? What outcome is expected?                             |
+| **Budget**         | "No budget this quarter"         | Explore timing, approval, and a smaller start                                    |
+| **Timing**         | "Not now"                        | Ask what would make it timely; accept if it is a no                              |
+| **Trust**          | "AI will make mistakes"          | Acknowledge, explain verified safeguards, offer a test                           |
+| **Fit**            | "This isn't for us"              | Check the criterion; accept if true                                              |
+| **Authority**      | "I need my boss"                 | Map the decision process; support the champion                                   |
+| **Status quo**     | "We do it manually"              | Understand the cost/benefit of change; do not attack                             |
+| **Competitor**     | "X is cheaper"                   | Clarify criteria; compare verified facts                                         |
+| **Risk**           | "What if it fails?"              | Explain verified risk controls and exit terms                                    |
 | **Implementation** | "This will take weeks to set up" | Explain the verified delivery path, owner, and effort; do not minimize real work |
-| **Adoption** | "The team won't use it" | Ask who must change, what has failed before, and what support exists |
-| **Need** | "We don't really need this" | Return to discovery; accept if true |
-| **Stall** | "Send info, I'll think" | Ask what would help; set a consented next step |
+| **Adoption**       | "The team won't use it"          | Ask who must change, what has failed before, and what support exists             |
+| **Need**           | "We don't really need this"      | Return to discovery; accept if true                                              |
+| **Stall**          | "Send info, I'll think"          | Ask what would help; set a consented next step                                   |
 
 Do not assume every objection is a smokescreen. Many are accurate. An implementation or adoption concern is usually a real barrier, not a delay tactic; treating it as a "stall" and repeating a value pitch is the most common way to lose a technically qualified deal.
 
@@ -95,7 +95,17 @@ Ask one question that separates the possible causes:
 - "What would need to be true for the timing to work?"
 - "Which part feels risky: the setup, the data, or the ongoing quality?"
 
-If the buyer does not want to elaborate, do not push. Respond to the surface objection with verified facts and offer a next step.
+If the buyer does not want to elaborate, answer the surface objection with verified facts, then make one trial close ("If that works, do we move forward?"). Do not retreat to "no pressure".
+
+### Step 3a — The objection loop (soft objections only)
+
+A soft objection ("expensive", "I'll think", "need to consult", "not now", "found cheaper", "not sure it fits") is a request for more value or clarity, not a refusal (core contract §4.3).
+
+1. **Isolate:** one question that finds the real reason. "Besides [objection], is there anything else holding you back?" / "If [objection] were solved, would you start?"
+2. **Reframe:** connect a verified capability to the buyer's own stated outcome and, if known, the cost of staying as-is (buyer's numbers only).
+3. **Re-ask:** ask for the decision or the next step again, in a different form.
+
+Limit: two honest passes per distinct reason. After the second, offer a smaller step or a dated follow-up and stop pressing. A hard stop ends the loop at once.
 
 ### Step 4 — Respond with the right evidence
 
@@ -172,14 +182,15 @@ A clean no preserves the relationship and the business's pricing integrity.
 3. If budget: ask what range is available; check passport options.
 4. If comparison: ask what they are comparing; compare verified scope.
 5. Never respond with "What's your budget?" as the first move; it feels like a trap.
+6. After clarifying and answering, ask: "If the price works out, are you ready to start?" If yes, move to closing. If no, the objection is not price; find the real one.
 
 ### "I need to think about it"
 
-- Accept the need to think.
-- Ask what would make the decision easier: information, a person, a trial, or time.
-- Offer a specific, consented follow-up.
-- Do not manufacture a deadline.
-- Do not ask the same question repeatedly.
+- "I'll think" is a soft objection. Never accept it as the end.
+- Ask once, plainly: "Sure. What exactly are you weighing: price, fit, or something else?"
+- Answer what they name with verified facts, then re-ask.
+- If they still want time, secure a dated return point: "I'll write on Thursday at 11:00, does that work?" (only with follow-up consent).
+- No fake deadlines.
 
 ### "Send me a proposal / brochure"
 
@@ -267,15 +278,15 @@ Stop the objection/negotiation loop when:
 
 ## Failure Recovery
 
-| Situation | Recovery |
-|---|---|
-| Agent promised an unauthorized discount | Correct immediately; do not honor it without approval; escalate. |
-| Buyer caught a factual error | Acknowledge, correct, show the verified source, and re-quote. |
-| Objection keeps repeating | Stop rebutting; ask what is really blocking; consider handoff. |
-| Buyer says "you're not listening" | Stop, summarize their position, ask what you missed. |
-| Negotiation reaches a deadlock | Summarize both positions; offer a human or a pause. |
-| Buyer uses a false premise | Correct gently with evidence; do not argue. |
-| Buyer threatens a public complaint | Do not bribe or threaten back; follow the escalation/complaint process. |
+| Situation                               | Recovery                                                                |
+| --------------------------------------- | ----------------------------------------------------------------------- |
+| Agent promised an unauthorized discount | Correct immediately; do not honor it without approval; escalate.        |
+| Buyer caught a factual error            | Acknowledge, correct, show the verified source, and re-quote.           |
+| Objection keeps repeating               | Stop rebutting; ask what is really blocking; consider handoff.          |
+| Buyer says "you're not listening"       | Stop, summarize their position, ask what you missed.                    |
+| Negotiation reaches a deadlock          | Summarize both positions; offer a human or a pause.                     |
+| Buyer uses a false premise              | Correct gently with evidence; do not argue.                             |
+| Buyer threatens a public complaint      | Do not bribe or threaten back; follow the escalation/complaint process. |
 
 ## Examples
 
@@ -295,9 +306,9 @@ Why: clarifies before discounting, uses only passport options, and does not inve
 
 Buyer: "I will think about it."
 
-Agent: "Of course. So I am not guessing: what would help you decide - [verified proof], [verified trial], or a conversation with [verified role]? If now is not the time, I will not insist."
+Agent: "Sure. What exactly are you weighing: the price, whether it fits your process, or something else? Name it and I'll give you a straight answer."
 
-Why: offers concrete help, respects the pause, no fake deadline.
+Why: isolates the real barrier. If the buyer still wants time, agree a dated return point.
 
 ### Example 3 — Competitor cheaper
 
@@ -337,6 +348,8 @@ Why: one acknowledgment, no rebuttal, clean exit.
 - **Untracked concession:** agreeing to a lower price or extra scope without a new approved quote version.
 - **Entitlement trade:** withholding a correction the buyer is owed until they concede something.
 - **Adoption dismissal:** replying to "the team won't use it" with another value pitch instead of an adoption plan.
+- **Polite retreat:** "no pressure, write when ready" as the first response to a soft objection.
+- **Single-pass objection handling:** one rebuttal, then silence.
 
 ## Dependencies
 
@@ -349,11 +362,11 @@ Why: one acknowledgment, no rebuttal, clean exit.
 
 ## Sources
 
-- Chris Voss, *Never Split the Difference* (2016), for labeling, mirroring, calibrated questions, and tactical empathy. The Black Swan Group describes the method as "precision listening with Tactical Empathy": <https://www.blackswanltd.com/>. The repository uses the listening and clarification tools, not hostage-negotiation tactics that would be inappropriate in a sales chat.
-- Roger Fisher, William Ury, and Bruce Patton, *Getting to Yes* (1981; later editions), for interests vs. positions, BATNA, and principled negotiation. Harvard's Program on Negotiation publishes related free resources: <https://www.pon.harvard.edu/>.
-- Robert Cialdini, *Influence*, for reciprocity, consistency, social proof, authority, liking, scarcity, and unity — with the ethical limits Cialdini emphasizes: <https://www.influenceatwork.com/7-principles-of-persuasion/>.
+- Chris Voss, _Never Split the Difference_ (2016), for labeling, mirroring, calibrated questions, and tactical empathy. The Black Swan Group describes the method as "precision listening with Tactical Empathy": <https://www.blackswanltd.com/>. The repository uses the listening and clarification tools, not hostage-negotiation tactics that would be inappropriate in a sales chat.
+- Roger Fisher, William Ury, and Bruce Patton, _Getting to Yes_ (1981; later editions), for interests vs. positions, BATNA, and principled negotiation. Harvard's Program on Negotiation publishes related free resources: <https://www.pon.harvard.edu/>.
+- Robert Cialdini, _Influence_, for reciprocity, consistency, social proof, authority, liking, scarcity, and unity — with the ethical limits Cialdini emphasizes: <https://www.influenceatwork.com/7-principles-of-persuasion/>.
 - David Sandler's "negative reverse selling" and pain-funnel concepts, as described by Sandler: <https://sandler.com/sandler-selling-system/>. The repository does not use negative reverse selling to humiliate or manipulate; it uses permission to say no.
-- Jim Camp, *Start with No* (2002), for no-need positioning and decision clarity.
+- Jim Camp, _Start with No_ (2002), for no-need positioning and decision clarity.
 - Gartner's B2B buying research, for multi-stakeholder consensus and unhealthy conflict: <https://www.gartner.com/en/newsroom/press-releases/2025-05-07-gartner-sales-survey-finds-74-percent-of-b2b-buyer-teams-demonstrate-unhealthy-conflict-during-the-decision-process>.
 
 These are practitioner frameworks and negotiation research, not proof that a specific script will close a specific deal. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).

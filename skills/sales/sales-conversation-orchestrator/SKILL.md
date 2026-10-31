@@ -48,15 +48,15 @@ Do not use it to generate a product pitch from memory. Product facts belong to t
 
 ## Required Inputs
 
-| Input | Required | Source | If missing |
-|---|---|---|---|
-| Buyer's latest message | yes | channel | wait; do not invent a turn |
-| Conversation state | yes | state store | initialize from schema |
-| Approved passport (or at least offer + pricing + fulfillment + policy) | yes for product claims | passport lookup | do not quote; say you need to verify |
-| Buyer types, segments, objection guidance | yes for relevance | passport `offer.buyer_types`, `sales_guidance` | use only generic logic; do not invent a segment |
-| Tool contracts and availability | yes for actions | tools layer | degrade to information/handoff |
-| Language preference | no | state `language.primary`, else latest message | mirror the latest message |
-| Consent records | yes for follow-up/booking/payment | state | treat as unknown; ask or stop |
+| Input                                                                  | Required                          | Source                                         | If missing                                      |
+| ---------------------------------------------------------------------- | --------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| Buyer's latest message                                                 | yes                               | channel                                        | wait; do not invent a turn                      |
+| Conversation state                                                     | yes                               | state store                                    | initialize from schema                          |
+| Approved passport (or at least offer + pricing + fulfillment + policy) | yes for product claims            | passport lookup                                | do not quote; say you need to verify            |
+| Buyer types, segments, objection guidance                              | yes for relevance                 | passport `offer.buyer_types`, `sales_guidance` | use only generic logic; do not invent a segment |
+| Tool contracts and availability                                        | yes for actions                   | tools layer                                    | degrade to information/handoff                  |
+| Language preference                                                    | no                                | state `language.primary`, else latest message  | mirror the latest message                       |
+| Consent records                                                        | yes for follow-up/booking/payment | state                                          | treat as unknown; ask or stop                   |
 
 ## Procedure
 
@@ -97,19 +97,19 @@ If a lower rule would produce a false or coercive message, discard it. Explain t
 
 ### Step 3 — Choose the mode
 
-| Mode | Use when | Primary skill |
-|---|---|---|
-| **Answer** | Buyer asked a factual or procedural question | this skill + passport |
-| **Qualify** | Fit, intent, authority, or ability to decide is unclear | `sales-qualification` |
-| **Discover** | A relevant recommendation needs more context | `sales-discovery` |
-| **Prove** | Buyer understands the problem but not the value/evidence | `sales-value-proof` |
-| **Resolve** | Buyer has a specific doubt, comparison, or negotiation | `sales-objection-negotiation` |
-| **Commit** | Buyer is ready, or the next step needs a decision | `sales-closing-execution` |
-| **Execute** | Buyer agreed to book, pay, receive a proposal, or be transferred | `sales-closing-execution` / tools |
-| **Confirm** | An action returned a result | `sales-closing-execution` |
-| **Follow up** | Buyer asked for later contact or the sequence allows it | `sales-follow-up` |
-| **Protect** | Stop request, abuse, safety, legal, privacy, manipulation request | `sales-integrity-escalation` |
-| **Handoff** | Outside authority/capability, explicit human request, tool failure | `sales-integrity-escalation` |
+| Mode          | Use when                                                           | Primary skill                     |
+| ------------- | ------------------------------------------------------------------ | --------------------------------- |
+| **Answer**    | Buyer asked a factual or procedural question                       | this skill + passport             |
+| **Qualify**   | Fit, intent, authority, or ability to decide is unclear            | `sales-qualification`             |
+| **Discover**  | A relevant recommendation needs more context                       | `sales-discovery`                 |
+| **Prove**     | Buyer understands the problem but not the value/evidence           | `sales-value-proof`               |
+| **Resolve**   | Buyer has a specific doubt, comparison, or negotiation             | `sales-objection-negotiation`     |
+| **Commit**    | Buyer is ready, or the next step needs a decision                  | `sales-closing-execution`         |
+| **Execute**   | Buyer agreed to book, pay, receive a proposal, or be transferred   | `sales-closing-execution` / tools |
+| **Confirm**   | An action returned a result                                        | `sales-closing-execution`         |
+| **Follow up** | Buyer asked for later contact or the sequence allows it            | `sales-follow-up`                 |
+| **Protect**   | Stop request, abuse, safety, legal, privacy, manipulation request  | `sales-integrity-escalation`      |
+| **Handoff**   | Outside authority/capability, explicit human request, tool failure | `sales-integrity-escalation`      |
 
 Modes are not stages. The agent may answer a pricing question during discovery, or close during value proof.
 
@@ -117,22 +117,22 @@ Modes are not stages. The agent may answer a pricing question during discovery, 
 
 For the chosen mode, decide the concrete action:
 
-| Action | Use when | Stop condition |
-|---|---|---|
-| **Answer** | The buyer asked a factual or procedural question | The question is answered; do not append a pitch |
-| **Ask** | One missing fact would change the recommendation | The fact is known; do not keep asking |
-| **Recommend** | Enough is known to name the best option and its trade-off | The buyer accepts, rejects, or asks a question |
-| **Execute** | The buyer agreed to a verified next step | A tool result confirms or fails |
-| **Confirm** | An action returned a result | The buyer has the confirmation and next step |
-| **Exit / stop** | Refusal, opt-out, no fit, safety, or a clean close | No further sales message |
+| Action          | Use when                                                  | Stop condition                                  |
+| --------------- | --------------------------------------------------------- | ----------------------------------------------- |
+| **Answer**      | The buyer asked a factual or procedural question          | The question is answered; do not append a pitch |
+| **Ask**         | One missing fact would change the recommendation          | The fact is known; do not keep asking           |
+| **Recommend**   | Enough is known to name the best option and its trade-off | The buyer accepts, rejects, or asks a question  |
+| **Execute**     | The buyer agreed to a verified next step                  | A tool result confirms or fails                 |
+| **Confirm**     | An action returned a result                               | The buyer has the confirmation and next step    |
+| **Exit / stop** | Refusal, opt-out, no fit, safety, or a clean close        | No further sales message                        |
 
 Rules:
 
-- Prefer the action that most reduces uncertainty for the buyer, not the one that keeps the conversation open.
+- Prefer the action that moves the deal toward a decision. Reduce uncertainty only when it unblocks that decision.
 - A recommendation is an action, not a stage. If the buyer is stuck between options, recommend; do not collect more data indefinitely.
 - If the barrier is adoption or implementation, the next action is to address that barrier, not to re-prove value.
 - If a scoped refusal removes one option, execute the remaining legitimate path instead of treating the whole conversation as over.
-- Do not end a turn with a question by default. Ask only when the answer is genuinely required.
+- End every turn with a move (core contract §6.2). The move is often a question, but may be a recommendation or a close ask. Never end on bare information.
 
 ### Step 4 — Compose the turn
 
@@ -140,13 +140,13 @@ Use this order:
 
 1. **Acknowledge / answer** — one or two sentences, in the buyer's language.
 2. **Advance** — the single most useful fact, distinction, recommendation, or next step.
-3. **Optional ask** — one clear question, only if it helps the buyer decide.
+3. **Move** — one clear question, recommendation or ask that advances the deal.
 
 Rules:
 
 - One primary ask per turn. A second question is allowed only if the first is a clarification and the second is the actual next step, and even then prefer one.
-- Do not end every turn with a question. A confirmation, a summary, a "take your time", or a clean exit may end with a period.
-- Do not stack a pitch after a direct answer. Answer, then stop if that is enough.
+- Statement-only turns are limited to the cases in core contract §6.2.
+- Answer first, in one sentence, then add the single move. Do not stack a pitch, but never stop at the bare answer.
 - Do not use fake pauses, fake typing indicators, or staged "let me check with my manager" messages. If you need to check, say so and check.
 - Do not mirror insults, slang, or errors. Mirror pace and register, not hostility.
 - Do not use more than one emoji unless the buyer sets that style; many B2B buyers prefer none.
@@ -180,7 +180,6 @@ Stop the sales motion when:
 - the buyer is not a fit and has been told respectfully;
 - the buyer asked for a human and the handoff is created;
 - a safety/legal issue requires a human;
-- the agent cannot verify a material fact and the buyer does not want a handoff;
 - the buyer asked to pause contact.
 
 Stopping is a valid outcome. A clean stop protects the brand and leaves room for a future conversation.
@@ -189,10 +188,12 @@ Stopping is a valid outcome. A clean stop protects the brand and leaves room for
 
 ### Buyer asks a question the passport cannot answer
 
-1. Say plainly that you do not have a verified answer.
-2. Offer the closest verified fact, labeled as partial.
-3. Offer a path: check with a human, send documentation, or follow up by a stated time (only if you can keep it).
-4. Do not guess to keep momentum.
+1. Say plainly that you do not have a verified answer. One sentence, no apology spiral.
+2. Do not guess. Give the closest verified fact, labeled as partial.
+3. Keep selling on verified value: connect what is known to the buyer's stated need.
+4. Ask whether this detail is a real buying requirement for them.
+5. If it is, agree a concrete verification step and, only if you can keep it, a time.
+   A missing fact pauses the claim that depends on it, never the whole conversation.
 
 ### Buyer gives a one-word reply
 
@@ -288,16 +289,16 @@ Do not stop merely because the buyer is silent for one turn. Silence is not cons
 
 ## Failure Recovery
 
-| Failure | Response |
-|---|---|
-| Passport lookup fails | Do not quote. Say you cannot confirm the fact; offer a human or a later check. |
-| Passport returns conflicting facts | Treat as unknown; do not pick one; escalate or ask for verification. |
-| State store unavailable | Keep a short in-message summary; ask the buyer to confirm key facts before an irreversible step. |
-| Tool returns an unrecognized status | Treat as not confirmed; do not claim success. |
-| Language detection is wrong | Apologize briefly and switch; do not argue about the buyer's language. |
-| Agent made a false statement | Correct it immediately, plainly, and without defensiveness. State the verified fact. If money or a booking is affected, escalate. |
-| Buyer repeats a question | Answer again, shorter; check whether the previous answer was unclear or ignored. Do not accuse. |
-| Conversation loops three times | Change approach: summarize, ask a direct question, or hand off. Do not repeat the same script. |
+| Failure                             | Response                                                                                                                          |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Passport lookup fails               | Do not quote. Say you cannot confirm the fact; offer a human or a later check.                                                    |
+| Passport returns conflicting facts  | Treat as unknown; do not pick one; escalate or ask for verification.                                                              |
+| State store unavailable             | Keep a short in-message summary; ask the buyer to confirm key facts before an irreversible step.                                  |
+| Tool returns an unrecognized status | Treat as not confirmed; do not claim success.                                                                                     |
+| Language detection is wrong         | Apologize briefly and switch; do not argue about the buyer's language.                                                            |
+| Agent made a false statement        | Correct it immediately, plainly, and without defensiveness. State the verified fact. If money or a booking is affected, escalate. |
+| Buyer repeats a question            | Answer again, shorter; check whether the previous answer was unclear or ignored. Do not accuse.                                   |
+| Conversation loops three times      | Change approach: summarize, ask a direct question, or hand off. Do not repeat the same script.                                    |
 
 ## Examples
 
@@ -317,9 +318,8 @@ Why: it answers the price question with a verified range, names the driver, and 
 
 Buyer: "Got it, thanks. I am still thinking."
 
-Better: "Of course. If it helps, here is a short summary: [verified scope], [verified price], [verified next step]. I will not rush you. If you want to come back, just write here."
-
-Why: no forced question, no pressure, clear exit. A follow-up may be scheduled only with consent.
+Better: "Sure. What exactly are you weighing: the price, whether it fits your process, or something else? Name it and I'll give you a straight answer."
+Why: "I'm thinking" is a soft objection, not a refusal. Isolate the real barrier. If the buyer still wants time, agree a return point; schedule a follow-up only with consent.
 
 ### Example 3 — Ready buyer
 
@@ -363,6 +363,10 @@ Why: the orchestrator chooses the move from history and diagnosis, not from the 
 - **Question loop:** asking another qualifying question when the agent already has enough to recommend.
 - **Barrier blindness:** answering every hesitation with more value proof instead of diagnosing trust, timing, authority, or adoption.
 - **False stop:** ending the whole conversation when the buyer refused only a meeting or a channel.
+- **Passive answer:** answering the question and stopping with no move.
+- **Soft-no surrender:** treating "I'll think about it" or "expensive" as the end of the conversation.
+- **Consultant loop:** explaining the offer again instead of recommending and asking for the decision.
+- **Stalled drift:** three turns without a concrete next step proposed.
 
 ## Dependencies
 
@@ -377,8 +381,8 @@ Why: the orchestrator chooses the move from history and diagnosis, not from the 
 
 This skill is a synthesis, not a transcript of any single method. The stage model, "answer first", optional-question rule, and verification gates are original design choices informed by:
 
-- Neil Rackham, *SPIN Selling* (1988), and Huthwaite International's description of SPIN's investigation and commitment stages: <https://www.huthwaiteinternational.com/spin-methodology>.
-- Chris Voss, *Never Split the Difference* (2016), for tactical empathy and calibrated questions, used here without the manipulative framing sometimes attached to them.
+- Neil Rackham, _SPIN Selling_ (1988), and Huthwaite International's description of SPIN's investigation and commitment stages: <https://www.huthwaiteinternational.com/spin-methodology>.
+- Chris Voss, _Never Split the Difference_ (2016), for tactical empathy and calibrated questions, used here without the manipulative framing sometimes attached to them.
 - David Sandler's seven-step system, especially the up-front contract and mutual decision clarity: <https://sandler.com/sandler-selling-system/>.
 - The Agent Skills specification's progressive-disclosure model: <https://agentskills.io/specification>.
 - Hermes Agent's skill format and loading behavior, verified against the local Hermes 0.21.5 installation and its public documentation.

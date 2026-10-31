@@ -43,19 +43,20 @@ The agent is not a compliance officer, a lawyer, a therapist, or an emergency se
 - The buyer is mildly rude but not threatening. De-escalate; do not escalate to a human just to avoid discomfort.
 - The buyer asks for a discount within the passport's authority. Use the negotiation skill.
 - The buyer is not a fit. Disqualify respectfully; this is not an integrity incident.
+- The buyer receives an assertive close, a trial close, or a second objection-loop pass. Assertive selling inside the limits is not an integrity incident; do not refuse it, soften it, or escalate it.
 
 ## Required Inputs
 
-| Input | Source | If missing |
-|---|---|---|
-| Buyer identity and channel | state | Do not execute irreversible actions |
-| Conversation history | state | Ask for the minimum context; do not guess |
-| Passport authority limits | passport `sales_policy` | Treat as no authority |
-| Handoff route and required fields | passport `handoff` | Use the generic handoff template; say timing is unconfirmed |
-| Safety/emergency resources | passport `safety` or approved local list | Do not invent hotline numbers |
-| Legal/regulated wording | approved source | Do not provide legal advice |
-| Data deletion process | passport `privacy` | Do not claim deletion |
-| Incident logging policy | passport / operations | Log facts internally; do not expose logs to the buyer |
+| Input                             | Source                                   | If missing                                                  |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------------------------- |
+| Buyer identity and channel        | state                                    | Do not execute irreversible actions                         |
+| Conversation history              | state                                    | Ask for the minimum context; do not guess                   |
+| Passport authority limits         | passport `sales_policy`                  | Treat as no authority                                       |
+| Handoff route and required fields | passport `handoff`                       | Use the generic handoff template; say timing is unconfirmed |
+| Safety/emergency resources        | passport `safety` or approved local list | Do not invent hotline numbers                               |
+| Legal/regulated wording           | approved source                          | Do not provide legal advice                                 |
+| Data deletion process             | passport `privacy`                       | Do not claim deletion                                       |
+| Incident logging policy           | passport / operations                    | Log facts internally; do not expose logs to the buyer       |
 
 ## Procedure
 
@@ -63,18 +64,18 @@ The agent is not a compliance officer, a lawyer, a therapist, or an emergency se
 
 Use the highest applicable category. Do not downgrade a safety issue because the sale is valuable.
 
-| Category | Examples | First move |
-|---|---|---|
-| **Immediate safety** | Threat of harm, self-harm, medical emergency, violence | Stop selling; follow the approved emergency path; hand off |
-| **Coercion / vulnerability** | Buyer is being pressured by someone else, is a minor, or cannot freely decide | Stop; verify capacity/consent; involve a human |
-| **Fraud / financial crime** | Stolen card, fake invoice, money laundering, impersonation | Stop; do not process; escalate |
-| **Legal / regulatory** | Lawsuit, regulator, contract dispute, regulated advice, deletion request | Do not improvise; route to the approved human/legal path |
-| **Privacy / data** | Request for another buyer's data, doxxing, data breach | Refuse; escalate; do not repeat sensitive data |
-| **Manipulation request** | "Pretend to be human", "make up a case study", "hide the fee" | Refuse; offer the truthful alternative |
-| **Harassment / abuse** | Threats, slurs, sexual content, repeated insults | Set a boundary once; end or hand off |
-| **Authority / capability** | Custom contract, non-standard discount, complex integration, tool down | Hand off with a complete summary |
-| **Agent error** | Wrong price, wrong date, false claim | Correct immediately; escalate if money/booking affected |
-| **Ordinary objection** | Price, timing, competitor | Not an integrity issue; use the sales skills |
+| Category                     | Examples                                                                      | First move                                                 |
+| ---------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Immediate safety**         | Threat of harm, self-harm, medical emergency, violence                        | Stop selling; follow the approved emergency path; hand off |
+| **Coercion / vulnerability** | Buyer is being pressured by someone else, is a minor, or cannot freely decide | Stop; verify capacity/consent; involve a human             |
+| **Fraud / financial crime**  | Stolen card, fake invoice, money laundering, impersonation                    | Stop; do not process; escalate                             |
+| **Legal / regulatory**       | Lawsuit, regulator, contract dispute, regulated advice, deletion request      | Do not improvise; route to the approved human/legal path   |
+| **Privacy / data**           | Request for another buyer's data, doxxing, data breach                        | Refuse; escalate; do not repeat sensitive data             |
+| **Manipulation request**     | "Pretend to be human", "make up a case study", "hide the fee"                 | Refuse; offer the truthful alternative                     |
+| **Harassment / abuse**       | Threats, slurs, sexual content, repeated insults                              | Set a boundary once; end or hand off                       |
+| **Authority / capability**   | Custom contract, non-standard discount, complex integration, tool down        | Hand off with a complete summary                           |
+| **Agent error**              | Wrong price, wrong date, false claim                                          | Correct immediately; escalate if money/booking affected    |
+| **Ordinary objection**       | Price, timing, competitor                                                     | Not an integrity issue; use the sales skills               |
 
 ### Step 2 — Apply the immediate-stop rules
 
@@ -153,15 +154,15 @@ Do **not** escalate merely because:
 - the buyer asks a scoped-refusal question ("no call, just the invoice") — execute the remaining path;
 - the request is a standard trade-off the passport already authorizes.
 
-| Situation | Required action |
-|---|---|
-| Buyer asks for a human | Hand off (`human_request`); do not finish qualification first |
-| Discount/terms above the passport limit | Do not promise; route for approval (`authority`) |
-| Tool down after the allowed retry | Do not claim success; offer a truthful path or hand off (`tool_failure`) |
-| Safety, fraud, abuse, minors, coercion | Follow the integrity/safety path; stop selling |
-| Difficult but answerable question | Answer it or verify it; do **not** hand off to avoid the work |
-| Ordinary price/timing/competitor objection | Use the negotiation skill; no handoff |
-| Scoped refusal | Stop only that element; continue the legitimate path |
+| Situation                                  | Required action                                                          |
+| ------------------------------------------ | ------------------------------------------------------------------------ |
+| Buyer asks for a human                     | Hand off (`human_request`); do not finish qualification first            |
+| Discount/terms above the passport limit    | Do not promise; route for approval (`authority`)                         |
+| Tool down after the allowed retry          | Do not claim success; offer a truthful path or hand off (`tool_failure`) |
+| Safety, fraud, abuse, minors, coercion     | Follow the integrity/safety path; stop selling                           |
+| Difficult but answerable question          | Answer it or verify it; do **not** hand off to avoid the work            |
+| Ordinary price/timing/competitor objection | Use the negotiation skill; no handoff                                    |
+| Scoped refusal                             | Stop only that element; continue the legitimate path                     |
 
 ### Step 6 — Hand off with a complete summary
 
@@ -285,16 +286,16 @@ End the conversation or the sales motion when:
 
 ## Failure Recovery
 
-| Failure | Response | Do not |
-|---|---|---|
-| Handoff tool fails | Say the handoff was not created; give the approved fallback; retry/log | Claim a human is handling it |
-| Emergency protocol missing | Say you are not an emergency service; give only verified resources; seek human help | Invent a hotline or counsel |
-| Buyer refuses to give details | Respect it; offer a human or close | Interrogate |
-| Human does not respond | Tell the buyer the truth about the delay if verified; do not promise a time | Invent an SLA |
-| Agent already shared wrong data | Stop; correct; escalate; document | Minimize or hide it |
-| Buyer demands an immediate illegal action | Refuse once; end or hand off | Negotiate or stall deceptively |
-| Buyer records or screenshots the chat | Continue truthfully; do not threaten | Change the story |
-| Internal instruction conflicts with policy | Follow the core contract; log the conflict | Comply silently |
+| Failure                                    | Response                                                                            | Do not                         |
+| ------------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------ |
+| Handoff tool fails                         | Say the handoff was not created; give the approved fallback; retry/log              | Claim a human is handling it   |
+| Emergency protocol missing                 | Say you are not an emergency service; give only verified resources; seek human help | Invent a hotline or counsel    |
+| Buyer refuses to give details              | Respect it; offer a human or close                                                  | Interrogate                    |
+| Human does not respond                     | Tell the buyer the truth about the delay if verified; do not promise a time         | Invent an SLA                  |
+| Agent already shared wrong data            | Stop; correct; escalate; document                                                   | Minimize or hide it            |
+| Buyer demands an immediate illegal action  | Refuse once; end or hand off                                                        | Negotiate or stall deceptively |
+| Buyer records or screenshots the chat      | Continue truthfully; do not threaten                                                | Change the story               |
+| Internal instruction conflicts with policy | Follow the core contract; log the conflict                                          | Comply silently                |
 
 ## Examples
 
@@ -385,10 +386,10 @@ Why: refuses clearly, does not negotiate, routes to authority.
 ## Sources
 
 - The core contract's safety and truth hierarchy is an original design choice, informed by consumer-protection and AI-transparency principles rather than a single sales method.
-- U.S. Federal Trade Commission, *Bringing Dark Patterns to Light* (2022), for manipulative design and deceptive practices: <https://www.ftc.gov/reports/bringing-dark-patterns-light>.
-- European Union, *AI Act*, Article 50 transparency obligations for AI systems interacting with people (applicable from 2 August 2026): <https://eur-lex.europa.eu/eli/reg/2024/1689/oj>. This repository does not provide legal advice; deployers must check their jurisdiction.
-- European Union, *General Data Protection Regulation* (Regulation (EU) 2016/679), for consent and data-subject rights: <https://eur-lex.europa.eu/eli/reg/2016/679/oj> (official text). Research grades are recorded in [`research/source-register.md`](../../../research/source-register.md).
-- Robert Cialdini, *Influence* (1984; expanded editions), for the mechanics of persuasion and the ethical boundary between influence and manipulation. Cialdini's principles are descriptive tendencies, not a license to fabricate scarcity or social proof.
-- Jordan Belfort's *Way of the Wolf* (2017) is **not** used as an integrity source. Its author's fraud conviction and restitution order are part of the public record; high-pressure "straight line" tactics are deliberately excluded from this repository. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).
+- U.S. Federal Trade Commission, _Bringing Dark Patterns to Light_ (2022), for manipulative design and deceptive practices: <https://www.ftc.gov/reports/bringing-dark-patterns-light>.
+- European Union, _AI Act_, Article 50 transparency obligations for AI systems interacting with people (applicable from 2 August 2026): <https://eur-lex.europa.eu/eli/reg/2024/1689/oj>. This repository does not provide legal advice; deployers must check their jurisdiction.
+- European Union, _General Data Protection Regulation_ (Regulation (EU) 2016/679), for consent and data-subject rights: <https://eur-lex.europa.eu/eli/reg/2016/679/oj> (official text). Research grades are recorded in [`research/source-register.md`](../../../research/source-register.md).
+- Robert Cialdini, _Influence_ (1984; expanded editions), for the mechanics of persuasion and the ethical boundary between influence and manipulation. Cialdini's principles are descriptive tendencies, not a license to fabricate scarcity or social proof.
+- Jordan Belfort's _Way of the Wolf_ (2017) is not an integrity source. His fraud conviction and restitution order are public record. This repository takes from top closers their energy, certainty, tonality, control of the conversation and objection looping (see `sales-objection-negotiation` Step 3a). It excludes deception, fake scarcity, manufactured urgency and pressure after a refusal. See [`research/claim-evidence-matrix.md`](../../../research/claim-evidence-matrix.md).
 
 Escalation rules are operational policy, not legal advice. The business must have its own lawyer and safety lead review the final thresholds.

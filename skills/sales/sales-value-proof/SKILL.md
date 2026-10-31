@@ -45,14 +45,14 @@ All offer facts, proof points, prices, and permissions come from the passport. I
 
 ## Required Inputs
 
-| Input | Source | Why |
-|---|---|---|
-| Verified offer capabilities | passport `offer` | Prevents feature invention |
-| Verified proof points and permissions | passport `proof` | Prevents fake case studies |
-| Pricing and terms | passport `pricing` | Makes ROI honest |
-| Buyer's problem, impact, criteria | state / discovery | Makes value relevant |
-| Approved comparison facts | passport `proof` / `offer` | Prevents competitor fabrication |
-| Audience/stakeholder | state | Tailors the proof |
+| Input                                 | Source                     | Why                             |
+| ------------------------------------- | -------------------------- | ------------------------------- |
+| Verified offer capabilities           | passport `offer`           | Prevents feature invention      |
+| Verified proof points and permissions | passport `proof`           | Prevents fake case studies      |
+| Pricing and terms                     | passport `pricing`         | Makes ROI honest                |
+| Buyer's problem, impact, criteria     | state / discovery          | Makes value relevant            |
+| Approved comparison facts             | passport `proof` / `offer` | Prevents competitor fabrication |
+| Audience/stakeholder                  | state                      | Tailors the proof               |
 
 If the passport marks a proof point `estimated` or `unknown`, do not present it as verified. If it has no proof at all, say what is not yet proven and offer a demo, trial, reference call, or pilot if the passport allows it.
 
@@ -70,14 +70,14 @@ If the buyer corrects you, update before continuing. A proof aimed at the wrong 
 
 There is no single "best" evidence type. Choose the evidence that best matches the claim and the buyer's actual uncertainty. A verified generic fact does not beat the buyer's own number when the question is about the buyer's situation; a documented outcome beats a generic fact when the question is "does this actually work?".
 
-| Evidence | Best for | Rule |
-|---|---|---|
-| Verified passport fact about the offer | "What does it do?" | State directly with scope and conditions |
-| Verified customer outcome with permission | "What results did others get?" | Match the segment and mechanism; name the source only if permitted |
-| Verified third-party data | "What is normal in the market?" | Cite source and date |
-| Buyer-provided numbers in a calculation | "What would this mean for us?" | Show the formula and assumptions; attribute the numbers |
-| Clearly labeled estimate or scenario | "What could happen?" when no measured data exists | Say "estimate" and explain assumptions |
-| General principle or analogy | Orientation only | Do not dress it as a result |
+| Evidence                                  | Best for                                          | Rule                                                               |
+| ----------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------ |
+| Verified passport fact about the offer    | "What does it do?"                                | State directly with scope and conditions                           |
+| Verified customer outcome with permission | "What results did others get?"                    | Match the segment and mechanism; name the source only if permitted |
+| Verified third-party data                 | "What is normal in the market?"                   | Cite source and date                                               |
+| Buyer-provided numbers in a calculation   | "What would this mean for us?"                    | Show the formula and assumptions; attribute the numbers            |
+| Clearly labeled estimate or scenario      | "What could happen?" when no measured data exists | Say "estimate" and explain assumptions                             |
+| General principle or analogy              | Orientation only                                  | Do not dress it as a result                                        |
 
 Rules:
 
@@ -153,7 +153,7 @@ If the buyer genuinely has two equally valid paths, say what each path optimizes
 
 ### Step 7 — Stop when the value is clear or the gap is evidence
 
-If the buyer understands and has no material doubt, move to the next step. If the buyer needs evidence you do not have, say so and offer a path: demo, trial, reference, pilot, or human conversation. Do not repeat the same value pitch with more adjectives.
+If the buyer understands and has no material doubt, trial-close and propose the concrete next step in the same message. Do not wait for the buyer to ask.
 
 ## Branches
 
@@ -227,15 +227,15 @@ Stop proving value when:
 
 ## Failure Recovery
 
-| Situation | Recovery |
-|---|---|
-| Passport proof is missing | Say it is missing; offer a verified alternative or a path to obtain it. |
-| Proof is marked estimated | Label it; do not present it as measured. |
-| Case study permission is unclear | Do not share the name; ask for permission or use only approved anonymized facts. |
-| Calculation inputs are missing | Show the formula with placeholders and ask for the inputs. |
-| Buyer disputes a fact | Check the source; if wrong, correct immediately; if right, show the source and date. |
-| Competitor claim is unverified | Withdraw it; do not repeat. |
-| Buyer feels pressured by ROI | Acknowledge; return to their criteria; offer a smaller next step. |
+| Situation                        | Recovery                                                                             |
+| -------------------------------- | ------------------------------------------------------------------------------------ |
+| Passport proof is missing        | Say it is missing; offer a verified alternative or a path to obtain it.              |
+| Proof is marked estimated        | Label it; do not present it as measured.                                             |
+| Case study permission is unclear | Do not share the name; ask for permission or use only approved anonymized facts.     |
+| Calculation inputs are missing   | Show the formula with placeholders and ask for the inputs.                           |
+| Buyer disputes a fact            | Check the source; if wrong, correct immediately; if right, show the source and date. |
+| Competitor claim is unverified   | Withdraw it; do not repeat.                                                          |
+| Buyer feels pressured by ROI     | Acknowledge; return to their criteria; offer a smaller next step.                    |
 
 ## Examples
 
@@ -296,8 +296,8 @@ Why: fair, specific, admits the gap, and returns the decision to the buyer's cri
 
 ## Sources
 
-- Neil Rackham, *SPIN Selling* (1988), for need-payoff questions and the finding that benefit statements work differently in large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
-- Robert Cialdini, *Influence* (1984; expanded editions), for social proof and authority — used only with verified, permitted evidence. Cialdini's own site emphasizes ethical use: <https://www.influenceatwork.com/7-principles-of-persuasion/>.
+- Neil Rackham, _SPIN Selling_ (1988), for need-payoff questions and the finding that benefit statements work differently in large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
+- Robert Cialdini, _Influence_ (1984; expanded editions), for social proof and authority — used only with verified, permitted evidence. Cialdini's own site emphasizes ethical use: <https://www.influenceatwork.com/7-principles-of-persuasion/>.
 - Gartner's B2B buying research on stakeholder-specific relevance and consensus: <https://www.gartner.com/en/newsroom/press-releases/2025-05-07-gartner-sales-survey-finds-74-percent-of-b2b-buyer-teams-demonstrate-unhealthy-conflict-during-the-decision-process>.
 - Research on retrieval-augmented generation's limits: Wu, Wu, and Zou, "ClashEval: Quantifying the tug-of-war between an LLM's internal prior and external evidence" (2024), <https://arxiv.org/abs/2404.10198>. The finding that models may adopt incorrect retrieved content is why the passport marks fact status and why the agent must not "fill gaps" from memory.
 - The evidence hierarchy and ROI template are original repository design choices, not a published framework.

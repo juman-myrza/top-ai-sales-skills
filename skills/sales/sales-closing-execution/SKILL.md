@@ -48,18 +48,18 @@ The universal rule: **no claim of completion without a confirming tool result.**
 
 ## Required Inputs
 
-| Input | Source | Required for |
-|---|---|---|
-| Offer, price, currency, fees, taxes | passport `offer`, `pricing` | direct purchase, proposal |
-| Payment methods and terms | passport `pricing`, `fulfillment` | direct purchase |
-| Cancellation/refund policy | passport `pricing`, `sales_policy` | confirmation |
-| Booking policy, duration, timezone, buffer | passport `fulfillment.booking` | booking |
-| Real availability | calendar tool | booking |
-| Buyer identity and consent | state | all execution |
-| Authority limits and negotiation limits | passport `sales_policy`, `sales_policy.negotiation` | discounts, custom terms |
-| Quote policy | passport `pricing.quote_policy` | discounted or custom amounts |
-| Proposal template | passport `fulfillment.proposal.template_id` | proposal |
-| Handoff route | passport `handoff` | human close |
+| Input                                      | Source                                              | Required for                 |
+| ------------------------------------------ | --------------------------------------------------- | ---------------------------- |
+| Offer, price, currency, fees, taxes        | passport `offer`, `pricing`                         | direct purchase, proposal    |
+| Payment methods and terms                  | passport `pricing`, `fulfillment`                   | direct purchase              |
+| Cancellation/refund policy                 | passport `pricing`, `sales_policy`                  | confirmation                 |
+| Booking policy, duration, timezone, buffer | passport `fulfillment.booking`                      | booking                      |
+| Real availability                          | calendar tool                                       | booking                      |
+| Buyer identity and consent                 | state                                               | all execution                |
+| Authority limits and negotiation limits    | passport `sales_policy`, `sales_policy.negotiation` | discounts, custom terms      |
+| Quote policy                               | passport `pricing.quote_policy`                     | discounted or custom amounts |
+| Proposal template                          | passport `fulfillment.proposal.template_id`         | proposal                     |
+| Handoff route                              | passport `handoff`                                  | human close                  |
 
 If a required input is missing, do not improvise. Say what is missing and offer a path.
 
@@ -76,9 +76,11 @@ Readiness is evidence, not hope. Signals include:
 - "We're ready to start."
 - "What's the next step?"
 
-A question about price or features is not readiness. A polite "sounds interesting" is not readiness. When unsure, ask one direct question: "Would you like to proceed with [verified option]?"
+A question about price or features is a buying signal, not yet a decision: answer it, then trial-close ("If this fits, shall we start?").
 
 Do not wait passively for the buyer to volunteer a decision. When the diagnosis is clear, the buyer's criteria are met, and the next step is verified, ask for the decision directly. "Ask for the decision" is part of the job, not pressure.
+
+Closing forms that are allowed: a direct ask ("Shall we start?"), a choice between two concrete next steps ("Tuesday or Thursday?"), and an assumptive next step the buyer can correct ("I'll prepare the invoice for [verified plan], correct?"). Not allowed: fake scarcity, fake deadlines, implied commitments the buyer did not make.
 
 ### Step 1a — State the terms before asking for the decision
 
@@ -113,13 +115,13 @@ Each rung is a real confirmation of a real thing, not a trick question. Do not u
 
 Use the passport's `fulfillment.mode`:
 
-| Mode | Path |
-|---|---|
-| `direct_purchase` | summarize → confirm → issue payment request → verify status |
-| `appointment` | check availability → offer slots → buyer chooses → book → confirm |
-| `quote` | collect scope → prepare proposal → validate → send → agree next step |
-| `hybrid` | follow the passport's order (for example, book a call before payment) |
-| `human_only` | hand off; do not execute |
+| Mode              | Path                                                                  |
+| ----------------- | --------------------------------------------------------------------- |
+| `direct_purchase` | summarize → confirm → issue payment request → verify status           |
+| `appointment`     | check availability → offer slots → buyer chooses → book → confirm     |
+| `quote`           | collect scope → prepare proposal → validate → send → agree next step  |
+| `hybrid`          | follow the passport's order (for example, book a call before payment) |
+| `human_only`      | hand off; do not execute                                              |
 
 Do not force every buyer into a meeting. If the offer is directly purchasable and the buyer is ready, let them buy. Do not force a direct purchase where the passport requires an appointment or human approval.
 
@@ -151,6 +153,7 @@ Ask for explicit confirmation: "Do you confirm?" Do not treat "ok" as confirmati
 9. If the buyer needs an invoice for a finance department, follow the passport's invoicing process; do not invent tax or legal details.
 
 **Never:**
+
 - collect full card numbers in chat;
 - send a personal account number not approved by the passport;
 - promise a payment link will "expire soon" unless it is true;
@@ -172,6 +175,7 @@ Ask for explicit confirmation: "Do you confirm?" Do not treat "ok" as confirmati
 11. If the buyer needs a reminder or calendar invite, use the approved tool; do not claim it was sent unless confirmed.
 
 **Never:**
+
 - invent availability;
 - offer a slot you have not checked;
 - book without the buyer's choice;
@@ -279,6 +283,10 @@ Do not add marketing to the confirmation. Do not ask a new qualifying question. 
 - Do not ask for card details in chat.
 - If repeated, hand off.
 
+### Buyer says "sounds good" without a concrete action
+
+- Do not treat it as a decision. Propose one concrete dated step ("Shall I send the invoice today, or do you want a short call tomorrow?") and ask for a choice.
+
 ### Booking tool is down
 
 - Say the calendar is unavailable; do not invent slots.
@@ -323,16 +331,16 @@ Do not stop at "I sent the request" unless the tool confirms it was sent. Do not
 
 ## Failure Recovery
 
-| Failure | Agent response | Do not |
-|---|---|---|
+| Failure              | Agent response                                                                 | Do not                                   |
+| -------------------- | ------------------------------------------------------------------------------ | ---------------------------------------- |
 | Availability timeout | "I can't confirm the calendar right now. I can retry or pass this to a human." | Invent slots or say "probably available" |
-| Booking conflict | "That slot was taken. Here are the current options." | Book a different time silently |
-| Booking timeout | "The booking is not confirmed yet. I'll retry / hand off." | Say "you're booked" |
-| Payment timeout | "The payment status is pending. I won't mark it paid until it's confirmed." | Send a second charge without idempotency |
-| Invoice tool error | "I couldn't issue the invoice. I can retry or have a human issue it." | Invent an invoice number |
-| Handoff tool error | "I couldn't create the handoff automatically. Here is what I can do…" | Claim a human is already handling it |
-| CRM write failure | Keep the state locally; retry; tell the buyer only if it affects them. | Claim the CRM is updated |
-| Duplicate request | Check idempotency key/status before retrying. | Create a second booking/charge |
+| Booking conflict     | "That slot was taken. Here are the current options."                           | Book a different time silently           |
+| Booking timeout      | "The booking is not confirmed yet. I'll retry / hand off."                     | Say "you're booked"                      |
+| Payment timeout      | "The payment status is pending. I won't mark it paid until it's confirmed."    | Send a second charge without idempotency |
+| Invoice tool error   | "I couldn't issue the invoice. I can retry or have a human issue it."          | Invent an invoice number                 |
+| Handoff tool error   | "I couldn't create the handoff automatically. Here is what I can do…"          | Claim a human is already handling it     |
+| CRM write failure    | Keep the state locally; retry; tell the buyer only if it affects them.         | Claim the CRM is updated                 |
+| Duplicate request    | Check idempotency key/status before retrying.                                  | Create a second booking/charge           |
 
 ## Examples
 
@@ -424,9 +432,9 @@ Why: respects the passport's booking policy and offers real alternatives. If the
 
 ## Sources
 
-- Neil Rackham, *SPIN Selling* (1988), for obtaining commitment as a stage and the warning that closing techniques can be counterproductive in large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
+- Neil Rackham, _SPIN Selling_ (1988), for obtaining commitment as a stage and the warning that closing techniques can be counterproductive in large sales: <https://www.huthwaiteinternational.com/spin-methodology>.
 - David Sandler's seven-step system, especially the up-front contract and post-sell confirmation: <https://sandler.com/sandler-selling-system/>.
-- Chris Voss, *Never Split the Difference* (2016), for calibrated questions and "that's right" moments before commitment.
+- Chris Voss, _Never Split the Difference_ (2016), for calibrated questions and "that's right" moments before commitment.
 - Agent Skills specification, for the skill's structure and progressive disclosure: <https://agentskills.io/specification>.
 - Tool contracts in this repository define the only permitted execution semantics. They are specifications, not implementations; the runtime must supply real tool adapters before this skill can execute a transaction.
 

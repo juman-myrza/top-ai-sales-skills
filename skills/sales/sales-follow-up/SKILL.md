@@ -48,16 +48,16 @@ This skill defines eligibility, timing, content, cadence, and stop rules. All ca
 
 ## Required Inputs
 
-| Input | Source | If missing |
-|---|---|---|
-| Consent to follow up | state / buyer's request | Do not send; ask once or stop |
-| Reason for the follow-up | state / agreed next step | Do not send |
-| New value or answer to deliver | passport / tool / human | Do not send a content-free reminder |
-| Cadence, channel, quiet hours | passport `follow_up` | Send only if the basis and passport allow it; otherwise stop |
-| Attempt count and last contact | state / CRM | Treat as unknown; do not restart a sequence |
-| Timezone | buyer or passport | Ask before scheduling |
-| Opt-out status | state / CRM | Treat as opted out until verified |
-| Handoff status | handoff tool | Do not send if a human owns the thread |
+| Input                          | Source                   | If missing                                                   |
+| ------------------------------ | ------------------------ | ------------------------------------------------------------ |
+| Consent to follow up           | state / buyer's request  | Do not send; ask once or stop                                |
+| Reason for the follow-up       | state / agreed next step | Do not send                                                  |
+| New value or answer to deliver | passport / tool / human  | Do not send a content-free reminder                          |
+| Cadence, channel, quiet hours  | passport `follow_up`     | Send only if the basis and passport allow it; otherwise stop |
+| Attempt count and last contact | state / CRM              | Treat as unknown; do not restart a sequence                  |
+| Timezone                       | buyer or passport        | Ask before scheduling                                        |
+| Opt-out status                 | state / CRM              | Treat as opted out until verified                            |
+| Handoff status                 | handoff tool             | Do not send if a human owns the thread                       |
 
 ## Procedure
 
@@ -79,16 +79,16 @@ If any answer is no, do not send. Record why.
 
 Reason codes:
 
-| Reason code | Example | Basis |
-|---|---|---|
-| `buyer_requested` | "Message me on Monday" | `buyer_requested` |
-| `agreed_next_step` | "I'll send the calculation by Thursday" | `agreed_next_step` |
-| `buyer_initiated_inquiry` | The buyer asked for a price, then went quiet | `buyer_initiated_inquiry` |
-| `document_ready` | The proposal or invoice is ready | `agreed_next_step` |
-| `answer_ready` | The human/technical answer arrived | `buyer_requested` or `buyer_initiated_inquiry` |
-| `appointment_recovery` | The buyer missed a booked appointment | `agreed_next_step` |
-| `post_purchase` | Onboarding or delivery check-in | `existing_customer` |
-| `re_engagement` | Permitted marketing consent, with something new | `marketing_consent` |
+| Reason code               | Example                                         | Basis                                          |
+| ------------------------- | ----------------------------------------------- | ---------------------------------------------- |
+| `buyer_requested`         | "Message me on Monday"                          | `buyer_requested`                              |
+| `agreed_next_step`        | "I'll send the calculation by Thursday"         | `agreed_next_step`                             |
+| `buyer_initiated_inquiry` | The buyer asked for a price, then went quiet    | `buyer_initiated_inquiry`                      |
+| `document_ready`          | The proposal or invoice is ready                | `agreed_next_step`                             |
+| `answer_ready`            | The human/technical answer arrived              | `buyer_requested` or `buyer_initiated_inquiry` |
+| `appointment_recovery`    | The buyer missed a booked appointment           | `agreed_next_step`                             |
+| `post_purchase`           | Onboarding or delivery check-in                 | `existing_customer`                            |
+| `re_engagement`           | Permitted marketing consent, with something new | `marketing_consent`                            |
 
 ### Step 2 — Choose the timing
 
@@ -103,8 +103,10 @@ Use the passport's `follow_up` policy:
 
 If the passport is silent:
 
-- send only buyer-requested or explicitly agreed follow-ups;
-- do not start an unsolicited sequence;
+- for `buyer_requested` and `agreed_next_step`: send as agreed;
+- for `buyer_initiated_inquiry`: allow up to 2 value-carrying follow-ups about the buyer's own inquiry, at least 24 hours apart and inside the channel's messaging rules (for example the WhatsApp service window or approved templates), then close the loop;
+- do not start unrelated or marketing sequences;
+- the business should set exact values in the passport; these are defaults only;
 - if the buyer said "later" without a date, ask once for a date instead of guessing;
 - when in doubt, wait longer rather than shorter.
 
@@ -156,18 +158,18 @@ Never tell the buyer a scheduled message was sent. Never let a scheduler bypass 
 
 ### Step 6 — Interpret the response
 
-| Buyer response | Action |
-|---|---|
-| Clear yes | Move to `sales-closing-execution`; confirm what happens next |
-| Clear no | Acknowledge once; stop the sequence; record opt-out if requested |
-| "Later" with a date | Schedule only that date; confirm it |
-| "Later" without a date | Ask once for a date; if no date, close the loop |
-| Question | Answer it; do not treat it as consent to continue selling |
-| Silence | Follow the passport's attempt limit; then close the loop |
-| Anger or complaint | Acknowledge, stop selling, offer a human if appropriate |
-| "Stop" / "unsubscribe" (and the passport's per-language opt-out keywords) | Stop immediately; one neutral acknowledgment at most |
-| Auto-reply / out of office | Do not count it as a real response; follow the stated return date if reliable |
-| Wrong person | Ask for the right contact or close politely; do not pitch them |
+| Buyer response                                                            | Action                                                                        |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Clear yes                                                                 | Move to `sales-closing-execution`; confirm what happens next                  |
+| Clear no                                                                  | Acknowledge once; stop the sequence; record opt-out if requested              |
+| "Later" with a date                                                       | Schedule only that date; confirm it                                           |
+| "Later" without a date                                                    | Ask once for a date; if no date, close the loop                               |
+| Question                                                                  | Answer it; do not treat it as consent to continue selling                     |
+| Silence                                                                   | Follow the passport's attempt limit; then close the loop                      |
+| Anger or complaint                                                        | Acknowledge, stop selling, offer a human if appropriate                       |
+| "Stop" / "unsubscribe" (and the passport's per-language opt-out keywords) | Stop immediately; one neutral acknowledgment at most                          |
+| Auto-reply / out of office                                                | Do not count it as a real response; follow the stated return date if reliable |
+| Wrong person                                                              | Ask for the right contact or close politely; do not pitch them                |
 
 Silence is not consent. A read receipt is not consent. A click is not consent to a sales sequence.
 
@@ -198,9 +200,7 @@ When the cadence ends without a response, send at most one clean close-out if th
 
 ### Buyer says "write later" without a date
 
-Ask once: "When would be convenient - give me a day and I will write only then." If the buyer gives no date, close the loop: "Understood, I will not remind you again. Write when it becomes relevant."
-
-Do not choose a date for the buyer and call it agreed.
+Propose a specific slot: "I'll write on Thursday at 11:00, does that work?" If the buyer corrects it, use theirs. If there is no answer, close the loop. Do not choose a date and call it agreed.
 
 ### Buyer says "write tomorrow"
 
@@ -209,6 +209,7 @@ Confirm the timezone and the channel. If "tomorrow" is ambiguous because the buy
 ### Buyer says "I need to think"
 
 Do not send a countdown. Ask what would help: a summary, a calculation, a comparison, or time. If the buyer accepts a follow-up date, schedule it. If not, close the loop.
+Secure a dated return point in the same message, as above. A follow-up with no agreed date is the weakest kind.
 
 ### Buyer asks for a proposal and then goes silent
 
@@ -284,18 +285,18 @@ A clean close-out is better than a fourth "just checking in".
 
 ## Failure Recovery
 
-| Failure | Response | Do not |
-|---|---|---|
-| Consent status unknown | Ask once or do not send | Assume opt-in |
-| Cadence missing from passport | Send only buyer-requested follow-ups | Invent a sequence |
-| CRM/state unavailable | Keep a local note; do not restart the sequence | Claim CRM is updated |
-| Send tool fails | Retry once; log; offer human/fallback | Say "sent" without confirmation |
-| Duplicate follow-up risk | Check last contact and reason before sending | Send "just in case" |
-| Buyer says stop but state is stale | Stop immediately; update state | Send one more "final" message |
-| Buyer's language changed | Switch language per `sales-language-adaptation` | Continue in the old language |
-| Handoff status unclear | Treat the thread as human-owned; do not send | Interleave automated sales |
-| Wrong recipient | Apologize once; ask for the right contact or close | Pitch the wrong person |
-| Follow-up reveals a factual error | Correct it, then decide whether the thread should continue | Bury the correction in a pitch |
+| Failure                            | Response                                                   | Do not                          |
+| ---------------------------------- | ---------------------------------------------------------- | ------------------------------- |
+| Consent status unknown             | Ask once or do not send                                    | Assume opt-in                   |
+| Cadence missing from passport      | Send only buyer-requested follow-ups                       | Invent a sequence               |
+| CRM/state unavailable              | Keep a local note; do not restart the sequence             | Claim CRM is updated            |
+| Send tool fails                    | Retry once; log; offer human/fallback                      | Say "sent" without confirmation |
+| Duplicate follow-up risk           | Check last contact and reason before sending               | Send "just in case"             |
+| Buyer says stop but state is stale | Stop immediately; update state                             | Send one more "final" message   |
+| Buyer's language changed           | Switch language per `sales-language-adaptation`            | Continue in the old language    |
+| Handoff status unclear             | Treat the thread as human-owned; do not send               | Interleave automated sales      |
+| Wrong recipient                    | Apologize once; ask for the right contact or close         | Pitch the wrong person          |
+| Follow-up reveals a factual error  | Correct it, then decide whether the thread should continue | Bury the correction in a pitch  |
 
 ## Examples
 

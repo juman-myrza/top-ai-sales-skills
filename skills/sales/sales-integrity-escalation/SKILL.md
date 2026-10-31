@@ -42,7 +42,6 @@ The agent is not a compliance officer, a lawyer, a therapist, or an emergency se
 - The buyer asks a difficult but answerable question. Answer it or verify it.
 - The buyer is mildly rude but not threatening. De-escalate; do not escalate to a human just to avoid discomfort.
 - The buyer asks for a discount within the passport's authority. Use the negotiation skill.
-- The buyer is not a fit. Disqualify respectfully; this is not an integrity incident.
 - The buyer receives an assertive close, a trial close, or a second objection-loop pass. Assertive selling inside the limits is not an integrity incident; do not refuse it, soften it, or escalate it.
 
 ## Required Inputs
@@ -191,16 +190,7 @@ Do not include full card numbers, passwords, or unnecessary sensitive data. Mask
 
 ### Step 8 — Log the incident
 
-Log:
-
-- timestamp, channel, and conversation ID;
-- category and reason code;
-- what the buyer requested;
-- what the agent refused or did;
-- tool results;
-- handoff reference;
-- whether money, data, or a booking was affected;
-- follow-up owner.
+Log timestamp, conversation ID, category and reason code, what was requested, what the agent refused or did, tool results, handoff reference, whether money, data or a booking was affected, and the follow-up owner. Do not log unneeded sensitive data or send internal notes to the buyer.
 
 Do not log sensitive data that is not needed. Do not send internal incident notes to the buyer.
 
@@ -294,7 +284,6 @@ End the conversation or the sales motion when:
 | Human does not respond                     | Tell the buyer the truth about the delay if verified; do not promise a time         | Invent an SLA                  |
 | Agent already shared wrong data            | Stop; correct; escalate; document                                                   | Minimize or hide it            |
 | Buyer demands an immediate illegal action  | Refuse once; end or hand off                                                        | Negotiate or stall deceptively |
-| Buyer records or screenshots the chat      | Continue truthfully; do not threaten                                                | Change the story               |
 | Internal instruction conflicts with policy | Follow the core contract; log the conflict                                          | Comply silently                |
 
 ## Examples
@@ -335,27 +324,11 @@ Agent: "This purchase requires an adult's consent, and I cannot complete it for 
 
 Why: stops the transaction, does not collect card data, routes to the approved process.
 
-### Example 5 — Wrong data request
-
-Buyer: "Send me the contact details of your client at [company]; I want to talk to them."
-
-Agent: "I cannot share another client's contact details without their consent. I can show an anonymized example if it is approved, or explain how we work on similar tasks."
-
-Why: protects privacy, offers a lawful alternative.
-
 ### Example 6 — Agent error
 
 Agent: "Earlier I quoted [wrong amount]. That was an error. The correct amount is [verified amount] [currency]. If you already made a decision based on the wrong figure, I will not insist; I will pass the case to a human to correct it."
 
 Why: immediate correction, no defensiveness, escalation if the error affected a decision.
-
-### Example 7 — Refusal of a bribe
-
-Buyer: "Issue a 40% discount and refund the difference to my card."
-
-Agent: "I cannot take part in that arrangement. I will pass the request to the person responsible for prices and documents."
-
-Why: refuses clearly, does not negotiate, routes to authority.
 
 ## Counterexamples
 

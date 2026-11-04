@@ -1,0 +1,1183 @@
+{
+  "schema_version": "1.1.0",
+  "passport_id": "ai-agent-training",
+  "version": "2.0.0",
+  "status": "approved",
+  "default_locale": "ru",
+  "effective_from": "2026-11-04",
+  "business": {
+    "legal_name": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Legal entity name not supplied in the brief."
+    },
+    "display_name": "Practical AI Training (working title)",
+    "description": {
+      "value": "AI automation company implementing practical AI agents and multi-agent systems for businesses, and providing hands-on education for people who want to build AI agents.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "website": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Website not supplied in the brief."
+    },
+    "markets": [
+      {
+        "value": "Primary launch market: Kyrgyzstan, with initial customer acquisition focused on Bishkek.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Expansion markets: Kazakhstan, Uzbekistan and wider CIS after validating repeatable sales and delivery in Kyrgyzstan.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "timezone": {
+      "value": "Asia/Bishkek",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "support_contact": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Public support contact is not supplied; never invent contact details."
+    },
+    "languages": [
+      "ru",
+      "ky"
+    ]
+  },
+  "offer": {
+    "id": "ai-agent-training",
+    "name": "Practical AI Agents Builder Program",
+    "type": "program",
+    "buyer_types": [
+      "b2c"
+    ],
+    "one_liner": {
+      "value": "Live practical training for builders who want to learn to design, build and apply AI agents and multi-agent systems to real tasks, including commercial business automation use cases.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "outcomes": [
+      {
+        "value": "Participants learn practical methods for building AI agents and connecting them to tools and APIs.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Participants work toward a practical project they can demonstrate; exact project and acceptance criteria are confirmed for each cohort.",
+        "status": "estimated",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "notes": "Final project rubric is still being prepared."
+      },
+      {
+        "value": "Participants learn how agent skills can be applied to business automation and explore potential paid implementation work; no income or client outcome is guaranteed.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "includes": [
+      {
+        "value": "Live, instructor-led practical sessions by the founder during initial cohorts.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Hands-on exercises and guided work on AI-agent building.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Agent architecture, tools, API integrations and multi-agent patterns, according to the confirmed cohort syllabus.",
+        "status": "estimated",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "notes": "Final module-by-module syllabus is being finalized."
+      },
+      {
+        "value": "Selected lesson recordings and supporting materials will be created progressively from cohort questions; this is not yet a fully pre-recorded course.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Guidance on applying AI-agent skills to business automation and exploring commercial use cases.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "excludes": [
+      {
+        "value": "Done-for-you implementation of a participant's business process; that is a separate B2B service.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Guaranteed income, employment, client acquisition or business success.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Unlimited private consulting, custom development or guaranteed individual project delivery.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "A complete pre-recorded video library available before the cohort begins.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "prerequisites": [
+      {
+        "value": "Participant should have a computer and be prepared to work hands-on; exact technical prerequisites and required accounts must be confirmed before enrollment.",
+        "status": "estimated",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "notes": "Owner has not finalized OS, accounts, paid tools or coding prerequisites."
+      }
+    ],
+    "support": {
+      "value": "Founder-led live instruction and cohort Q&A. Exact schedule, communication channel, response times and post-course support duration must be confirmed for each cohort.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "status": "active"
+  },
+  "pricing": {
+    "currency": {
+      "value": "KGS",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "tax_behavior": "unknown",
+    "plans": [
+      {
+        "id": "builder-cohort",
+        "name": "Live Practical AI Agents Builder Cohort",
+        "billing_period": "one_time",
+        "price": {
+          "value": 50000,
+          "status": "estimated",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "notes": "50,000 KGS is the owner's proposed course price, not yet confirmed as final for a specific cohort. Agent may state it as an indicative price and must confirm cohort details and payment terms with owner before requesting payment."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "minimum_term": {
+          "value": "One-time cohort enrollment; dates, duration, attendance and access terms must be published for the specific cohort.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "cancellation": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Cancellation and missed-session policy are not finalized."
+        },
+        "refund": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Refund policy is not finalized."
+        },
+        "status": "active"
+      }
+    ],
+    "payment_methods": [
+      {
+        "value": null,
+        "status": "unknown",
+        "notes": "Payment methods and payment links are not configured; confirm with owner."
+      }
+    ],
+    "invoice_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Tax treatment, payment method, installments, invoice details and refund terms are not finalized."
+    },
+    "discount_policy": {
+      "allowed": false,
+      "max_percent": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No discount authority."
+      },
+      "approval_threshold_percent": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Any special price requires owner approval."
+      },
+      "stacking": {
+        "value": "No discounts or promotional stacking without owner approval.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      "conditions": []
+    },
+    "quote_policy": {
+      "required_for_discount": true,
+      "required_for_custom_terms": true,
+      "validity_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable until cohort enrollment terms are published."
+      },
+      "terms_snapshot_required": true,
+      "approved_quote_required_for_payment": true
+    }
+  },
+  "qualification": {
+    "fit_criteria": [
+      {
+        "value": "Person wants to build AI agents rather than only purchase a ready-made automation service.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Person is willing to learn through practical exercises and build a project.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Person wants to apply AI agents to real business tasks or develop skills for potential client work.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "disqualifiers": [
+      {
+        "value": "A person who only wants a ready-made business solution should be routed to the separate B2B implementation offer, not sold the course.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "A person expecting guaranteed income, clients, employment or effortless results is not a fit for the program promise.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "required_fields": [
+      "learning_goal",
+      "current_experience",
+      "builder_or_business_goal",
+      "preferred_language",
+      "availability_for_live_sessions"
+    ],
+    "decision_roles": [
+      {
+        "value": "The individual learner or the person paying for the learner's enrollment.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "service_area": {
+      "value": "Initial cohorts are planned for Kyrgyzstan; remote participation and other geographies require confirmation for the specific cohort.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    }
+  },
+  "discovery": {
+    "required_fields": [
+      "learning_goal",
+      "current_experience",
+      "preferred_language",
+      "availability_for_live_sessions"
+    ],
+    "optional_fields": [
+      "coding_background",
+      "tools_already_used",
+      "project_idea",
+      "business_niche",
+      "budget_range"
+    ],
+    "recommendation_rules": [
+      {
+        "value": "Route builders and aspiring AI automation specialists to this education offer only; do not combine their workshop with a business-owner event.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Explain that initial cohorts are live and founder-led. Selected recordings are added progressively; do not advertise a complete recorded library.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "50,000 KGS is the proposed price and remains subject to confirmation for the specific cohort. Do not invent dates, seats, venue, schedule or payment instructions.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Discuss monetization as a possible application of skills, never as guaranteed income or guaranteed client acquisition.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "If a person needs a ready-made implementation rather than learning, offer to route them to the separate B2B conversation without pressure.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not claim an exact module, prerequisite, duration, support period or certificate unless confirmed for the cohort.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ]
+  },
+  "proof": {
+    "cases": [],
+    "testimonials": [],
+    "certifications": [],
+    "stats": [],
+    "prohibited_claims": [
+      {
+        "value": "Do not guarantee earnings, jobs, clients, mastery or business outcomes.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not claim a fully recorded course exists; initial format is live and recordings are created progressively.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not invent student results, testimonials, cohort sizes or completion rates.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ]
+  },
+  "fulfillment": {
+    "mode": "hybrid",
+    "delivery": {
+      "value": "Initial delivery is live, founder-led practical instruction. Selected recordings and supporting materials are created progressively as the course is taught and refined.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "booking": {
+      "required": true,
+      "calendar_id": {
+        "value": "juman.kg.agent@gmail.com",
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "Primary calendar of the owner account; read/written only by the calendar-booking adapter.",
+        "verified_at": "2026-10-28"
+      },
+      "duration_minutes": {
+        "value": 20,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "INTERNAL scheduling value (owner decision 2026-10-28). Never stated to a client: daniyar-guard rejects any stated length.",
+        "verified_at": "2026-10-28"
+      },
+      "timezone": {
+        "value": "Asia/Bishkek",
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "slot_interval_minutes": {
+        "value": 30,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "Slot start step = duration (20) + buffer (10).",
+        "verified_at": "2026-10-28"
+      },
+      "buffer_before_minutes": {
+        "value": 10,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "buffer_after_minutes": {
+        "value": 10,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "availability_window_days": {
+        "value": 14,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "offer_slot_count": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "reschedule_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "cancellation_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "no_show_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "reminder_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "external_link_allowed": false
+    },
+    "proposal": {
+      "required": false,
+      "template_id": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "validity_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "approval_required": true
+    }
+  },
+  "sales_policy": {
+    "authority_limits": {
+      "max_discount_percent_without_approval": {
+        "value": 0,
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      "can_customize_contract": false,
+      "can_change_refund_terms": false,
+      "can_waive_fees": false
+    },
+    "approval_matrix": [
+      {
+        "condition": {
+          "value": "Confirming cohort dates, schedule, location/online format, final price, syllabus, prerequisites and payment terms",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "approver": {
+          "value": "Juman Nizamidinov / course owner",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "channel": {
+          "value": "Owner handoff through the existing Kanban/coordinator route",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        }
+      },
+      {
+        "condition": {
+          "value": "Any discount, installment, refund or special enrollment condition",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "approver": {
+          "value": "Juman Nizamidinov / course owner",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "channel": {
+          "value": "Owner handoff through the existing Kanban/coordinator route",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        }
+      }
+    ],
+    "verified_scarcity": [],
+    "competitor_policy": {
+      "value": "Do not make unsupported competitor comparisons or disparage other courses.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "custom_terms": {
+      "value": "The agent may explain the general learning format; special terms, refunds, installments or private mentoring require owner approval.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "contract_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Enrollment terms and course agreement have not been supplied."
+    },
+    "call_recording_policy": {
+      "value": "Do not claim calls are recorded; recording consent and retention policy are not configured.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "negotiation": {
+      "tradables": [],
+      "non_negotiables": [
+        {
+          "value": "No guaranteed income, job, client acquisition or business success.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        {
+          "value": "Initial cohort is live-led; a full pre-recorded library is not promised.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        {
+          "value": "No discounts, installments or refund exceptions without owner approval.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        }
+      ],
+      "walk_away": {
+        "value": "If buyer requires guaranteed income, unconfirmed curriculum, unavailable schedule or non-standard payment/refund terms, explain the limitation and hand off to the owner.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    }
+  },
+  "sales_guidance": {
+    "segments": [
+      {
+        "id": "ai-agent-builders",
+        "name": "Builders and aspiring AI automation specialists",
+        "description": {
+          "value": "People who want to learn to build AI agents and multi-agent systems through practical work.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "buyer_types": [
+          "b2c"
+        ],
+        "fit_signals": [
+          {
+            "value": "Wants to build a working agent or learn integrations and agent architecture.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Has tried AI tools but does not yet know how to build reliable agents connected to real tools and business processes.",
+            "status": "estimated",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "notes": "Hypothesized pain; validate during qualification."
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "Wants practical skills, a portfolio project or to explore AI automation as a professional service.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "default_motion": "hybrid"
+      },
+      {
+        "id": "technical-founders-creators",
+        "name": "Technical founders and creators",
+        "description": {
+          "value": "Builders who want to prototype AI-powered products or automate their own repeatable tasks.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "buyer_types": [
+          "b2c"
+        ],
+        "fit_signals": [
+          {
+            "value": "Has a concrete project idea and is willing to learn hands-on.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Needs a structured path from AI experimentation to a working agent.",
+            "status": "estimated",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "notes": "Hypothesized pain; validate during qualification."
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "Has a project or product idea that requires agent capabilities.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "default_motion": "hybrid"
+      }
+    ],
+    "objection_guidance": [
+      {
+        "id": "price",
+        "objection_type": "price",
+        "guidance": {
+          "value": "Explain that 50,000 KGS is the current proposed cohort price, subject to confirmation of cohort details by the owner.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not invent discounts, installments or limited-time offers.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "income",
+        "objection_type": "trust",
+        "guidance": {
+          "value": "Explain that practical skills may be applied to paid projects, but income depends on learner ability, effort, market and sales execution.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Never promise a specific income or guaranteed clients.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "experience",
+        "objection_type": "fit",
+        "guidance": {
+          "value": "Ask about coding and AI experience; do not claim the course is beginner-friendly or advanced-only until prerequisites are confirmed.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not promise that no technical background is required.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "format",
+        "objection_type": "need",
+        "guidance": {
+          "value": "Be transparent: initial teaching is live and founder-led; selected recordings are created progressively.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not describe this as a fully recorded self-paced course.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "AI Agent Implementation",
+        "category": "done-for-you service",
+        "our_advantage": {
+          "value": "Customer receives an implemented solution without building it personally.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "our_tradeoff": {
+          "value": "Separate B2B service with project pricing; it does not teach the customer to build the system.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "source": {
+          "value": "Internal offer comparison",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "last_checked": "2026-11-04"
+      },
+      {
+        "name": "Self-study and free tutorials",
+        "category": "self-study",
+        "our_advantage": {
+          "value": "Live practical instruction and direct guidance from the founder during the cohort.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "our_tradeoff": {
+          "value": "Self-study can be cheaper and more flexible but requires the learner to structure learning independently.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "source": {
+          "value": "General category comparison; not a competitor-specific claim",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "last_checked": "2026-11-04"
+      }
+    ]
+  },
+  "handoff": {
+    "routes": [
+      {
+        "reason_code": "human_request",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "authority",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "capability",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "legal",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "complaint",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      }
+    ],
+    "required_fields": [
+      "buyer_goal",
+      "verified_facts",
+      "open_questions",
+      "requested_scope"
+    ],
+    "automation_pause": true,
+    "human_takeover_policy": {
+      "value": "A human owns the thread after a handoff; automation stays paused until a human resumes it.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    }
+  },
+  "follow_up": {
+    "allowed": true,
+    "basis": [
+      "buyer_requested",
+      "agreed_next_step",
+      "buyer_initiated_inquiry"
+    ],
+    "channels": [
+      "instagram",
+      "telegram",
+      "whatsapp",
+      "email"
+    ],
+    "quiet_hours": {
+      "start": "20:00",
+      "end": "09:00",
+      "timezone": "Asia/Bishkek"
+    },
+    "allowed_days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat"
+    ],
+    "max_attempts_per_reason": {
+      "value": 2,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested operational cap; confirm CRM cadence before enabling outbound follow-up."
+    },
+    "max_attempts_per_conversation": {
+      "value": 3,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested cap; stop immediately on opt-out or clear disinterest."
+    },
+    "min_interval_hours": {
+      "value": 48,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested minimum interval; obey channel-specific messaging windows."
+    },
+    "close_out_after_days": {
+      "value": 21,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested close-out window; stop earlier on opt-out."
+    },
+    "opt_out_keywords": [
+      "стоп",
+      "не пишите",
+      "отписаться",
+      "не интересно"
+    ],
+    "marketing_consent_required": true
+  },
+  "privacy": {
+    "data_collected": [
+      {
+        "value": "Name or preferred form of address, contact handle, business/role, stated goal, process pain and information needed to qualify the requested service.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "For education inquiries: learning goal, current experience, preferred language and availability for live sessions.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "purposes": [
+      {
+        "value": "Respond to an inbound inquiry, distinguish business implementation from AI-builder education, qualify fit and arrange the next step requested by the person.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Send requested information or event details only after the person asks for them or clearly opts in.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "retention": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Retention period is not defined; collect only necessary data."
+    },
+    "deletion_process": {
+      "value": "Route deletion or access requests to the owner; do not claim deletion until it is confirmed.",
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Operational process requires owner confirmation."
+    },
+    "sharing": {
+      "value": "Do not add people to WhatsApp groups or share their contact details without explicit consent.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "pii_rules": [
+      {
+        "value": "Do not collect payment card data, passwords, or government identifiers in chat.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Collect only the information needed for the current decision.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "legal_basis": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Jurisdiction-specific privacy notice and legal basis have not been reviewed."
+    }
+  },
+  "safety": {
+    "emergency_protocol": {
+      "value": null,
+      "status": "unknown",
+      "notes": "No emergency protocol defined for this offer."
+    },
+    "emergency_resources": [],
+    "minors_policy": {
+      "value": "The offer is not directed at minors; guardian consent is required if a minor is involved.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "vulnerability_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Not defined; do not use any buyer's vulnerability as leverage."
+    }
+  },
+  "tools": {
+    "passport_lookup": {
+      "adapter_id": "daniyar-passport-lookup",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "Installed and verified 2026-10-28: the passport-lookup plugin is enabled in this profile and the guard reads approved prices and booking links through it (adapter daniyar-passport-lookup). Verified by resolving both approved offers through the adapter."
+    },
+    "calendar_availability": {
+      "adapter_id": "daniyar-calendar-booking",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "calendar_availability tool: real free slots from the primary calendar (20 min slot, 10 min buffer, Asia/Bishkek). Verified live on 2026-10-28."
+    },
+    "calendar_booking": {
+      "adapter_id": "daniyar-calendar-booking",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "calendar_booking tool: creates one event with a Meet link, idempotent per request key, re-checks the slot before booking. Verified live (create + retry + cancel) on 2026-10-28."
+    },
+    "payments_invoicing": {
+      "adapter_id": "adapter-payments_invoicing",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "crm_memory": {
+      "adapter_id": "adapter-crm_memory",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "human_handoff": {
+      "adapter_id": "adapter-human_handoff",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "messaging_media": {
+      "adapter_id": "adapter-messaging_media",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    }
+  },
+  "metadata": {
+    "owner": "Business owner (Daniyar project)",
+    "approved_by": "Juman Nizamidinov",
+    "approved_at": "2026-11-04",
+    "created_at": "2026-10-24",
+    "updated_at": "2026-11-04",
+    "source_of_truth": "Owner-confirmed strategy and product clarification, 2026-11-04; unresolved details remain explicitly marked.",
+    "review_cycle_days": 90,
+    "fictional": false,
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-10-24",
+        "change": "Initial draft from the business brief. Not approved for publication."
+      },
+      {
+        "version": "2.0.0",
+        "date": "2026-11-04",
+        "change": "Updated to the current company model: existing working AI Sales Manager, scoped B2B implementation from an indicative 100,000 KGS, separate indicative monthly support per agent, live practical AI-builder education, audience-specific qualification and strict commercial guardrails."
+      }
+    ]
+  },
+  "unresolved": [
+    "Final cohort dates, start time, weekly schedule, duration, venue/online format and available seats are not confirmed.",
+    "50,000 KGS is the proposed course price; owner must approve the price for the actual cohort before payment collection.",
+    "Final syllabus, prerequisites, coding level, required accounts/software and paid tool costs are not finalized.",
+    "Final practical project, deliverables, assessment, certificate (if any) and completion criteria are not finalized.",
+    "Recording access, duration of access and post-cohort support are not finalized.",
+    "Payment methods, invoice/tax treatment, installments, cancellation and refund policies are not finalized.",
+    "Legal entity, website and public support contact are not supplied."
+  ]
+}

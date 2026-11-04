@@ -28,16 +28,16 @@ Rules:
 
 | File | Notes |
 |---|---|
-| `offers/ai-agent-implementation/1.0.0.json` | approved; matches the profile byte-for-byte |
-| `offers/ai-agent-training/1.0.0.json` | approved; matches the profile byte-for-byte |
+| `offers/ai-agent-implementation/2.0.0.json` | current mirror revision; profile publish must be completed separately |
+| `offers/ai-agent-training/2.0.0.json` | current mirror revision; profile publish must be completed separately |
 | `schema/passport.schema.json` | byte-identical to the repository schema |
 | `catalog.json` | generated in the adapter's shape from the two offers |
 
-The two offers are the profile's **approved** revision (calendar `juman.kg.agent@gmail.com`, 15-minute meeting length carried in `fulfillment.booking.duration_minutes`, booking tools marked `implemented`). Facts inside them still carry explicit statuses (`verified` / `estimated` / `unknown`) and open decisions stay in `unresolved`.
+The two v2.0.0 files are updated repository mirror drafts for the current company model. They preserve the verified passport-lookup and calendar adapter bindings from the earlier deployment, but this GitHub mirror is **not** the authoritative runtime store. Facts carry explicit statuses (`verified` / `estimated` / `unknown`); open commercial and operational decisions remain in `unresolved`. The agent will not read these changes until the same versioned files are copied into `/opt/data/profiles/daniyar/passports/` and published with the adapter.
 
 ## Sync
 
-The profile is authoritative. After changing passports or `catalog.json` in the profile (via the adapter's `publish`), mirror them here and refresh the recorded hashes:
+The profile is authoritative. For this update, first copy the v2.0.0 files from this repository branch into the profile's persistent store, run `validate` for each offer, then `publish` each offer. Once the profile catalog is updated, sync the authoritative files back to `main` and refresh the recorded hashes:
 
 ```bash
 # On the VPS, after publishing in the profile store

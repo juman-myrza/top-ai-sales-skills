@@ -1,18 +1,18 @@
 {
   "offers": {
     "ai-agent-implementation": {
-      "current_version": "2.0.0",
-      "file": "offers/ai-agent-implementation/2.0.0.json",
+      "current_version": "2.1.0",
+      "file": "offers/ai-agent-implementation/2.1.0.json",
       "passport_id": "ai-agent-implementation",
-      "sha256": "bf804011e7bc43b0173bcea42cef32eb863f6c0b1cbec4eb46c9deabfa57a878"
+      "sha256": "3e1b7410c1ffd5b9cab7a3650c58b9064146083f9471b60fa00cee138df41194"
     },
     "ai-agent-training": {
-      "current_version": "2.0.0",
-      "file": "offers/ai-agent-training/2.0.0.json",
+      "current_version": "2.1.0",
+      "file": "offers/ai-agent-training/2.1.0.json",
       "passport_id": "ai-agent-training",
-      "sha256": "37d9e6e8a777ac524dc39625294448d536dd297d865c44bb87d628c11a25a0a4"
+      "sha256": "33255ab4eea0037ccdadf497ae5661549b52cc5bd94a55ac6a2f111d47851c12"
     }
   },
   "tenant_id": "daniyar",
-  "updated_at": "2026-11-04T00:00:00+00:00"
+  "updated_at": "2026-11-04T12:00:00+06:00"
 }

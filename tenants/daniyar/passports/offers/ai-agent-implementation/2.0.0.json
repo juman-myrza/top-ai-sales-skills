@@ -1,0 +1,1301 @@
+{
+  "schema_version": "1.1.0",
+  "passport_id": "ai-agent-implementation",
+  "version": "2.0.0",
+  "status": "approved",
+  "default_locale": "ru",
+  "effective_from": "2026-11-04",
+  "business": {
+    "legal_name": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Legal entity name not supplied in the brief."
+    },
+    "display_name": "AI Automation Services (working title)",
+    "description": {
+      "value": "AI automation company implementing practical AI agents and multi-agent systems for businesses, and providing hands-on education for people who want to build AI agents.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "website": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Website not supplied in the brief."
+    },
+    "markets": [
+      {
+        "value": "Primary launch market: Kyrgyzstan, with initial customer acquisition focused on Bishkek.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Expansion markets: Kazakhstan, Uzbekistan and wider CIS after validating repeatable sales and delivery in Kyrgyzstan.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "timezone": {
+      "value": "Asia/Bishkek",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "support_contact": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Public support contact is not supplied; never invent contact details."
+    },
+    "languages": [
+      "ru",
+      "ky"
+    ]
+  },
+  "offer": {
+    "id": "ai-agent-implementation",
+    "name": "AI Agent Implementation & Business Automation",
+    "type": "service",
+    "buyer_types": [
+      "b2b"
+    ],
+    "one_liner": {
+      "value": "We identify a valuable repetitive business process and implement an AI agent or connected agent system around an agreed scope. The existing AI Sales Manager is available as a working demonstration.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "outcomes": [
+      {
+        "value": "A defined business process is automated or assisted by an AI agent according to an agreed scope.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "The customer receives the agreed implementation, integrations, testing and handover.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Use cases may include inbound sales, lead qualification, customer support, booking, reporting, executive assistance and internal operations; suitability is assessed per business.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "includes": [
+      {
+        "value": "Discovery of the business process, current handling and desired outcome.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Solution design and written scope for the agreed project.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Implementation and configuration of the agreed AI agent(s) and integrations within approved scope.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Testing, deployment and handover.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Demonstration of the existing working AI Sales Manager when relevant to the buyer's use case.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "excludes": [
+      {
+        "value": "Unlimited automation of every process in the company.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Unspecified integrations, additional agents or features outside approved scope.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Third-party API, model, hosting, telephony, messaging or infrastructure costs unless explicitly included in the written quote.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "New feature development as part of routine monthly support.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Guaranteed revenue growth, conversion lift, error-free operation or guaranteed ROI.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "prerequisites": [
+      {
+        "value": "Customer identifies a business problem and provides timely access to relevant systems, data and decision-makers.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Scope, acceptance criteria, integrations, timeline and commercial terms are agreed before implementation begins.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "support": {
+      "value": "Optional monthly operational support is priced separately per active agent. It covers agreed maintenance and troubleshooting, not unlimited new development. Response times, service hours and SLA are not yet defined.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "status": "active"
+  },
+  "pricing": {
+    "currency": {
+      "value": "KGS",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "tax_behavior": "unknown",
+    "plans": [
+      {
+        "id": "implementation-from",
+        "name": "AI Agent Implementation — starting price",
+        "billing_period": "one_time",
+        "price": {
+          "value": 100000,
+          "status": "estimated",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "notes": "Indicative starting price discussed by the owner. Not a fixed quote; final price depends on scope, integrations, complexity and written owner-approved proposal."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "minimum_term": {
+          "value": "One-time project fee; scope and milestones are defined in an approved proposal.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "cancellation": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Cancellation terms are not finalized."
+        },
+        "refund": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Refund terms are not finalized."
+        },
+        "status": "active"
+      },
+      {
+        "id": "monthly-support-per-agent",
+        "name": "Monthly operational support — per agent",
+        "billing_period": "monthly",
+        "price": {
+          "value": 10000,
+          "status": "estimated",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "notes": "Indicative target of 10,000 KGS per agent per month. Confirm exact coverage and final amount in the proposal; this is not unlimited development."
+        },
+        "setup_fee": {
+          "value": 0,
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "minimum_term": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Minimum term is not finalized."
+        },
+        "cancellation": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Cancellation terms are not finalized."
+        },
+        "refund": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Refund terms are not finalized."
+        },
+        "status": "active"
+      }
+    ],
+    "payment_methods": [
+      {
+        "value": null,
+        "status": "unknown",
+        "notes": "Payment methods and payment links are not configured; obtain the approved route from the owner."
+      }
+    ],
+    "invoice_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Invoice details, tax treatment, deposits, milestones and payment schedule must be confirmed in the written proposal."
+    },
+    "discount_policy": {
+      "allowed": false,
+      "max_percent": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No discount authority is granted to the agent."
+      },
+      "approval_threshold_percent": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Any concession requires owner approval."
+      },
+      "stacking": {
+        "value": "No discounts or promotional stacking without written owner approval.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      "conditions": []
+    },
+    "quote_policy": {
+      "required_for_discount": true,
+      "required_for_custom_terms": true,
+      "validity_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Quote validity is not finalized."
+      },
+      "terms_snapshot_required": true,
+      "approved_quote_required_for_payment": true
+    }
+  },
+  "qualification": {
+    "fit_criteria": [
+      {
+        "value": "Business has a specific, repetitive, high-volume or time-consuming process that can be described and evaluated.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "The process affects sales, customer response, booking, reporting or internal operations.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "A business owner or authorized manager is involved in defining scope and approving budget.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "The company can provide required system access, data and an implementation contact.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "disqualifiers": [
+      {
+        "value": "Buyer asks to automate everything but will not identify a process or agree a measurable scope.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Buyer expects guaranteed sales, profit, ROI or completely autonomous operation without human oversight.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Requested integration or action is unsafe, unlawful, unsupported or cannot be validated with available access.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "required_fields": [
+      "business_name_or_type",
+      "industry",
+      "process_to_automate",
+      "current_process_and_tools",
+      "pain_or_cost_of_current_process",
+      "desired_outcome",
+      "decision_role",
+      "timeline"
+    ],
+    "decision_roles": [
+      {
+        "value": "Business owner, founder, CEO, head of sales or operations lead with authority to approve scope and budget.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "service_area": {
+      "value": "Initial delivery focus: Kyrgyzstan, especially Bishkek. Remote projects in Kazakhstan, Uzbekistan and other CIS markets may be considered after fit and delivery feasibility are confirmed.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    }
+  },
+  "discovery": {
+    "required_fields": [
+      "industry",
+      "business_context",
+      "process_description",
+      "current_workflow",
+      "pain_points",
+      "desired_outcome",
+      "volume_or_frequency",
+      "current_tools",
+      "decision_role"
+    ],
+    "optional_fields": [
+      "required_integrations",
+      "data_sources",
+      "team_size",
+      "timeline",
+      "budget_range",
+      "security_or_compliance_constraints"
+    ],
+    "recommendation_rules": [
+      {
+        "value": "Lead with the existing AI Sales Manager demo when the buyer needs inbound sales handling, lead qualification, customer response, escalation, appointment scheduling or booking.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "The AI Sales Manager is already developed and working: it responds to customers, qualifies leads, escalates to a human, can complete an agreed sale and can schedule appointments or bookings. Do not imply every client deployment is instant or identical.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "For other needs, discover the process and assess feasibility before recommending a scoped custom implementation.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Present 100,000 KGS as an indicative implementation starting point, not a fixed quote; final price is scope-dependent and requires an owner-approved proposal.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Present 10,000 KGS per agent per month as an indicative support target; confirm exact coverage and final amount in the proposal.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Separate implementation, support and third-party operating costs. Never hide API or infrastructure costs.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not promise ROI, revenue uplift, conversion increase, fixed delivery date or SLA without verified evidence and owner approval.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not route business buyers into the builders course or builders-only workshop; offer a business-specific consultation or demo.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ]
+  },
+  "proof": {
+    "cases": [],
+    "testimonials": [],
+    "certifications": [],
+    "stats": [
+      {
+        "value": "An AI Sales Manager has been developed and is currently working; capabilities are owner-confirmed. This is product-readiness evidence, not a customer case study or proof of client ROI.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "prohibited_claims": [
+      {
+        "value": "Do not invent customer logos, case studies, testimonials, customer counts, revenue figures, time savings, conversion rates or ROI.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not present internal AI Sales Manager operation as a proven result for a customer's business.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Do not promise zero errors, 24/7 human support, unlimited scope or fully autonomous decisions in every situation.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ]
+  },
+  "fulfillment": {
+    "mode": "quote",
+    "delivery": {
+      "value": "Discovery → written scope and proposal → implementation → testing and customer acceptance → deployment and handover. Timeline and deliverables are defined per approved project.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "booking": {
+      "required": true,
+      "calendar_id": {
+        "value": "juman.kg.agent@gmail.com",
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "Primary calendar of the owner account; read/written only by the calendar-booking adapter.",
+        "verified_at": "2026-10-28"
+      },
+      "duration_minutes": {
+        "value": 20,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "INTERNAL scheduling value (owner decision 2026-10-28). Never stated to a client: daniyar-guard rejects any stated length.",
+        "verified_at": "2026-10-28"
+      },
+      "timezone": {
+        "value": "Asia/Bishkek",
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "slot_interval_minutes": {
+        "value": 30,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "Slot start step = duration (20) + buffer (10).",
+        "verified_at": "2026-10-28"
+      },
+      "buffer_before_minutes": {
+        "value": 10,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "buffer_after_minutes": {
+        "value": 10,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "availability_window_days": {
+        "value": 14,
+        "status": "verified",
+        "source": "Owner decision 2026-10-28: calendar juman.kg.agent@gmail.com (primary), timezone Asia/Bishkek, slot 20 min, buffer 10 min.",
+        "notes": "",
+        "verified_at": "2026-10-28"
+      },
+      "offer_slot_count": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "reschedule_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "cancellation_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "no_show_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "reminder_policy": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not applicable."
+      },
+      "external_link_allowed": false
+    },
+    "proposal": {
+      "required": true,
+      "template_id": {
+        "value": null,
+        "status": "unknown",
+        "notes": "No proposal template defined."
+      },
+      "validity_days": {
+        "value": null,
+        "status": "unknown",
+        "notes": "Not finalized."
+      },
+      "approval_required": true,
+      "approval_role": {
+        "value": "Owner approves custom scopes and commercials.",
+        "status": "estimated",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "notes": "Not specified in the brief.",
+        "verified_at": "2026-10-24"
+      }
+    }
+  },
+  "sales_policy": {
+    "authority_limits": {
+      "max_discount_percent_without_approval": {
+        "value": 0,
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      "can_customize_contract": false,
+      "can_change_refund_terms": false,
+      "can_waive_fees": false
+    },
+    "approval_matrix": [
+      {
+        "condition": {
+          "value": "Final project price, scope, delivery timeline, milestones or acceptance criteria",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "approver": {
+          "value": "Juman Nizamidinov / business owner",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "channel": {
+          "value": "Owner handoff through the existing Kanban/coordinator route",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        }
+      },
+      {
+        "condition": {
+          "value": "Any discount, custom contract term, refund, payment schedule or fee waiver",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "approver": {
+          "value": "Juman Nizamidinov / business owner",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "channel": {
+          "value": "Owner handoff through the existing Kanban/coordinator route",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        }
+      }
+    ],
+    "verified_scarcity": [],
+    "competitor_policy": {
+      "value": "Do not make unsupported competitor comparisons or disparage alternatives.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "custom_terms": {
+      "value": "Custom scope, new integrations, additional agents and non-standard terms require an owner-approved written proposal.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "contract_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Contract template and legal terms have not been supplied."
+    },
+    "call_recording_policy": {
+      "value": "Do not claim calls are recorded; recording consent and retention policy are not configured.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "negotiation": {
+      "tradables": [],
+      "non_negotiables": [
+        {
+          "value": "No discount, waiver or custom payment terms without owner approval.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        {
+          "value": "Monthly support is separate from implementation and does not include unlimited new features.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        {
+          "value": "External API, hosting and infrastructure costs are separately disclosed in the proposal.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        }
+      ],
+      "walk_away": {
+        "value": "If buyer requires unsupported integration, unapproved terms, guaranteed outcomes or unlimited undefined scope, pause and hand off to the owner.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    }
+  },
+  "sales_guidance": {
+    "segments": [
+      {
+        "id": "ecommerce-marketplace",
+        "name": "E-commerce and marketplace businesses",
+        "description": {
+          "value": "Online stores and marketplace sellers with repetitive customer, sales, reporting or operational processes.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "buyer_types": [
+          "b2b"
+        ],
+        "fit_signals": [
+          {
+            "value": "High volume of product/customer questions, repetitive order or sales tasks, recurring reporting needs.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Slow responses to incoming inquiries, manual qualification and repetitive customer support.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          },
+          {
+            "value": "Manual sales reporting and routine operations.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "Growing inquiry volume, missed leads, team workload or need to improve response consistency.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "default_motion": "quote"
+      },
+      {
+        "id": "inbound-sales-teams",
+        "name": "Businesses with inbound sales teams",
+        "description": {
+          "value": "Service companies and businesses receiving leads through messaging, websites or social channels.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "buyer_types": [
+          "b2b"
+        ],
+        "fit_signals": [
+          {
+            "value": "Repeatable sales conversation and clear human escalation path.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Slow first response, inconsistent lead qualification, missed follow-ups or manual appointment booking.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "More incoming leads than the team can handle consistently.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "default_motion": "appointment"
+      },
+      {
+        "id": "service-smb",
+        "name": "Small and medium service businesses",
+        "description": {
+          "value": "Companies with recurring internal processes suitable for scoped automation.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "buyer_types": [
+          "b2b"
+        ],
+        "fit_signals": [
+          {
+            "value": "Named process owner, repeatable steps and accessible systems/data.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "typical_pains": [
+          {
+            "value": "Manual administration, reporting, scheduling and information retrieval.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "buying_triggers": [
+          {
+            "value": "Operational bottlenecks or growth that increases repetitive work.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ],
+        "default_motion": "quote"
+      }
+    ],
+    "objection_guidance": [
+      {
+        "id": "price",
+        "objection_type": "price",
+        "guidance": {
+          "value": "Explain that 100,000 KGS is an indicative starting point, not a fixed quote. Final price follows discovery and written scope; monthly support is separate.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not invent fixed package prices or offer discounts.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "need",
+        "objection_type": "need",
+        "guidance": {
+          "value": "Ask which process is costly or repetitive. If there is no meaningful problem, do not push AI implementation.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not claim AI is necessary for every business.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "trust",
+        "objection_type": "trust",
+        "guidance": {
+          "value": "Offer a relevant demonstration of the existing working AI Sales Manager and explain what is and is not demonstrated.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not present the internal demo as a customer success case.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "risk",
+        "objection_type": "risk",
+        "guidance": {
+          "value": "Explain scoped delivery, testing and human escalation; reliability depends on agreed integrations and operating conditions.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not promise error-free or fully autonomous operation.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      },
+      {
+        "id": "timing",
+        "objection_type": "timing",
+        "guidance": {
+          "value": "Offer discovery or follow-up at a time the buyer requests.",
+          "status": "verified",
+          "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+          "verified_at": "2026-11-04"
+        },
+        "evidence_ids": [],
+        "avoid": [
+          {
+            "value": "Do not invent project start dates or urgency.",
+            "status": "verified",
+            "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+            "verified_at": "2026-11-04"
+          }
+        ]
+      }
+    ],
+    "alternatives": []
+  },
+  "handoff": {
+    "routes": [
+      {
+        "reason_code": "human_request",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595) replacing the revoked Discord handoff route; the handoff card is written by daniyar-guard v2.9 to the coordinator profile.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "authority",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595) replacing the revoked Discord handoff route; the handoff card is written by daniyar-guard v2.9 to the coordinator profile.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "capability",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595) replacing the revoked Discord handoff route; the handoff card is written by daniyar-guard v2.9 to the coordinator profile.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "legal",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595) replacing the revoked Discord handoff route; the handoff card is written by daniyar-guard v2.9 to the coordinator profile.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      },
+      {
+        "reason_code": "complaint",
+        "destination": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Handoff destination not specified in the brief; confirm the owner or queue."
+        },
+        "channel": {
+          "value": "Kanban card, assignee `default`",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595) replacing the revoked Discord handoff route; the handoff card is written by daniyar-guard v2.9 to the coordinator profile.",
+          "verified_at": "2026-10-27"
+        },
+        "hours": {
+          "value": null,
+          "status": "unknown",
+          "notes": "Service hours not finalized."
+        },
+        "response_time": {
+          "value": null,
+          "status": "unknown",
+          "notes": "No SLA approved; do not promise a response time."
+        },
+        "fallback": {
+          "value": "If the Kanban handoff card cannot be written, tell the buyer the transfer is not confirmed and offer a follow-up path.",
+          "status": "verified",
+          "source": "Owner decision 2026-10-27 (relayed on Kanban card t_f4929595): the handoff route is the Kanban card written by daniyar-guard v2.9 to the coordinator profile (default). It replaces the revoked Discord route and the handoff tool this profile does not implement.",
+          "verified_at": "2026-10-27"
+        }
+      }
+    ],
+    "required_fields": [
+      "buyer_goal",
+      "verified_facts",
+      "open_questions",
+      "requested_scope"
+    ],
+    "automation_pause": true,
+    "human_takeover_policy": {
+      "value": "A human owns the thread after a handoff; automation stays paused until a human resumes it.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    }
+  },
+  "follow_up": {
+    "allowed": true,
+    "basis": [
+      "buyer_requested",
+      "agreed_next_step",
+      "buyer_initiated_inquiry"
+    ],
+    "channels": [
+      "instagram",
+      "telegram",
+      "whatsapp",
+      "email"
+    ],
+    "quiet_hours": {
+      "start": "20:00",
+      "end": "09:00",
+      "timezone": "Asia/Bishkek"
+    },
+    "allowed_days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat"
+    ],
+    "max_attempts_per_reason": {
+      "value": 2,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested operational cap; confirm CRM cadence before enabling outbound follow-up."
+    },
+    "max_attempts_per_conversation": {
+      "value": 3,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested cap; stop immediately on opt-out or clear disinterest."
+    },
+    "min_interval_hours": {
+      "value": 48,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested minimum interval; obey channel-specific messaging windows."
+    },
+    "close_out_after_days": {
+      "value": 21,
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Suggested close-out window; stop earlier on opt-out."
+    },
+    "opt_out_keywords": [
+      "стоп",
+      "не пишите",
+      "отписаться",
+      "не интересно"
+    ],
+    "marketing_consent_required": true
+  },
+  "privacy": {
+    "data_collected": [
+      {
+        "value": "Name or preferred form of address, contact handle, business/role, stated goal, process pain and information needed to qualify the requested service.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "For education inquiries: learning goal, current experience, preferred language and availability for live sessions.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "purposes": [
+      {
+        "value": "Respond to an inbound inquiry, distinguish business implementation from AI-builder education, qualify fit and arrange the next step requested by the person.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      },
+      {
+        "value": "Send requested information or event details only after the person asks for them or clearly opts in.",
+        "status": "verified",
+        "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+        "verified_at": "2026-11-04"
+      }
+    ],
+    "retention": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Retention period is not defined; collect only necessary data."
+    },
+    "deletion_process": {
+      "value": "Route deletion or access requests to the owner; do not claim deletion until it is confirmed.",
+      "status": "estimated",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "notes": "Operational process requires owner confirmation."
+    },
+    "sharing": {
+      "value": "Do not add people to WhatsApp groups or share their contact details without explicit consent.",
+      "status": "verified",
+      "source": "Owner-confirmed business strategy and product clarification, 2026-11-04",
+      "verified_at": "2026-11-04"
+    },
+    "pii_rules": [
+      {
+        "value": "Do not collect payment card data, passwords, or government identifiers in chat.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      },
+      {
+        "value": "Collect only the information needed for the current decision.",
+        "status": "verified",
+        "source": "Business brief (2026-10-24), supplied by the owner",
+        "verified_at": "2026-10-24"
+      }
+    ],
+    "legal_basis": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Jurisdiction-specific privacy notice and legal basis have not been reviewed."
+    }
+  },
+  "safety": {
+    "emergency_protocol": {
+      "value": null,
+      "status": "unknown",
+      "notes": "No emergency protocol defined for this offer."
+    },
+    "emergency_resources": [],
+    "minors_policy": {
+      "value": "For business customers; the offer is not directed at minors.",
+      "status": "verified",
+      "source": "Business brief (2026-10-24), supplied by the owner",
+      "verified_at": "2026-10-24"
+    },
+    "vulnerability_policy": {
+      "value": null,
+      "status": "unknown",
+      "notes": "Not defined; do not use any buyer's vulnerability as leverage."
+    }
+  },
+  "tools": {
+    "passport_lookup": {
+      "adapter_id": "daniyar-passport-lookup",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "Installed and verified 2026-10-28: the passport-lookup plugin is enabled in this profile and the guard reads approved prices and booking links through it (adapter daniyar-passport-lookup). Verified by resolving both approved offers through the adapter."
+    },
+    "calendar_availability": {
+      "adapter_id": "daniyar-calendar-booking",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "calendar_availability tool: real free slots from the primary calendar (20 min slot, 10 min buffer, Asia/Bishkek). Verified live on 2026-10-28."
+    },
+    "calendar_booking": {
+      "adapter_id": "daniyar-calendar-booking",
+      "status": "implemented",
+      "contract_version": "1.1.0",
+      "notes": "calendar_booking tool: creates one event with a Meet link, idempotent per request key, re-checks the slot before booking. Verified live (create + retry + cancel) on 2026-10-28."
+    },
+    "payments_invoicing": {
+      "adapter_id": "adapter-payments_invoicing",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "crm_memory": {
+      "adapter_id": "adapter-crm_memory",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "human_handoff": {
+      "adapter_id": "adapter-human_handoff",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    },
+    "messaging_media": {
+      "adapter_id": "adapter-messaging_media",
+      "status": "not_implemented",
+      "contract_version": "1.1.0"
+    }
+  },
+  "metadata": {
+    "owner": "Business owner (Daniyar project)",
+    "approved_by": "Juman Nizamidinov",
+    "approved_at": "2026-11-04",
+    "created_at": "2026-10-24",
+    "updated_at": "2026-11-04",
+    "source_of_truth": "Owner-confirmed strategy and product clarification, 2026-11-04; unresolved details remain explicitly marked.",
+    "review_cycle_days": 90,
+    "fictional": false,
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-10-24",
+        "change": "Initial draft from the business brief. Not approved for publication."
+      },
+      {
+        "version": "1.0.0",
+        "date": "2026-10-27",
+        "change": "Owner decision 2026-10-27 (Kanban card t_834fb6a1): the \"first three customers\" 25,000 KGS introductory campaign was cancelled. Removed the campaign's scarcity claim, its discount condition, the notes naming it the only approved price variant, and the open question about it; discount_policy.allowed is now false."
+      },
+      {
+        "version": "1.0.0",
+        "date": "2026-10-27",
+        "change": "Owner decision 2026-10-27 (Kanban card t_8f4df30b): the meeting length is now carried here. fulfillment.booking.duration_minutes changed from unknown/null to verified 15 minutes; daniyar-guard derives the authorised length from this value instead of holding it in code."
+      },
+      {
+        "version": "2.0.0",
+        "date": "2026-11-04",
+        "change": "Updated to the current company model: existing working AI Sales Manager, scoped B2B implementation from an indicative 100,000 KGS, separate indicative monthly support per agent, live practical AI-builder education, audience-specific qualification and strict commercial guardrails."
+      }
+    ]
+  },
+  "unresolved": [
+    "Legal entity/display brand name, website and public support contacts are not confirmed.",
+    "100,000 KGS implementation starting point and 10,000 KGS per-agent monthly support are indicative targets; confirm final published prices and package boundaries.",
+    "Monthly support coverage, service hours, response times, SLA, minimum term and cancellation terms are not finalized.",
+    "API/model/hosting cost allocation and included usage limits must be defined in each proposal.",
+    "Payment methods, invoicing, tax treatment, deposits, refunds and contract terms are not configured.",
+    "No external customer case studies, testimonials, measured savings or ROI evidence have been supplied.",
+    "Confirm exact booking calendar policy and human handoff availability before promising response times."
+  ]
+}

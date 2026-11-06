@@ -136,7 +136,7 @@ Escalate **only** when one of these is true:
 
 1. the buyer explicitly asks for a human;
 2. the request exceeds the agent's authority (custom discount, non-standard contract, legal exception, regulated advice);
-3. the request exceeds the agent's capability (tool down after recovery, complex technical/legal question, multi-party negotiation);
+3. the request exceeds the agent's capability (a BLOCKING tool failure after recovery, complex technical/legal question, multi-party negotiation) a transient failure of an optional capability is retried and worked around, never a reason to escalate;
 4. there is a genuine safety, abuse, fraud, or legal-risk issue;
 5. the buyer is repeatedly misunderstood or the conversation is stuck in a loop the agent cannot resolve;
 6. the passport requires human approval for this deal size or segment.
@@ -153,15 +153,15 @@ Do **not** escalate merely because:
 - the buyer asks a scoped-refusal question ("no call, just the invoice") — execute the remaining path;
 - the request is a standard trade-off the passport already authorizes.
 
-| Situation                                  | Required action                                                          |
-| ------------------------------------------ | ------------------------------------------------------------------------ |
-| Buyer asks for a human                     | Hand off (`human_request`); do not finish qualification first            |
-| Discount/terms above the passport limit    | Do not promise; route for approval (`authority`)                         |
-| Tool down after the allowed retry          | Do not claim success; offer a truthful path or hand off (`tool_failure`) |
-| Safety, fraud, abuse, minors, coercion     | Follow the integrity/safety path; stop selling                           |
-| Difficult but answerable question          | Answer it or verify it; do **not** hand off to avoid the work            |
-| Ordinary price/timing/competitor objection | Use the negotiation skill; no handoff                                    |
-| Scoped refusal                             | Stop only that element; continue the legitimate path                     |
+| Situation                                  | Required action                                                         |
+| ------------------------------------------ | ----------------------------------------------------------------------- |
+| Buyer asks for a human                     | Hand off (`human_request`); do not finish qualification first           |
+| Discount/terms above the passport limit    | Do not promise; route for approval (`authority`)                        |
+| Blocking tool down after the allowed retry | an optional capability failing transiently is retried and worked around |
+| Safety, fraud, abuse, minors, coercion     | Follow the integrity/safety path; stop selling                          |
+| Difficult but answerable question          | Answer it or verify it; do **not** hand off to avoid the work           |
+| Ordinary price/timing/competitor objection | Use the negotiation skill; no handoff                                   |
+| Scoped refusal                             | Stop only that element; continue the legitimate path                    |
 
 ### Step 6 — Hand off with a complete summary
 

@@ -33,7 +33,7 @@ Rules:
 | `schema/passport.schema.json` | byte-identical to the repository schema |
 | `catalog.json` | generated in the adapter's shape from the two offers |
 
-The two v2.0.0 files are updated repository mirror drafts for the current company model. They preserve the verified passport-lookup and calendar adapter bindings from the earlier deployment, but this GitHub mirror is **not** the authoritative runtime store. Facts carry explicit statuses (`verified` / `estimated` / `unknown`); open commercial and operational decisions remain in `unresolved`. The agent will not read these changes until the same versioned files are copied into `/opt/data/profiles/daniyar/passports/` and published with the adapter.
+The two v3.0.0 files are the current GitHub mirror revisions for the owner-approved company model. They align Implementation with AI Starter/Business/Enterprise and Academy with the approved two-month cohort format. The GitHub mirror is **not** the authoritative runtime store. Tool bindings explicitly retain `not_implemented` or `degraded` where no verified adapter exists. The running agent will not read these changes until the same versioned files are copied into `/opt/data/profiles/daniyar/passports/`, validated and published with the adapter.
 
 ## Sync
 

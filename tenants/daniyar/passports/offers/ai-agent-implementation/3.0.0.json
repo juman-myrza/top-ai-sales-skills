@@ -218,9 +218,9 @@
       }
     ],
     "support": {
-      "value": "Внедрение включает 30-дневную гарантию на дефекты после приёмки. Постоянный мониторинг и операционное сопровождение не включены автоматически и оформляются отдельно. Точные часы, каналы поддержки, лимиты, сроки реакции и SLA должны быть в отдельном письменном соглашении. Не обещать поддержку 24/7.",
+      "value": "Внедрение включает 30-дневную гарантию на дефекты после приёмки. Постоянный мониторинг и операционное сопровождение не включены автоматически и оформляются отдельно. Точные часы, каналы поддержки, лимиты, сроки реакции и SLA должны быть в отдельном письменном соглашении. Не обещать поддержку 24/7. Отдельные ежемесячные Care-подписки пока не являются утверждёнными к продаже продуктами. Диапазоны Starter Care 5 000–8 000, Business Care 12 000–20 000 и Enterprise Care от 30 000 сом/месяц являются предварительными ориентирами стратегии и не должны предлагаться или цитироваться Daniyar до отдельного утверждения состава, часов, лимитов, SLA и цены.",
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19"
     },
     "status": "active"
@@ -347,117 +347,6 @@
           "verified_at": "2026-11-19"
         },
         "status": "active"
-      },
-      {
-        "id": "starter-care",
-        "name": "Starter Care — preliminary, not currently quoteable",
-        "billing_period": "monthly",
-        "price": {
-          "value": 5000,
-          "status": "estimated",
-          "source": "Owner-approved operating guardrail recorded during passport completion, 2026-11-19; aligned with Business Strategy & Execution Plan v1.1.",
-          "notes": "Предварительный нижний ориентир 5 000 KGS/месяц; стратегия v1.1 указывает диапазон 5 000–8 000. План приостановлен до утверждения состава, лимитов и SLA; Daniyar не должен продавать или обещать его."
-        },
-        "setup_fee": {
-          "value": 0,
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19",
-          "notes": "Отдельный setup fee не утверждён; не обещать его отсутствие в индивидуальном предложении."
-        },
-        "minimum_term": {
-          "value": "Минимальный срок не установлен; до отдельного утверждения Care-подписка не предлагается.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "cancellation": {
-          "value": "Индивидуальные условия должны быть определены в будущем соглашении; агент не принимает такие решения.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "refund": {
-          "value": "Условия возврата должны быть определены в будущем соглашении; агент не обещает возврат.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "status": "paused"
-      },
-      {
-        "id": "business-care",
-        "name": "Business Care — preliminary, not currently quoteable",
-        "billing_period": "monthly",
-        "price": {
-          "value": 12000,
-          "status": "estimated",
-          "source": "Owner-approved operating guardrail recorded during passport completion, 2026-11-19; aligned with Business Strategy & Execution Plan v1.1.",
-          "notes": "Предварительный нижний ориентир 12 000 KGS/месяц; стратегия v1.1 указывает диапазон 12 000–20 000. План приостановлен до утверждения состава, лимитов и SLA; Daniyar не должен продавать или обещать его."
-        },
-        "setup_fee": {
-          "value": 0,
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19",
-          "notes": "Отдельный setup fee не утверждён; не обещать его отсутствие в индивидуальном предложении."
-        },
-        "minimum_term": {
-          "value": "Минимальный срок не установлен; до отдельного утверждения Care-подписка не предлагается.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "cancellation": {
-          "value": "Индивидуальные условия должны быть определены в будущем соглашении; агент не принимает такие решения.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "refund": {
-          "value": "Условия возврата должны быть определены в будущем соглашении; агент не обещает возврат.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "status": "paused"
-      },
-      {
-        "id": "enterprise-care",
-        "name": "Enterprise Care — preliminary, not currently quoteable",
-        "billing_period": "monthly",
-        "price": {
-          "value": 30000,
-          "status": "estimated",
-          "source": "Owner-approved operating guardrail recorded during passport completion, 2026-11-19; aligned with Business Strategy & Execution Plan v1.1.",
-          "notes": "Предварительный нижний ориентир от 30 000 KGS/месяц по стратегии v1.1. План приостановлен до определения SLA, часов поддержки, реакции на инциденты и объёма работ; Daniyar не должен продавать или обещать его."
-        },
-        "setup_fee": {
-          "value": 0,
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19",
-          "notes": "Отдельный setup fee не утверждён; не обещать его отсутствие в индивидуальном предложении."
-        },
-        "minimum_term": {
-          "value": "Минимальный срок не установлен; до отдельного утверждения Care-подписка не предлагается.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "cancellation": {
-          "value": "Индивидуальные условия должны быть определены в будущем соглашении; агент не принимает такие решения.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "refund": {
-          "value": "Условия возврата должны быть определены в будущем соглашении; агент не обещает возврат.",
-          "status": "verified",
-          "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
-          "verified_at": "2026-11-19"
-        },
-        "status": "paused"
       }
     ],
     "payment_methods": [
@@ -469,9 +358,9 @@
       }
     ],
     "invoice_policy": {
-      "value": "Платёжный и invoicing adapter не подключён. Daniyar не создаёт счёт и не подтверждает поступление денег. Счёт, налоговые реквизиты и окончательный налоговый режим подтверждает уполномоченный человек и отражает в письменных документах. Налоговую ставку и включение налогов агент самостоятельно не называет.",
+      "value": "Налоговый режим и включение налогов могут различаться в зависимости от юридического лица, применимой юрисдикции и конкретной сделки. Daniyar не называет налоговые ставки и не утверждает, что цена включает или исключает налог; бухгалтер/владелец подтверждает применимое условие в конкретном счёте или договоре.",
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19"
     },
     "discount_policy": {
@@ -507,11 +396,11 @@
       "required_for_discount": true,
       "required_for_custom_terms": true,
       "validity_days": {
-        "value": 14,
+        "value": 0,
         "status": "verified",
-        "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+        "source": "Owner-approved operating policy recorded 2026-11-19.",
         "verified_at": "2026-11-19",
-        "notes": "A written proposal is valid for 14 calendar days unless the proposal states a shorter expiry. An expired proposal must be re-approved."
+        "notes": "0 = универсальный срок действия коммерческого предложения не установлен. В каждом письменном предложении владелец указывает конкретную дату окончания; Daniyar не придумывает её."
       },
       "terms_snapshot_required": true,
       "approved_quote_required_for_payment": true
@@ -811,11 +700,11 @@
         "verified_at": "2026-11-19"
       },
       "validity_days": {
-        "value": 14,
+        "value": 0,
         "status": "verified",
-        "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+        "source": "Owner-approved operating policy recorded 2026-11-19.",
         "verified_at": "2026-11-19",
-        "notes": "Предложение действительно 14 календарных дней, если в самом предложении не указан более ранний срок. Просроченное предложение требует повторного подтверждения владельца."
+        "notes": "0 = универсальный срок не установлен; срок указывается в каждом письменном предложении владельцем."
       },
       "approval_required": true,
       "approval_role": {
@@ -1756,18 +1645,9 @@
     }
   },
   "follow_up": {
-    "allowed": true,
-    "basis": [
-      "buyer_requested",
-      "agreed_next_step",
-      "buyer_initiated_inquiry"
-    ],
-    "channels": [
-      "instagram",
-      "telegram",
-      "whatsapp",
-      "email"
-    ],
+    "allowed": false,
+    "basis": [],
+    "channels": [],
     "quiet_hours": {
       "start": "20:00",
       "end": "09:00",
@@ -1782,32 +1662,32 @@
       "sat"
     ],
     "max_attempts_per_reason": {
-      "value": 2,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Не более двух попыток по одной согласованной причине; немедленно прекратить после opt-out или явного отказа."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "max_attempts_per_conversation": {
-      "value": 3,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Не более трёх follow-up касаний на диалог; никакого давления и повторных сообщений после отказа."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "min_interval_hours": {
-      "value": 48,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Минимальный интервал между follow-up попытками — 48 часов; дополнительно соблюдать правила и окна конкретной платформы."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "close_out_after_days": {
-      "value": 21,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Закрывать follow-up после 21 дня без ответа; не возобновлять без нового основания."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "opt_out_keywords": [
       "стоп",
@@ -1977,7 +1857,7 @@
     "approved_at": "2026-11-19",
     "created_at": "2026-11-19",
     "updated_at": "2026-11-19",
-    "source_of_truth": "Owner-approved Business Strategy & Execution Plan v1.1 in Notion, owner instructions in the 2026-11-19 conversation, and this versioned passport. Tool states reflect the repository/deployed Daniyar evidence; passport is not runtime-active until copied to the profile store, validated and published.",
+    "source_of_truth": "Owner-approved Business Strategy & Execution Plan v1.1 in Notion, owner instructions in the 2026-11-19 conversation, and this versioned passport. Tool states reflect the repository/deployed Daniyar evidence; passport is not runtime-active until copied to the profile store, validated and published. Scope, prices and operational guardrails are approved for agent use. The unresolved list records owner/accountant/technical items that must not be improvised or promised by Daniyar.",
     "review_cycle_days": 30,
     "fictional": false,
     "changelog": [
@@ -2000,8 +1880,20 @@
         "version": "3.0.0",
         "date": "2026-11-19",
         "change": "Owner-approved Business Strategy v1.1 alignment: Starter from 79,000 KGS, Business from 199,000 KGS, Enterprise from 499,000 KGS; complete package boundaries; QR/manual payment verification; proposal, handoff, follow-up, privacy and safety guardrails; Care tiers retained as paused estimates."
+      },
+      {
+        "version": "3.0.1",
+        "date": "2026-11-19",
+        "change": "Removed provisional Care price plans from quoteable pricing; disabled automated outbound follow-up pending owner-approved cadence; removed implicit default quote expiry; clarified tax handling and owner-controlled legal/technical items."
       }
     ]
   },
-  "unresolved": []
+  "unresolved": [
+    "Юридическое наименование и регистрационные реквизиты должны быть предоставлены владельцем и включены в договор/счёт; Daniyar не называет их самостоятельно.",
+    "Применимый налоговый режим и точное налоговое отражение подтверждает бухгалтер/владелец для конкретной сделки; Daniyar не рассчитывает налог и не заявляет, что налог включён или исключён.",
+    "Юридически согласованные условия отмены, возврата, ответственности и обработки данных должны содержаться в актуальном договоре/уведомлении; Daniyar передаёт такие вопросы владельцу.",
+    "Публичный сайт, телефон и email поддержки не утверждены для раскрытия клиентам; не выдумывать контактные данные.",
+    "Платные Care-подписки не готовы к продаже: требуется отдельно утвердить содержание, часы поддержки, лимиты, SLA и цены.",
+    "Каждый канал и интеграция в клиентском проекте требуют отдельной технической проверки; наличие функции в каталоге не означает готовую интеграцию с любой CRM или платформой."
+  ]
 }

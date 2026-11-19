@@ -28,8 +28,8 @@ Rules:
 
 | File | Notes |
 |---|---|
-| `offers/ai-agent-implementation/3.0.0.json` | current approved GitHub mirror revision; runtime publication is separate |
-| `offers/ai-agent-training/3.0.0.json` | current approved GitHub mirror revision; runtime publication is separate |
+| `offers/ai-agent-implementation/3.0.1.json` | current approved GitHub mirror revision; runtime publication is separate |
+| `offers/ai-agent-training/3.0.1.json` | current approved GitHub mirror revision; runtime publication is separate |
 | `schema/passport.schema.json` | byte-identical to the repository schema |
 | `catalog.json` | generated in the adapter's shape from the two offers |
 

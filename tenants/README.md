@@ -28,25 +28,55 @@ Rules:
 
 | File | Notes |
 |---|---|
-| `offers/ai-agent-implementation/3.0.1.json` | current approved GitHub mirror revision; runtime publication is separate |
-| `offers/ai-agent-training/3.0.1.json` | current approved GitHub mirror revision; runtime publication is separate |
+| `offers/ai-agent-implementation/3.0.1.json` | current approved GitHub mirror revision; runtime publication to Daniyar's profile is separate |
+| `offers/ai-agent-training/3.0.1.json` | current approved GitHub mirror revision; runtime publication to Daniyar's profile is separate |
 | `schema/passport.schema.json` | byte-identical to the repository schema |
-| `catalog.json` | generated in the adapter's shape from the two offers |
+| `catalog.json` | points to the current approved 3.0.1 versions |
 
-The two v3.0.0 files are the current GitHub mirror revisions for the owner-approved company model. They align Implementation with AI Starter/Business/Enterprise and Academy with the approved two-month cohort format. The GitHub mirror is **not** the authoritative runtime store. Tool bindings explicitly retain `not_implemented` or `degraded` where no verified adapter exists. The running agent will not read these changes until the same versioned files are copied into `/opt/data/profiles/daniyar/passports/`, validated and published with the adapter.
+The v3.0.1 passports align with Business Strategy & Execution Plan v1.1. The implementation passport exposes only the approved Starter, Business and Enterprise starting prices; preliminary Care ranges are not quoteable plans. The Academy passport contains the approved two-month format, 50,000 KGS price, six-month video access and free repeat participation in later cohorts. Automated outbound follow-up is disabled until a separate cadence is approved. Tax/legal/refund terms, cohort-specific dates and prerequisites, and other owner-controlled items remain explicitly listed in `unresolved`; Daniyar must not guess or promise them.
+
+The GitHub mirror is **not** the authoritative runtime store. Tool bindings retain `not_implemented` or `degraded` where no verified runtime integration exists. Daniyar will not read these revisions until the same files are copied into `/opt/data/profiles/daniyar/passports/`, validated and published with the adapter. A passport status of `approved` does not mean the items listed in `unresolved` have been supplied; it means the published facts and safe agent boundaries are owner-approved.
 
 ## Sync
 
-The profile is authoritative. For this update, first copy the v2.0.0 files from this repository branch into the profile's persistent store, run `validate` for each offer, then `publish` each offer. Once the profile catalog is updated, sync the authoritative files back to `main` and refresh the recorded hashes:
+The profile is authoritative. The repository mirror currently points to passport version `3.0.1` for both Daniyar offers. From a checked-out repository on the VPS, copy the versioned files and schema into the persistent profile store, then validate and publish each offer:
 
 ```bash
-# On the VPS, after publishing in the profile store
+cd /path/to/top-ai-sales-skills
+
+export DANIYAR_PASSPORT_ROOT=/opt/data/profiles/daniyar/passports
+mkdir -p "$DANIYAR_PASSPORT_ROOT"/{schema,offers}
+
+cp -a tenants/daniyar/passports/offers/. "$DANIYAR_PASSPORT_ROOT/offers/"
+cp product-passport/passport.schema.json "$DANIYAR_PASSPORT_ROOT/schema/passport.schema.json"
+
+python3 tools/adapters/passport-lookup/passport_lookup.py \
+  --root "$DANIYAR_PASSPORT_ROOT" --tenant-id daniyar \
+  validate --offer-id ai-agent-implementation --version 3.0.1
+
+python3 tools/adapters/passport-lookup/passport_lookup.py \
+  --root "$DANIYAR_PASSPORT_ROOT" --tenant-id daniyar \
+  validate --offer-id ai-agent-training --version 3.0.1
+
+python3 tools/adapters/passport-lookup/passport_lookup.py \
+  --root "$DANIYAR_PASSPORT_ROOT" --tenant-id daniyar \
+  publish --offer-id ai-agent-implementation --version 3.0.1
+
+python3 tools/adapters/passport-lookup/passport_lookup.py \
+  --root "$DANIYAR_PASSPORT_ROOT" --tenant-id daniyar \
+  publish --offer-id ai-agent-training --version 3.0.1
+```
+
+Before publication, review each passport's `unresolved` list. These entries must not be filled by guessing. The current approved passports already contain fail-closed rules so Daniyar does not quote unsupported terms, claim unavailable integrations, or promise legal/tax/refund details. If an unresolved item becomes necessary for a particular customer's proposal, pause that promise and obtain owner/accountant/technical approval first.
+
+After the runtime profile has published both offers, sync the authoritative files and catalog back into this GitHub mirror and refresh its hashes:
+
+```bash
 export STORE=/opt/data/profiles/daniyar/passports
-cp -a "$STORE/offers/."            tenants/daniyar/passports/offers/
-cp -a "$STORE/catalog.json"        tenants/daniyar/passports/catalog.json
+cp -a "$STORE/offers/." tenants/daniyar/passports/offers/
+cp -a "$STORE/catalog.json" tenants/daniyar/passports/catalog.json
 cp -a "$STORE/schema/passport.schema.json" tenants/daniyar/passports/schema/passport.schema.json
 
-# then refresh the recorded SHA-256 (repo side)
 cd tenants/daniyar/passports
 { sha256sum catalog.json; sha256sum offers/*/*.json; sha256sum schema/passport.schema.json; } > MIRROR.sha256
 ```

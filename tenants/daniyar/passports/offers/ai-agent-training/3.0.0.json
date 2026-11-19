@@ -276,9 +276,9 @@
       }
     ],
     "invoice_policy": {
-      "value": "Платёжный и invoicing adapter не подключён. Daniyar не создаёт счёт и не подтверждает поступление денег. Счёт, налоговые реквизиты и окончательный налоговый режим подтверждает уполномоченный человек и отражает в письменных документах. Налоговую ставку и включение налогов агент самостоятельно не называет.",
+      "value": "Налоговый режим и включение налогов могут различаться в зависимости от юридического лица, применимой юрисдикции и конкретной сделки. Daniyar не называет налоговые ставки и не утверждает, что цена включает или исключает налог; бухгалтер/владелец подтверждает применимое условие в конкретном счёте или договоре.",
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19"
     },
     "discount_policy": {
@@ -314,11 +314,11 @@
       "required_for_discount": true,
       "required_for_custom_terms": true,
       "validity_days": {
-        "value": 14,
+        "value": 0,
         "status": "verified",
-        "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+        "source": "Owner-approved operating policy recorded 2026-11-19.",
         "verified_at": "2026-11-19",
-        "notes": "A written proposal is valid for 14 calendar days unless the proposal states a shorter expiry. An expired proposal must be re-approved."
+        "notes": "0 = универсальный срок действия коммерческого предложения не установлен. В каждом письменном предложении владелец указывает конкретную дату окончания; Daniyar не придумывает её."
       },
       "terms_snapshot_required": true,
       "approved_quote_required_for_payment": true
@@ -597,9 +597,9 @@
       "validity_days": {
         "value": 0,
         "status": "verified",
-        "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+        "source": "Owner-approved operating policy recorded 2026-11-19.",
         "verified_at": "2026-11-19",
-        "notes": "0 = нет универсального срока действия предложения; ориентироваться на опубликованный срок регистрации конкретного потока."
+        "notes": "0 = универсальный срок не установлен; срок указывается в каждом письменном предложении владельцем."
       },
       "approval_required": false,
       "approval_role": {
@@ -1440,18 +1440,9 @@
     }
   },
   "follow_up": {
-    "allowed": true,
-    "basis": [
-      "buyer_requested",
-      "agreed_next_step",
-      "buyer_initiated_inquiry"
-    ],
-    "channels": [
-      "instagram",
-      "telegram",
-      "whatsapp",
-      "email"
-    ],
+    "allowed": false,
+    "basis": [],
+    "channels": [],
     "quiet_hours": {
       "start": "20:00",
       "end": "09:00",
@@ -1466,32 +1457,32 @@
       "sat"
     ],
     "max_attempts_per_reason": {
-      "value": 2,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Не более двух попыток по одной согласованной причине; немедленно прекратить после opt-out или явного отказа."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "max_attempts_per_conversation": {
-      "value": 3,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Не более трёх follow-up касаний на диалог; никакого давления и повторных сообщений после отказа."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "min_interval_hours": {
-      "value": 48,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Минимальный интервал между follow-up попытками — 48 часов; дополнительно соблюдать правила и окна конкретной платформы."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "close_out_after_days": {
-      "value": 21,
+      "value": 0,
       "status": "verified",
-      "source": "Owner instruction to complete and approve both Daniyar passports, current Business Strategy & Execution Plan v1.1, and owner-confirmed clarifications in this conversation; reviewed 2026-11-19.",
+      "source": "Owner-approved operating policy recorded 2026-11-19.",
       "verified_at": "2026-11-19",
-      "notes": "Закрывать follow-up после 21 дня без ответа; не возобновлять без нового основания."
+      "notes": "0 = автоматические исходящие follow-up сообщения отключены до отдельного утверждения владельцем cadence и доступных инструментов."
     },
     "opt_out_keywords": [
       "стоп",
@@ -1661,7 +1652,7 @@
     "approved_at": "2026-11-19",
     "created_at": "2026-11-19",
     "updated_at": "2026-11-19",
-    "source_of_truth": "Owner-approved AI Academy format and pricing decisions in the 2026-11-19 conversation, Business Strategy & Execution Plan v1.1, and this versioned passport. Cohort-specific dates/venue/capacity are only announced by the owner.",
+    "source_of_truth": "Owner-approved AI Academy format and pricing decisions in the 2026-11-19 conversation, Business Strategy & Execution Plan v1.1, and this versioned passport. Cohort-specific dates/venue/capacity are only announced by the owner. Approved operating scope covers the two-month course format, 50,000 KGS price, 6-month video access, free repeat participation and no-employment/no-income guarantees. Cohort-specific items remain explicitly owner-controlled in unresolved.",
     "review_cycle_days": 30,
     "fictional": false,
     "changelog": [
@@ -1684,8 +1675,20 @@
         "version": "3.0.0",
         "date": "2026-11-19",
         "change": "Owner-approved format and commercial update: two months; first month three 1-hour live sessions per week; second month real practical projects; 6-month video access; free repeat participation in later cohorts; price 50,000 KGS; no employment or income promises; QR/manual payment verification and complete sales/privacy/safety guardrails."
+      },
+      {
+        "version": "3.0.1",
+        "date": "2026-11-19",
+        "change": "Disabled automated outbound follow-up pending owner-approved cadence; removed implicit default offer validity; clarified tax/payment restrictions and owner-controlled cohort details, prerequisites, project assessment and refund terms."
       }
     ]
   },
-  "unresolved": []
+  "unresolved": [
+    "Даты, дни недели, время начала занятий, онлайн/очный формат, площадка и наличие мест объявляются владельцем отдельно для каждого потока.",
+    "Точный уровень программирования, prerequisites, инструменты, аккаунты и возможные расходы на платные сервисы должны быть опубликованы для конкретного потока; Daniyar не делает предположений.",
+    "Точная рубрика проекта, критерии завершения, формат проверки и наличие сертификата не обещаются, пока владелец не опубликовал их.",
+    "Условия отмены, возврата и пропуска занятий должны быть опубликованы владельцем для конкретного потока; Daniyar не обещает возврат или перенос.",
+    "Юридическое лицо, регистрационные реквизиты и точное налоговое отражение подтверждаются владельцем/бухгалтером; агент не сообщает неподтверждённые реквизиты.",
+    "Платные инструменты, API, модели и инфраструктура не считаются включёнными в цену, если это прямо не объявлено владельцем для потока."
+  ]
 }
